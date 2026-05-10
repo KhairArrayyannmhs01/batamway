@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BatamWay — Trans Batam Digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#1B4FD8;--blue-mid:#2563EB;--blue-light:#EFF4FF;--blue-glow:rgba(37,99,235,0.18);
+  --teal:#0D9488;--teal-light:#F0FDFA;--amber:#F59E0B;--amber-light:#FFFBEB;
+  --rose:#F43F5E;--rose-light:#FFF1F2;--violet:#7C3AED;--violet-light:#F5F3FF;
+  --ink:#0D1526;--ink-2:#374151;--ink-3:#6B7280;--ink-4:#9CA3AF;
+  --surface:#FFFFFF;--surface-2:#F8FAFD;--border:#E5E9F2;--border-2:#D1D9E8;
+  --r-sm:8px;--r-md:14px;--r-lg:20px;--r-xl:28px;--r-full:999px;
+  --sh-sm:0 1px 4px rgba(13,21,38,0.07);--sh-md:0 4px 20px rgba(13,21,38,0.10);
+  --sh-lg:0 12px 40px rgba(13,21,38,0.13);--sh-blue:0 6px 24px rgba(37,99,235,0.22);
+}
+body{font-family:'Sora',sans-serif;background:var(--surface-2);color:var(--ink);line-height:1.6;min-height:100vh;overflow-x:hidden}
+nav{background:rgba(255,255,255,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;padding:0 2rem}
+.nav-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{display:flex;align-items:center;gap:11px;text-decoration:none}
+.logo-mark{width:40px;height:40px;background:linear-gradient(135deg,var(--blue) 0%,#4F8EF7 100%);border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:var(--sh-blue)}
+.logo-mark svg{width:22px;height:22px;fill:white}
+.logo-text{font-size:19px;font-weight:800;color:var(--ink);letter-spacing:-0.5px}
+.logo-text span{color:var(--blue-mid)}
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none}
+.nav-links a{font-size:13.5px;font-weight:500;color:var(--ink-3);text-decoration:none;padding:7px 14px;border-radius:var(--r-sm);transition:all .2s;cursor:pointer}
+.nav-links a:hover{color:var(--ink);background:var(--surface-2)}
+.nav-links a.active{color:var(--blue-mid);background:var(--blue-light);font-weight:600}
+.nav-right{display:flex;gap:8px;align-items:center}
+.nav-points{display:flex;align-items:center;gap:6px;background:var(--amber-light);border:1px solid #FDE68A;padding:6px 13px;border-radius:var(--r-full);font-size:13px;font-weight:700;color:#92400E;cursor:pointer}
+.btn-nl{padding:8px 18px;border-radius:var(--r-md);font-size:13.5px;font-weight:600;cursor:pointer;background:transparent;border:1.5px solid var(--border-2);color:var(--ink-2);font-family:'Sora',sans-serif;transition:all .2s}
+.btn-nl:hover{border-color:var(--blue-mid);color:var(--blue-mid)}
+.btn-ns{padding:8px 20px;border-radius:var(--r-md);font-size:13.5px;font-weight:600;cursor:pointer;background:var(--blue-mid);border:none;color:white;font-family:'Sora',sans-serif;box-shadow:var(--sh-blue);transition:all .2s}
+.btn-ns:hover{background:var(--blue);transform:translateY(-1px)}
+.page{display:none}.page.active{display:block}
+
+/* ─ HOME HERO ─ */
+.hero{background:#0D1526;padding:4rem 2rem 3rem;position:relative;overflow:hidden}
+.hg1{position:absolute;top:-100px;left:20%;width:600px;height:600px;background:radial-gradient(circle,rgba(37,99,235,0.25) 0%,transparent 65%);pointer-events:none}
+.hg2{position:absolute;bottom:-80px;right:5%;width:400px;height:400px;background:radial-gradient(circle,rgba(13,148,136,0.18) 0%,transparent 65%);pointer-events:none}
+.hgl{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+.hero-in{max-width:1280px;margin:0 auto;position:relative;z-index:1}
+.hero-pill{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.13);padding:6px 16px;border-radius:var(--r-full);font-size:12px;color:rgba(255,255,255,0.75);margin-bottom:1.5rem;font-weight:500}
+.ldot{width:7px;height:7px;background:#10B981;border-radius:50%;box-shadow:0 0 6px #10B981;animation:blink 1.5s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+.hero-layout{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.hero-left h1{font-size:3rem;font-weight:800;color:white;line-height:1.15;letter-spacing:-1.2px;margin-bottom:1rem}
+.hero-left h1 .acc{background:linear-gradient(90deg,#60A5FA,#34D399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-left p{font-size:15px;color:rgba(255,255,255,0.55);max-width:420px;margin-bottom:2rem;line-height:1.7}
+.cta-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.btn-hp{padding:13px 26px;border-radius:var(--r-md);background:var(--blue-mid);color:white;border:none;font-size:14px;font-weight:700;font-family:'Sora',sans-serif;cursor:pointer;box-shadow:var(--sh-blue);display:flex;align-items:center;gap:8px;transition:all .25s}
+.btn-hp:hover{background:var(--blue);transform:translateY(-2px);box-shadow:0 10px 32px rgba(37,99,235,0.35)}
+.btn-hp svg{width:17px;height:17px;stroke:white;stroke-width:2.5;fill:none}
+.btn-hs{padding:13px 22px;border-radius:var(--r-md);background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.85);border:1px solid rgba(255,255,255,0.15);font-size:14px;font-weight:600;font-family:'Sora',sans-serif;cursor:pointer;transition:all .25s}
+.btn-hs:hover{background:rgba(255,255,255,0.15)}
+.hero-stats{display:flex;gap:2rem;margin-top:2.5rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.1)}
+.hst-v{font-size:1.7rem;font-weight:800;color:white;letter-spacing:-0.8px;display:block}
+.hst-l{font-size:11.5px;color:rgba(255,255,255,0.45);font-weight:500}
+.vsep{width:1px;background:rgba(255,255,255,.12);align-self:stretch}
+
+/* Search card */
+.sc{background:white;border-radius:var(--r-xl);padding:1.75rem;box-shadow:0 20px 60px rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.1)}
+.sc-title{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:1.25rem;display:flex;align-items:center;gap:8px}
+.sc-title svg{width:18px;height:18px;stroke:var(--blue-mid);stroke-width:2.5;fill:none}
+.iw{position:relative;margin-bottom:10px}
+.iw label{display:block;font-size:10.5px;font-weight:700;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:5px}
+.iw input{width:100%;padding:12px 14px 12px 42px;border:1.5px solid var(--border);border-radius:var(--r-md);font-size:13.5px;font-family:'Sora',sans-serif;color:var(--ink);transition:all .2s;outline:none;background:var(--surface-2)}
+.iw input:focus{border-color:var(--blue-mid);background:white;box-shadow:0 0 0 3px var(--blue-glow)}
+.iw input::placeholder{color:var(--ink-4)}
+.ii{position:absolute;left:13px;bottom:13px;width:18px;height:18px;stroke:var(--ink-4);stroke-width:2;fill:none}
+.swap-d{display:flex;align-items:center;gap:10px;margin:4px 0}
+.swap-d .line{flex:1;height:1px;background:var(--border)}
+.swap-c{width:32px;height:32px;border-radius:50%;background:white;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;flex-shrink:0;box-shadow:var(--sh-sm)}
+.swap-c:hover{border-color:var(--blue-mid);background:var(--blue-light)}
+.swap-c:hover svg{stroke:var(--blue-mid)}
+.swap-c svg{width:14px;height:14px;stroke:var(--ink-3);stroke-width:2.5;fill:none}
+.sf{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 12px}
+.fsel{padding:10px 12px;border:1.5px solid var(--border);border-radius:var(--r-md);font-size:12.5px;font-family:'Sora',sans-serif;color:var(--ink-2);background:var(--surface-2);cursor:pointer;outline:none;transition:all .2s}
+.fsel:focus{border-color:var(--blue-mid)}
+.btn-sm{width:100%;padding:14px;border-radius:var(--r-md);background:linear-gradient(135deg,var(--blue-mid) 0%,#1E40AF 100%);color:white;border:none;font-size:14px;font-weight:700;font-family:'Sora',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;box-shadow:var(--sh-blue);transition:all .25s}
+.btn-sm:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(37,99,235,0.35)}
+.btn-sm svg{width:17px;height:17px;stroke:white;stroke-width:2.5;fill:none}
+.pchips{margin-top:12px}
+.pchips p{font-size:11px;color:var(--ink-4);font-weight:600;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{padding:5px 12px;border-radius:var(--r-full);border:1px solid var(--border);background:white;font-size:12px;color:var(--ink-3);font-weight:500;cursor:pointer;transition:all .2s}
+.chip:hover{border-color:var(--blue-mid);color:var(--blue-mid);background:var(--blue-light)}
+
+/* Main layout */
+.mwrap{max-width:1280px;margin:0 auto;padding:2rem 2rem}
+.ptabs{display:flex;gap:3px;background:white;border:1px solid var(--border);border-radius:var(--r-lg);padding:5px;width:fit-content;margin-bottom:1.75rem;box-shadow:var(--sh-sm)}
+.ptab{padding:9px 22px;border-radius:var(--r-md);font-size:13.5px;font-weight:600;cursor:pointer;color:var(--ink-3);border:none;background:transparent;font-family:'Sora',sans-serif;display:flex;align-items:center;gap:7px;transition:all .2s}
+.ptab svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none}
+.ptab.active{background:var(--blue-mid);color:white;box-shadow:var(--sh-blue)}
+.ptab:not(.active):hover{color:var(--ink);background:var(--surface-2)}
+.cgrid{display:grid;grid-template-columns:1fr 390px;gap:1.75rem}
+
+/* Map */
+.mshell{background:white;border-radius:var(--r-lg);border:1px solid var(--border);overflow:hidden;height:540px;position:relative;box-shadow:var(--sh-sm)}
+.mcanvas{width:100%;height:100%;background:linear-gradient(rgba(200,215,240,0.4) 1px,transparent 1px),linear-gradient(90deg,rgba(200,215,240,0.4) 1px,transparent 1px),linear-gradient(160deg,#C8DFF5 0%,#B8D4EF 50%,#C4DCF2 100%);background-size:44px 44px;position:relative}
+.mwater{position:absolute;bottom:0;left:0;right:0;height:28%;background:linear-gradient(180deg,#A8C8E8 0%,#90B8DC 100%);opacity:.55}
+.mwater::after{content:'SELAT SINGAPURA';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:10px;font-weight:700;color:rgba(255,255,255,0.6);letter-spacing:2px}
+.rd{position:absolute;background:white;opacity:.75;border-radius:3px}
+.rd-h{height:7px}.rd-v{width:7px}
+.rtl{position:absolute;height:5px;background:var(--blue-mid);opacity:.9;border-radius:3px;box-shadow:0 0 8px rgba(37,99,235,0.5)}
+.stp{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;z-index:5}
+.stp-pin{width:30px;height:30px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(0,0,0,0.2);border:2.5px solid white}
+.stp-inner{width:11px;height:11px;border-radius:50%;background:white;transform:rotate(45deg)}
+.stp-lbl{background:var(--ink);color:white;border-radius:7px;padding:4px 9px;font-size:10.5px;font-weight:600;white-space:nowrap;box-shadow:var(--sh-md);opacity:0;transform:translateY(4px);transition:all .2s}
+.stp:hover .stp-lbl{opacity:1;transform:translateY(0)}
+.mbus{position:absolute;z-index:8;background:var(--blue-mid);border-radius:6px;padding:5px 9px;display:flex;align-items:center;gap:4px;box-shadow:0 4px 14px rgba(37,99,235,0.35);animation:mvb 10s linear infinite;border:2px solid white}
+.mbus svg{width:14px;height:14px;fill:white}
+.mbus span{font-size:10px;font-weight:700;color:white;font-family:'DM Mono',monospace}
+@keyframes mvb{0%{left:8%}50%{left:52%}50.01%{left:8%}100%{left:8%}}
+.lpulse{position:absolute;z-index:6;transform:translate(-50%,-50%)}
+.pr1{position:absolute;width:44px;height:44px;border-radius:50%;background:rgba(37,99,235,.15);transform:translate(-50%,-50%);animation:pls 2.2s ease-out infinite}
+.pr2{animation-delay:.7s}
+.pdot{width:14px;height:14px;border-radius:50%;background:var(--blue-mid);border:3px solid white;box-shadow:var(--sh-md)}
+@keyframes pls{0%{transform:translate(-50%,-50%) scale(.8);opacity:1}100%{transform:translate(-50%,-50%) scale(2.4);opacity:0}}
+.mleg{position:absolute;top:12px;left:12px;background:white;border-radius:var(--r-md);padding:13px 15px;box-shadow:var(--sh-md);min-width:150px}
+.mleg h4{font-size:10px;font-weight:700;color:var(--ink-4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
+.lr{display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--ink-2);margin-bottom:5px;font-weight:500}
+.ld{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.mctrl{position:absolute;top:12px;right:12px;display:flex;flex-direction:column;gap:4px}
+.mc{width:36px;height:36px;background:white;border-radius:var(--r-sm);border:1px solid var(--border);box-shadow:var(--sh-sm);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:var(--ink-2);font-weight:600;transition:all .2s}
+.mc:hover{background:var(--blue-light);color:var(--blue-mid)}
+.mbar{position:absolute;bottom:0;left:0;right:0;padding:12px;background:linear-gradient(transparent,rgba(13,21,38,0.06))}
+.mbi{background:white;border-radius:var(--r-md);padding:13px 18px;display:flex;align-items:center;gap:0;box-shadow:var(--sh-md);flex-wrap:wrap}
+.mbs{display:flex;align-items:center;gap:7px;padding:0 16px;font-size:12.5px;color:var(--ink-2);flex:1}
+.mbs:first-child{padding-left:0}.mbs:last-child{padding-right:0}
+.msep{width:1px;height:22px;background:var(--border);flex-shrink:0}
+.mbs svg{width:15px;height:15px;stroke:var(--blue-mid);stroke-width:2.5;fill:none;flex-shrink:0}
+.mbs strong{color:var(--ink);font-weight:700}
+
+/* Sidebar */
+.sidebar{display:flex;flex-direction:column;gap:1.25rem}
+.slbl{font-size:13px;font-weight:700;color:var(--ink-4);text-transform:uppercase;letter-spacing:.7px;margin-bottom:.75rem}
+.bcard{background:white;border:1.5px solid var(--border);border-radius:var(--r-lg);padding:1.1rem 1.25rem;cursor:pointer;transition:all .22s;position:relative;overflow:hidden;box-shadow:var(--sh-sm)}
+.bcard::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:4px 0 0 4px;background:var(--blue-mid);transform:scaleY(0);transition:transform .22s;transform-origin:center}
+.bcard:hover{border-color:var(--blue-mid);box-shadow:0 4px 20px var(--blue-glow);transform:translateX(3px)}
+.bcard:hover::before,.bcard.sel::before{transform:scaleY(1)}
+.bcard.sel{border-color:var(--blue-mid);background:var(--blue-light);box-shadow:0 4px 20px var(--blue-glow)}
+.bch{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.bcl{display:flex;align-items:center;gap:9px}
+.rbadge{padding:5px 12px;border-radius:var(--r-sm);font-size:12px;font-weight:800;font-family:'DM Mono',monospace;letter-spacing:0.5px;background:var(--blue-mid);color:white}
+.rbadge.g{background:var(--teal)}.rbadge.a{background:var(--amber)}
+.bcname{font-size:14px;font-weight:700;color:var(--ink)}
+.bcsub{font-size:11.5px;color:var(--ink-4);margin-top:1px}
+.eta{padding:5px 12px;border-radius:var(--r-full);font-size:12px;font-weight:700}
+.es{background:#FEF2F2;color:#DC2626}.eo{background:#F0FDF4;color:#16A34A}.em{background:var(--amber-light);color:#B45309}
+.cr{margin-bottom:8px}
+.cm{display:flex;justify-content:space-between;font-size:11px;color:var(--ink-4);margin-bottom:4px;font-weight:500}
+.ct{height:6px;background:var(--surface-2);border-radius:99px;overflow:hidden;border:1px solid var(--border)}
+.cf{height:100%;border-radius:99px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+.cr-r{background:linear-gradient(90deg,#F87171,#EF4444)}.cr-a{background:linear-gradient(90deg,#FCD34D,#F59E0B)}.cr-g{background:linear-gradient(90deg,#34D399,#10B981)}
+.bcf{display:flex;align-items:center;justify-content:space-between}
+.bcst{display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--ink-4);font-weight:500}
+.bcst svg{width:13px;height:13px;stroke:currentColor;stroke-width:2;fill:none}
+.btrk{padding:6px 15px;border-radius:var(--r-full);background:var(--blue-mid);color:white;border:none;font-size:12px;font-weight:700;font-family:'Sora',sans-serif;cursor:pointer;transition:all .2s}
+.btrk:hover{background:var(--blue);transform:scale(1.04)}
+.qag{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.qab{background:white;border:1.5px solid var(--border);border-radius:var(--r-md);padding:14px 12px;cursor:pointer;text-align:left;transition:all .22s;box-shadow:var(--sh-sm)}
+.qab:hover{border-color:var(--blue-mid);transform:translateY(-2px);box-shadow:var(--sh-md)}
+.qai{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:8px}
+.qai svg{width:18px;height:18px;stroke:white;stroke-width:2.2;fill:none}
+.qan{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:1px}
+.qah{font-size:11px;color:var(--ink-4);font-weight:500}
+.proutes{background:white;border-radius:var(--r-lg);border:1px solid var(--border);padding:1.25rem;margin-top:1.5rem;box-shadow:var(--sh-sm)}
+.prl{display:flex;flex-direction:column;gap:8px}
+.pri{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--surface-2);border-radius:var(--r-md);cursor:pointer;transition:all .2s;border:1px solid transparent}
+.pri:hover{background:var(--blue-light);border-color:var(--blue-mid)}
+.pric{width:40px;height:40px;border-radius:10px;background:var(--blue-light);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pric svg{width:20px;height:20px;stroke:var(--blue-mid);stroke-width:2;fill:none}
+.prin{flex:1}.prna{font-size:13px;font-weight:700;color:var(--ink)}
+.prde{font-size:11.5px;color:var(--ink-4);font-weight:500;margin-top:1px}
+.prm{text-align:right;flex-shrink:0}
+.prfa{font-size:13px;font-weight:800;color:var(--ink)}.prti{font-size:11px;color:var(--ink-4);font-weight:500}
+.shdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem}
+.shdr h2{font-size:17px;font-weight:800;color:var(--ink);letter-spacing:-.3px}
+.seall{font-size:12.5px;font-weight:700;color:var(--blue-mid);cursor:pointer;background:none;border:none;font-family:'Sora',sans-serif;padding:5px 12px;border-radius:var(--r-sm);transition:background .2s}
+.seall:hover{background:var(--blue-light)}
+
+/* ─── GAMIFIKASI PAGE ─── */
+.gh{background:linear-gradient(135deg,#0D1526 0%,#1E1B4B 60%,#1A3A6E 100%);padding:3rem 2rem;position:relative;overflow:hidden}
+.gg1{position:absolute;top:-60px;left:30%;width:500px;height:500px;background:radial-gradient(circle,rgba(124,58,237,0.25) 0%,transparent 65%);pointer-events:none}
+.gg2{position:absolute;bottom:-40px;right:10%;width:350px;height:350px;background:radial-gradient(circle,rgba(251,191,36,0.2) 0%,transparent 65%);pointer-events:none}
+.ghi{max-width:1280px;margin:0 auto;position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.gtag{display:inline-flex;align-items:center;gap:7px;background:rgba(124,58,237,0.2);border:1px solid rgba(124,58,237,0.35);padding:5px 14px;border-radius:var(--r-full);font-size:12px;color:#C4B5FD;font-weight:600;margin-bottom:1rem}
+.gh h1{font-size:2.5rem;font-weight:800;color:white;line-height:1.2;letter-spacing:-1px;margin-bottom:.75rem}
+.gh h1 .gold{background:linear-gradient(90deg,#FCD34D,#F59E0B);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.gh p{font-size:14.5px;color:rgba(255,255,255,.5);margin-bottom:1.75rem;line-height:1.7}
+.btn-gp{padding:13px 26px;border-radius:var(--r-md);background:linear-gradient(135deg,#7C3AED,#EC4899);color:white;border:none;font-size:14px;font-weight:700;font-family:'Sora',sans-serif;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:0 6px 24px rgba(124,58,237,0.35);transition:all .25s;text-decoration:none}
+.btn-gp:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(124,58,237,0.4);text-decoration:none}
+.btn-gp svg{width:17px;height:17px;stroke:white;stroke-width:2.5;fill:none}
+.rkcard{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:var(--r-xl);padding:1.75rem;backdrop-filter:blur(8px)}
+.rkt{display:flex;align-items:center;gap:14px;margin-bottom:1.25rem}
+.avring{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#EC4899);padding:3px;flex-shrink:0}
+.avin{width:100%;height:100%;border-radius:50%;background:#1E1B4B;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:white}
+.rki{flex:1}
+.rkname{font-size:15px;font-weight:700;color:white;margin-bottom:3px}
+.rktier{display:inline-flex;align-items:center;gap:5px;background:rgba(251,191,36,0.18);border:1px solid rgba(251,191,36,0.3);padding:3px 10px;border-radius:var(--r-full);font-size:11.5px;font-weight:700;color:#FCD34D}
+.rkbig{font-size:2rem;font-weight:800;color:white;letter-spacing:-1px;margin-bottom:.25rem}
+.rklbl{font-size:11.5px;color:rgba(255,255,255,.45);font-weight:500}
+.xpw{margin:1rem 0 .5rem}
+.xpm{display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.45);margin-bottom:6px;font-weight:500}
+.xpbg{height:8px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden}
+.xpf{height:100%;width:68%;border-radius:99px;background:linear-gradient(90deg,#7C3AED,#EC4899,#FBBF24);background-size:200%;animation:xpg 3s linear infinite}
+@keyframes xpg{0%{background-position:0%}100%{background-position:200%}}
+.mstn{display:flex;gap:8px;margin-top:.75rem}
+.ms{flex:1;background:rgba(255,255,255,.06);border-radius:var(--r-md);padding:8px 10px;text-align:center;border:1px solid rgba(255,255,255,.08)}
+.msv{font-size:15px;font-weight:800;color:white;display:block}
+.msl{font-size:10px;color:rgba(255,255,255,.4);font-weight:500}
+.gmain{max-width:1280px;margin:0 auto;padding:2rem 2rem}
+.ggrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;margin-bottom:1.75rem}
+.gcard{background:white;border-radius:var(--r-lg);border:1px solid var(--border);padding:1.5rem;box-shadow:var(--sh-sm);transition:all .22s}
+.gcard:hover{transform:translateY(-3px);box-shadow:var(--sh-lg)}
+.gct{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:1rem;display:flex;align-items:center;gap:7px}
+.gct svg{width:17px;height:17px;stroke:var(--violet);stroke-width:2.5;fill:none}
+.lbcard{background:white;border-radius:var(--r-lg);border:1px solid var(--border);padding:1.5rem;box-shadow:var(--sh-sm)}
+.lbch{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem}
+.lbt{font-size:15px;font-weight:800;color:var(--ink);display:flex;align-items:center;gap:8px}
+.lbt svg{width:18px;height:18px;stroke:var(--amber);stroke-width:2.5;fill:none}
+.lbf{padding:6px 14px;border-radius:var(--r-full);border:1.5px solid var(--border);font-size:12px;font-family:'Sora',sans-serif;color:var(--ink-2);background:white;cursor:pointer}
+.lbl{display:flex;flex-direction:column;gap:8px}
+.lbr{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:var(--r-md);background:var(--surface-2);transition:all .2s;cursor:pointer;border:1px solid transparent}
+.lbr:hover{background:var(--blue-light);border-color:var(--border)}
+.lbr.me{background:linear-gradient(135deg,var(--blue-light),#F5F3FF);border-color:var(--blue-mid)}
+.lbrk{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;font-family:'DM Mono',monospace;flex-shrink:0}
+.rk1{background:linear-gradient(135deg,#FCD34D,#F59E0B);color:white}
+.rk2{background:linear-gradient(135deg,#E2E8F0,#CBD5E1);color:#475569}
+.rk3{background:linear-gradient(135deg,#FDBA74,#EA580C);color:white}
+.rkn{background:var(--border);color:var(--ink-3)}
+.lbav{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white;flex-shrink:0}
+.lbi{flex:1}
+.lbname{font-size:13px;font-weight:700;color:var(--ink)}.lbcity{font-size:11px;color:var(--ink-4);font-weight:500}
+.lbpts{font-size:14px;font-weight:800;color:var(--ink);font-family:'DM Mono',monospace}
+.lbtr{font-size:11px;color:var(--teal);font-weight:600}
+.bdg-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bdg-item{background:var(--surface-2);border-radius:var(--r-md);padding:14px;text-align:center;border:1.5px solid var(--border);transition:all .22s;cursor:pointer;position:relative;overflow:hidden}
+.bdg-item.earned{background:linear-gradient(135deg,#F5F3FF,white);border-color:#C4B5FD}
+.bdg-item:hover{transform:scale(1.04);box-shadow:var(--sh-md)}
+.bdg-em{font-size:28px;display:block;margin-bottom:6px}
+.bdg-n{font-size:11.5px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.bdg-d{font-size:10.5px;color:var(--ink-4);font-weight:500;line-height:1.4}
+.bdg-lk{position:absolute;inset:0;background:rgba(255,255,255,.75);display:flex;align-items:center;justify-content:center;border-radius:inherit;font-size:22px;backdrop-filter:blur(2px)}
+.bdg-item.earned .bdg-lk{display:none}
+.chall{display:flex;flex-direction:column;gap:10px}
+.chi{background:var(--surface-2);border-radius:var(--r-md);padding:14px;border:1.5px solid var(--border);transition:all .22s;cursor:pointer}
+.chi:hover{border-color:var(--teal);background:var(--teal-light)}
+.chh{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.chl{display:flex;align-items:center;gap:9px}
+.chic{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px}
+.chn{font-size:13px;font-weight:700;color:var(--ink)}
+.chr{display:flex;align-items:center;gap:4px;background:var(--amber-light);border:1px solid #FDE68A;padding:3px 9px;border-radius:var(--r-full);font-size:11.5px;font-weight:700;color:#92400E}
+.cpb{height:6px;background:var(--border);border-radius:99px;overflow:hidden;margin-bottom:5px}
+.cpf{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--teal),#34D399)}
+.cpm{display:flex;justify-content:space-between;font-size:11px;color:var(--ink-4);font-weight:500}
+.rwdg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rwdi{background:white;border:1.5px solid var(--border);border-radius:var(--r-md);padding:1rem;text-align:center;transition:all .22s;cursor:pointer;box-shadow:var(--sh-sm)}
+.rwdi:hover{border-color:var(--amber);transform:translateY(-2px);box-shadow:0 6px 20px rgba(245,158,11,.15)}
+.rwem{font-size:32px;display:block;margin-bottom:8px}
+.rwn{font-size:12.5px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.rwp{display:inline-flex;align-items:center;gap:4px;background:var(--amber-light);border:1px solid #FDE68A;padding:3px 10px;border-radius:var(--r-full);font-size:11.5px;font-weight:700;color:#92400E}
+.trl{display:flex;flex-direction:column;gap:8px}
+.tri{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--surface-2);border-radius:var(--r-md);border:1px solid var(--border)}
+.tric{width:32px;height:32px;border-radius:8px;background:var(--blue-light);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tric svg{width:16px;height:16px;stroke:var(--blue-mid);stroke-width:2.5;fill:none}
+.trin{flex:1}.trnm{font-size:12.5px;font-weight:700;color:var(--ink)}.trdt{font-size:11px;color:var(--ink-4);font-weight:500}
+.trpt{font-size:12.5px;font-weight:800;color:var(--teal);background:var(--teal-light);padding:3px 9px;border-radius:var(--r-full)}
+.two-col{display:grid;grid-template-columns:3fr 2fr;gap:1.5rem}
+
+/* ─── ECO-RUNNER GAME ─── */
+.game-section{background:white;border-radius:var(--r-lg);border:1px solid var(--border);overflow:hidden;box-shadow:var(--sh-md);margin-bottom:1.75rem}
+.game-header{background:linear-gradient(135deg,#0D1526,#1E1B4B);padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
+.game-title-area{display:flex;align-items:center;gap:12px}
+.game-title-area h3{font-size:16px;font-weight:800;color:white;letter-spacing:-.3px}
+.game-title-area p{font-size:12px;color:rgba(255,255,255,.5);font-weight:500;margin-top:1px}
+.game-tag{display:inline-flex;align-items:center;gap:5px;background:rgba(124,58,237,.25);border:1px solid rgba(124,58,237,.4);padding:4px 12px;border-radius:var(--r-full);font-size:11px;color:#C4B5FD;font-weight:700}
+.game-stats-row{display:flex;gap:16px;align-items:center}
+.gstat{text-align:center}
+.gstat-val{font-size:18px;font-weight:800;color:white;display:block;font-family:'DM Mono',monospace}
+.gstat-lbl{font-size:10px;color:rgba(255,255,255,.4);font-weight:500}
+.game-canvas-wrap{position:relative;background:#1a1a2e;overflow:hidden;cursor:pointer}
+#ecoCanvas{display:block;width:100%;height:220px}
+.game-hud{position:absolute;top:10px;right:14px;display:flex;flex-direction:column;gap:6px;pointer-events:none}
+.hud-chip{background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-full);padding:4px 12px;font-size:12px;font-weight:700;color:white;backdrop-filter:blur(4px);font-family:'DM Mono',monospace}
+.hud-chip.pts{background:rgba(245,158,11,.2);border-color:rgba(245,158,11,.4);color:#FCD34D}
+.game-controls{padding:1rem 1.5rem;background:var(--surface-2);display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border)}
+.game-hint{font-size:12px;color:var(--ink-4);display:flex;align-items:center;gap:6px;font-weight:500}
+.key-badge{background:var(--surface);border:1.5px solid var(--border);border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700;color:var(--ink-2);font-family:'DM Mono',monospace;box-shadow:var(--sh-sm)}
+.btn-game-start{padding:8px 22px;border-radius:var(--r-md);background:linear-gradient(135deg,#7C3AED,#EC4899);color:white;border:none;font-size:13px;font-weight:700;font-family:'Sora',sans-serif;cursor:pointer;box-shadow:0 4px 14px rgba(124,58,237,.35);transition:all .2s}
+.btn-game-start:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(124,58,237,.45)}
+.game-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(13,21,38,.82);backdrop-filter:blur(3px);z-index:10;transition:opacity .3s}
+.game-overlay.hidden{opacity:0;pointer-events:none}
+.overlay-card{background:white;border-radius:var(--r-xl);padding:2rem 2.5rem;text-align:center;box-shadow:var(--sh-lg);min-width:280px}
+.overlay-emoji{font-size:52px;display:block;margin-bottom:.75rem}
+.overlay-title{font-size:20px;font-weight:800;color:var(--ink);margin-bottom:.5rem;letter-spacing:-.4px}
+.overlay-sub{font-size:13px;color:var(--ink-3);margin-bottom:1.25rem;line-height:1.5}
+.overlay-score{display:flex;gap:16px;justify-content:center;margin-bottom:1.25rem}
+.ov-stat{background:var(--surface-2);border-radius:var(--r-md);padding:10px 18px;border:1px solid var(--border)}
+.ov-stat-val{font-size:20px;font-weight:800;color:var(--ink);font-family:'DM Mono',monospace;display:block}
+.ov-stat-lbl{font-size:10px;color:var(--ink-4);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.btn-play-again{width:100%;padding:12px;border-radius:var(--r-md);background:linear-gradient(135deg,#7C3AED,#EC4899);color:white;border:none;font-size:14px;font-weight:700;font-family:'Sora',sans-serif;cursor:pointer;box-shadow:0 4px 14px rgba(124,58,237,.35);transition:all .2s}
+.btn-play-again:hover{transform:translateY(-1px)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="#">
+      <div class="logo-mark"><svg viewBox="0 0 24 24"><path d="M3 13h2v3l4-3h5a2 2 0 002-2V8a2 2 0 00-2-2H3a2 2 0 00-2 2v3a2 2 0 002 2zm0-5h16v4H8.83L6 14.17V12H3V8zm18-4H7V3h14a2 2 0 012 2v5l-2-1V4z"/></svg></div>
+      <span class="logo-text">Batam<span>Way</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a class="active" onclick="showPage('home',this)">Beranda</a></li>
+      <li><a onclick="showPage('gami',this)">🎮 Gamifikasi</a></li>
+      <li><a onclick="showPage('home',this)">Tracker</a></li>
+      <li><a onclick="showPage('home',this)">Jadwal</a></li>
+      <li><a onclick="showPage('home',this)">Reward</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-points" onclick="showPage('gami',document.querySelectorAll('.nav-links a')[1])">🪙 2.840 Poin</div>
+      <button class="btn-nl">Masuk</button>
+      <button class="btn-ns">Daftar Gratis</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HOME -->
+<div id="page-home" class="page active">
+  <section class="hero">
+    <div class="hg1"></div><div class="hg2"></div><div class="hgl"></div>
+    <div class="hero-in">
+      <div class="hero-layout">
+        <div class="hero-left">
+          <div class="hero-pill"><span class="ldot"></span>Trans Batam · Live Tracking Aktif</div>
+          <h1>Naik Bus Batam<br>Lebih <span class="acc">Cerdas</span><br>&amp; Menyenangkan</h1>
+          <p>Lacak posisi Trans Batam secara real-time, rencanakan perjalanan, kumpulkan poin, dan nikmati Batam tanpa stres.</p>
+          <div class="cta-row">
+            <button class="btn-hp"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>Cari Rute Sekarang</button>
+            <button class="btn-hs">Lihat Jadwal →</button>
+          </div>
+          <div class="hero-stats">
+            <div><span class="hst-v">12</span><span class="hst-l">Koridor Aktif</span></div>
+            <div class="vsep"></div>
+            <div><span class="hst-v">84</span><span class="hst-l">Armada Bus</span></div>
+            <div class="vsep"></div>
+            <div><span class="hst-v">12.4K</span><span class="hst-l">Pengguna Aktif</span></div>
+          </div>
+        </div>
+        <div class="sc">
+          <div class="sc-title"><svg viewBox="0 0 24 24"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>Rencanakan Perjalanan</div>
+          <div class="iw"><label>Dari mana?</label><div style="position:relative"><svg class="ii" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg><input type="text" id="fi" placeholder="Pilih halte asal…"></div></div>
+          <div class="swap-d"><div class="line"></div><div class="swap-c" onclick="swapI()" title="Tukar"><svg viewBox="0 0 24 24"><path d="M7 16V4m0 0L3 8m4-4l4 4M17 8v12m0 0l4-4m-4 4l-4-4"/></svg></div><div class="line"></div></div>
+          <div class="iw"><label>Ke mana?</label><div style="position:relative"><svg class="ii" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><input type="text" id="ti" placeholder="Pilih halte tujuan…"></div></div>
+          <div class="sf">
+            <select class="fsel"><option>Berangkat Sekarang</option><option>Pilih Waktu</option></select>
+            <select class="fsel"><option>Semua Koridor</option><option>Koridor 1</option><option>Koridor 2</option><option>Koridor 3</option><option>Koridor 4</option><option>Koridor 5</option></select>
+          </div>
+          <button class="btn-sm" onclick="doSearch()"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>Cari Rute Trans Batam</button>
+          <div class="pchips"><p>Populer hari ini</p><div class="chips">
+            <span class="chip" onclick="fillR('Batam Centre','Nagoya')">Batam Centre → Nagoya</span>
+            <span class="chip" onclick="fillR('Batu Aji','Sekupang')">Batu Aji → Sekupang</span>
+            <span class="chip" onclick="fillR('Tiban','Jodoh')">Tiban → Jodoh</span>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="mwrap">
+    <div class="ptabs">
+      <button class="ptab active"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Peta Live</button>
+      <button class="ptab"><svg viewBox="0 0 24 24"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>Rute</button>
+      <button class="ptab"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Jadwal</button>
+      <button class="ptab"><svg viewBox="0 0 24 24"><path d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>Tiket</button>
+      <button class="ptab"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>Halte</button>
+    </div>
+    <div class="cgrid">
+      <div>
+        <div class="mshell">
+          <div class="mcanvas">
+            <div class="mwater"></div>
+            <div class="rd rd-h" style="top:32%;left:0;right:0"></div>
+            <div class="rd rd-h" style="top:58%;left:0;right:62%"></div>
+            <div class="rd rd-v" style="left:28%;top:0;bottom:28%"></div>
+            <div class="rd rd-v" style="left:62%;top:0;bottom:0"></div>
+            <div class="rtl" style="top:calc(32% - 2px);left:7%;width:58%"></div>
+            <div class="stp" style="top:32%;left:8%"><div class="stp-pin" style="background:var(--blue-mid)"><div class="stp-inner"></div></div><div class="stp-lbl">Terminal Batam Centre</div></div>
+            <div class="stp" style="top:32%;left:29%"><div class="stp-pin" style="background:var(--teal)"><div class="stp-inner"></div></div><div class="stp-lbl">Nagoya Hill</div></div>
+            <div class="stp" style="top:32%;left:52%"><div class="stp-pin" style="background:var(--amber)"><div class="stp-inner"></div></div><div class="stp-lbl">Kepri Mall</div></div>
+            <div class="stp" style="top:58%;left:15%"><div class="stp-pin" style="background:var(--rose)"><div class="stp-inner"></div></div><div class="stp-lbl">Batu Aji Terminal</div></div>
+            <div class="stp" style="top:58%;left:45%"><div class="stp-pin" style="background:var(--violet)"><div class="stp-inner"></div></div><div class="stp-lbl">Sekupang</div></div>
+            <div class="lpulse" style="top:32%;left:38%"><div class="pr1"></div><div class="pr1 pr2"></div><div class="pdot"></div></div>
+            <div class="mbus" style="top:calc(32% - 18px)"><svg viewBox="0 0 24 24"><path d="M3 13h2v3l4-3h5a2 2 0 002-2V8a2 2 0 00-2-2H3a2 2 0 00-2 2v3a2 2 0 002 2zm0-5h16v4H8.83L6 14.17V12H3V8zm18-4H7V3h14a2 2 0 012 2v5l-2-1V4z"/></svg><span>K1-07</span></div>
+            <div class="mleg"><h4>Legenda</h4><div class="lr"><div class="ld" style="background:var(--blue-mid)"></div>Terminal Utama</div><div class="lr"><div class="ld" style="background:var(--teal)"></div>Halte Aktif</div><div class="lr"><div class="ld" style="background:var(--amber)"></div>Kepadatan Sedang</div><div class="lr"><div class="ld" style="background:var(--rose)"></div>Kepadatan Tinggi</div></div>
+            <div class="mctrl"><div class="mc">+</div><div class="mc">−</div><div class="mc" style="font-size:14px">◎</div></div>
+            <div class="mbar"><div class="mbi">
+              <div class="mbs"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Estimasi <strong style="margin-left:4px">23 mnt</strong></div>
+              <div class="msep"></div>
+              <div class="mbs"><svg viewBox="0 0 24 24"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>Jarak <strong style="margin-left:4px">8.4 km</strong></div>
+              <div class="msep"></div>
+              <div class="mbs"><svg viewBox="0 0 24 24"><path d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>Tarif <strong style="margin-left:4px">Rp 5.000</strong></div>
+              <div class="msep"></div>
+              <div class="mbs"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><strong>1</strong>&nbsp;transfer</div>
+            </div></div>
+          </div>
+        </div>
+        <div class="proutes">
+          <div class="shdr"><h2>Rute Populer Trans Batam</h2><button class="seall">Lihat Semua →</button></div>
+          <div class="prl">
+            <div class="pri"><div class="pric"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div class="prin"><div class="prna">Koridor 1 — Batam Centre ↔ Jodoh</div><div class="prde">Trans Batam · 8 halte · Setiap 15 menit</div></div><div class="prm"><div class="prfa">Rp 5.000</div><div class="prti">≈ 35 mnt</div></div></div>
+            <div class="pri"><div class="pric"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div class="prin"><div class="prna">Koridor 3 — Batu Aji ↔ Sekupang</div><div class="prde">Trans Batam · 6 halte · Setiap 20 menit</div></div><div class="prm"><div class="prfa">Rp 5.000</div><div class="prti">≈ 28 mnt</div></div></div>
+            <div class="pri"><div class="pric"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div class="prin"><div class="prna">Koridor 5 — Tiban ↔ Kepri Mall</div><div class="prde">Trans Batam · 7 halte · Setiap 25 menit</div></div><div class="prm"><div class="prfa">Rp 5.000</div><div class="prti">≈ 40 mnt</div></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <div>
+          <div class="slbl">Bus Terdekat — Real Time</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div class="bcard sel"><div class="bch"><div class="bcl"><span class="rbadge">K1</span><div><div class="bcname">Koridor 1 — Jodoh</div><div class="bcsub">Trans Batam · Bus 07</div></div></div><span class="eta es">2 menit</span></div><div class="cr"><div class="cm"><span>Kapasitas</span><span>78% — Padat</span></div><div class="ct"><div class="cf cr-r" style="width:78%"></div></div></div><div class="bcf"><div class="bcst"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>Batam Centre → Jodoh</div><button class="btrk">🔴 Live</button></div></div>
+            <div class="bcard"><div class="bch"><div class="bcl"><span class="rbadge g">K2</span><div><div class="bcname">Koridor 2 — Nagoya</div><div class="bcsub">Trans Batam · Bus 14</div></div></div><span class="eta em">8 menit</span></div><div class="cr"><div class="cm"><span>Kapasitas</span><span>45% — Normal</span></div><div class="ct"><div class="cf cr-a" style="width:45%"></div></div></div><div class="bcf"><div class="bcst"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>Batu Aji → Nagoya</div><button class="btrk">Lacak</button></div></div>
+            <div class="bcard"><div class="bch"><div class="bcl"><span class="rbadge a">K5</span><div><div class="bcname">Koridor 5 — Kepri Mall</div><div class="bcsub">Trans Batam · Bus 22</div></div></div><span class="eta eo">15 menit</span></div><div class="cr"><div class="cm"><span>Kapasitas</span><span>18% — Longgar</span></div><div class="ct"><div class="cf cr-g" style="width:18%"></div></div></div><div class="bcf"><div class="bcst"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>Tiban → Kepri Mall</div><button class="btrk">Lacak</button></div></div>
+          </div>
+        </div>
+        <div>
+          <div class="slbl">Aksi Cepat</div>
+          <div class="qag">
+            <div class="qab"><div class="qai" style="background:var(--blue-mid)"><svg viewBox="0 0 24 24"><path d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg></div><div class="qan">Beli Tiket</div><div class="qah">Digital &amp; cashless</div></div>
+            <div class="qab"><div class="qai" style="background:var(--amber)"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="qan">Reward</div><div class="qah">Tukar poin hadiah</div></div>
+            <div class="qab"><div class="qai" style="background:var(--teal)"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><div class="qan">Jadwal</div><div class="qah">Jadwal harian bus</div></div>
+            <div class="qab" onclick="showPage('gami',document.querySelectorAll('.nav-links a')[1])"><div class="qai" style="background:var(--violet)"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><div class="qan">Gamifikasi</div><div class="qah">Poin &amp; badge saya</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GAMIFIKASI -->
+<div id="page-gami" class="page">
+  <section class="gh">
+    <div class="gg1"></div><div class="gg2"></div><div class="hgl"></div>
+    <div class="ghi">
+      <div>
+        <div class="gtag">🎮 Mode Gamifikasi Aktif</div>
+        <h1>Perjalananmu<br>Punya <span class="gold">Nilai Lebih</span></h1>
+        <p>Setiap naik Trans Batam kamu mengumpulkan poin, naik level, dan berkesempatan memenangkan reward eksklusif. Jadikan komutmu menyenangkan!</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn-gp" href="gamifikasi.html"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Tantangan Hari Ini</a>
+          <button class="btn-hs">Riwayat Perjalanan →</button>
+        </div>
+      </div>
+      <div class="rkcard">
+        <div class="rkt">
+          <div class="avring"><div class="avin">K</div></div>
+          <div class="rki"><div class="rkname">Khair Arrayyan</div><div class="rktier">🏆 Platinum Rider</div></div>
+          <div style="text-align:right"><div class="rkbig">2.840</div><div class="rklbl">Total Poin</div></div>
+        </div>
+        <div class="xpw">
+          <div class="xpm"><span>Level 12 — Platinum</span><span>68% menuju Level 13</span></div>
+          <div class="xpbg"><div class="xpf"></div></div>
+        </div>
+        <div class="mstn">
+          <div class="ms"><span class="msv">47</span><span class="msl">Trip Bulan Ini</span></div>
+          <div class="ms"><span class="msv">#5</span><span class="msl">Peringkat Kota</span></div>
+          <div class="ms"><span class="msv">12</span><span class="msl">Badge Diraih</span></div>
+          <div class="ms"><span class="msv">5</span><span class="msl">Hari Beruntun</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="gmain">
+
+    <!-- ═══ ECO-RUNNER GAME SECTION ═══ -->
+    <div class="game-section">
+      <div class="game-header">
+        <div class="game-title-area">
+          <div>
+            <h3>🎮 Eco-Runner Batam</h3>
+            <p>Lari kejar Trans Batam, hindari macet & polusi!</p>
+          </div>
+          <div class="game-tag">🏆 Dapatkan Poin Nyata</div>
+        </div>
+        <div class="game-stats-row">
+          <div class="gstat"><span class="gstat-val" id="g-best">0</span><span class="gstat-lbl">Rekor Terbaik</span></div>
+          <div style="width:1px;height:32px;background:rgba(255,255,255,.12)"></div>
+          <div class="gstat"><span class="gstat-val" id="g-earned">0</span><span class="gstat-lbl">Poin Diraih</span></div>
+        </div>
+      </div>
+      <div class="game-canvas-wrap">
+        <canvas id="ecoCanvas"></canvas>
+        <div class="game-hud">
+          <div class="hud-chip" id="hud-score">📏 0 m</div>
+          <div class="hud-chip pts" id="hud-pts">🪙 0 pts</div>
+        </div>
+        <!-- Start Overlay -->
+        <div class="game-overlay" id="overlay-start">
+          <div class="overlay-card">
+            <span class="overlay-emoji">🏃</span>
+            <div class="overlay-title">Eco-Runner Batam</div>
+            <div class="overlay-sub">Kejar Trans Batam dan hindari kemacetan!<br>Semakin jauh, semakin banyak poin yang kamu dapat.</div>
+            <button class="btn-play-again" onclick="startGame()">▶ Mulai Berlari!</button>
+          </div>
+        </div>
+        <!-- Game Over Overlay -->
+        <div class="game-overlay hidden" id="overlay-gameover">
+          <div class="overlay-card">
+            <span class="overlay-emoji" id="ov-emoji">💨</span>
+            <div class="overlay-title" id="ov-title">Kena Macet!</div>
+            <div class="overlay-sub" id="ov-sub">Kalau naik Trans Batam, nggak bakal kena macet deh!</div>
+            <div class="overlay-score">
+              <div class="ov-stat"><span class="ov-stat-val" id="ov-dist">0</span><span class="ov-stat-lbl">Meter</span></div>
+              <div class="ov-stat"><span class="ov-stat-val" id="ov-pts">0</span><span class="ov-stat-lbl">Poin</span></div>
+              <div class="ov-stat"><span class="ov-stat-val" id="ov-best">0</span><span class="ov-stat-lbl">Rekor</span></div>
+            </div>
+            <button class="btn-play-again" onclick="startGame()">🔄 Main Lagi</button>
+          </div>
+        </div>
+      </div>
+      <div class="game-controls">
+        <div class="game-hint">
+          <span class="key-badge">SPASI</span> atau
+          <span class="key-badge">↑</span> atau
+          <span>Klik/Tap untuk lompat</span>
+          &nbsp;·&nbsp;
+          <span class="key-badge">↓</span>
+          <span>untuk jongkok</span>
+        </div>
+        <button class="btn-game-start" onclick="startGame()">▶ Restart Game</button>
+      </div>
+    </div>
+
+    <div class="ggrid">
+      <!-- Tantangan -->
+      <div class="gcard">
+        <div class="gct"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> Tantangan Harian</div>
+        <div class="chall">
+          <div class="chi"><div class="chh"><div class="chl"><div class="chic" style="background:#EFF4FF">🚌</div><div><div class="chn">Naik 3x Trans Batam Hari Ini</div><div style="font-size:11px;color:var(--ink-4);font-weight:500;margin-top:1px">2/3 perjalanan selesai</div></div></div><div class="chr">🪙 +150</div></div><div class="cpb"><div class="cpf" style="width:66%"></div></div><div class="cpm"><span>2 dari 3 selesai</span><span>⏰ Sisa 4 jam</span></div></div>
+          <div class="chi"><div class="chh"><div class="chl"><div class="chic" style="background:#F0FDF4">⏰</div><div><div class="chn">Naik di Jam Sibuk (06.00–09.00)</div><div style="font-size:11px;color:var(--teal);font-weight:600;margin-top:1px">✓ Selesai!</div></div></div><div class="chr">🪙 +100</div></div><div class="cpb"><div class="cpf" style="width:100%"></div></div><div class="cpm"><span style="color:var(--teal);font-weight:700">✓ Selesai</span><span>+100 poin diterima</span></div></div>
+          <div class="chi"><div class="chh"><div class="chl"><div class="chic" style="background:var(--violet-light)">🗺️</div><div><div class="chn">Coba Koridor Baru (Koridor 4)</div><div style="font-size:11px;color:var(--ink-4);font-weight:500;margin-top:1px">Belum dimulai</div></div></div><div class="chr">🪙 +250</div></div><div class="cpb"><div class="cpf" style="width:0%"></div></div><div class="cpm"><span>0 dari 1 selesai</span><span>⏰ Sisa 3 hari</span></div></div>
+          <div class="chi"><div class="chh"><div class="chl"><div class="chic" style="background:var(--amber-light)">👥</div><div><div class="chn">Ajak 1 Teman Daftar BatamWay</div><div style="font-size:11px;color:var(--ink-4);font-weight:500;margin-top:1px">Referral aktif</div></div></div><div class="chr">🪙 +500</div></div><div class="cpb"><div class="cpf" style="width:0%"></div></div><div class="cpm"><span>0 dari 1 selesai</span><span>⏰ Minggu ini</span></div></div>
+        </div>
+      </div>
+
+      <!-- Badge -->
+      <div class="gcard">
+        <div class="gct"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>Koleksi Badge</div>
+        <div class="bdg-grid">
+          <div class="bdg-item earned"><span class="bdg-em">🚌</span><div class="bdg-n">Pelancong Setia</div><div class="bdg-d">50 perjalanan Trans Batam</div></div>
+          <div class="bdg-item earned"><span class="bdg-em">⭐</span><div class="bdg-n">Early Bird</div><div class="bdg-d">Naik bus sebelum jam 7 pagi</div></div>
+          <div class="bdg-item earned"><span class="bdg-em">🗺️</span><div class="bdg-n">Penjelajah Batam</div><div class="bdg-d">Coba semua koridor</div></div>
+          <div class="bdg-item earned"><span class="bdg-em">♻️</span><div class="bdg-n">Eco Rider</div><div class="bdg-d">30 hari tanpa kendaraan pribadi</div></div>
+          <div class="bdg-item"><span class="bdg-em">🔥</span><div class="bdg-n">Streak Master</div><div class="bdg-d">30 hari beruntun naik bus</div><div class="bdg-lk">🔒</div></div>
+          <div class="bdg-item"><span class="bdg-em">👑</span><div class="bdg-n">Trans King</div><div class="bdg-d">Capai Level 20</div><div class="bdg-lk">🔒</div></div>
+        </div>
+      </div>
+
+      <!-- Reward Store -->
+      <div class="gcard">
+        <div class="shdr" style="margin-bottom:.75rem"><div class="gct" style="margin:0"><svg viewBox="0 0 24 24"><path d="M20 12V22H4V12M22 7H2v5h20V7zM12 22V7M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>Toko Reward</div><button class="seall">Semua →</button></div>
+        <div class="rwdg">
+          <div class="rwdi"><span class="rwem">☕</span><div class="rwn">Voucher Kopi</div><div class="rwp">🪙 500 Poin</div></div>
+          <div class="rwdi"><span class="rwem">🎫</span><div class="rwn">Tiket Gratis</div><div class="rwp">🪙 1.000 Poin</div></div>
+          <div class="rwdi"><span class="rwem">🛒</span><div class="rwn">Voucher Belanja</div><div class="rwp">🪙 2.000 Poin</div></div>
+          <div class="rwdi"><span class="rwem">📱</span><div class="rwn">Pulsa Gratis</div><div class="rwp">🪙 3.000 Poin</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <!-- Leaderboard -->
+      <div class="lbcard">
+        <div class="lbch">
+          <div class="lbt"><svg viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M17 8l-5-5-5 5M12 3v14"/></svg>Leaderboard Kota Batam</div>
+          <select class="lbf"><option>Minggu Ini</option><option>Bulan Ini</option><option>Sepanjang Waktu</option></select>
+        </div>
+        <div class="lbl">
+          <div class="lbr"><div class="lbrk rk1">1</div><div class="lbav" style="background:linear-gradient(135deg,#F59E0B,#EF4444)">S</div><div class="lbi"><div class="lbname">Salman Alfarizi</div><div class="lbcity">Tiban</div></div><div style="text-align:right"><div class="lbpts">5.240</div><div class="lbtr">↑ 3 minggu berturut</div></div></div>
+          <div class="lbr"><div class="lbrk rk2">2</div><div class="lbav" style="background:linear-gradient(135deg,#6366F1,#7C3AED)">N</div><div class="lbi"><div class="lbname">Nathaniel Alfa Putra</div><div class="lbcity">Batam Center</div></div><div style="text-align:right"><div class="lbpts">4.910</div><div class="lbtr">↑ Naik 1 posisi</div></div></div>
+          <div class="lbr"><div class="lbrk rk3">3</div><div class="lbav" style="background:linear-gradient(135deg,#10B981,#0D9488)">R</div><div class="lbi"><div class="lbname">Ricky</div><div class="lbcity">Taman Kota</div></div><div style="text-align:right"><div class="lbpts">4.650</div><div class="lbtr">— Stabil</div></div></div>
+          <div class="lbr"><div class="lbrk rkn">4</div><div class="lbav" style="background:linear-gradient(135deg,#F43F5E,#EC4899)">J</div><div class="lbi"><div class="lbname">Jason Alfaro</div><div class="lbcity">Batam Center</div></div><div style="text-align:right"><div class="lbpts">3.980</div><div class="lbtr" style="color:var(--rose)">↓ Turun 1</div></div></div>
+          <div style="border:1.5px dashed #C4B5FD;border-radius:var(--r-md);padding:2px;margin-top:4px">
+            <div class="lbr me"><div class="lbrk" style="background:linear-gradient(135deg,#7C3AED,#EC4899);color:white">5</div><div class="lbav" style="background:linear-gradient(135deg,#7C3AED,#6366F1)">K</div><div class="lbi"><div class="lbname">Khair Arrayyan <span style="font-size:10px;color:var(--blue-mid);font-weight:700">(Kamu)</span></div><div class="lbcity">Sengkuang</div></div><div style="text-align:right"><div class="lbpts">3.500</div><div class="lbtr" style="color:var(--violet)">— Stabil</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trip history -->
+      <div class="gcard" style="height:fit-content">
+        <div class="shdr"><div class="gct" style="margin:0"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Riwayat &amp; Poin</div><button class="seall">Semua →</button></div>
+        <div class="trl">
+          <div class="tri"><div class="tric"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div class="trin"><div class="trnm">Batam Centre → Jodoh</div><div class="trdt">Hari ini · 08.14 · Koridor 1</div></div><div class="trpt">+50</div></div>
+          <div class="tri"><div class="tric"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div class="trin"><div class="trnm">Nagoya → Batam Centre</div><div class="trdt">Kemarin · 17.32 · Koridor 1</div></div><div class="trpt">+50</div></div>
+          <div class="tri"><div class="tric"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div class="trin"><div class="trnm">Batu Aji → Sekupang</div><div class="trdt">Kemarin · 12.05 · Koridor 3</div></div><div class="trpt">+50</div></div>
+          <div class="tri" style="background:linear-gradient(135deg,var(--amber-light),white);border-color:#FDE68A"><div class="tric" style="background:var(--amber-light)"><svg viewBox="0 0 24 24" stroke="#F59E0B" stroke-width="2" fill="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><div class="trin"><div class="trnm" style="color:#92400E">Bonus Tantangan</div><div class="trdt" style="color:#B45309">Early Bird Challenge</div></div><div class="trpt" style="background:var(--amber-light);color:#92400E;border:1px solid #FDE68A">+100</div></div>
+          <div class="tri"><div class="tric"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div class="trin"><div class="trnm">Tiban → Kepri Mall</div><div class="trdt">2 hari lalu · 09.50 · Koridor 5</div></div><div class="trpt">+50</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showPage(id,el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  if(el) el.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.ptab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    document.querySelectorAll('.ptab').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+  });
+});
+document.querySelectorAll('.bcard').forEach(c=>{
+  c.addEventListener('click',()=>{
+    document.querySelectorAll('.bcard').forEach(x=>x.classList.remove('sel'));
+    c.classList.add('sel');
+  });
+});
+function swapI(){const f=document.getElementById('fi'),t=document.getElementById('ti');[f.value,t.value]=[t.value,f.value]}
+function fillR(f,t){document.getElementById('fi').value=f;document.getElementById('ti').value=t}
+function doSearch(){
+  const f=document.getElementById('fi').value.trim(),t=document.getElementById('ti').value.trim();
+  if(!f||!t){
+    if(!f)document.getElementById('fi').style.borderColor='#EF4444';
+    if(!t)document.getElementById('ti').style.borderColor='#EF4444';
+    setTimeout(()=>{document.getElementById('fi').style.borderColor='';document.getElementById('ti').style.borderColor=''},2000);
+  }
+}
+window.addEventListener('load',()=>{
+  document.querySelectorAll('.cf').forEach(b=>{const w=b.style.width;b.style.width='0';setTimeout(()=>{b.style.width=w},400)});
+  initGame();
+});
+
+/* ═══════════════ ECO-RUNNER GAME ENGINE ═══════════════ */
+const CVS = document.getElementById('ecoCanvas');
+const CTX = CVS.getContext('2d');
+let GW, GH, RAF, gameRunning=false, gameOver=false;
+let score=0, bestScore=0, earnedPts=0;
+let spd=4, frame=0, bgOffset=0;
+let runner, obstacles=[], clouds=[], busTarget;
+let jumpHeld=false, crouchHeld=false;
+let gamePhase='idle'; // idle | running | dead
+
+// ── Responsive canvas ──
+function resizeCanvas(){
+  const wrap=CVS.parentElement;
+  GW=wrap.clientWidth||800;
+  GH=220;
+  CVS.width=GW; CVS.height=GH;
+}
+
+function initGame(){
+  resizeCanvas();
+  window.addEventListener('resize',()=>{ if(!gameRunning) resizeCanvas(); });
+  drawIdleScreen();
+}
+
+function startGame(){
+  document.getElementById('overlay-start').classList.add('hidden');
+  document.getElementById('overlay-gameover').classList.add('hidden');
+  resizeCanvas();
+  spd=4; frame=0; bgOffset=0; score=0; earnedPts=0;
+  gameRunning=true; gameOver=false; gamePhase='running';
+
+  const GROUND = GH - 44;
+  runner = {
+    x:80, y:GROUND, w:28, h:44,
+    dy:0, vy:0, grounded:true,
+    crouching:false,
+    legPhase:0,
+    jumpPow:-13
+  };
+
+  obstacles=[]; clouds=[];
+  // Pre-populate clouds
+  for(let i=0;i<5;i++) clouds.push(mkCloud(Math.random()*GW));
+  // Bus target (goal visual on right edge)
+  busTarget={x:GW+200, arriving:false};
+
+  if(RAF) cancelAnimationFrame(RAF);
+  gameLoop();
+}
+
+function gameLoop(){
+  if(!gameRunning) return;
+  update();
+  render();
+  RAF=requestAnimationFrame(gameLoop);
+}
+
+function update(){
+  frame++;
+  spd = 4 + Math.min(score/500, 6); // max speed 10
+  score += spd*0.07;
+  earnedPts = Math.floor(score/50);
+  bgOffset = (bgOffset + spd*0.4)%GW;
+
+  const GROUND=GH-44;
+
+  // Runner physics
+  if(crouchHeld && runner.grounded){
+    runner.crouching=true;
+    runner.h=28; runner.y=GROUND+16;
+  } else {
+    runner.crouching=false;
+    runner.h=44;
+  }
+  if(!runner.crouching){
+    runner.vy+=0.7;
+    runner.y+=runner.vy;
+  }
+  if(runner.y>=GROUND){ runner.y=GROUND; runner.vy=0; runner.grounded=true; }
+  else { runner.grounded=false; }
+  runner.legPhase+=spd*0.25;
+
+  // Obstacles
+  const spawnRate = Math.max(60, 130-score/20);
+  if(frame%Math.floor(spawnRate)===0) obstacles.push(mkObstacle());
+  obstacles.forEach(o=>{ o.x-=spd; });
+  obstacles=obstacles.filter(o=>o.x+o.w>-20);
+
+  // Collision detection
+  const rBox={x:runner.x+6,y:runner.y+4,w:runner.w-12,h:runner.h-4};
+  for(const o of obstacles){
+    if(rBox.x<o.x+o.w-4 && rBox.x+rBox.w>o.x+4 && rBox.y<o.y+o.h-4 && rBox.y+rBox.h>o.y+4){
+      endGame(); return;
+    }
+  }
+
+  // Clouds
+  clouds.forEach(c=>{ c.x-=spd*0.25; });
+  clouds=clouds.filter(c=>c.x>-150);
+  if(clouds.length<5) clouds.push(mkCloud(GW+20));
+
+  // HUD
+  document.getElementById('hud-score').textContent='📏 '+Math.floor(score)+' m';
+  document.getElementById('hud-pts').textContent='🪙 '+earnedPts+' pts';
+}
+
+function mkObstacle(){
+  const GROUND=GH-44;
+  const types=['car','truck','smog'];
+  const t=types[Math.floor(Math.random()*types.length)];
+  if(t==='car') return {type:'car',x:GW+10,y:GROUND+8,w:58,h:36,color:'#EF4444'};
+  if(t==='truck') return {type:'truck',x:GW+10,y:GROUND+2,w:78,h:42,color:'#F59E0B'};
+  return {type:'smog',x:GW+10,y:GROUND-20,w:50,h:60,color:'rgba(120,120,120,0.6)',floating:true};
+}
+
+function mkCloud(x){
+  return {x, y:20+Math.random()*50, r:18+Math.random()*22, opacity:0.2+Math.random()*0.25};
+}
+
+function render(){
+  CTX.clearRect(0,0,GW,GH);
+  drawBg();
+  drawGround();
+  clouds.forEach(c=>drawCloud(c));
+  obstacles.forEach(o=>drawObstacle(o));
+  drawBusTarget();
+  drawRunner();
+}
+
+function drawBg(){
+  // Sky gradient
+  const sky=CTX.createLinearGradient(0,0,0,GH-60);
+  sky.addColorStop(0,'#0D1526');
+  sky.addColorStop(0.6,'#1A3A6E');
+  sky.addColorStop(1,'#2563EB22');
+  CTX.fillStyle=sky; CTX.fillRect(0,0,GW,GH-60);
+
+  // Stars
+  CTX.fillStyle='rgba(255,255,255,0.7)';
+  const starPositions=[[0.05,0.1],[0.15,0.05],[0.25,0.18],[0.4,0.06],[0.55,0.14],
+    [0.7,0.04],[0.8,0.2],[0.9,0.08],[0.95,0.16],[0.1,0.25],[0.35,0.22],[0.6,0.25]];
+  starPositions.forEach(([fx,fy])=>{
+    CTX.beginPath();
+    CTX.arc((fx*GW - bgOffset*0.1 + GW)%GW, fy*GH, 1.2, 0, Math.PI*2);
+    CTX.fill();
+  });
+
+  // Batam Centre skyline — scrolling buildings
+  const bldgs=[
+    {w:38,h:110,color:'#1E3A6E'},{w:22,h:80,color:'#152B55'},
+    {w:45,h:140,color:'#243B7A'},{w:28,h:100,color:'#1A2F60'},
+    {w:55,h:160,color:'#1E3A6E'},{w:30,h:90,color:'#0F2040'},
+    {w:40,h:125,color:'#243B7A'},{w:25,h:75,color:'#152B55'},
+    {w:60,h:155,color:'#1E3A6E'},{w:35,h:105,color:'#1A2F60'},
+  ];
+  const totalW=bldgs.reduce((s,b)=>s+b.w+6,0);
+  const off2=(bgOffset*0.6)%totalW;
+
+  for(let rep=-1;rep<3;rep++){
+    let bx=rep*totalW-off2;
+    bldgs.forEach(b=>{
+      CTX.fillStyle=b.color;
+      CTX.fillRect(bx, GH-60-b.h, b.w, b.h);
+      // Windows
+      for(let row=0;row<Math.floor(b.h/14);row++){
+        for(let col=0;col<Math.floor(b.w/9);col++){
+          if(Math.sin(bx+col*77+row*31)>0.3){
+            CTX.fillStyle='rgba(255,220,60,0.55)';
+            CTX.fillRect(bx+col*9+2, GH-60-b.h+row*14+3, 5, 8);
+          }
+        }
+      }
+      // Batam Centre tower antenna (every 3rd building)
+      if(b.h>130){
+        CTX.strokeStyle='#2563EB'; CTX.lineWidth=1.5;
+        CTX.beginPath();CTX.moveTo(bx+b.w/2,GH-60-b.h);CTX.lineTo(bx+b.w/2,GH-60-b.h-22);CTX.stroke();
+        CTX.fillStyle='#EF4444';
+        CTX.beginPath();CTX.arc(bx+b.w/2,GH-60-b.h-22,2.5,0,Math.PI*2);CTX.fill();
+      }
+      bx+=b.w+6;
+    });
+  }
+
+  // Jembatan Barelang silhouette (mid-distance)
+  const boff=(bgOffset*0.3)%GW;
+  CTX.strokeStyle='rgba(37,99,235,0.35)'; CTX.lineWidth=2;
+  CTX.beginPath();
+  const bx0=(GW*0.1-boff+GW*2)%GW - GW*0.5;
+  CTX.moveTo(bx0,GH-65);
+  // Bridge arch
+  CTX.quadraticCurveTo(bx0+60,GH-105,bx0+120,GH-65);
+  CTX.stroke();
+  // Cable lines
+  CTX.strokeStyle='rgba(37,99,235,0.18)'; CTX.lineWidth=1;
+  for(let i=0;i<7;i++){
+    CTX.beginPath();
+    CTX.moveTo(bx0+60,GH-105);
+    CTX.lineTo(bx0+i*18,GH-65);
+    CTX.stroke();
+  }
+}
+
+function drawGround(){
+  // Road
+  const road=CTX.createLinearGradient(0,GH-60,0,GH);
+  road.addColorStop(0,'#374151'); road.addColorStop(1,'#1F2937');
+  CTX.fillStyle=road; CTX.fillRect(0,GH-60,GW,60);
+
+  // Road markings (dashed center line)
+  CTX.strokeStyle='rgba(255,255,255,0.3)'; CTX.lineWidth=2;
+  CTX.setLineDash([30,20]);
+  CTX.beginPath(); CTX.moveTo(0,GH-32); CTX.lineTo(GW,GH-32);
+  CTX.stroke(); CTX.setLineDash([]);
+
+  // Sidewalk
+  CTX.fillStyle='#4B5563'; CTX.fillRect(0,GH-62,GW,4);
+  CTX.fillStyle='#6B7280'; CTX.fillRect(0,GH-62,GW,2);
+
+  // Street lamp posts (scrolling)
+  CTX.strokeStyle='#9CA3AF'; CTX.lineWidth=2;
+  for(let i=0;i<6;i++){
+    const lx=((i*180)+GW-bgOffset*0.8+GW*2)%GW;
+    CTX.beginPath(); CTX.moveTo(lx,GH-62); CTX.lineTo(lx,GH-62-40); CTX.stroke();
+    CTX.beginPath(); CTX.moveTo(lx,GH-102); CTX.lineTo(lx+14,GH-102); CTX.stroke();
+    // Glow
+    const grd=CTX.createRadialGradient(lx+14,GH-102,0,lx+14,GH-102,18);
+    grd.addColorStop(0,'rgba(253,224,71,0.25)'); grd.addColorStop(1,'transparent');
+    CTX.fillStyle=grd; CTX.fillRect(lx-4,GH-120,36,36);
+    CTX.fillStyle='rgba(253,224,71,0.9)';
+    CTX.beginPath(); CTX.arc(lx+14,GH-102,2.5,0,Math.PI*2); CTX.fill();
+  }
+}
+
+function drawCloud(c){
+  CTX.globalAlpha=c.opacity;
+  CTX.fillStyle='white';
+  CTX.beginPath(); CTX.arc(c.x,c.y,c.r,0,Math.PI*2); CTX.fill();
+  CTX.beginPath(); CTX.arc(c.x+c.r*0.7,c.y+4,c.r*0.7,0,Math.PI*2); CTX.fill();
+  CTX.beginPath(); CTX.arc(c.x-c.r*0.6,c.y+5,c.r*0.6,0,Math.PI*2); CTX.fill();
+  CTX.globalAlpha=1;
+}
+
+function drawObstacle(o){
+  if(o.type==='car'){
+    // Car body
+    const cg=CTX.createLinearGradient(o.x,o.y,o.x,o.y+o.h);
+    cg.addColorStop(0,'#EF4444'); cg.addColorStop(1,'#B91C1C');
+    CTX.fillStyle=cg;
+    CTX.beginPath();
+    CTX.roundRect(o.x,o.y+10,o.w,o.h-10,4);
+    CTX.fill();
+    // Roof
+    CTX.fillStyle='#DC2626';
+    CTX.beginPath();
+    CTX.roundRect(o.x+8,o.y,o.w-16,18,3);
+    CTX.fill();
+    // Windshield
+    CTX.fillStyle='rgba(147,210,255,0.7)';
+    CTX.fillRect(o.x+10,o.y+2,o.w-22,14);
+    // Wheels
+    [o.x+10, o.x+o.w-16].forEach(wx=>{
+      CTX.fillStyle='#111'; CTX.beginPath(); CTX.arc(wx,o.y+o.h,9,0,Math.PI*2); CTX.fill();
+      CTX.fillStyle='#666'; CTX.beginPath(); CTX.arc(wx,o.y+o.h,5,0,Math.PI*2); CTX.fill();
+    });
+    // "MACET" label
+    CTX.fillStyle='rgba(255,255,255,0.9)'; CTX.font='bold 8px Sora,sans-serif';
+    CTX.textAlign='center'; CTX.fillText('MACET',o.x+o.w/2,o.y+o.h-2); CTX.textAlign='left';
+  } else if(o.type==='truck'){
+    // Truck cab
+    const tg=CTX.createLinearGradient(o.x,o.y,o.x,o.y+o.h);
+    tg.addColorStop(0,'#F59E0B'); tg.addColorStop(1,'#B45309');
+    CTX.fillStyle=tg;
+    CTX.beginPath(); CTX.roundRect(o.x,o.y+5,o.w,o.h-5,4); CTX.fill();
+    // Cab top
+    CTX.fillStyle='#D97706';
+    CTX.beginPath(); CTX.roundRect(o.x+o.w-22,o.y,22,20,3); CTX.fill();
+    // Window
+    CTX.fillStyle='rgba(147,210,255,0.7)'; CTX.fillRect(o.x+o.w-20,o.y+2,18,14);
+    // Wheels
+    [o.x+14, o.x+o.w-18].forEach(wx=>{
+      CTX.fillStyle='#111'; CTX.beginPath(); CTX.arc(wx,o.y+o.h,11,0,Math.PI*2); CTX.fill();
+      CTX.fillStyle='#555'; CTX.beginPath(); CTX.arc(wx,o.y+o.h,6,0,Math.PI*2); CTX.fill();
+    });
+    CTX.fillStyle='rgba(255,255,255,0.85)'; CTX.font='bold 7px Sora,sans-serif';
+    CTX.textAlign='center'; CTX.fillText('POLUSI',o.x+o.w/2-10,o.y+o.h/2+4); CTX.textAlign='left';
+  } else {
+    // Smog cloud
+    for(let i=0;i<4;i++){
+      const sg=CTX.createRadialGradient(o.x+o.w/2+i*5,o.y+o.h/2-i*4,0,o.x+o.w/2+i*5,o.y+o.h/2-i*4,28);
+      sg.addColorStop(0,'rgba(107,114,128,0.55)'); sg.addColorStop(1,'transparent');
+      CTX.fillStyle=sg;
+      CTX.beginPath(); CTX.arc(o.x+o.w/2+i*5,o.y+o.h/2-i*5+Math.sin(frame*0.06+i)*3,22+i*3,0,Math.PI*2); CTX.fill();
+    }
+    CTX.fillStyle='rgba(180,180,180,0.6)'; CTX.font='bold 8px Sora,sans-serif';
+    CTX.textAlign='center'; CTX.fillText('😷',o.x+o.w/2,o.y+o.h/2); CTX.textAlign='left';
+  }
+}
+
+function drawBusTarget(){
+  // Trans Batam bus approaching from right (distant goal)
+  const bx = GW-90+Math.sin(frame*0.03)*2;
+  const by = GH-44-42;
+  // Bus body
+  const bg2=CTX.createLinearGradient(bx,by,bx,by+42);
+  bg2.addColorStop(0,'#2563EB'); bg2.addColorStop(1,'#1E40AF');
+  CTX.fillStyle=bg2;
+  CTX.beginPath(); CTX.roundRect(bx,by,80,42,5); CTX.fill();
+  // Stripe
+  CTX.fillStyle='#FCD34D'; CTX.fillRect(bx,by+28,80,4);
+  // Windows
+  CTX.fillStyle='rgba(186,230,253,0.8)';
+  [bx+6,bx+20,bx+34,bx+48].forEach(wx=>{ CTX.fillRect(wx,by+5,12,14); });
+  // Door
+  CTX.strokeStyle='rgba(255,255,255,0.4)'; CTX.lineWidth=1;
+  CTX.strokeRect(bx+60,by+14,14,20);
+  // Wheels
+  [bx+14,bx+62].forEach(wx=>{
+    CTX.fillStyle='#111'; CTX.beginPath(); CTX.arc(wx,by+42,9,0,Math.PI*2); CTX.fill();
+    CTX.fillStyle='#888'; CTX.beginPath(); CTX.arc(wx,by+42,5,0,Math.PI*2); CTX.fill();
+  });
+  // Trans Batam label
+  CTX.fillStyle='white'; CTX.font='bold 7px Sora,sans-serif'; CTX.textAlign='center';
+  CTX.fillText('TRANS BATAM',bx+40,by+23); CTX.textAlign='left';
+  // Pulsing arrow pointing to bus
+  const pulse=Math.sin(frame*0.1)*3;
+  CTX.fillStyle='rgba(252,211,77,0.9)'; CTX.font='bold 14px sans-serif';
+  CTX.fillText('►',bx-22+pulse,by+22);
+}
+
+function drawRunner(){
+  const r=runner;
+  const lp=r.legPhase;
+  const ry=r.y; const rh=r.h;
+
+  CTX.save();
+  CTX.translate(r.x+r.w/2, ry+rh/2);
+  if(r.crouching) CTX.scale(1,0.65);
+
+  // Shadow
+  CTX.fillStyle='rgba(0,0,0,0.25)';
+  CTX.beginPath(); CTX.ellipse(0,rh/2+2,10,4,0,0,Math.PI*2); CTX.fill();
+
+  // Legs
+  const legAmp = r.grounded?8:0;
+  const leg1y = rh*0.1 + Math.sin(lp)*legAmp;
+  const leg2y = rh*0.1 - Math.sin(lp)*legAmp;
+  CTX.strokeStyle='#1E40AF'; CTX.lineWidth=5; CTX.lineCap='round';
+  CTX.beginPath(); CTX.moveTo(0,rh*0.1); CTX.lineTo(-5,leg1y+12); CTX.lineTo(-8,leg1y+22); CTX.stroke();
+  CTX.beginPath(); CTX.moveTo(0,rh*0.1); CTX.lineTo(5,leg2y+12); CTX.lineTo(8,leg2y+22); CTX.stroke();
+  // Shoes
+  CTX.fillStyle='#1E3A6E';
+  CTX.beginPath(); CTX.ellipse(-8,leg1y+22,6,3,0,0,Math.PI*2); CTX.fill();
+  CTX.beginPath(); CTX.ellipse(8,leg2y+22,6,3,0,0,Math.PI*2); CTX.fill();
+
+  // Body
+  const bodyGrad=CTX.createLinearGradient(-10,-rh*0.25,10,rh*0.15);
+  bodyGrad.addColorStop(0,'#2563EB'); bodyGrad.addColorStop(1,'#1E40AF');
+  CTX.fillStyle=bodyGrad;
+  CTX.beginPath(); CTX.roundRect(-10,-rh*0.25,20,rh*0.35,4); CTX.fill();
+  // Shirt stripe
+  CTX.fillStyle='#FCD34D'; CTX.fillRect(-10,-rh*0.05,20,3);
+
+  // Arms (pumping)
+  const armAmp=r.grounded?10:5;
+  CTX.strokeStyle='#2563EB'; CTX.lineWidth=4;
+  CTX.beginPath(); CTX.moveTo(-8,-rh*0.15); CTX.lineTo(-14,-rh*0.15+Math.sin(lp+1)*armAmp); CTX.stroke();
+  CTX.beginPath(); CTX.moveTo(8,-rh*0.15); CTX.lineTo(14,-rh*0.15-Math.sin(lp+1)*armAmp); CTX.stroke();
+
+  // Head
+  CTX.fillStyle='#FBBF24';
+  CTX.beginPath(); CTX.arc(0,-rh*0.35,10,0,Math.PI*2); CTX.fill();
+  // Hair
+  CTX.fillStyle='#92400E';
+  CTX.beginPath(); CTX.arc(0,-rh*0.35-7,8,Math.PI,0); CTX.fill();
+  // Eyes
+  CTX.fillStyle='#111';
+  CTX.beginPath(); CTX.arc(4,-rh*0.37,2,0,Math.PI*2); CTX.fill();
+  // Sweat drop (when fast)
+  if(spd>7){
+    CTX.fillStyle='rgba(147,210,255,0.8)';
+    CTX.beginPath(); CTX.arc(-12,-rh*0.3,3,0,Math.PI*2); CTX.fill();
+  }
+
+  CTX.restore();
+}
+
+function endGame(){
+  gameRunning=false; gamePhase='dead';
+  cancelAnimationFrame(RAF);
+
+  if(Math.floor(score)>bestScore) bestScore=Math.floor(score);
+  document.getElementById('g-best').textContent=bestScore;
+  document.getElementById('g-earned').textContent=earnedPts;
+
+  document.getElementById('ov-dist').textContent=Math.floor(score);
+  document.getElementById('ov-pts').textContent=earnedPts;
+  document.getElementById('ov-best').textContent=bestScore;
+
+  const msgs=[
+    {e:'💨',t:'Kena Macet!',s:'Kalau naik Trans Batam, nggak bakal kena macet deh!'},
+    {e:'😤',t:'Tersedak Polusi!',s:'Dalam bus ber-AC, udara jauh lebih segar!'},
+    {e:'🚗',t:'Kejebak!',s:'Bus Trans Batam punya jalur khusus, lebih ngebut!'},
+  ];
+  const m=msgs[Math.floor(Math.random()*msgs.length)];
+  document.getElementById('ov-emoji').textContent=m.e;
+  document.getElementById('ov-title').textContent=m.t;
+  document.getElementById('ov-sub').textContent=m.s;
+  document.getElementById('overlay-gameover').classList.remove('hidden');
+
+  // Draw death frame
+  render();
+}
+
+function drawIdleScreen(){
+  if(!CVS) return;
+  resizeCanvas();
+  const sky=CTX.createLinearGradient(0,0,0,GH);
+  sky.addColorStop(0,'#0D1526'); sky.addColorStop(1,'#1A3A6E');
+  CTX.fillStyle=sky; CTX.fillRect(0,0,GW,GH);
+}
+
+// Input handling
+window.addEventListener('keydown',e=>{
+  if(e.code==='Space'||e.code==='ArrowUp'){
+    e.preventDefault();
+    if(gamePhase==='idle'||gamePhase==='dead'){startGame();return;}
+    if(runner&&runner.grounded&&!runner.crouching){ runner.vy=runner.jumpPow; runner.grounded=false; }
+  }
+  if(e.code==='ArrowDown'){ e.preventDefault(); crouchHeld=true; }
+});
+window.addEventListener('keyup',e=>{ if(e.code==='ArrowDown') crouchHeld=false; });
+CVS.addEventListener('click',()=>{
+  if(gamePhase==='idle'||gamePhase==='dead'){startGame();return;}
+  if(runner&&runner.grounded&&!runner.crouching){ runner.vy=runner.jumpPow; runner.grounded=false; }
+});
+CVS.addEventListener('touchstart',e=>{
+  e.preventDefault();
+  if(gamePhase==='idle'||gamePhase==='dead'){startGame();return;}
+  if(runner&&runner.grounded&&!runner.crouching){ runner.vy=runner.jumpPow; runner.grounded=false; }
+},{passive:false});
+</script>
+</body>
+</html>
