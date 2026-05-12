@@ -273,39 +273,54 @@ nav{background:rgba(255,255,255,0.9);backdrop-filter:blur(16px);border-bottom:1p
 .trpt{font-size:12.5px;font-weight:800;color:var(--teal);background:var(--teal-light);padding:3px 9px;border-radius:var(--r-full)}
 .two-col{display:grid;grid-template-columns:3fr 2fr;gap:1.5rem}
 
-/* ─── ECO-RUNNER GAME ─── */
-.game-section{background:white;border-radius:var(--r-lg);border:1px solid var(--border);overflow:hidden;box-shadow:var(--sh-md);margin-bottom:1.75rem}
-.game-header{background:linear-gradient(135deg,#0D1526,#1E1B4B);padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
-.game-title-area{display:flex;align-items:center;gap:12px}
-.game-title-area h3{font-size:16px;font-weight:800;color:white;letter-spacing:-.3px}
-.game-title-area p{font-size:12px;color:rgba(255,255,255,.5);font-weight:500;margin-top:1px}
-.game-tag{display:inline-flex;align-items:center;gap:5px;background:rgba(124,58,237,.25);border:1px solid rgba(124,58,237,.4);padding:4px 12px;border-radius:var(--r-full);font-size:11px;color:#C4B5FD;font-weight:700}
-.game-stats-row{display:flex;gap:16px;align-items:center}
-.gstat{text-align:center}
-.gstat-val{font-size:18px;font-weight:800;color:white;display:block;font-family:'DM Mono',monospace}
-.gstat-lbl{font-size:10px;color:rgba(255,255,255,.4);font-weight:500}
-.game-canvas-wrap{position:relative;background:#1a1a2e;overflow:hidden;cursor:pointer}
-#ecoCanvas{display:block;width:100%;height:220px}
-.game-hud{position:absolute;top:10px;right:14px;display:flex;flex-direction:column;gap:6px;pointer-events:none}
-.hud-chip{background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-full);padding:4px 12px;font-size:12px;font-weight:700;color:white;backdrop-filter:blur(4px);font-family:'DM Mono',monospace}
-.hud-chip.pts{background:rgba(245,158,11,.2);border-color:rgba(245,158,11,.4);color:#FCD34D}
-.game-controls{padding:1rem 1.5rem;background:var(--surface-2);display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border)}
-.game-hint{font-size:12px;color:var(--ink-4);display:flex;align-items:center;gap:6px;font-weight:500}
-.key-badge{background:var(--surface);border:1.5px solid var(--border);border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700;color:var(--ink-2);font-family:'DM Mono',monospace;box-shadow:var(--sh-sm)}
-.btn-game-start{padding:8px 22px;border-radius:var(--r-md);background:linear-gradient(135deg,#7C3AED,#EC4899);color:white;border:none;font-size:13px;font-weight:700;font-family:'Sora',sans-serif;cursor:pointer;box-shadow:0 4px 14px rgba(124,58,237,.35);transition:all .2s}
-.btn-game-start:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(124,58,237,.45)}
-.game-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(13,21,38,.82);backdrop-filter:blur(3px);z-index:10;transition:opacity .3s}
-.game-overlay.hidden{opacity:0;pointer-events:none}
-.overlay-card{background:white;border-radius:var(--r-xl);padding:2rem 2.5rem;text-align:center;box-shadow:var(--sh-lg);min-width:280px}
-.overlay-emoji{font-size:52px;display:block;margin-bottom:.75rem}
-.overlay-title{font-size:20px;font-weight:800;color:var(--ink);margin-bottom:.5rem;letter-spacing:-.4px}
-.overlay-sub{font-size:13px;color:var(--ink-3);margin-bottom:1.25rem;line-height:1.5}
-.overlay-score{display:flex;gap:16px;justify-content:center;margin-bottom:1.25rem}
-.ov-stat{background:var(--surface-2);border-radius:var(--r-md);padding:10px 18px;border:1px solid var(--border)}
-.ov-stat-val{font-size:20px;font-weight:800;color:var(--ink);font-family:'DM Mono',monospace;display:block}
-.ov-stat-lbl{font-size:10px;color:var(--ink-4);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
-.btn-play-again{width:100%;padding:12px;border-radius:var(--r-md);background:linear-gradient(135deg,#7C3AED,#EC4899);color:white;border:none;font-size:14px;font-weight:700;font-family:'Sora',sans-serif;cursor:pointer;box-shadow:0 4px 14px rgba(124,58,237,.35);transition:all .2s}
-.btn-play-again:hover{transform:translateY(-1px)}
+/* ══ GAME OVER OVERLAY — FIX ══ */
+/* Overlay dasar: hidden state */
+.g-overlay{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:1.25rem;
+  background:rgba(7,9,26,0.88);
+  backdrop-filter:blur(10px);
+  z-index:20;
+  transition:opacity .3s, visibility .3s;
+}
+/* State tersembunyi */
+.g-overlay.hidden{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+/* State terlihat */
+.g-overlay.visible{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+}
+/* Animasi game over masuk */
+@keyframes goSlideIn{
+  from{transform:translateY(30px);opacity:0}
+  to{transform:translateY(0);opacity:1}
+}
+.g-over-content{
+  animation:goSlideIn .4s cubic-bezier(.16,1,.3,1) forwards;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:1.25rem;
+}
+/* Shake animasi saat mati */
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  20%{transform:translateX(-8px)}
+  40%{transform:translateX(8px)}
+  60%{transform:translateX(-5px)}
+  80%{transform:translateX(5px)}
+}
+.g-shake{animation:shake .5s ease-out}
 </style>
 </head>
 <body>
@@ -324,7 +339,7 @@ nav{background:rgba(255,255,255,0.9);backdrop-filter:blur(16px);border-bottom:1p
       <li><a onclick="showPage('home',this)">Reward</a></li>
     </ul>
     <div class="nav-right">
-      <div class="nav-points" onclick="showPage('gami',document.querySelectorAll('.nav-links a')[1])">🪙 2.840 Poin</div>
+      <div class="nav-points" onclick="showPage('gami',document.querySelectorAll('.nav-links a')[1])">🪙 <span id="nav-pts">2.840</span> Poin</div>
       <button class="btn-nl">Masuk</button>
       <button class="btn-ns">Daftar Gratis</button>
     </div>
@@ -443,170 +458,260 @@ nav{background:rgba(255,255,255,0.9);backdrop-filter:blur(16px);border-bottom:1p
   </div>
 </div>
 
-<!-- GAMIFIKASI -->
+<!-- ══════════ GAMIFIKASI PAGE ══════════ -->
 <div id="page-gami" class="page">
-  <section class="gh">
-    <div class="gg1"></div><div class="gg2"></div><div class="hgl"></div>
-    <div class="ghi">
-      <div>
-        <div class="gtag">🎮 Mode Gamifikasi Aktif</div>
-        <h1>Perjalananmu<br>Punya <span class="gold">Nilai Lebih</span></h1>
-        <p>Setiap naik Trans Batam kamu mengumpulkan poin, naik level, dan berkesempatan memenangkan reward eksklusif. Jadikan komutmu menyenangkan!</p>
-        <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <a class="btn-gp" href="gamifikasi.html"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Tantangan Hari Ini</a>
-          <button class="btn-hs">Riwayat Perjalanan →</button>
+  <section style="background:linear-gradient(135deg,#0D1526 0%,#1a1a3e 55%,#1A3A6E 100%);padding:3rem 2rem;position:relative;overflow:hidden">
+    <div style="position:absolute;top:-80px;left:25%;width:480px;height:480px;background:radial-gradient(circle,rgba(124,58,237,0.22) 0%,transparent 65%);pointer-events:none"></div>
+    <div style="position:absolute;bottom:-60px;right:8%;width:320px;height:320px;background:radial-gradient(circle,rgba(245,158,11,0.18) 0%,transparent 65%);pointer-events:none"></div>
+    <div class="hgl"></div>
+    <div style="max-width:1280px;margin:0 auto;position:relative;z-index:1">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem">
+        <div style="display:flex;align-items:center;gap:16px">
+          <div style="width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#EC4899);padding:3px;flex-shrink:0">
+            <div style="width:100%;height:100%;border-radius:50%;background:#1E1B4B;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:white">K</div>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:600;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.7px;margin-bottom:3px">Selamat datang kembali</div>
+            <div style="font-size:20px;font-weight:800;color:white;letter-spacing:-.4px">Khair Arrayyan</div>
+            <div style="display:inline-flex;align-items:center;gap:5px;background:rgba(251,191,36,0.15);border:1px solid rgba(251,191,36,0.28);padding:3px 10px;border-radius:99px;font-size:11.5px;font-weight:700;color:#FCD34D;margin-top:4px">🏆 Platinum Rider · Level 12</div>
+          </div>
         </div>
-      </div>
-      <div class="rkcard">
-        <div class="rkt">
-          <div class="avring"><div class="avin">K</div></div>
-          <div class="rki"><div class="rkname">Khair Arrayyan</div><div class="rktier">🏆 Platinum Rider</div></div>
-          <div style="text-align:right"><div class="rkbig">2.840</div><div class="rklbl">Total Poin</div></div>
-        </div>
-        <div class="xpw">
-          <div class="xpm"><span>Level 12 — Platinum</span><span>68% menuju Level 13</span></div>
-          <div class="xpbg"><div class="xpf"></div></div>
-        </div>
-        <div class="mstn">
-          <div class="ms"><span class="msv">47</span><span class="msl">Trip Bulan Ini</span></div>
-          <div class="ms"><span class="msv">#5</span><span class="msl">Peringkat Kota</span></div>
-          <div class="ms"><span class="msv">12</span><span class="msl">Badge Diraih</span></div>
-          <div class="ms"><span class="msv">5</span><span class="msl">Hari Beruntun</span></div>
+        <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap">
+          <div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:1rem 1.5rem;min-width:220px">
+            <div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.4);margin-bottom:6px;font-weight:500"><span>XP Menuju Level 13</span><span>68%</span></div>
+            <div style="height:7px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden">
+              <div style="height:100%;width:68%;border-radius:99px;background:linear-gradient(90deg,#7C3AED,#EC4899,#FBBF24);background-size:200%;animation:xpg 3s linear infinite"></div>
+            </div>
+          </div>
+          <div style="display:flex;gap:.75rem">
+            <div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:.75rem 1.1rem;text-align:center">
+              <div style="font-size:1.4rem;font-weight:800;color:white;letter-spacing:-.5px" id="gami-poin-display">2.840</div>
+              <div style="font-size:10px;color:rgba(255,255,255,.4);font-weight:500;margin-top:1px">Total Poin</div>
+            </div>
+            <div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:.75rem 1.1rem;text-align:center">
+              <div style="font-size:1.4rem;font-weight:800;color:white;letter-spacing:-.5px">#5</div>
+              <div style="font-size:10px;color:rgba(255,255,255,.4);font-weight:500;margin-top:1px">Peringkat</div>
+            </div>
+            <div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:.75rem 1.1rem;text-align:center">
+              <div style="font-size:1.4rem;font-weight:800;color:white;letter-spacing:-.5px">47</div>
+              <div style="font-size:10px;color:rgba(255,255,255,.4);font-weight:500;margin-top:1px">Trip</div>
+            </div>
+            <div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:.75rem 1.1rem;text-align:center">
+              <div style="font-size:1.4rem;font-weight:800;color:#FCD34D;letter-spacing:-.5px">5🔥</div>
+              <div style="font-size:10px;color:rgba(255,255,255,.4);font-weight:500;margin-top:1px">Streak</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="gmain">
-
-    <!-- ═══ ECO-RUNNER GAME SECTION ═══ -->
-    <div class="game-section">
-      <div class="game-header">
-        <div class="game-title-area">
-          <div>
-            <h3>🎮 Eco-Runner Batam</h3>
-            <p>Lari kejar Trans Batam, hindari macet & polusi!</p>
+  <div style="max-width:1280px;margin:0 auto;padding:2rem 2rem">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem;align-items:start">
+      <div style="background:white;border-radius:20px;overflow:hidden;box-shadow:0 4px 24px rgba(13,21,38,.10);border:1px solid var(--border);cursor:pointer" onclick="showPage('game',document.querySelectorAll('.nav-links a')[1])">
+        <div style="position:relative;height:220px;overflow:hidden;background:linear-gradient(135deg,#0D1526 0%,#1E3A6E 60%,#2563EB 100%)">
+          <svg style="position:absolute;bottom:0;left:0;width:100%;height:120px" viewBox="0 0 600 120" preserveAspectRatio="none">
+            <rect x="0" y="40" width="40" height="80" fill="#1a2f60" rx="2"/><rect x="10" y="20" width="20" height="60" fill="#243b7a" rx="2"/><rect x="50" y="50" width="55" height="70" fill="#1a2f60" rx="2"/><rect x="60" y="30" width="30" height="50" fill="#152b55" rx="2"/><rect x="115" y="35" width="50" height="85" fill="#243b7a" rx="2"/><rect x="175" y="55" width="38" height="65" fill="#1a2f60" rx="2"/><rect x="225" y="25" width="60" height="95" fill="#1e3a6e" rx="2"/><rect x="245" y="10" width="18" height="30" fill="#243b7a" rx="2"/><rect x="295" y="45" width="45" height="75" fill="#152b55" rx="2"/><rect x="350" y="30" width="65" height="90" fill="#1a3a6e" rx="2"/><rect x="370" y="15" width="22" height="35" fill="#243b7a" rx="2"/><rect x="425" y="50" width="40" height="70" fill="#1a2f60" rx="2"/><rect x="475" y="35" width="55" height="85" fill="#243b7a" rx="2"/><rect x="495" y="20" width="20" height="30" fill="#152b55" rx="2"/><rect x="540" y="45" width="60" height="75" fill="#1e3a6e" rx="2"/>
+            <rect x="18" y="45" width="5" height="7" fill="rgba(255,220,60,.5)" rx="1"/><rect x="18" y="58" width="5" height="7" fill="rgba(255,220,60,.5)" rx="1"/><rect x="65" y="38" width="5" height="7" fill="rgba(255,220,60,.5)" rx="1"/><rect x="120" y="42" width="5" height="7" fill="rgba(255,220,60,.4)" rx="1"/><rect x="130" y="55" width="5" height="7" fill="rgba(255,220,60,.5)" rx="1"/><rect x="233" y="32" width="5" height="7" fill="rgba(255,220,60,.5)" rx="1"/><rect x="245" y="48" width="5" height="7" fill="rgba(255,220,60,.45)" rx="1"/><rect x="358" y="38" width="5" height="7" fill="rgba(255,220,60,.5)" rx="1"/><rect x="370" y="52" width="5" height="7" fill="rgba(255,220,60,.4)" rx="1"/><rect x="482" y="42" width="5" height="7" fill="rgba(255,220,60,.5)" rx="1"/>
+          </svg>
+          <div style="position:absolute;bottom:0;left:0;right:0;height:28px;background:#232323"></div>
+          <div style="position:absolute;bottom:13px;left:0;right:0;height:2px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.4) 0,rgba(255,255,255,.4) 24px,transparent 24px,transparent 44px)"></div>
+          <svg style="position:absolute;bottom:24px;left:60px;width:38px;height:56px" viewBox="0 0 38 56">
+            <line x1="19" y1="34" x2="10" y2="52" stroke="#2563EB" stroke-width="5" stroke-linecap="round"/><line x1="19" y1="34" x2="28" y2="50" stroke="#2563EB" stroke-width="5" stroke-linecap="round"/>
+            <ellipse cx="10" cy="53" rx="6" ry="3" fill="#1E40AF"/><ellipse cx="28" cy="51" rx="6" ry="3" fill="#1E40AF"/>
+            <rect x="10" y="20" width="18" height="16" rx="4" fill="#2563EB"/><rect x="10" y="28" width="18" height="3" fill="#FCD34D"/>
+            <line x1="10" y1="24" x2="2" y2="32" stroke="#2563EB" stroke-width="4" stroke-linecap="round"/><line x1="28" y1="24" x2="36" y2="18" stroke="#2563EB" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="19" cy="12" r="10" fill="#FBBF24"/><circle cx="23" cy="11" r="2.5" fill="#111"/>
+            <path d="M10 8 Q19 0 28 8" fill="#92400E"/>
+          </svg>
+          <svg style="position:absolute;bottom:22px;right:30px;width:100px;height:52px" viewBox="0 0 100 52">
+            <rect x="0" y="6" width="96" height="40" rx="6" fill="#2563EB"/><rect x="0" y="34" width="96" height="5" fill="#FCD34D"/>
+            <rect x="6" y="11" width="14" height="16" rx="2" fill="rgba(186,230,253,.85)"/><rect x="24" y="11" width="14" height="16" rx="2" fill="rgba(186,230,253,.85)"/><rect x="42" y="11" width="14" height="16" rx="2" fill="rgba(186,230,253,.85)"/><rect x="60" y="11" width="14" height="16" rx="2" fill="rgba(186,230,253,.85)"/>
+            <rect x="76" y="16" width="14" height="22" rx="2" fill="rgba(186,230,253,.5)" stroke="rgba(255,255,255,.3)" stroke-width="1"/>
+            <circle cx="18" cy="48" r="8" fill="#111"/><circle cx="18" cy="48" r="4" fill="#555"/><circle cx="76" cy="48" r="8" fill="#111"/><circle cx="76" cy="48" r="4" fill="#555"/>
+            <text x="48" y="28" text-anchor="middle" font-family="sans-serif" font-size="7" font-weight="bold" fill="white">TRANS BATAM</text>
+          </svg>
+          <div style="position:absolute;top:16px;left:16px;background:rgba(13,21,38,.7);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:8px 14px">
+            <div style="font-size:15px;font-weight:800;color:white;letter-spacing:-.3px">🎮 Eco-Runner Batam</div>
+            <div style="font-size:11px;color:rgba(255,255,255,.55);font-weight:500;margin-top:2px">Endless Runner · Batam City</div>
           </div>
-          <div class="game-tag">🏆 Dapatkan Poin Nyata</div>
-        </div>
-        <div class="game-stats-row">
-          <div class="gstat"><span class="gstat-val" id="g-best">0</span><span class="gstat-lbl">Rekor Terbaik</span></div>
-          <div style="width:1px;height:32px;background:rgba(255,255,255,.12)"></div>
-          <div class="gstat"><span class="gstat-val" id="g-earned">0</span><span class="gstat-lbl">Poin Diraih</span></div>
-        </div>
-      </div>
-      <div class="game-canvas-wrap">
-        <canvas id="ecoCanvas"></canvas>
-        <div class="game-hud">
-          <div class="hud-chip" id="hud-score">📏 0 m</div>
-          <div class="hud-chip pts" id="hud-pts">🪙 0 pts</div>
-        </div>
-        <!-- Start Overlay -->
-        <div class="game-overlay" id="overlay-start">
-          <div class="overlay-card">
-            <span class="overlay-emoji">🏃</span>
-            <div class="overlay-title">Eco-Runner Batam</div>
-            <div class="overlay-sub">Kejar Trans Batam dan hindari kemacetan!<br>Semakin jauh, semakin banyak poin yang kamu dapat.</div>
-            <button class="btn-play-again" onclick="startGame()">▶ Mulai Berlari!</button>
-          </div>
-        </div>
-        <!-- Game Over Overlay -->
-        <div class="game-overlay hidden" id="overlay-gameover">
-          <div class="overlay-card">
-            <span class="overlay-emoji" id="ov-emoji">💨</span>
-            <div class="overlay-title" id="ov-title">Kena Macet!</div>
-            <div class="overlay-sub" id="ov-sub">Kalau naik Trans Batam, nggak bakal kena macet deh!</div>
-            <div class="overlay-score">
-              <div class="ov-stat"><span class="ov-stat-val" id="ov-dist">0</span><span class="ov-stat-lbl">Meter</span></div>
-              <div class="ov-stat"><span class="ov-stat-val" id="ov-pts">0</span><span class="ov-stat-lbl">Poin</span></div>
-              <div class="ov-stat"><span class="ov-stat-val" id="ov-best">0</span><span class="ov-stat-lbl">Rekor</span></div>
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s;background:rgba(13,21,38,.35)" class="game-thumb-hover">
+            <div style="width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.95);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.3)">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="#2563EB"><path d="M8 5v14l11-7z"/></svg>
             </div>
-            <button class="btn-play-again" onclick="startGame()">🔄 Main Lagi</button>
           </div>
         </div>
-      </div>
-      <div class="game-controls">
-        <div class="game-hint">
-          <span class="key-badge">SPASI</span> atau
-          <span class="key-badge">↑</span> atau
-          <span>Klik/Tap untuk lompat</span>
-          &nbsp;·&nbsp;
-          <span class="key-badge">↓</span>
-          <span>untuk jongkok</span>
-        </div>
-        <button class="btn-game-start" onclick="startGame()">▶ Restart Game</button>
-      </div>
-    </div>
-
-    <div class="ggrid">
-      <!-- Tantangan -->
-      <div class="gcard">
-        <div class="gct"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> Tantangan Harian</div>
-        <div class="chall">
-          <div class="chi"><div class="chh"><div class="chl"><div class="chic" style="background:#EFF4FF">🚌</div><div><div class="chn">Naik 3x Trans Batam Hari Ini</div><div style="font-size:11px;color:var(--ink-4);font-weight:500;margin-top:1px">2/3 perjalanan selesai</div></div></div><div class="chr">🪙 +150</div></div><div class="cpb"><div class="cpf" style="width:66%"></div></div><div class="cpm"><span>2 dari 3 selesai</span><span>⏰ Sisa 4 jam</span></div></div>
-          <div class="chi"><div class="chh"><div class="chl"><div class="chic" style="background:#F0FDF4">⏰</div><div><div class="chn">Naik di Jam Sibuk (06.00–09.00)</div><div style="font-size:11px;color:var(--teal);font-weight:600;margin-top:1px">✓ Selesai!</div></div></div><div class="chr">🪙 +100</div></div><div class="cpb"><div class="cpf" style="width:100%"></div></div><div class="cpm"><span style="color:var(--teal);font-weight:700">✓ Selesai</span><span>+100 poin diterima</span></div></div>
-          <div class="chi"><div class="chh"><div class="chl"><div class="chic" style="background:var(--violet-light)">🗺️</div><div><div class="chn">Coba Koridor Baru (Koridor 4)</div><div style="font-size:11px;color:var(--ink-4);font-weight:500;margin-top:1px">Belum dimulai</div></div></div><div class="chr">🪙 +250</div></div><div class="cpb"><div class="cpf" style="width:0%"></div></div><div class="cpm"><span>0 dari 1 selesai</span><span>⏰ Sisa 3 hari</span></div></div>
-          <div class="chi"><div class="chh"><div class="chl"><div class="chic" style="background:var(--amber-light)">👥</div><div><div class="chn">Ajak 1 Teman Daftar BatamWay</div><div style="font-size:11px;color:var(--ink-4);font-weight:500;margin-top:1px">Referral aktif</div></div></div><div class="chr">🪙 +500</div></div><div class="cpb"><div class="cpf" style="width:0%"></div></div><div class="cpm"><span>0 dari 1 selesai</span><span>⏰ Minggu ini</span></div></div>
+        <div style="padding:1.1rem 1.25rem;display:flex;align-items:center;justify-content:space-between">
+          <div>
+            <div style="font-size:15px;font-weight:800;color:var(--ink);letter-spacing:-.3px">Eco-Runner Batam</div>
+            <div style="font-size:12.5px;color:var(--ink-4);font-weight:500;margin-top:2px">Kejar bus, hindari macet &amp; polusi!</div>
+          </div>
+          <button onclick="event.stopPropagation();showPage('game',document.querySelectorAll('.nav-links a')[1])" style="padding:10px 28px;border-radius:99px;background:linear-gradient(135deg,#2563EB,#1E40AF);color:white;border:none;font-size:14px;font-weight:700;font-family:'Sora',sans-serif;cursor:pointer;box-shadow:0 4px 14px rgba(37,99,235,.35);transition:all .2s;white-space:nowrap">
+            ▶ Play
+          </button>
         </div>
       </div>
 
-      <!-- Badge -->
-      <div class="gcard">
-        <div class="gct"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>Koleksi Badge</div>
-        <div class="bdg-grid">
-          <div class="bdg-item earned"><span class="bdg-em">🚌</span><div class="bdg-n">Pelancong Setia</div><div class="bdg-d">50 perjalanan Trans Batam</div></div>
-          <div class="bdg-item earned"><span class="bdg-em">⭐</span><div class="bdg-n">Early Bird</div><div class="bdg-d">Naik bus sebelum jam 7 pagi</div></div>
-          <div class="bdg-item earned"><span class="bdg-em">🗺️</span><div class="bdg-n">Penjelajah Batam</div><div class="bdg-d">Coba semua koridor</div></div>
-          <div class="bdg-item earned"><span class="bdg-em">♻️</span><div class="bdg-n">Eco Rider</div><div class="bdg-d">30 hari tanpa kendaraan pribadi</div></div>
-          <div class="bdg-item"><span class="bdg-em">🔥</span><div class="bdg-n">Streak Master</div><div class="bdg-d">30 hari beruntun naik bus</div><div class="bdg-lk">🔒</div></div>
-          <div class="bdg-item"><span class="bdg-em">👑</span><div class="bdg-n">Trans King</div><div class="bdg-d">Capai Level 20</div><div class="bdg-lk">🔒</div></div>
+      <div style="background:white;border-radius:20px;border:1px solid var(--border);padding:1.5rem;box-shadow:0 2px 12px rgba(13,21,38,.07)">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.1rem">
+          <div style="font-size:15px;font-weight:800;color:var(--ink);display:flex;align-items:center;gap:7px"><span style="font-size:18px">⚡</span>Tantangan Harian</div>
+          <span style="font-size:11px;font-weight:600;color:var(--ink-4);background:var(--surface-2);padding:4px 10px;border-radius:99px;border:1px solid var(--border)">Reset 23:14:02</span>
         </div>
-      </div>
-
-      <!-- Reward Store -->
-      <div class="gcard">
-        <div class="shdr" style="margin-bottom:.75rem"><div class="gct" style="margin:0"><svg viewBox="0 0 24 24"><path d="M20 12V22H4V12M22 7H2v5h20V7zM12 22V7M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>Toko Reward</div><button class="seall">Semua →</button></div>
-        <div class="rwdg">
-          <div class="rwdi"><span class="rwem">☕</span><div class="rwn">Voucher Kopi</div><div class="rwp">🪙 500 Poin</div></div>
-          <div class="rwdi"><span class="rwem">🎫</span><div class="rwn">Tiket Gratis</div><div class="rwp">🪙 1.000 Poin</div></div>
-          <div class="rwdi"><span class="rwem">🛒</span><div class="rwn">Voucher Belanja</div><div class="rwp">🪙 2.000 Poin</div></div>
-          <div class="rwdi"><span class="rwem">📱</span><div class="rwn">Pulsa Gratis</div><div class="rwp">🪙 3.000 Poin</div></div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="padding:12px 14px;background:var(--surface-2);border-radius:12px;border:1.5px solid var(--border)">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px">
+              <div style="display:flex;align-items:center;gap:9px"><span style="font-size:20px">🚌</span><div><div style="font-size:13px;font-weight:700;color:var(--ink)">Naik 3x Trans Batam</div><div style="font-size:11px;color:var(--ink-4);font-weight:500">2 dari 3 selesai</div></div></div>
+              <div style="background:var(--amber-light);border:1px solid #FDE68A;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:700;color:#92400E">🪙 +150</div>
+            </div>
+            <div style="height:5px;background:var(--border);border-radius:99px;overflow:hidden"><div style="height:100%;width:66%;background:linear-gradient(90deg,var(--amber),#F59E0B);border-radius:99px"></div></div>
+          </div>
+          <div style="padding:12px 14px;background:#F0FDF4;border-radius:12px;border:1.5px solid #BBF7D0">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px">
+              <div style="display:flex;align-items:center;gap:9px"><span style="font-size:20px">⏰</span><div><div style="font-size:13px;font-weight:700;color:var(--ink)">Naik di Jam Sibuk (06–09)</div><div style="font-size:11px;color:var(--teal);font-weight:600">✓ Selesai!</div></div></div>
+              <div style="background:#DCFCE7;border:1px solid #BBF7D0;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:700;color:#166534">✓ +100</div>
+            </div>
+            <div style="height:5px;background:#BBF7D0;border-radius:99px;overflow:hidden"><div style="height:100%;width:100%;background:linear-gradient(90deg,#10B981,#34D399);border-radius:99px"></div></div>
+          </div>
+          <div style="padding:12px 14px;background:var(--surface-2);border-radius:12px;border:1.5px solid var(--border)">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px">
+              <div style="display:flex;align-items:center;gap:9px"><span style="font-size:20px">🗺️</span><div><div style="font-size:13px;font-weight:700;color:var(--ink)">Coba Koridor Baru (Kor. 4)</div><div style="font-size:11px;color:var(--ink-4);font-weight:500">Belum dimulai</div></div></div>
+              <div style="background:var(--violet-light);border:1px solid #DDD6FE;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:700;color:#5B21B6">🪙 +250</div>
+            </div>
+            <div style="height:5px;background:var(--border);border-radius:99px;overflow:hidden"><div style="height:100%;width:0%;background:linear-gradient(90deg,#7C3AED,#A78BFA);border-radius:99px"></div></div>
+          </div>
+          <div style="padding:12px 14px;background:var(--surface-2);border-radius:12px;border:1.5px solid var(--border)">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px">
+              <div style="display:flex;align-items:center;gap:9px"><span style="font-size:20px">👥</span><div><div style="font-size:13px;font-weight:700;color:var(--ink)">Ajak 1 Teman Daftar</div><div style="font-size:11px;color:var(--ink-4);font-weight:500">Minggu ini</div></div></div>
+              <div style="background:var(--amber-light);border:1px solid #FDE68A;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:700;color:#92400E">🪙 +500</div>
+            </div>
+            <div style="height:5px;background:var(--border);border-radius:99px;overflow:hidden"><div style="height:100%;width:0%;background:linear-gradient(90deg,var(--amber),#FBBF24);border-radius:99px"></div></div>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="two-col">
-      <!-- Leaderboard -->
-      <div class="lbcard">
-        <div class="lbch">
-          <div class="lbt"><svg viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M17 8l-5-5-5 5M12 3v14"/></svg>Leaderboard Kota Batam</div>
-          <select class="lbf"><option>Minggu Ini</option><option>Bulan Ini</option><option>Sepanjang Waktu</option></select>
+    <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:1.5rem;margin-bottom:1.5rem;align-items:start">
+      <div style="background:white;border-radius:20px;border:1px solid var(--border);padding:1.5rem;box-shadow:0 2px 12px rgba(13,21,38,.07)">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.1rem">
+          <div style="font-size:15px;font-weight:800;color:var(--ink);display:flex;align-items:center;gap:7px"><span style="font-size:18px">🏆</span>Leaderboard Batam</div>
+          <select style="padding:5px 12px;border-radius:99px;border:1.5px solid var(--border);font-size:12px;font-family:'Sora',sans-serif;color:var(--ink-2);background:white;cursor:pointer;outline:none"><option>Minggu Ini</option><option>Bulan Ini</option><option>All Time</option></select>
         </div>
-        <div class="lbl">
-          <div class="lbr"><div class="lbrk rk1">1</div><div class="lbav" style="background:linear-gradient(135deg,#F59E0B,#EF4444)">S</div><div class="lbi"><div class="lbname">Salman Alfarizi</div><div class="lbcity">Tiban</div></div><div style="text-align:right"><div class="lbpts">5.240</div><div class="lbtr">↑ 3 minggu berturut</div></div></div>
-          <div class="lbr"><div class="lbrk rk2">2</div><div class="lbav" style="background:linear-gradient(135deg,#6366F1,#7C3AED)">N</div><div class="lbi"><div class="lbname">Nathaniel Alfa Putra</div><div class="lbcity">Batam Center</div></div><div style="text-align:right"><div class="lbpts">4.910</div><div class="lbtr">↑ Naik 1 posisi</div></div></div>
-          <div class="lbr"><div class="lbrk rk3">3</div><div class="lbav" style="background:linear-gradient(135deg,#10B981,#0D9488)">R</div><div class="lbi"><div class="lbname">Ricky</div><div class="lbcity">Taman Kota</div></div><div style="text-align:right"><div class="lbpts">4.650</div><div class="lbtr">— Stabil</div></div></div>
-          <div class="lbr"><div class="lbrk rkn">4</div><div class="lbav" style="background:linear-gradient(135deg,#F43F5E,#EC4899)">J</div><div class="lbi"><div class="lbname">Jason Alfaro</div><div class="lbcity">Batam Center</div></div><div style="text-align:right"><div class="lbpts">3.980</div><div class="lbtr" style="color:var(--rose)">↓ Turun 1</div></div></div>
-          <div style="border:1.5px dashed #C4B5FD;border-radius:var(--r-md);padding:2px;margin-top:4px">
-            <div class="lbr me"><div class="lbrk" style="background:linear-gradient(135deg,#7C3AED,#EC4899);color:white">5</div><div class="lbav" style="background:linear-gradient(135deg,#7C3AED,#6366F1)">K</div><div class="lbi"><div class="lbname">Khair Arrayyan <span style="font-size:10px;color:var(--blue-mid);font-weight:700">(Kamu)</span></div><div class="lbcity">Sengkuang</div></div><div style="text-align:right"><div class="lbpts">3.500</div><div class="lbtr" style="color:var(--violet)">— Stabil</div></div></div>
-          </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;align-items:center;gap:11px;padding:10px 12px;background:#FFFBEB;border-radius:11px;border:1px solid #FDE68A"><div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#FCD34D,#F59E0B);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:white;flex-shrink:0">1</div><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#F59E0B,#EF4444);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white;flex-shrink:0">S</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ink)">Salman Alfarizi</div><div style="font-size:11px;color:var(--ink-4)">Tiban</div></div><div style="text-align:right"><div style="font-size:14px;font-weight:800;color:var(--ink);font-family:'DM Mono',monospace">5.240</div><div style="font-size:10px;color:var(--teal);font-weight:600">↑ 3 berturut</div></div></div>
+          <div style="display:flex;align-items:center;gap:11px;padding:10px 12px;background:var(--surface-2);border-radius:11px;border:1px solid var(--border)"><div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#E2E8F0,#CBD5E1);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#475569;flex-shrink:0">2</div><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#6366F1,#7C3AED);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white;flex-shrink:0">N</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ink)">Nathaniel Alfa Putra</div><div style="font-size:11px;color:var(--ink-4)">Batam Center</div></div><div style="text-align:right"><div style="font-size:14px;font-weight:800;color:var(--ink);font-family:'DM Mono',monospace">4.910</div><div style="font-size:10px;color:var(--teal);font-weight:600">↑ Naik 1</div></div></div>
+          <div style="display:flex;align-items:center;gap:11px;padding:10px 12px;background:var(--surface-2);border-radius:11px;border:1px solid var(--border)"><div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#FDBA74,#EA580C);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:white;flex-shrink:0">3</div><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#10B981,#0D9488);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white;flex-shrink:0">R</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ink)">Ricky</div><div style="font-size:11px;color:var(--ink-4)">Taman Kota</div></div><div style="text-align:right"><div style="font-size:14px;font-weight:800;color:var(--ink);font-family:'DM Mono',monospace">4.650</div><div style="font-size:10px;color:var(--ink-4);font-weight:500">— Stabil</div></div></div>
+          <div style="display:flex;align-items:center;gap:11px;padding:10px 12px;background:var(--surface-2);border-radius:11px;border:1px solid var(--border)"><div style="width:28px;height:28px;border-radius:8px;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--ink-3);flex-shrink:0">4</div><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#F43F5E,#EC4899);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white;flex-shrink:0">J</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ink)">Jason Alfaro</div><div style="font-size:11px;color:var(--ink-4)">Batam Center</div></div><div style="text-align:right"><div style="font-size:14px;font-weight:800;color:var(--ink);font-family:'DM Mono',monospace">3.980</div><div style="font-size:10px;color:var(--rose);font-weight:600">↓ Turun 1</div></div></div>
+          <div style="display:flex;align-items:center;gap:11px;padding:10px 12px;background:linear-gradient(135deg,#EFF4FF,#F5F3FF);border-radius:11px;border:1.5px solid #C4B5FD"><div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#7C3AED,#EC4899);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:white;flex-shrink:0">5</div><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#6366F1);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white;flex-shrink:0">K</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ink)">Khair Arrayyan <span style="font-size:10px;color:var(--blue-mid);font-weight:700">(Kamu)</span></div><div style="font-size:11px;color:var(--ink-4)">Sengkuang</div></div><div style="text-align:right"><div style="font-size:14px;font-weight:800;color:var(--ink);font-family:'DM Mono',monospace">3.500</div><div style="font-size:10px;color:var(--violet);font-weight:600">— Stabil</div></div></div>
         </div>
       </div>
 
-      <!-- Trip history -->
-      <div class="gcard" style="height:fit-content">
-        <div class="shdr"><div class="gct" style="margin:0"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Riwayat &amp; Poin</div><button class="seall">Semua →</button></div>
-        <div class="trl">
-          <div class="tri"><div class="tric"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div class="trin"><div class="trnm">Batam Centre → Jodoh</div><div class="trdt">Hari ini · 08.14 · Koridor 1</div></div><div class="trpt">+50</div></div>
-          <div class="tri"><div class="tric"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div class="trin"><div class="trnm">Nagoya → Batam Centre</div><div class="trdt">Kemarin · 17.32 · Koridor 1</div></div><div class="trpt">+50</div></div>
-          <div class="tri"><div class="tric"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div class="trin"><div class="trnm">Batu Aji → Sekupang</div><div class="trdt">Kemarin · 12.05 · Koridor 3</div></div><div class="trpt">+50</div></div>
-          <div class="tri" style="background:linear-gradient(135deg,var(--amber-light),white);border-color:#FDE68A"><div class="tric" style="background:var(--amber-light)"><svg viewBox="0 0 24 24" stroke="#F59E0B" stroke-width="2" fill="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><div class="trin"><div class="trnm" style="color:#92400E">Bonus Tantangan</div><div class="trdt" style="color:#B45309">Early Bird Challenge</div></div><div class="trpt" style="background:var(--amber-light);color:#92400E;border:1px solid #FDE68A">+100</div></div>
-          <div class="tri"><div class="tric"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div class="trin"><div class="trnm">Tiban → Kepri Mall</div><div class="trdt">2 hari lalu · 09.50 · Koridor 5</div></div><div class="trpt">+50</div></div>
+      <div style="background:white;border-radius:20px;border:1px solid var(--border);padding:1.5rem;box-shadow:0 2px 12px rgba(13,21,38,.07)">
+        <div style="font-size:15px;font-weight:800;color:var(--ink);display:flex;align-items:center;gap:7px;margin-bottom:1.1rem"><span style="font-size:18px">🎖️</span>Koleksi Badge</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px">
+          <div style="background:linear-gradient(135deg,#F5F3FF,white);border:1.5px solid #DDD6FE;border-radius:12px;padding:12px;text-align:center;cursor:pointer;transition:all .2s" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"><div style="font-size:28px;margin-bottom:5px">🚌</div><div style="font-size:11.5px;font-weight:700;color:var(--ink)">Pelancong Setia</div><div style="font-size:10px;color:var(--ink-4);margin-top:2px">50 perjalanan</div></div>
+          <div style="background:linear-gradient(135deg,#F5F3FF,white);border:1.5px solid #DDD6FE;border-radius:12px;padding:12px;text-align:center;cursor:pointer;transition:all .2s" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"><div style="font-size:28px;margin-bottom:5px">⭐</div><div style="font-size:11.5px;font-weight:700;color:var(--ink)">Early Bird</div><div style="font-size:10px;color:var(--ink-4);margin-top:2px">Naik sebelum 07.00</div></div>
+          <div style="background:linear-gradient(135deg,#F5F3FF,white);border:1.5px solid #DDD6FE;border-radius:12px;padding:12px;text-align:center;cursor:pointer;transition:all .2s" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"><div style="font-size:28px;margin-bottom:5px">🗺️</div><div style="font-size:11.5px;font-weight:700;color:var(--ink)">Penjelajah</div><div style="font-size:10px;color:var(--ink-4);margin-top:2px">Semua koridor</div></div>
+          <div style="background:linear-gradient(135deg,#F5F3FF,white);border:1.5px solid #DDD6FE;border-radius:12px;padding:12px;text-align:center;cursor:pointer;transition:all .2s" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"><div style="font-size:28px;margin-bottom:5px">♻️</div><div style="font-size:11.5px;font-weight:700;color:var(--ink)">Eco Rider</div><div style="font-size:10px;color:var(--ink-4);margin-top:2px">30 hari eco</div></div>
+          <div style="position:relative;background:var(--surface-2);border:1.5px solid var(--border);border-radius:12px;padding:12px;text-align:center;cursor:pointer"><div style="font-size:28px;margin-bottom:5px;filter:grayscale(1);opacity:.4">🔥</div><div style="font-size:11.5px;font-weight:700;color:var(--ink-4)">Streak Master</div><div style="font-size:10px;color:var(--ink-4);margin-top:2px">30 hari beruntun</div><div style="position:absolute;top:6px;right:8px;font-size:13px">🔒</div></div>
+          <div style="position:relative;background:var(--surface-2);border:1.5px solid var(--border);border-radius:12px;padding:12px;text-align:center;cursor:pointer"><div style="font-size:28px;margin-bottom:5px;filter:grayscale(1);opacity:.4">👑</div><div style="font-size:11.5px;font-weight:700;color:var(--ink-4)">Trans King</div><div style="font-size:10px;color:var(--ink-4);margin-top:2px">Capai Level 20</div><div style="position:absolute;top:6px;right:8px;font-size:13px">🔒</div></div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:1.25rem">
+        <div style="background:white;border-radius:20px;border:1px solid var(--border);padding:1.5rem;box-shadow:0 2px 12px rgba(13,21,38,.07)">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
+            <div style="font-size:15px;font-weight:800;color:var(--ink);display:flex;align-items:center;gap:7px"><span style="font-size:18px">🎁</span>Toko Reward</div>
+            <button style="font-size:12px;font-weight:700;color:var(--blue-mid);background:none;border:none;cursor:pointer;font-family:'Sora',sans-serif">Semua →</button>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <div style="background:var(--surface-2);border:1.5px solid var(--border);border-radius:12px;padding:10px;text-align:center;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='#F59E0B';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateY(0)'"><div style="font-size:26px;margin-bottom:4px">☕</div><div style="font-size:12px;font-weight:700;color:var(--ink);margin-bottom:3px">Voucher Kopi</div><div style="display:inline-block;background:var(--amber-light);border:1px solid #FDE68A;padding:2px 8px;border-radius:99px;font-size:11px;font-weight:700;color:#92400E">🪙 500</div></div>
+            <div style="background:var(--surface-2);border:1.5px solid var(--border);border-radius:12px;padding:10px;text-align:center;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='#F59E0B';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateY(0)'"><div style="font-size:26px;margin-bottom:4px">🎫</div><div style="font-size:12px;font-weight:700;color:var(--ink);margin-bottom:3px">Tiket Gratis</div><div style="display:inline-block;background:var(--amber-light);border:1px solid #FDE68A;padding:2px 8px;border-radius:99px;font-size:11px;font-weight:700;color:#92400E">🪙 1.000</div></div>
+            <div style="background:var(--surface-2);border:1.5px solid var(--border);border-radius:12px;padding:10px;text-align:center;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='#F59E0B';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateY(0)'"><div style="font-size:26px;margin-bottom:4px">🛒</div><div style="font-size:12px;font-weight:700;color:var(--ink);margin-bottom:3px">Voucher Belanja</div><div style="display:inline-block;background:var(--amber-light);border:1px solid #FDE68A;padding:2px 8px;border-radius:99px;font-size:11px;font-weight:700;color:#92400E">🪙 2.000</div></div>
+            <div style="background:var(--surface-2);border:1.5px solid var(--border);border-radius:12px;padding:10px;text-align:center;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='#F59E0B';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateY(0)'"><div style="font-size:26px;margin-bottom:4px">📱</div><div style="font-size:12px;font-weight:700;color:var(--ink);margin-bottom:3px">Pulsa Gratis</div><div style="display:inline-block;background:var(--amber-light);border:1px solid #FDE68A;padding:2px 8px;border-radius:99px;font-size:11px;font-weight:700;color:#92400E">🪙 3.000</div></div>
+          </div>
+        </div>
+        <div style="background:white;border-radius:20px;border:1px solid var(--border);padding:1.5rem;box-shadow:0 2px 12px rgba(13,21,38,.07)">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
+            <div style="font-size:15px;font-weight:800;color:var(--ink);display:flex;align-items:center;gap:7px"><span style="font-size:18px">📋</span>Riwayat Poin</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;gap:10px;padding:9px 11px;background:var(--surface-2);border-radius:10px;border:1px solid var(--border)"><div style="width:30px;height:30px;border-radius:8px;background:var(--blue-light);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div style="flex:1"><div style="font-size:12.5px;font-weight:700;color:var(--ink)">Batam Centre → Jodoh</div><div style="font-size:11px;color:var(--ink-4)">Hari ini · 08.14</div></div><div style="background:var(--teal-light);color:var(--teal);font-size:12px;font-weight:800;padding:3px 9px;border-radius:99px">+50</div></div>
+            <div style="display:flex;align-items:center;gap:10px;padding:9px 11px;background:var(--surface-2);border-radius:10px;border:1px solid var(--border)"><div style="width:30px;height:30px;border-radius:8px;background:var(--blue-light);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div style="flex:1"><div style="font-size:12.5px;font-weight:700;color:var(--ink)">Nagoya → Batam Centre</div><div style="font-size:11px;color:var(--ink-4)">Kemarin · 17.32</div></div><div style="background:var(--teal-light);color:var(--teal);font-size:12px;font-weight:800;padding:3px 9px;border-radius:99px">+50</div></div>
+            <div style="display:flex;align-items:center;gap:10px;padding:9px 11px;background:linear-gradient(135deg,var(--amber-light),white);border-radius:10px;border:1px solid #FDE68A"><div style="width:30px;height:30px;border-radius:8px;background:var(--amber-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px">⭐</div><div style="flex:1"><div style="font-size:12.5px;font-weight:700;color:#92400E">Bonus Tantangan</div><div style="font-size:11px;color:#B45309">Early Bird Challenge</div></div><div style="background:var(--amber-light);color:#92400E;font-size:12px;font-weight:800;padding:3px 9px;border-radius:99px;border:1px solid #FDE68A">+100</div></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<!-- ══════════ GAME PAGE ══════════ -->
+<div id="page-game" class="page">
+  <div style="background:#0D1526;padding:1rem 2rem;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(255,255,255,.08)">
+    <button onclick="showPage('gami',document.querySelectorAll('.nav-links a')[1])" style="display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.75);padding:7px 14px;border-radius:99px;font-size:13px;font-weight:600;font-family:'Sora',sans-serif;cursor:pointer;transition:all .2s">← Kembali</button>
+    <div style="font-size:15px;font-weight:700;color:white">🎮 Eco-Runner Batam</div>
+    <div style="margin-left:auto;display:flex;gap:10px;align-items:center">
+      <div style="background:rgba(7,9,26,.9);border:1px solid rgba(255,255,255,.08);padding:5px 14px;border-radius:99px;font-size:13px;font-weight:700;color:#A5B4FC">Skor: <span id="g-score">0</span></div>
+      <div style="background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);padding:5px 14px;border-radius:99px;font-size:13px;font-weight:700;color:#FCD34D">Rekor: <span id="g-best-h">1139</span></div>
+      <!-- FIX #1: Tambah id="g-poin-header" yang sebelumnya disebut "g-earned-h" tapi tidak ada di HTML -->
+      <div style="background:rgba(37,99,235,.15);border:1px solid rgba(37,99,235,.3);padding:5px 14px;border-radius:99px;font-size:13px;font-weight:700;color:#93C5FD">Poin: <span id="g-poin">3</span></div>
+    </div>
+  </div>
+  <div style="background:#07091a;min-height:calc(100vh - 133px);display:flex;flex-direction:column;overflow:hidden">
+    <div id="game-area" style="flex:1;position:relative;background:#07091a;overflow:hidden;display:flex;align-items:center;justify-content:center">
+      <canvas id="gameCanvas" style="display:block;width:100%;height:100%;max-width:1400px"></canvas>
+
+      <!-- FIX #2: Overlay START — pakai class g-overlay visible -->
+      <div id="g-start" class="g-overlay visible">
+        <div class="g-over-content">
+          <div style="font-size:3rem">🏃</div>
+          <div style="font-size:2rem;font-weight:900;letter-spacing:-1px;text-align:center;color:white">Eco-Runner Batam</div>
+          <div style="font-size:.85rem;color:#6b7a9e;text-align:center;max-width:300px;line-height:1.6">Lompat melewati polusi &amp; kemacetan!<br>Setiap 100 skor = 1 Poin BatamWay nyata.</div>
+          <button onclick="gameStart()" style="display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#00e5ff,#0891b2);color:#000;border:none;padding:13px 36px;border-radius:14px;font-family:'Sora',sans-serif;font-size:.95rem;font-weight:800;cursor:pointer;transition:all .25s;box-shadow:0 0 30px rgba(0,229,255,0.4)">▶ Mulai Berlari</button>
+        </div>
+      </div>
+
+      <!-- FIX #3: Overlay GAME OVER — pakai class g-overlay hidden, BUKAN opacity/visibility inline -->
+      <div id="g-over" class="g-overlay hidden">
+        <div class="g-over-content" id="g-over-content">
+          <div style="font-size:3.5rem" id="g-over-emoji">💥</div>
+          <div style="font-size:2rem;font-weight:900;letter-spacing:-1px;text-align:center;color:white">Game Over!</div>
+          <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:20px;padding:1.5rem 2.5rem;text-align:center;min-width:240px">
+            <div style="font-size:.7rem;color:#6b7a9e;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.5rem">Skor Kamu</div>
+            <div style="font-size:3rem;font-weight:900;font-family:'DM Mono',monospace;color:#00e5ff;line-height:1;margin-bottom:.75rem" id="g-final">0</div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div style="font-size:.85rem;color:#f59e0b;font-weight:700">🪙 +<span id="g-earned">0</span> Poin BatamWay diraih!</div>
+              <div style="font-size:.85rem;color:#93C5FD;font-weight:600">🏆 Rekor: <span id="g-best">1139</span></div>
+            </div>
+          </div>
+          <div style="display:flex;gap:10px">
+            <button onclick="gameRestart()" style="display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#00e5ff,#0891b2);color:#000;border:none;padding:13px 32px;border-radius:14px;font-family:'Sora',sans-serif;font-size:.95rem;font-weight:800;cursor:pointer;box-shadow:0 0 30px rgba(0,229,255,0.4)">🔄 Main Lagi</button>
+            <button onclick="showPage('gami',document.querySelectorAll('.nav-links a')[1])" style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.15);padding:13px 24px;border-radius:14px;font-family:'Sora',sans-serif;font-size:.9rem;font-weight:700;cursor:pointer">Kembali</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:.7rem 1.5rem;background:rgba(7,9,26,0.9);border-top:1px solid rgba(255,255,255,0.06);flex-shrink:0">
+      <div style="display:flex;align-items:center;gap:1rem">
+        <div style="display:flex;align-items:center;gap:6px;font-size:.72rem;color:#6b7a9e">
+          <span style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-bottom:3px solid rgba(0,0,0,0.3);padding:3px 10px;border-radius:6px;font-family:'DM Mono',monospace;font-size:.65rem;color:white;font-weight:700">SPASI</span> atau <span style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-bottom:3px solid rgba(0,0,0,0.3);padding:3px 10px;border-radius:6px;font-family:'DM Mono',monospace;font-size:.65rem;color:white;font-weight:700">↑</span> atau Tap → Lompat
+        </div>
+        <div style="width:1px;height:16px;background:rgba(255,255,255,0.08)"></div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:.72rem;color:#6b7a9e">
+          <span style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-bottom:3px solid rgba(0,0,0,0.3);padding:3px 10px;border-radius:6px;font-family:'DM Mono',monospace;font-size:.65rem;color:white;font-weight:700">↓</span> → Jongkok / Double jump
+        </div>
+      </div>
+      <button onclick="gameRestart()" style="display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,#7c3aed,#4f46e5);border:none;color:white;padding:9px 20px;border-radius:10px;font-family:'Sora',sans-serif;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .2s">🔄 Restart</button>
+    </div>
+  </div>
+</div>
+
+<style>
+@keyframes xpg{0%{background-position:0%}100%{background-position:200%}}
+.game-thumb-hover{pointer-events:none}
+div:hover>.game-thumb-hover{opacity:1!important}
+</style>
 
 <script>
 function showPage(id,el){
@@ -615,6 +720,7 @@ function showPage(id,el){
   document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
   if(el) el.classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
+  if(id==='game') initGame();
 }
 document.querySelectorAll('.ptab').forEach(t=>{
   t.addEventListener('click',()=>{
@@ -640,449 +746,469 @@ function doSearch(){
 }
 window.addEventListener('load',()=>{
   document.querySelectorAll('.cf').forEach(b=>{const w=b.style.width;b.style.width='0';setTimeout(()=>{b.style.width=w},400)});
-  initGame();
 });
 
-/* ═══════════════ ECO-RUNNER GAME ENGINE ═══════════════ */
-const CVS = document.getElementById('ecoCanvas');
-const CTX = CVS.getContext('2d');
-let GW, GH, RAF, gameRunning=false, gameOver=false;
-let score=0, bestScore=0, earnedPts=0;
-let spd=4, frame=0, bgOffset=0;
-let runner, obstacles=[], clouds=[], busTarget;
-let jumpHeld=false, crouchHeld=false;
-let gamePhase='idle'; // idle | running | dead
+/* ═══════════════════════════════════════════════════
+     GAME ENGINE — ECO-RUNNER BATAM (FIXED)
+═══════════════════════════════════════════════════ */
 
-// ── Responsive canvas ──
-function resizeCanvas(){
-  const wrap=CVS.parentElement;
-  GW=wrap.clientWidth||800;
-  GH=220;
-  CVS.width=GW; CVS.height=GH;
+/* ── Helper: tampilkan/sembunyikan overlay dengan class ── */
+function showOverlay(id){
+  const el=document.getElementById(id);
+  el.classList.remove('hidden');
+  el.classList.add('visible');
+  /* Reset animasi konten */
+  const content=el.querySelector('.g-over-content');
+  if(content){content.style.animation='none';void content.offsetWidth;content.style.animation='';}
+}
+function hideOverlay(id){
+  const el=document.getElementById(id);
+  el.classList.remove('visible');
+  el.classList.add('hidden');
 }
 
-function initGame(){
-  resizeCanvas();
-  window.addEventListener('resize',()=>{ if(!gameRunning) resizeCanvas(); });
-  drawIdleScreen();
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+let W, H, dpr;
+let gameRunning = false;
+let score = 0, bestScore = 1139, sessionPoin = 3;
+let speed, spawnTimer, spawnInterval;
+let obstacles = [], buildings = [], stars = [], particles = [], laneMarkers = [];
+let busX, busVisible, busTimer;
+const GRAVITY = 0.55, JUMP_FORCE = -13, DUCK_H = 28, NORMAL_H = 48;
+let player, groundY;
+
+function initGame() {
+  const area = document.getElementById('game-area');
+  const rect = area.getBoundingClientRect();
+  dpr = window.devicePixelRatio || 1;
+  W = rect.width; H = rect.height;
+  canvas.width = W * dpr; canvas.height = H * dpr;
+  canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  groundY = H * 0.72;
+  player = { x: W * 0.12, y: 0, w: 28, h: NORMAL_H, vy: 0, onGround: true, ducking: false, jumpCount: 0 };
+  resetPlayer(); initBg();
 }
 
-function startGame(){
-  document.getElementById('overlay-start').classList.add('hidden');
-  document.getElementById('overlay-gameover').classList.add('hidden');
-  resizeCanvas();
-  spd=4; frame=0; bgOffset=0; score=0; earnedPts=0;
-  gameRunning=true; gameOver=false; gamePhase='running';
-
-  const GROUND = GH - 44;
-  runner = {
-    x:80, y:GROUND, w:28, h:44,
-    dy:0, vy:0, grounded:true,
-    crouching:false,
-    legPhase:0,
-    jumpPow:-13
-  };
-
-  obstacles=[]; clouds=[];
-  // Pre-populate clouds
-  for(let i=0;i<5;i++) clouds.push(mkCloud(Math.random()*GW));
-  // Bus target (goal visual on right edge)
-  busTarget={x:GW+200, arriving:false};
-
-  if(RAF) cancelAnimationFrame(RAF);
-  gameLoop();
+function resetPlayer() {
+  player.y = groundY - player.h;
+  player.vy = 0;
+  player.onGround = true;
+  player.ducking = false;
+  player.jumpCount = 0;
+  player.h = NORMAL_H;
 }
 
-function gameLoop(){
+function initBg() {
+  stars = [];
+  for (let i = 0; i < 80; i++) {
+    stars.push({ x: Math.random()*W, y: Math.random()*groundY*.7, r: Math.random()*1.5+.3, a: Math.random() });
+  }
+  buildings = [];
+  let bx = 0;
+  while (bx < W + 200) {
+    const bh = 60+Math.random()*140, bw = 40+Math.random()*60;
+    buildings.push({x:bx,w:bw,h:bh});
+    bx += bw+6+Math.random()*10;
+  }
+  laneMarkers = [];
+  for (let i=0;i<10;i++) laneMarkers.push({x:i*120});
+  obstacles = []; particles = [];
+  speed = 5; spawnTimer = 0; spawnInterval = 90;
+  busX = W+200; busVisible = false; busTimer = 0;
+}
+
+/* ── FIX UTAMA: gameStart & gameOver pakai showOverlay/hideOverlay ── */
+function gameStart() {
+  hideOverlay('g-start');
+  hideOverlay('g-over');
+  score = 0;
+  sessionPoin = 3;
+  initBg();
+  resetPlayer();
+  document.getElementById('g-score').textContent = '0';
+  document.getElementById('g-poin').textContent = sessionPoin;
+  gameRunning = true;
+  requestAnimationFrame(gameLoop);
+}
+
+function gameRestart() {
+  hideOverlay('g-over');
+  gameStart();
+}
+
+function gameOver2() {
+  if(!gameRunning) return; /* guard agar tidak dipanggil dua kali */
+  gameRunning = false;
+  spawnDeathPfx();
+  draw(); /* render frame terakhir dengan partikel */
+
+  const earned = Math.floor(score/100);
+  sessionPoin += earned;
+
+  /* Update semua display */
+  document.getElementById('g-poin').textContent = sessionPoin;
+  document.getElementById('g-final').textContent = score;
+  document.getElementById('g-earned').textContent = earned;
+
+  if(score > bestScore) {
+    bestScore = score;
+    document.getElementById('g-best-h').textContent = bestScore;
+  }
+  document.getElementById('g-best').textContent = bestScore;
+
+  /* Tampilkan overlay game over — dijamin muncul */
+  setTimeout(()=>{
+    showOverlay('g-over');
+  }, 300); /* sedikit delay agar animasi partikel keliatan dulu */
+}
+
+let lastTime = 0;
+function gameLoop(ts) {
   if(!gameRunning) return;
-  update();
-  render();
-  RAF=requestAnimationFrame(gameLoop);
+  const dt = Math.min((ts-lastTime)/16.67, 3);
+  lastTime = ts;
+  update(dt);
+  draw();
+  requestAnimationFrame(gameLoop);
 }
 
-function update(){
-  frame++;
-  spd = 4 + Math.min(score/500, 6); // max speed 10
-  score += spd*0.07;
-  earnedPts = Math.floor(score/50);
-  bgOffset = (bgOffset + spd*0.4)%GW;
+function update(dt) {
+  score++;
+  document.getElementById('g-score').textContent = score;
+  speed = 5 + Math.floor(score/150)*0.4;
 
-  const GROUND=GH-44;
+  buildings.forEach(b => {
+    b.x -= speed*0.3;
+    if(b.x + b.w < 0) {
+      const l = buildings[buildings.length-1];
+      b.x = (l ? l.x + l.w + 6 : W) + Math.random()*10;
+      b.h = 60 + Math.random()*140;
+    }
+  });
 
-  // Runner physics
-  if(crouchHeld && runner.grounded){
-    runner.crouching=true;
-    runner.h=28; runner.y=GROUND+16;
-  } else {
-    runner.crouching=false;
-    runner.h=44;
+  laneMarkers.forEach(m => {
+    m.x -= speed;
+    if(m.x + 60 < 0) m.x += 10*120;
+  });
+
+  busTimer++;
+  if(!busVisible && busTimer > 400) { busVisible = true; busTimer = 0; busX = W + 50; }
+  if(busVisible) {
+    busX -= speed*2.5;
+    if(busX + 120 < 0) { busVisible = false; busTimer = 0; }
   }
-  if(!runner.crouching){
-    runner.vy+=0.7;
-    runner.y+=runner.vy;
+
+  spawnTimer++;
+  if(spawnTimer > spawnInterval) {
+    spawnObstacle();
+    spawnTimer = 0;
+    spawnInterval = Math.max(40, 90 - Math.floor(score/100)*3);
   }
-  if(runner.y>=GROUND){ runner.y=GROUND; runner.vy=0; runner.grounded=true; }
-  else { runner.grounded=false; }
-  runner.legPhase+=spd*0.25;
 
-  // Obstacles
-  const spawnRate = Math.max(60, 130-score/20);
-  if(frame%Math.floor(spawnRate)===0) obstacles.push(mkObstacle());
-  obstacles.forEach(o=>{ o.x-=spd; });
-  obstacles=obstacles.filter(o=>o.x+o.w>-20);
-
-  // Collision detection
-  const rBox={x:runner.x+6,y:runner.y+4,w:runner.w-12,h:runner.h-4};
-  for(const o of obstacles){
-    if(rBox.x<o.x+o.w-4 && rBox.x+rBox.w>o.x+4 && rBox.y<o.y+o.h-4 && rBox.y+rBox.h>o.y+4){
-      endGame(); return;
+  obstacles = obstacles.filter(o => o.x > -100);
+  for(const ob of obstacles) {
+    ob.x -= speed;
+    if(collide(ob)) {
+      gameOver2();
+      return;
     }
   }
 
-  // Clouds
-  clouds.forEach(c=>{ c.x-=spd*0.25; });
-  clouds=clouds.filter(c=>c.x>-150);
-  if(clouds.length<5) clouds.push(mkCloud(GW+20));
+  if(!player.onGround) {
+    player.vy += GRAVITY;
+    player.y += player.vy;
+    if(player.y >= groundY - player.h) {
+      player.y = groundY - player.h;
+      player.vy = 0;
+      player.onGround = true;
+      player.jumpCount = 0;
+    }
+  }
 
-  // HUD
-  document.getElementById('hud-score').textContent='📏 '+Math.floor(score)+' m';
-  document.getElementById('hud-pts').textContent='🪙 '+earnedPts+' pts';
+  particles = particles.filter(p => p.life > 0);
+  particles.forEach(p => { p.x += p.vx; p.y += p.vy; p.life--; });
 }
 
-function mkObstacle(){
-  const GROUND=GH-44;
-  const types=['car','truck','smog'];
-  const t=types[Math.floor(Math.random()*types.length)];
-  if(t==='car') return {type:'car',x:GW+10,y:GROUND+8,w:58,h:36,color:'#EF4444'};
-  if(t==='truck') return {type:'truck',x:GW+10,y:GROUND+2,w:78,h:42,color:'#F59E0B'};
-  return {type:'smog',x:GW+10,y:GROUND-20,w:50,h:60,color:'rgba(120,120,120,0.6)',floating:true};
+function spawnObstacle() {
+  const types = ['pollution','traffic','barrier'];
+  const type = score > 100 ? types[Math.floor(Math.random()*(score > 300 ? 3 : 2))] : 'pollution';
+  const h = type === 'barrier' ? 30 : type === 'traffic' ? 54 : 42;
+  const oy = type === 'barrier' ? groundY - h - 30 : groundY - h;
+  obstacles.push({x: W + 60, y: oy, w: type === 'traffic' ? 70 : 36, h, type, frame: 0});
 }
 
-function mkCloud(x){
-  return {x, y:20+Math.random()*50, r:18+Math.random()*22, opacity:0.2+Math.random()*0.25};
+function collide(ob) {
+  const m = 6;
+  return !(
+    player.x + m > ob.x + ob.w - m ||
+    player.x + player.w - m < ob.x + m ||
+    player.y + m > ob.y + ob.h - m ||
+    player.y + player.h - m < ob.y + m
+  );
 }
 
-function render(){
-  CTX.clearRect(0,0,GW,GH);
-  drawBg();
-  drawGround();
-  clouds.forEach(c=>drawCloud(c));
-  obstacles.forEach(o=>drawObstacle(o));
-  drawBusTarget();
-  drawRunner();
-}
+function draw() {
+  ctx.clearRect(0, 0, W, H);
 
-function drawBg(){
-  // Sky gradient
-  const sky=CTX.createLinearGradient(0,0,0,GH-60);
-  sky.addColorStop(0,'#0D1526');
-  sky.addColorStop(0.6,'#1A3A6E');
-  sky.addColorStop(1,'#2563EB22');
-  CTX.fillStyle=sky; CTX.fillRect(0,0,GW,GH-60);
+  const sg = ctx.createLinearGradient(0, 0, 0, groundY);
+  sg.addColorStop(0, '#040814');
+  sg.addColorStop(1, '#111827');
+  ctx.fillStyle = sg;
+  ctx.fillRect(0, 0, W, groundY);
 
-  // Stars
-  CTX.fillStyle='rgba(255,255,255,0.7)';
-  const starPositions=[[0.05,0.1],[0.15,0.05],[0.25,0.18],[0.4,0.06],[0.55,0.14],
-    [0.7,0.04],[0.8,0.2],[0.9,0.08],[0.95,0.16],[0.1,0.25],[0.35,0.22],[0.6,0.25]];
-  starPositions.forEach(([fx,fy])=>{
-    CTX.beginPath();
-    CTX.arc((fx*GW - bgOffset*0.1 + GW)%GW, fy*GH, 1.2, 0, Math.PI*2);
-    CTX.fill();
+  stars.forEach(s => {
+    ctx.save();
+    ctx.globalAlpha = .3 + s.a*.6;
+    ctx.fillStyle = '#fff';
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+    ctx.fill();
+    ctx.restore();
   });
 
-  // Batam Centre skyline — scrolling buildings
-  const bldgs=[
-    {w:38,h:110,color:'#1E3A6E'},{w:22,h:80,color:'#152B55'},
-    {w:45,h:140,color:'#243B7A'},{w:28,h:100,color:'#1A2F60'},
-    {w:55,h:160,color:'#1E3A6E'},{w:30,h:90,color:'#0F2040'},
-    {w:40,h:125,color:'#243B7A'},{w:25,h:75,color:'#152B55'},
-    {w:60,h:155,color:'#1E3A6E'},{w:35,h:105,color:'#1A2F60'},
-  ];
-  const totalW=bldgs.reduce((s,b)=>s+b.w+6,0);
-  const off2=(bgOffset*0.6)%totalW;
-
-  for(let rep=-1;rep<3;rep++){
-    let bx=rep*totalW-off2;
-    bldgs.forEach(b=>{
-      CTX.fillStyle=b.color;
-      CTX.fillRect(bx, GH-60-b.h, b.w, b.h);
-      // Windows
-      for(let row=0;row<Math.floor(b.h/14);row++){
-        for(let col=0;col<Math.floor(b.w/9);col++){
-          if(Math.sin(bx+col*77+row*31)>0.3){
-            CTX.fillStyle='rgba(255,220,60,0.55)';
-            CTX.fillRect(bx+col*9+2, GH-60-b.h+row*14+3, 5, 8);
-          }
+  buildings.forEach(b => {
+    const top = groundY - b.h;
+    ctx.fillStyle = '#0d1b40';
+    ctx.fillRect(b.x, top, b.w, b.h);
+    const cols = Math.floor(b.w/12), rows = Math.floor(b.h/16);
+    for(let r = 0; r < rows; r++)
+      for(let c = 0; c < cols; c++) {
+        if(Math.random() > .4) {
+          ctx.fillStyle = Math.random() > .3 ?
+            `rgba(255,220,100,${.4+Math.random()*.4})` : 'rgba(20,40,80,0.5)';
+          ctx.fillRect(b.x+5+c*12, top+7+r*16, 7, 9);
         }
       }
-      // Batam Centre tower antenna (every 3rd building)
-      if(b.h>130){
-        CTX.strokeStyle='#2563EB'; CTX.lineWidth=1.5;
-        CTX.beginPath();CTX.moveTo(bx+b.w/2,GH-60-b.h);CTX.lineTo(bx+b.w/2,GH-60-b.h-22);CTX.stroke();
-        CTX.fillStyle='#EF4444';
-        CTX.beginPath();CTX.arc(bx+b.w/2,GH-60-b.h-22,2.5,0,Math.PI*2);CTX.fill();
-      }
-      bx+=b.w+6;
-    });
-  }
-
-  // Jembatan Barelang silhouette (mid-distance)
-  const boff=(bgOffset*0.3)%GW;
-  CTX.strokeStyle='rgba(37,99,235,0.35)'; CTX.lineWidth=2;
-  CTX.beginPath();
-  const bx0=(GW*0.1-boff+GW*2)%GW - GW*0.5;
-  CTX.moveTo(bx0,GH-65);
-  // Bridge arch
-  CTX.quadraticCurveTo(bx0+60,GH-105,bx0+120,GH-65);
-  CTX.stroke();
-  // Cable lines
-  CTX.strokeStyle='rgba(37,99,235,0.18)'; CTX.lineWidth=1;
-  for(let i=0;i<7;i++){
-    CTX.beginPath();
-    CTX.moveTo(bx0+60,GH-105);
-    CTX.lineTo(bx0+i*18,GH-65);
-    CTX.stroke();
-  }
-}
-
-function drawGround(){
-  // Road
-  const road=CTX.createLinearGradient(0,GH-60,0,GH);
-  road.addColorStop(0,'#374151'); road.addColorStop(1,'#1F2937');
-  CTX.fillStyle=road; CTX.fillRect(0,GH-60,GW,60);
-
-  // Road markings (dashed center line)
-  CTX.strokeStyle='rgba(255,255,255,0.3)'; CTX.lineWidth=2;
-  CTX.setLineDash([30,20]);
-  CTX.beginPath(); CTX.moveTo(0,GH-32); CTX.lineTo(GW,GH-32);
-  CTX.stroke(); CTX.setLineDash([]);
-
-  // Sidewalk
-  CTX.fillStyle='#4B5563'; CTX.fillRect(0,GH-62,GW,4);
-  CTX.fillStyle='#6B7280'; CTX.fillRect(0,GH-62,GW,2);
-
-  // Street lamp posts (scrolling)
-  CTX.strokeStyle='#9CA3AF'; CTX.lineWidth=2;
-  for(let i=0;i<6;i++){
-    const lx=((i*180)+GW-bgOffset*0.8+GW*2)%GW;
-    CTX.beginPath(); CTX.moveTo(lx,GH-62); CTX.lineTo(lx,GH-62-40); CTX.stroke();
-    CTX.beginPath(); CTX.moveTo(lx,GH-102); CTX.lineTo(lx+14,GH-102); CTX.stroke();
-    // Glow
-    const grd=CTX.createRadialGradient(lx+14,GH-102,0,lx+14,GH-102,18);
-    grd.addColorStop(0,'rgba(253,224,71,0.25)'); grd.addColorStop(1,'transparent');
-    CTX.fillStyle=grd; CTX.fillRect(lx-4,GH-120,36,36);
-    CTX.fillStyle='rgba(253,224,71,0.9)';
-    CTX.beginPath(); CTX.arc(lx+14,GH-102,2.5,0,Math.PI*2); CTX.fill();
-  }
-}
-
-function drawCloud(c){
-  CTX.globalAlpha=c.opacity;
-  CTX.fillStyle='white';
-  CTX.beginPath(); CTX.arc(c.x,c.y,c.r,0,Math.PI*2); CTX.fill();
-  CTX.beginPath(); CTX.arc(c.x+c.r*0.7,c.y+4,c.r*0.7,0,Math.PI*2); CTX.fill();
-  CTX.beginPath(); CTX.arc(c.x-c.r*0.6,c.y+5,c.r*0.6,0,Math.PI*2); CTX.fill();
-  CTX.globalAlpha=1;
-}
-
-function drawObstacle(o){
-  if(o.type==='car'){
-    // Car body
-    const cg=CTX.createLinearGradient(o.x,o.y,o.x,o.y+o.h);
-    cg.addColorStop(0,'#EF4444'); cg.addColorStop(1,'#B91C1C');
-    CTX.fillStyle=cg;
-    CTX.beginPath();
-    CTX.roundRect(o.x,o.y+10,o.w,o.h-10,4);
-    CTX.fill();
-    // Roof
-    CTX.fillStyle='#DC2626';
-    CTX.beginPath();
-    CTX.roundRect(o.x+8,o.y,o.w-16,18,3);
-    CTX.fill();
-    // Windshield
-    CTX.fillStyle='rgba(147,210,255,0.7)';
-    CTX.fillRect(o.x+10,o.y+2,o.w-22,14);
-    // Wheels
-    [o.x+10, o.x+o.w-16].forEach(wx=>{
-      CTX.fillStyle='#111'; CTX.beginPath(); CTX.arc(wx,o.y+o.h,9,0,Math.PI*2); CTX.fill();
-      CTX.fillStyle='#666'; CTX.beginPath(); CTX.arc(wx,o.y+o.h,5,0,Math.PI*2); CTX.fill();
-    });
-    // "MACET" label
-    CTX.fillStyle='rgba(255,255,255,0.9)'; CTX.font='bold 8px Sora,sans-serif';
-    CTX.textAlign='center'; CTX.fillText('MACET',o.x+o.w/2,o.y+o.h-2); CTX.textAlign='left';
-  } else if(o.type==='truck'){
-    // Truck cab
-    const tg=CTX.createLinearGradient(o.x,o.y,o.x,o.y+o.h);
-    tg.addColorStop(0,'#F59E0B'); tg.addColorStop(1,'#B45309');
-    CTX.fillStyle=tg;
-    CTX.beginPath(); CTX.roundRect(o.x,o.y+5,o.w,o.h-5,4); CTX.fill();
-    // Cab top
-    CTX.fillStyle='#D97706';
-    CTX.beginPath(); CTX.roundRect(o.x+o.w-22,o.y,22,20,3); CTX.fill();
-    // Window
-    CTX.fillStyle='rgba(147,210,255,0.7)'; CTX.fillRect(o.x+o.w-20,o.y+2,18,14);
-    // Wheels
-    [o.x+14, o.x+o.w-18].forEach(wx=>{
-      CTX.fillStyle='#111'; CTX.beginPath(); CTX.arc(wx,o.y+o.h,11,0,Math.PI*2); CTX.fill();
-      CTX.fillStyle='#555'; CTX.beginPath(); CTX.arc(wx,o.y+o.h,6,0,Math.PI*2); CTX.fill();
-    });
-    CTX.fillStyle='rgba(255,255,255,0.85)'; CTX.font='bold 7px Sora,sans-serif';
-    CTX.textAlign='center'; CTX.fillText('POLUSI',o.x+o.w/2-10,o.y+o.h/2+4); CTX.textAlign='left';
-  } else {
-    // Smog cloud
-    for(let i=0;i<4;i++){
-      const sg=CTX.createRadialGradient(o.x+o.w/2+i*5,o.y+o.h/2-i*4,0,o.x+o.w/2+i*5,o.y+o.h/2-i*4,28);
-      sg.addColorStop(0,'rgba(107,114,128,0.55)'); sg.addColorStop(1,'transparent');
-      CTX.fillStyle=sg;
-      CTX.beginPath(); CTX.arc(o.x+o.w/2+i*5,o.y+o.h/2-i*5+Math.sin(frame*0.06+i)*3,22+i*3,0,Math.PI*2); CTX.fill();
-    }
-    CTX.fillStyle='rgba(180,180,180,0.6)'; CTX.font='bold 8px Sora,sans-serif';
-    CTX.textAlign='center'; CTX.fillText('😷',o.x+o.w/2,o.y+o.h/2); CTX.textAlign='left';
-  }
-}
-
-function drawBusTarget(){
-  // Trans Batam bus approaching from right (distant goal)
-  const bx = GW-90+Math.sin(frame*0.03)*2;
-  const by = GH-44-42;
-  // Bus body
-  const bg2=CTX.createLinearGradient(bx,by,bx,by+42);
-  bg2.addColorStop(0,'#2563EB'); bg2.addColorStop(1,'#1E40AF');
-  CTX.fillStyle=bg2;
-  CTX.beginPath(); CTX.roundRect(bx,by,80,42,5); CTX.fill();
-  // Stripe
-  CTX.fillStyle='#FCD34D'; CTX.fillRect(bx,by+28,80,4);
-  // Windows
-  CTX.fillStyle='rgba(186,230,253,0.8)';
-  [bx+6,bx+20,bx+34,bx+48].forEach(wx=>{ CTX.fillRect(wx,by+5,12,14); });
-  // Door
-  CTX.strokeStyle='rgba(255,255,255,0.4)'; CTX.lineWidth=1;
-  CTX.strokeRect(bx+60,by+14,14,20);
-  // Wheels
-  [bx+14,bx+62].forEach(wx=>{
-    CTX.fillStyle='#111'; CTX.beginPath(); CTX.arc(wx,by+42,9,0,Math.PI*2); CTX.fill();
-    CTX.fillStyle='#888'; CTX.beginPath(); CTX.arc(wx,by+42,5,0,Math.PI*2); CTX.fill();
   });
-  // Trans Batam label
-  CTX.fillStyle='white'; CTX.font='bold 7px Sora,sans-serif'; CTX.textAlign='center';
-  CTX.fillText('TRANS BATAM',bx+40,by+23); CTX.textAlign='left';
-  // Pulsing arrow pointing to bus
-  const pulse=Math.sin(frame*0.1)*3;
-  CTX.fillStyle='rgba(252,211,77,0.9)'; CTX.font='bold 14px sans-serif';
-  CTX.fillText('►',bx-22+pulse,by+22);
-}
 
-function drawRunner(){
-  const r=runner;
-  const lp=r.legPhase;
-  const ry=r.y; const rh=r.h;
+  ctx.fillStyle = '#1a1a2e';
+  ctx.fillRect(0, groundY, W, H - groundY);
+  ctx.fillStyle = 'rgba(0,229,255,0.2)';
+  ctx.fillRect(0, groundY, W, 2);
+  ctx.fillStyle = '#20203a';
+  ctx.fillRect(0, groundY + 2, W, 20);
+  laneMarkers.forEach(m => {
+    ctx.fillStyle = 'rgba(255,255,255,0.1)';
+    ctx.fillRect(m.x, groundY + 15, 55, 4);
+  });
 
-  CTX.save();
-  CTX.translate(r.x+r.w/2, ry+rh/2);
-  if(r.crouching) CTX.scale(1,0.65);
-
-  // Shadow
-  CTX.fillStyle='rgba(0,0,0,0.25)';
-  CTX.beginPath(); CTX.ellipse(0,rh/2+2,10,4,0,0,Math.PI*2); CTX.fill();
-
-  // Legs
-  const legAmp = r.grounded?8:0;
-  const leg1y = rh*0.1 + Math.sin(lp)*legAmp;
-  const leg2y = rh*0.1 - Math.sin(lp)*legAmp;
-  CTX.strokeStyle='#1E40AF'; CTX.lineWidth=5; CTX.lineCap='round';
-  CTX.beginPath(); CTX.moveTo(0,rh*0.1); CTX.lineTo(-5,leg1y+12); CTX.lineTo(-8,leg1y+22); CTX.stroke();
-  CTX.beginPath(); CTX.moveTo(0,rh*0.1); CTX.lineTo(5,leg2y+12); CTX.lineTo(8,leg2y+22); CTX.stroke();
-  // Shoes
-  CTX.fillStyle='#1E3A6E';
-  CTX.beginPath(); CTX.ellipse(-8,leg1y+22,6,3,0,0,Math.PI*2); CTX.fill();
-  CTX.beginPath(); CTX.ellipse(8,leg2y+22,6,3,0,0,Math.PI*2); CTX.fill();
-
-  // Body
-  const bodyGrad=CTX.createLinearGradient(-10,-rh*0.25,10,rh*0.15);
-  bodyGrad.addColorStop(0,'#2563EB'); bodyGrad.addColorStop(1,'#1E40AF');
-  CTX.fillStyle=bodyGrad;
-  CTX.beginPath(); CTX.roundRect(-10,-rh*0.25,20,rh*0.35,4); CTX.fill();
-  // Shirt stripe
-  CTX.fillStyle='#FCD34D'; CTX.fillRect(-10,-rh*0.05,20,3);
-
-  // Arms (pumping)
-  const armAmp=r.grounded?10:5;
-  CTX.strokeStyle='#2563EB'; CTX.lineWidth=4;
-  CTX.beginPath(); CTX.moveTo(-8,-rh*0.15); CTX.lineTo(-14,-rh*0.15+Math.sin(lp+1)*armAmp); CTX.stroke();
-  CTX.beginPath(); CTX.moveTo(8,-rh*0.15); CTX.lineTo(14,-rh*0.15-Math.sin(lp+1)*armAmp); CTX.stroke();
-
-  // Head
-  CTX.fillStyle='#FBBF24';
-  CTX.beginPath(); CTX.arc(0,-rh*0.35,10,0,Math.PI*2); CTX.fill();
-  // Hair
-  CTX.fillStyle='#92400E';
-  CTX.beginPath(); CTX.arc(0,-rh*0.35-7,8,Math.PI,0); CTX.fill();
-  // Eyes
-  CTX.fillStyle='#111';
-  CTX.beginPath(); CTX.arc(4,-rh*0.37,2,0,Math.PI*2); CTX.fill();
-  // Sweat drop (when fast)
-  if(spd>7){
-    CTX.fillStyle='rgba(147,210,255,0.8)';
-    CTX.beginPath(); CTX.arc(-12,-rh*0.3,3,0,Math.PI*2); CTX.fill();
+  if(busVisible) {
+    const by = groundY - 60;
+    ctx.fillStyle = '#1d4ed8';
+    ctx.beginPath();
+    ctx.roundRect(busX, by, 110, 60, 8);
+    ctx.fill();
+    for(let i = 0; i < 4; i++) {
+      ctx.fillStyle = 'rgba(186,230,253,0.5)';
+      ctx.beginPath();
+      ctx.roundRect(busX + 12 + i*24, by + 10, 18, 14, 3);
+      ctx.fill();
+    }
+    ctx.fillStyle = '#fef08a';
+    ctx.beginPath();
+    ctx.roundRect(busX + 100, by + 20, 10, 8, 3);
+    ctx.fill();
+    ctx.fillStyle = '#eff6ff';
+    ctx.font = 'bold 8px Sora,sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('TRANS BATAM', busX + 55, by + 40);
+    [busX + 18, busX + 82].forEach(wx => {
+      ctx.fillStyle = '#1f2937';
+      ctx.beginPath();
+      ctx.arc(wx, by + 62, 9, 0, Math.PI*2);
+      ctx.fill();
+    });
   }
 
-  CTX.restore();
-}
+  obstacles.forEach(ob => {
+    ob.frame++;
+    ctx.save();
+    if(ob.type === 'pollution') {
+      ctx.fillStyle = '#f97316';
+      ctx.beginPath();
+      ctx.roundRect(ob.x, ob.y + 18, ob.w, ob.h - 18, 6);
+      ctx.fill();
+      ctx.fillStyle = '#ea580c';
+      ctx.beginPath();
+      ctx.roundRect(ob.x + 5, ob.y + 8, ob.w - 12, 18, 7);
+      ctx.fill();
+      [ob.x + 7, ob.x + ob.w - 15].forEach(wx => {
+        ctx.fillStyle = '#111';
+        ctx.beginPath();
+        ctx.arc(wx, ob.y + ob.h, 7, 0, Math.PI*2);
+        ctx.fill();
+      });
+      for(let i = 0; i < 3; i++) {
+        ctx.fillStyle = `rgba(150,100,40,${.25-i*.07})`;
+        ctx.beginPath();
+        ctx.arc(ob.x + ob.w + 8 + i*14, ob.y - i*4, 11 + i*5 + Math.sin(ob.frame/8+i)*3, 0, Math.PI*2);
+        ctx.fill();
+      }
+      ctx.fillStyle = 'rgba(251,146,60,.9)';
+      ctx.font = 'bold 8px Sora,sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('POLUSI', ob.x + ob.w/2, ob.y + 4);
+    } else if(ob.type === 'traffic') {
+      ctx.fillStyle = '#ef4444';
+      ctx.beginPath();
+      ctx.roundRect(ob.x, ob.y, ob.w, ob.h, 6);
+      ctx.fill();
+      ctx.fillStyle = '#b91c1c';
+      ctx.fillRect(ob.x, ob.y + ob.h*.4, ob.w, ob.h*.2);
+      [ob.x + 10, ob.x + ob.w - 18].forEach(wx => {
+        ctx.fillStyle = '#111';
+        ctx.beginPath();
+        ctx.arc(wx, ob.y + ob.h, 9, 0, Math.PI*2);
+        ctx.fill();
+      });
+      ctx.fillStyle = 'rgba(239,68,68,.9)';
+      ctx.font = 'bold 8px Sora,sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('MACET', ob.x + ob.w/2, ob.y - 5);
+    } else {
+      ctx.fillStyle = '#facc15';
+      ctx.fillRect(ob.x, ob.y, ob.w, 10);
+      ctx.fillStyle = '#ef4444';
+      ctx.fillRect(ob.x, ob.y + 10, ob.w, 10);
+      ctx.fillStyle = '#facc15';
+      ctx.fillRect(ob.x, ob.y + 20, ob.w, 10);
+      ctx.fillStyle = '#374151';
+      ctx.fillRect(ob.x, ob.y, 6, ob.h);
+      ctx.fillRect(ob.x + ob.w - 6, ob.y, 6, ob.h);
+    }
+    ctx.restore();
+  });
 
-function endGame(){
-  gameRunning=false; gamePhase='dead';
-  cancelAnimationFrame(RAF);
+  particles.forEach(p => {
+    ctx.save();
+    ctx.globalAlpha = p.life/p.max;
+    ctx.fillStyle = p.color;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r*(p.life/p.max), 0, Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+  });
 
-  if(Math.floor(score)>bestScore) bestScore=Math.floor(score);
-  document.getElementById('g-best').textContent=bestScore;
-  document.getElementById('g-earned').textContent=earnedPts;
+  const px = player.x, py = player.y, ph = player.h, pw = player.w;
+  const pg = ctx.createRadialGradient(px + pw/2, py + ph, 0, px + pw/2, py + ph/2, 50);
+  pg.addColorStop(0, 'rgba(0,229,255,0.15)');
+  pg.addColorStop(1, 'transparent');
+  ctx.fillStyle = pg;
+  ctx.fillRect(px - 30, py - 20, pw + 60, ph + 40);
 
-  document.getElementById('ov-dist').textContent=Math.floor(score);
-  document.getElementById('ov-pts').textContent=earnedPts;
-  document.getElementById('ov-best').textContent=bestScore;
-
-  const msgs=[
-    {e:'💨',t:'Kena Macet!',s:'Kalau naik Trans Batam, nggak bakal kena macet deh!'},
-    {e:'😤',t:'Tersedak Polusi!',s:'Dalam bus ber-AC, udara jauh lebih segar!'},
-    {e:'🚗',t:'Kejebak!',s:'Bus Trans Batam punya jalur khusus, lebih ngebut!'},
-  ];
-  const m=msgs[Math.floor(Math.random()*msgs.length)];
-  document.getElementById('ov-emoji').textContent=m.e;
-  document.getElementById('ov-title').textContent=m.t;
-  document.getElementById('ov-sub').textContent=m.s;
-  document.getElementById('overlay-gameover').classList.remove('hidden');
-
-  // Draw death frame
-  render();
-}
-
-function drawIdleScreen(){
-  if(!CVS) return;
-  resizeCanvas();
-  const sky=CTX.createLinearGradient(0,0,0,GH);
-  sky.addColorStop(0,'#0D1526'); sky.addColorStop(1,'#1A3A6E');
-  CTX.fillStyle=sky; CTX.fillRect(0,0,GW,GH);
-}
-
-// Input handling
-window.addEventListener('keydown',e=>{
-  if(e.code==='Space'||e.code==='ArrowUp'){
-    e.preventDefault();
-    if(gamePhase==='idle'||gamePhase==='dead'){startGame();return;}
-    if(runner&&runner.grounded&&!runner.crouching){ runner.vy=runner.jumpPow; runner.grounded=false; }
+  if(player.ducking) {
+    ctx.fillStyle = '#00e5ff';
+    ctx.beginPath();
+    ctx.roundRect(px + 2, py + ph*.3, pw - 4, ph*.7, 8);
+    ctx.fill();
+    ctx.fillStyle = '#fbbf24';
+    ctx.beginPath();
+    ctx.arc(px + pw/2, py + ph*.2, pw*.4, 0, Math.PI*2);
+    ctx.fill();
+  } else {
+    ctx.fillStyle = '#00b4d8';
+    ctx.beginPath();
+    ctx.roundRect(px + 4, py + ph*.35, pw - 8, ph*.5, 6);
+    ctx.fill();
+    ctx.fillStyle = '#fbbf24';
+    ctx.beginPath();
+    ctx.arc(px + pw/2, py + ph*.15, pw*.42, 0, Math.PI*2);
+    ctx.fill();
+    const la = Math.sin(Date.now()/80)*8;
+    ctx.fillStyle = '#0e7490';
+    ctx.beginPath();
+    ctx.roundRect(px + 4, py + ph*.83, 10, ph*.17, 4);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.roundRect(px + pw - 14, py + ph*.83 + la*.5, 10, Math.max(4, ph*.17 - la*.3), 4);
+    ctx.fill();
+    ctx.strokeStyle = '#00e5ff';
+    ctx.lineWidth = 3;
+    ctx.lineCap = 'round';
+    ctx.setLineDash([]);
+    ctx.beginPath();
+    ctx.moveTo(px + 6, py + ph*.45);
+    ctx.lineTo(px - 6, py + ph*.55 + la*.3);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(px + pw - 6, py + ph*.45);
+    ctx.lineTo(px + pw + 6, py + ph*.55 - la*.3);
+    ctx.stroke();
   }
-  if(e.code==='ArrowDown'){ e.preventDefault(); crouchHeld=true; }
+
+  ctx.fillStyle = 'rgba(0,229,255,0.8)';
+  ctx.beginPath();
+  ctx.ellipse(px + pw/2, py + ph*.08, pw*.45, ph*.1, 0, Math.PI, 0);
+  ctx.fill();
+
+  ctx.font = 'bold 14px "DM Mono",monospace';
+  ctx.fillStyle = '#00e5ff';
+  ctx.textAlign = 'right';
+  ctx.fillText(String(score).padStart(5,'0'), W - 14, 34);
+  ctx.font = '9px Sora,sans-serif';
+  ctx.fillStyle = 'rgba(255,255,255,.35)';
+  ctx.fillText('SKOR', W - 14, 48);
+  ctx.textAlign = 'left';
+  ctx.fillStyle = 'rgba(255,255,255,.25)';
+  ctx.font = '9px "DM Mono",monospace';
+  ctx.fillText('SPD ' + speed.toFixed(1) + 'x', 12, 34);
+}
+
+function spawnDeathPfx() {
+  for(let i = 0; i < 20; i++) {
+    const a = Math.random()*Math.PI*2, s = 2 + Math.random()*5;
+    particles.push({
+      x: player.x + player.w/2, y: player.y + player.h/2,
+      vx: Math.cos(a)*s, vy: Math.sin(a)*s - 2,
+      r: 3 + Math.random()*5,
+      color: ['#00e5ff','#7c3aed','#f59e0b','#ef4444'][Math.floor(Math.random()*4)],
+      life: 40, max: 40
+    });
+  }
+  draw();
+}
+
+function jump() {
+  if(!gameRunning) return;
+  if(player.jumpCount < 2) {
+    player.vy = JUMP_FORCE;
+    player.onGround = false;
+    player.jumpCount++;
+    player.ducking = false;
+    player.h = NORMAL_H;
+    player.y = Math.min(player.y, groundY - player.h);
+  }
+}
+
+function duck(on) {
+  if(!gameRunning) return;
+  if(on && player.onGround) {
+    player.ducking = true;
+    const p = player.h;
+    player.h = DUCK_H;
+    player.y += p - DUCK_H;
+  } else if(!on && player.ducking) {
+    const p = player.h;
+    player.ducking = false;
+    player.h = NORMAL_H;
+    player.y -= NORMAL_H - p;
+  }
+}
+
+window.addEventListener('keydown', e => {
+  if(e.code === 'Space' || e.code === 'ArrowUp') { e.preventDefault(); jump(); }
+  if(e.code === 'ArrowDown') { e.preventDefault(); duck(true); }
 });
-window.addEventListener('keyup',e=>{ if(e.code==='ArrowDown') crouchHeld=false; });
-CVS.addEventListener('click',()=>{
-  if(gamePhase==='idle'||gamePhase==='dead'){startGame();return;}
-  if(runner&&runner.grounded&&!runner.crouching){ runner.vy=runner.jumpPow; runner.grounded=false; }
+window.addEventListener('keyup', e => {
+  if(e.code === 'ArrowDown') duck(false);
 });
-CVS.addEventListener('touchstart',e=>{
-  e.preventDefault();
-  if(gamePhase==='idle'||gamePhase==='dead'){startGame();return;}
-  if(runner&&runner.grounded&&!runner.crouching){ runner.vy=runner.jumpPow; runner.grounded=false; }
-},{passive:false});
+canvas.addEventListener('click', jump);
+canvas.addEventListener('touchstart', e => { e.preventDefault(); jump(); }, {passive: false});
+window.addEventListener('resize', () => initGame());
+
+initGame();
 </script>
 </body>
 </html>
