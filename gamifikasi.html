@@ -17,22 +17,26 @@
   --r-sm:8px;--r-md:14px;--r-lg:20px;--r-xl:28px;--r-full:999px;
   --sh-sm:0 1px 4px rgba(13,21,38,0.07);--sh-md:0 4px 20px rgba(13,21,38,0.10);
   --sh-lg:0 12px 40px rgba(13,21,38,0.13);--sh-blue:0 6px 24px rgba(37,99,235,0.22);
+  --nav-h:68px;
 }
 body{font-family:'Sora',sans-serif;background:var(--surface-2);color:var(--ink);line-height:1.6;min-height:100vh;overflow-x:hidden}
-nav{background:rgba(255,255,255,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;padding:0 2rem}
-.nav-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:68px}
+nav{background-color: rgba(6, 8, 15, 0.60);backdrop-filter: blur(6px);border-bottom:1px solid rgba(255,255,255,0.06);position:sticky;top:0;z-index:300;padding:0 2rem}
+.nav-inner{max-width:1320px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:var(--nav-h)}
 .logo{display:flex;align-items:center;gap:11px;text-decoration:none}
+.logo-img-slot{width:40px;height:40px;border-radius:12px;border:2px dashed rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;overflow:hidden;background:rgba(255,255,255,0.06);flex-shrink:0;cursor:default;transition:border-color .2s}
+.logo-img-slot:hover{border-color:var(--blue-mid)}
+.logo-img-slot img{width:100%;height:100%;object-fit:cover;display:block;background:transparent}
 .logo-mark{width:40px;height:40px;background:linear-gradient(135deg,var(--blue) 0%,#4F8EF7 100%);border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:var(--sh-blue)}
 .logo-mark svg{width:22px;height:22px;fill:white}
-.logo-text{font-size:19px;font-weight:800;color:var(--ink);letter-spacing:-0.5px}
-.logo-text span{color:var(--blue-mid)}
+.logo-text{font-family:'Bricolage Grotesque',sans-serif;font-size:19px;font-weight:800;color:var(--blue-mid);letter-spacing:-0.5px}
+.logo-text span{color:var(--amber)}
 .nav-links{display:flex;align-items:center;gap:4px;list-style:none}
-.nav-links a{font-size:13.5px;font-weight:500;color:var(--ink-3);text-decoration:none;padding:7px 14px;border-radius:var(--r-sm);transition:all .2s;cursor:pointer}
-.nav-links a:hover{color:var(--ink);background:var(--surface-2)}
-.nav-links a.active{color:var(--blue-mid);background:var(--blue-light);font-weight:600}
+.nav-links a{font-size:13.5px;font-weight:600;color:rgba(255,255,255,0.92);text-decoration:none;padding:7px 14px;border-radius:var(--r-sm);transition:all .2s;cursor:pointer;border-bottom:2px solid transparent}
+.nav-links a:hover{color:rgba(255,255,255,0.98);background:rgba(255,255,255,0.04)}
+.nav-links a.active{color:var(--blue-mid);background:rgba(37,99,235,0.16);font-weight:700;border-bottom-color:var(--blue-mid)}
 .nav-right{display:flex;gap:8px;align-items:center}
 .nav-points{display:flex;align-items:center;gap:6px;background:var(--amber-light);border:1px solid #FDE68A;padding:6px 13px;border-radius:var(--r-full);font-size:13px;font-weight:700;color:#92400E;cursor:pointer}
-.btn-nl{padding:8px 18px;border-radius:var(--r-md);font-size:13.5px;font-weight:600;cursor:pointer;background:transparent;border:1.5px solid var(--border-2);color:var(--ink-2);font-family:'Sora',sans-serif;transition:all .2s}
+.btn-nl{padding:8px 18px;border-radius:var(--r-md);font-size:13.5px;font-weight:600;cursor:pointer;background:transparent;border:1.5px solid var(--border-2);color:white;font-family:'Sora',sans-serif;transition:all .2s;white-space:nowrap}
 .btn-nl:hover{border-color:var(--blue-mid);color:var(--blue-mid)}
 .btn-ns{padding:8px 20px;border-radius:var(--r-md);font-size:13.5px;font-weight:600;cursor:pointer;background:var(--blue-mid);border:none;color:white;font-family:'Sora',sans-serif;box-shadow:var(--sh-blue);transition:all .2s}
 .btn-ns:hover{background:var(--blue);transform:translateY(-1px)}
@@ -50,6 +54,58 @@ div:hover>.game-thumb-hover{opacity:1!important}
 /* Slam landing flash */
 @keyframes slamFlash{0%{background:rgba(0,229,255,.2)}100%{background:transparent}}
 .slam-flash{animation:slamFlash .35s ease-out forwards}
+
+/* ══ FOOTER ══ */
+footer{background:#07091A;padding:0}
+.footer-top{padding:4rem 2rem 3rem}
+.footer-inner{max-width:1320px;margin:0 auto}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1.2fr;gap:3rem}
+.footer-logo{display:flex;align-items:center;gap:11px;margin-bottom:1.2rem}
+.footer-logo-mark{width:38px;height:38px;background:linear-gradient(135deg,var(--blue),#4F8EF7);border-radius:11px;display:flex;align-items:center;justify-content:center}
+.footer-logo-mark svg{width:20px;height:20px;fill:white}
+.footer-logo-text{font-family:'Bricolage Grotesque',sans-serif;font-size:19px;font-weight:800;color:white;letter-spacing:-.5px}
+.footer-logo-text span{color:#60A5FA}
+.footer-desc{font-size:13.5px;color:rgba(255,255,255,.4);line-height:1.7;margin-bottom:1.5rem;max-width:280px}
+.footer-social{display:flex;gap:8px}
+.social-btn{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;transition:all .2s;text-decoration:none;color:white}
+.social-btn:hover{background:rgba(37,99,235,.3);border-color:rgba(37,99,235,.5)}
+.footer-col h5{font-size:12px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:1.1rem}
+.footer-links{display:flex;flex-direction:column;gap:.55rem;list-style:none}
+.footer-links a{font-size:13.5px;color:rgba(255,255,255,.55);text-decoration:none;transition:color .2s;font-weight:500;cursor:pointer}
+.footer-links a:hover{color:white}
+.footer-app h5{font-size:12px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:1.1rem}
+.app-dl{display:flex;flex-direction:column;gap:8px}
+.app-btn{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:10px 14px;cursor:pointer;transition:all .2s;text-decoration:none}
+.app-btn:hover{background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.2)}
+.app-btn-icon{font-size:22px}
+.app-btn-text{flex:1}
+.app-btn-sub{font-size:9px;color:rgba(255,255,255,.4);font-weight:500;display:block;text-transform:uppercase;letter-spacing:.4px}
+.app-btn-name{font-size:13px;font-weight:700;color:white;display:block}
+.footer-newsletter{margin-top:1.5rem}
+.newsletter-input-wrap{display:flex;gap:0;margin-top:.7rem;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:12px;overflow:hidden;padding:4px 4px 4px 12px;align-items:center}
+.newsletter-input{flex:1;background:transparent;border:none;outline:none;font-size:13px;color:white;font-family:'Sora',sans-serif;padding:5px 0}
+.newsletter-input::placeholder{color:rgba(255,255,255,.3)}
+.newsletter-btn{padding:8px 14px;border-radius:9px;background:var(--blue-mid);border:none;color:white;font-size:12.5px;font-weight:700;font-family:'Sora',sans-serif;cursor:pointer;transition:all .2s;white-space:nowrap}
+.newsletter-btn:hover{background:var(--blue)}
+.footer-mid{background:rgba(255,255,255,.03);border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07);padding:1.5rem 2rem}
+.footer-mid-inner{max-width:1320px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem}
+.footer-badges{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.footer-badge{display:flex;align-items:center;gap:6px;padding:5px 12px;border-radius:99px;border:1px solid rgba(255,255,255,.1);font-size:11.5px;font-weight:600;color:rgba(255,255,255,.5)}
+.footer-badge span{font-size:14px}
+.footer-koridor{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.k-chip{padding:3px 10px;border-radius:99px;background:rgba(37,99,235,.18);border:1px solid rgba(37,99,235,.3);font-size:11px;font-weight:700;color:#93C5FD;font-family:'DM Mono',monospace}
+.footer-bottom{padding:1.25rem 2rem}
+.footer-bottom-inner{max-width:1320px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+.footer-copy{font-size:12.5px;color:rgba(255,255,255,.3);font-weight:500}
+.footer-legal{display:flex;gap:1.25rem}
+.footer-legal a{font-size:12px;color:rgba(255,255,255,.3);text-decoration:none;cursor:pointer;transition:color .2s;font-weight:500}
+.footer-legal a:hover{color:rgba(255,255,255,.6)}
+
+/* ══ RESPONSIVE FOOTER HELPERS ══ */
+@media(max-width:900px){
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+
 </style>
 </head>
 <body>
@@ -57,15 +113,18 @@ div:hover>.game-thumb-hover{opacity:1!important}
 <nav>
   <div class="nav-inner">
     <a class="logo" href="index.html">
-      <div class="logo-mark"><svg viewBox="0 0 24 24"><path d="M3 13h2v3l4-3h5a2 2 0 002-2V8a2 2 0 00-2-2H3a2 2 0 00-2 2v3a2 2 0 002 2zm0-5h16v4H8.83L6 14.17V12H3V8zm18-4H7V3h14a2 2 0 012 2v5l-2-1V4z"/></svg></div>
+      <div class="logo-img-slot" title="Logo BatamWay">
+        <img id="logo-custom-img" src="./assets/Logo.png" alt="Logo BatamWay">
+      </div>
       <span class="logo-text">Batam<span>Way</span></span>
     </a>
     <ul class="nav-links">
       <li><a href="index.html">Beranda</a></li>
-      <li><a class="active">🎮 Gamifikasi</a></li>
-      <li><a href="index.html">Tracker</a></li>
-      <li><a href="index.html">Jadwal</a></li>
-      <li><a href="index.html">Reward</a></li>
+      <li><a href="gamifikasi.html">🎮 Gamifikasi</a></li>
+      <li><a href="rute.html">Rute</a></li>
+      <li><a href="jadwal.html">Jadwal</a></li>
+      <li><a href="tiket.html">Tiket</a></li>
+      <li><a href="halte.html">Halte</a></li>
     </ul>
     <div class="nav-right">
       <div class="nav-points">🪙 <span id="nav-pts">2.840</span> Poin</div>
@@ -81,7 +140,7 @@ div:hover>.game-thumb-hover{opacity:1!important}
     <div style="position:absolute;top:-80px;left:25%;width:480px;height:480px;background:radial-gradient(circle,rgba(124,58,237,0.22) 0%,transparent 65%);pointer-events:none"></div>
     <div style="position:absolute;bottom:-60px;right:8%;width:320px;height:320px;background:radial-gradient(circle,rgba(245,158,11,0.18) 0%,transparent 65%);pointer-events:none"></div>
     <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none"></div>
-    <div style="max-width:1280px;margin:0 auto;position:relative;z-index:1">
+    <div style="max-width:1320px;margin:0 auto;position:relative;z-index:1">
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem">
         <div style="display:flex;align-items:center;gap:16px">
           <div style="width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#EC4899);padding:3px;flex-shrink:0">
@@ -103,7 +162,7 @@ div:hover>.game-thumb-hover{opacity:1!important}
     </div>
   </section>
 
-  <div style="max-width:1280px;margin:0 auto;padding:2rem 2rem">
+  <div style="max-width:1320px;margin:0 auto;padding:2rem 2rem">
     <!-- GAME CARD -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem;align-items:start">
       <div style="background:white;border-radius:20px;overflow:hidden;box-shadow:0 4px 24px rgba(13,21,38,.10);border:1px solid var(--border);cursor:pointer" onclick="showPage('game')">
@@ -313,6 +372,148 @@ div:hover>.game-thumb-hover{opacity:1!important}
     </div>
   </div>
 </div>
+
+<!-- ══════════════════════════════════
+     FOOTER
+══════════════════════════════════ -->
+<footer id="tentang">
+  <div class="footer-top">
+    <div class="footer-inner">
+      <div class="footer-grid">
+
+        <!-- Brand col -->
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="footer-logo-mark">
+              <svg viewBox="0 0 24 24"><path d="M3 13h2v3l4-3h5a2 2 0 002-2V8a2 2 0 00-2-2H3a2 2 0 00-2 2v3a2 2 0 002 2zm0-5h16v4H8.83L6 14.17V12H3V8zm18-4H7V3h14a2 2 0 012 2v5l-2-1V4z"/></svg>
+            </div>
+            <span class="footer-logo-text">Batam<span>Way</span></span>
+          </div>
+          <p class="footer-desc">Platform digitalisasi transportasi publik dan gamifikasi perjalanan untuk warga Batam. Naik bus lebih cerdas, lebih menyenangkan.</p>
+          <div class="footer-social">
+            <a class="social-btn" href="#" title="Instagram">📸</a>
+            <a class="social-btn" href="#" title="Twitter/X">𝕏</a>
+            <a class="social-btn" href="#" title="Facebook">📘</a>
+            <a class="social-btn" href="#" title="YouTube">▶️</a>
+            <a class="social-btn" href="#" title="TikTok">🎵</a>
+          </div>
+          <div class="footer-newsletter" style="margin-top:1.5rem">
+            <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.8px">Newsletter</div>
+            <div style="font-size:13px;color:rgba(255,255,255,.35);margin:.4rem 0 .6rem">Update rute & promo langsung ke email</div>
+            <div class="newsletter-input-wrap">
+              <input class="newsletter-input" type="email" placeholder="email@kamu.com">
+              <button class="newsletter-btn">Langganan</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Layanan -->
+        <div class="footer-col">
+          <h5>Layanan</h5>
+          <ul class="footer-links">
+            <li><a href="#">Tracker Live Bus</a></li>
+            <li><a href="#">Jadwal Trans Batam</a></li>
+            <li><a href="#">Beli Tiket Digital</a></li>
+            <li><a href="#">Cari Halte</a></li>
+            <li><a href="#">Rencanakan Rute</a></li>
+            <li><a href="#">API untuk Developer</a></li>
+          </ul>
+        </div>
+
+        <!-- Gamifikasi -->
+        <div class="footer-col">
+          <h5>Gamifikasi</h5>
+          <ul class="footer-links">
+            <li><a href="#">Dashboard Poin</a></li>
+            <li><a href="#">Leaderboard</a></li>
+            <li><a href="#">Tantangan Harian</a></li>
+            <li><a href="#">Toko Reward</a></li>
+            <li><a href="#">Eco-Rider Program</a></li>
+            <li><a href="#">Eco-Runner Game</a></li>
+          </ul>
+        </div>
+
+        <!-- Tentang -->
+        <div class="footer-col">
+          <h5>Tentang</h5>
+          <ul class="footer-links">
+            <li><a href="#">Tentang BatamWay</a></li>
+            <li><a href="#">Tim Kami</a></li>
+            <li><a href="#">Berita & Blog</a></li>
+            <li><a href="#">Karir</a></li>
+            <li><a href="#">Kontak Kami</a></li>
+            <li><a href="#">Hubungi Dishub</a></li>
+          </ul>
+        </div>
+
+        <!-- Download App -->
+        <div class="footer-app">
+          <h5>Download App</h5>
+          <div class="app-dl">
+            <a class="app-btn" href="#">
+              <span class="app-btn-icon">📱</span>
+              <div class="app-btn-text">
+                <span class="app-btn-sub">Download di</span>
+                <span class="app-btn-name">App Store</span>
+              </div>
+            </a>
+            <a class="app-btn" href="#">
+              <span class="app-btn-icon">🤖</span>
+              <div class="app-btn-text">
+                <span class="app-btn-sub">Tersedia di</span>
+                <span class="app-btn-name">Google Play</span>
+              </div>
+            </a>
+          </div>
+          <div style="margin-top:1.25rem">
+            <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.75rem">Layanan Darurat</div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <a href="tel:082100001234" style="display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(255,255,255,.6);text-decoration:none;font-weight:500">
+                <span style="font-size:16px">📞</span>0821-0000-1234
+              </a>
+              <a href="mailto:info@batamway.id" style="display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(255,255,255,.6);text-decoration:none;font-weight:500">
+                <span style="font-size:16px">✉️</span>info@batamway.id
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Koridor strip -->
+  <div class="footer-mid">
+    <div class="footer-mid-inner">
+      <div class="footer-badges">
+        <div class="footer-badge"><span>🏛️</span>Didukung Dishub Batam</div>
+        <div class="footer-badge"><span>🔒</span>SSL Secured</div>
+        <div class="footer-badge"><span>✅</span>Terverifikasi Resmi</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+        <span style="font-size:11px;font-weight:700;color:rgba(255,255,255,.3);letter-spacing:.5px;text-transform:uppercase">Koridor:</span>
+        <div class="footer-koridor">
+          <span class="k-chip">K1</span><span class="k-chip">K2</span><span class="k-chip">K3</span>
+          <span class="k-chip">K4</span><span class="k-chip">K5</span><span class="k-chip">K6</span>
+          <span class="k-chip">K7</span><span class="k-chip">K8</span><span class="k-chip">K9</span>
+          <span class="k-chip">K10</span><span class="k-chip">K11</span><span class="k-chip">K12</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Copyright -->
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <span class="footer-copy">© 2026 BatamWay. Hak cipta dilindungi undang-undang.</span>
+      <div class="footer-legal">
+        <a href="#">Kebijakan Privasi</a>
+        <a href="#">Syarat &amp; Ketentuan</a>
+        <a href="#">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
 
 <script>
 /* ── PAGE ROUTING ── */
@@ -940,6 +1141,20 @@ canvas.addEventListener('touchstart',e=>{e.preventDefault();doJump();},{passive:
 window.addEventListener('resize',()=>{if(document.getElementById('page-game').classList.contains('active'))initGame();});
 
 initGame();
+// Set navbar active link based on current filename
+function setNavActive(){
+  const current = window.location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav-links a').forEach(link=>{
+    link.classList.remove('active');
+    const href = link.getAttribute('href');
+    if(!href) return;
+    const file = href.split('/').pop();
+    if(file === current){
+      link.classList.add('active');
+    }
+  });
+}
+window.addEventListener('load', setNavActive);
 </script>
 </body>
 </html>
