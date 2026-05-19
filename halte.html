@@ -25,11 +25,11 @@ body{font-family:'Sora',sans-serif;background:var(--surface-2);color:var(--ink);
 
 /* ══ NAVBAR ══ */
 nav{
-  background:rgba(255,255,255,0.92);
-  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
+  background-color: rgba(6, 8, 15, 0.60);
+  backdrop-filter: blur(6px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
   position:sticky;top:0;z-index:300;
-  padding:0 2rem;
+  padding: 12px 0;
 }
 .nav-inner{max-width:1320px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:var(--nav-h)}
 
@@ -38,16 +38,17 @@ nav{
 .logo-img-slot{
   width:40px;height:40px;
   border-radius:12px;
-  border:2px dashed var(--border-2);
+  border:2px dashed rgba(255,255,255,0.08);
   display:flex;align-items:center;justify-content:center;
   overflow:hidden;
-  background:var(--blue-light);
+  background:transparent;
   position:relative;
   cursor:default;
   transition:border-color .2s;
 }
 .logo-img-slot:hover{border-color:var(--blue-mid)}
-.logo-img-slot img{width:100%;height:100%;object-fit:cover;display:block}
+.logo-img-slot img{width:100%;height:100%;object-fit:cover;display:block;background:transparent}
+.logo-img-slot{background:rgba(255,255,255,0.06)}
 .logo-mark{
   width:40px;height:40px;
   background:linear-gradient(135deg,var(--blue) 0%,#4F8EF7 100%);
@@ -57,108 +58,150 @@ nav{
   flex-shrink:0;
 }
 .logo-mark svg{width:20px;height:20px;fill:white}
-.logo-text{font-family:'Bricolage Grotesque',sans-serif;font-size:20px;font-weight:800;color:var(--ink);letter-spacing:-0.6px;line-height:1}
-.logo-text span{color:var(--blue-mid)}
+.logo-text{font-family:'Bricolage Grotesque',sans-serif;font-size:20px;font-weight:800;color:var(--blue-mid);letter-spacing:-0.6px;line-height:1}
+.logo-text span{color:var(--amber)}
 .logo-divider{width:1px;height:22px;background:var(--border-2);margin:0 2px}
 
 /* Nav links */
 .nav-links{display:flex;align-items:center;gap:2px;list-style:none}
-.nav-links a{font-size:13.5px;font-weight:600;color:var(--ink-3);text-decoration:none;padding:7px 13px;border-radius:var(--r-sm);transition:all .2s;cursor:pointer;white-space:nowrap}
-.nav-links a:hover{color:var(--ink);background:var(--surface-2)}
-.nav-links a.active{color:var(--blue-mid);background:var(--blue-light);font-weight:700}
+.nav-links a{font-size:13.5px;font-weight:600;color:rgba(255,255,255,0.92);text-decoration:none;padding:7px 13px;border-radius:var(--r-sm);transition:all .2s;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent}
+.nav-links a:hover{color:rgba(255,255,255,0.98);background:rgba(255,255,255,0.04)}
+.nav-links a.active{color:var(--blue-mid);background:rgba(37,99,235,0.16);font-weight:700;border-bottom-color:var(--blue-mid)}
 
 /* Nav right */
 .nav-right{display:flex;gap:8px;align-items:center;flex-shrink:0}
 .nav-points{display:flex;align-items:center;gap:6px;background:var(--amber-light);border:1px solid #FDE68A;padding:7px 14px;border-radius:var(--r-full);font-size:13px;font-weight:700;color:#92400E;cursor:pointer;transition:all .2s;white-space:nowrap}
 .nav-points:hover{background:#FEF3C7}
-.btn-nl{padding:8px 18px;border-radius:var(--r-md);font-size:13.5px;font-weight:600;cursor:pointer;background:transparent;border:1.5px solid var(--border-2);color:var(--ink-2);font-family:'Sora',sans-serif;transition:all .2s;white-space:nowrap}
+.btn-nl{padding:8px 18px;border-radius:var(--r-md);font-size:13.5px;font-weight:600;cursor:pointer;background:transparent;border:1.5px solid var(--border-2);color:white;font-family:'Sora',sans-serif;transition:all .2s;white-space:nowrap}
 .btn-nl:hover{border-color:var(--blue-mid);color:var(--blue-mid)}
 .btn-ns{padding:8px 20px;border-radius:var(--r-md);font-size:13.5px;font-weight:700;cursor:pointer;background:var(--blue-mid);border:none;color:white;font-family:'Sora',sans-serif;box-shadow:var(--sh-blue);transition:all .2s;white-space:nowrap}
 .btn-ns:hover{background:var(--blue);transform:translateY(-1px)}
 
-/* ══ GAMIFICATION FLOATING BUTTON ══ */
-.gami-fab{
-  position:fixed;
-  right:24px;
-  bottom:28px;
-  z-index:400;
-  display:flex;flex-direction:column;align-items:flex-end;gap:10px;
+/* ═══════════════════════════════
+   SHOPEE-STYLE GIFT BOX FAB
+═══════════════════════════════ */
+.fab-wrapper{
+  position:fixed;left:50px;top:200px;z-index:600;
+  display:flex;flex-direction:column;align-items:flex-start;gap:8px;
 }
-.gami-fab-btn{
-  display:flex;align-items:center;gap:10px;
-  background:linear-gradient(135deg,#7C3AED,#EC4899);
-  border:none;border-radius:50px;
-  padding:13px 22px;
-  color:white;
-  font-family:'Sora',sans-serif;font-size:14px;font-weight:700;
-  cursor:pointer;
-  box-shadow:0 8px 30px rgba(124,58,237,0.45);
-  transition:all .3s cubic-bezier(.16,1,.3,1);
-  position:relative;overflow:hidden;
-  white-space:nowrap;
-}
-.gami-fab-btn::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(255,255,255,.15),transparent);
-  border-radius:inherit;
-}
-.gami-fab-btn:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 14px 40px rgba(124,58,237,0.55)}
-.gami-fab-btn .fab-icon{font-size:20px;animation:fabWiggle 2s ease-in-out infinite}
-@keyframes fabWiggle{0%,100%{transform:rotate(0deg)}20%{transform:rotate(-12deg)}40%{transform:rotate(12deg)}60%{transform:rotate(-6deg)}80%{transform:rotate(6deg)}}
-.gami-fab-badge{
-  position:absolute;top:-5px;right:-5px;
-  background:#EF4444;color:white;
-  border-radius:50%;width:20px;height:20px;
-  font-size:10px;font-weight:800;
-  display:flex;align-items:center;justify-content:center;
-  border:2px solid white;
-  animation:fabPulse 1.5s ease-in-out infinite;
-}
-@keyframes fabPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
 
-/* Popup menu */
+/* The gift box button */
+.fab-gift{
+  width:72px;height:80px;
+  cursor:pointer;border:none;background:none;padding:0;
+  position:relative;
+  filter:drop-shadow(0 6px 20px rgba(124,58,237,0.5));
+  animation:fabFloat 3s ease-in-out infinite;
+  transition:filter .2s;
+}
+.fab-gift:hover{filter:drop-shadow(0 10px 28px rgba(124,58,237,0.65))}
+@keyframes fabFloat{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  25%{transform:translateY(-6px) rotate(-2deg)}
+  75%{transform:translateY(-3px) rotate(2deg)}
+}
+
+/* Label bawah tombol */
+.fab-label{
+  background:linear-gradient(135deg,#7C3AED,#EC4899);
+  color:white;border-radius:var(--r-full);
+  padding:4px 12px;font-size:11px;font-weight:700;
+  font-family:'Sora',sans-serif;
+  white-space:nowrap;letter-spacing:.2px;
+  box-shadow:0 4px 16px rgba(124,58,237,0.4);
+  animation:labelPulse 2s ease-in-out infinite;
+  cursor:pointer;border:none;
+}
+@keyframes labelPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+
+/* Notif badge */
+.fab-notif{
+  position:absolute;top:-4px;right:-4px;
+  background:#EF4444;color:white;border-radius:50%;
+  width:20px;height:20px;font-size:10px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+  border:2.5px solid white;
+  animation:notifBounce 1.4s ease-in-out infinite;
+  font-family:'Sora',sans-serif;
+}
+@keyframes notifBounce{0%,100%{transform:scale(1)}40%{transform:scale(1.25)}60%{transform:scale(0.9)}}
+
+/* Glow ring behind gift */
+.fab-gift::before{
+  content:'';
+  position:absolute;
+  inset:-8px;border-radius:50%;
+  background:radial-gradient(circle,rgba(124,58,237,0.2) 0%,transparent 70%);
+  animation:glowRing 2s ease-in-out infinite;
+  z-index:-1;
+}
+@keyframes glowRing{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.15)}}
+
+/* SVG Gift Box — drawn inline */
+.gift-svg{width:72px;height:80px;overflow:visible}
+
+/* ═══════════════════════════════
+   POPUP MENU
+═══════════════════════════════ */
 .gami-popup{
-  position:fixed;right:24px;bottom:92px;z-index:399;
-  background:white;border-radius:var(--r-xl);padding:1rem;
-  box-shadow:0 20px 60px rgba(13,21,38,0.18),0 0 0 1px var(--border);
-  width:280px;
-  transform:translateY(20px) scale(0.95);
+  position:fixed;left:20px;top:100px;right:auto;bottom:auto;z-index:599;
+  background:white;border-radius:22px;
+  box-shadow:0 24px 70px rgba(13,21,38,0.18),0 0 0 1px rgba(0,0,0,0.05);
+  width:290px;
+  transform:translateY(16px) scale(0.94);
   opacity:0;visibility:hidden;pointer-events:none;
-  transition:all .35s cubic-bezier(.16,1,.3,1);
-  transform-origin:bottom right;
+  transition:all .32s cubic-bezier(.16,1,.3,1);
+  transform-origin:top left;
+  overflow:hidden;
 }
 .gami-popup.open{transform:translateY(0) scale(1);opacity:1;visibility:visible;pointer-events:auto}
-.gami-popup-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:.85rem;padding-bottom:.75rem;border-bottom:1px solid var(--border)}
-.gami-popup-hd h4{font-size:13px;font-weight:800;color:var(--ink);display:flex;align-items:center;gap:6px}
-.gami-popup-close{width:26px;height:26px;border-radius:50%;background:var(--surface-2);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--ink-3);transition:all .2s}
-.gami-popup-close:hover{background:var(--border);color:var(--ink)}
-.gami-menu-item{
-  display:flex;align-items:center;gap:12px;
-  padding:10px 12px;border-radius:var(--r-md);
-  cursor:pointer;transition:all .2s;
-  text-decoration:none;margin-bottom:4px;
+
+/* Popup header strip */
+.gami-popup-top{
+  background:linear-gradient(135deg,#1E1B4B,#2D1B69);
+  padding:1rem 1.1rem .85rem;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.gp-poin{flex:1}
+.gp-poin-lbl{font-size:10px;font-weight:700;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.6px}
+.gp-poin-num{font-size:24px;font-weight:900;color:white;font-family:'DM Mono',monospace;letter-spacing:-1px;line-height:1.1;display:flex;align-items:center;gap:6px}
+.gp-rank{background:rgba(255,215,0,.15);border:1px solid rgba(255,215,0,.3);border-radius:10px;padding:6px 10px;text-align:center;flex-shrink:0}
+.gp-rank-num{font-size:16px;font-weight:800;color:#FCD34D;font-family:'DM Mono',monospace;display:block;line-height:1}
+.gp-rank-lbl{font-size:9px;color:rgba(255,255,255,.4);font-weight:600;display:block;margin-top:2px}
+.gami-popup-close{
+  position:absolute;top:10px;right:10px;
+  width:24px;height:24px;border-radius:50%;
+  background:rgba(255,255,255,.12);border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;color:rgba(255,255,255,.7);transition:all .2s;
+}
+.gami-popup-close:hover{background:rgba(255,255,255,.2)}
+
+/* XP bar */
+.gp-xp{padding:.6rem 1.1rem;background:#F8FAFD;border-bottom:1px solid var(--border)}
+.gp-xp-row{display:flex;justify-content:space-between;font-size:10.5px;color:var(--ink-4);font-weight:600;margin-bottom:5px}
+.gp-xp-bar{height:5px;background:var(--border);border-radius:99px;overflow:hidden}
+.gp-xp-fill{height:100%;width:68%;border-radius:99px;background:linear-gradient(90deg,#7C3AED,#EC4899,#FBBF24);background-size:200%;animation:xpAnim 3s linear infinite}
+@keyframes xpAnim{0%{background-position:0%}100%{background-position:200%}}
+
+/* Menu items */
+.gami-popup-body{padding:.6rem .75rem .75rem}
+.pm-item{
+  display:flex;align-items:center;gap:10px;
+  padding:9px 10px;border-radius:var(--r-md);
+  cursor:pointer;transition:all .18s;
+  text-decoration:none;margin-bottom:3px;
   border:1px solid transparent;
 }
-.gami-menu-item:hover{background:var(--surface-2);border-color:var(--border)}
-.gami-menu-item:last-child{margin-bottom:0}
-.gami-menu-icon{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-.gami-menu-text{flex:1}
-.gami-menu-label{font-size:13px;font-weight:700;color:var(--ink);display:block}
-.gami-menu-sub{font-size:11px;color:var(--ink-4);font-weight:500;display:block;margin-top:1px}
-.gami-menu-arrow{font-size:12px;color:var(--ink-4)}
-/* Poin strip dalam popup */
-.gami-poin-strip{
-  background:linear-gradient(135deg,#1E1B4B,#2D1B69);
-  border-radius:var(--r-md);padding:.75rem 1rem;
-  display:flex;align-items:center;gap:10px;
-  margin-bottom:.75rem;
-}
-.gami-poin-num{font-size:22px;font-weight:900;color:white;font-family:'DM Mono',monospace;letter-spacing:-1px}
-.gami-poin-lbl{font-size:10px;color:rgba(255,255,255,.5);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
-.gami-poin-icon{font-size:26px;margin-left:auto}
+.pm-item:last-child{margin-bottom:0}
+.pm-item:hover{background:var(--surface-2);border-color:var(--border)}
+.pm-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.pm-label{font-size:13px;font-weight:700;color:var(--ink);display:block}
+.pm-sub{font-size:10.5px;color:var(--ink-4);font-weight:500;display:block;margin-top:1px}
+.pm-arrow{font-size:11px;color:var(--ink-4);margin-left:auto;flex-shrink:0}
 
 /* ══ CAROUSEL ══ */
-.carousel-wrap{background:#0D1526;overflow:hidden;position:relative}
+.carousel-wrap{background:#0D1526;overflow:hidden;position:relative;margin-top:calc(-1 * var(--nav-h));padding-top:var(--nav-h)}
 .carousel-track{display:flex;transition:transform .6s cubic-bezier(.4,0,.2,1)}
 .carousel-slide{
   min-width:100%;aspect-ratio:16/9;
@@ -505,7 +548,7 @@ footer{background:#07091A;padding:0}
     <a class="logo" href="#">
       <!-- Slot untuk logo custom Anda -->
       <div class="logo-img-slot" title="Logo BatamWay">
-        <img id="logo-custom-img" src="assets/logo.png" alt="Logo BatamWay">
+        <img id="logo-custom-img" src="./assets/Logo.png" alt="Logo BatamWay">
       </div>
       <span class="logo-text">Batam<span>Way</span></span>
     </a>
@@ -516,7 +559,7 @@ footer{background:#07091A;padding:0}
       <li><a href="rute.html">Rute</a></li>
       <li><a href="jadwal.html">Jadwal</a></li>
       <li><a href="tiket.html">Tiket</a></li>
-      <li><a class="active" href="halte.html">Halte</a></li>
+      <li><a href="halte.html">Halte</a></li>
     </ul>
 
     <div class="nav-right">
@@ -527,64 +570,97 @@ footer{background:#07091A;padding:0}
   </div>
 </nav>
 
-<!-- ══════════════════════════════════
-     GAMIFICATION FLOATING ACTION BUTTON
-══════════════════════════════════ -->
-<div class="gami-fab">
-  <div class="gami-popup" id="gamiPopup">
-    <!-- Poin strip -->
-    <div class="gami-poin-strip">
-      <div>
-        <div class="gami-poin-lbl">Total Poin Kamu</div>
-        <div class="gami-poin-num">2.840 🪙</div>
-      </div>
-      <div class="gami-poin-icon">🏆</div>
-    </div>
+<!-- ═══════════════════════════════════════════
+     SHOPEE-STYLE GIFT BOX FAB
+═══════════════════════════════════════════ -->
 
-    <div class="gami-popup-hd">
-      <h4>🎮 Menu Gamifikasi</h4>
-      <button class="gami-popup-close" onclick="toggleGamiPopup()">✕</button>
-    </div>
 
-    <a class="gami-menu-item" href="gamifikasi.html">
-      <div class="gami-menu-icon" style="background:#EFF4FF;font-size:20px">🎮</div>
-      <div class="gami-menu-text">
-        <span class="gami-menu-label">Gamifikasi</span>
-        <span class="gami-menu-sub">Dashboard poin & tantangan</span>
-      </div>
-      <span class="gami-menu-arrow">→</span>
-    </a>
-    <a class="gami-menu-item" href="#">
-      <div class="gami-menu-icon" style="background:#FFFBEB;font-size:20px">🎁</div>
-      <div class="gami-menu-text">
-        <span class="gami-menu-label">Toko Reward</span>
-        <span class="gami-menu-sub">Tukar poin jadi hadiah</span>
-      </div>
-      <span class="gami-menu-arrow">→</span>
-    </a>
-    <a class="gami-menu-item" href="#">
-      <div class="gami-menu-icon" style="background:#F0FDF4;font-size:20px">📍</div>
-      <div class="gami-menu-text">
-        <span class="gami-menu-label">Tracker Perjalanan</span>
-        <span class="gami-menu-sub">Riwayat & statistik trip</span>
-      </div>
-      <span class="gami-menu-arrow">→</span>
-    </a>
-    <a class="gami-menu-item" href="#">
-      <div class="gami-menu-icon" style="background:#F5F3FF;font-size:20px">🏅</div>
-      <div class="gami-menu-text">
-        <span class="gami-menu-label">Leaderboard</span>
-        <span class="gami-menu-sub">Kamu #5 di Batam!</span>
-      </div>
-      <span class="gami-menu-arrow">→</span>
-    </a>
-  </div>
+<!-- FAB Gift Box -->
+<div class="fab-wrapper">
+  <button class="fab-gift" id="fabGift" onclick="navigateToGamifikasi()" aria-label="Buka halaman gamifikasi">
+    <!-- Notif badge -->
+    <div class="fab-notif">3</div>
+    <!-- SVG Gift Box — tema BatamWay ungu & biru -->
+    <svg class="gift-svg" viewBox="0 0 72 80" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="boxGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#7C3AED"/>
+          <stop offset="100%" stop-color="#4F46E5"/>
+        </linearGradient>
+        <linearGradient id="lidGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#EC4899"/>
+          <stop offset="100%" stop-color="#9333EA"/>
+        </linearGradient>
+        <linearGradient id="ribbonV" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#FCD34D"/>
+          <stop offset="100%" stop-color="#F59E0B"/>
+        </linearGradient>
+        <linearGradient id="ribbonH" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#FCD34D"/>
+          <stop offset="100%" stop-color="#F59E0B"/>
+        </linearGradient>
+        <linearGradient id="bowGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#FDE68A"/>
+          <stop offset="100%" stop-color="#FCD34D"/>
+        </linearGradient>
+        <filter id="softGlow">
+          <feGaussianBlur stdDeviation="2" result="blur"/>
+          <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+        </filter>
+      </defs>
 
-  <button class="gami-fab-btn" onclick="toggleGamiPopup()">
-    <span class="fab-icon">🎮</span>
-    Gamifikasi
-    <div class="gami-fab-badge">3</div>
+      <!-- Shadow -->
+      <ellipse cx="36" cy="79" rx="22" ry="4" fill="rgba(0,0,0,0.18)"/>
+
+      <!-- BOX body -->
+      <rect x="6" y="38" width="60" height="38" rx="5" fill="url(#boxGrad)"/>
+      <!-- Box shine -->
+      <rect x="6" y="38" width="60" height="10" rx="5" fill="rgba(255,255,255,0.08)"/>
+      <!-- Box side highlight -->
+      <rect x="6" y="38" width="5" height="38" rx="2" fill="rgba(255,255,255,0.06)"/>
+
+      <!-- LID -->
+      <rect x="3" y="28" width="66" height="14" rx="5" fill="url(#lidGrad)"/>
+      <!-- Lid shine -->
+      <rect x="3" y="28" width="66" height="6" rx="5" fill="rgba(255,255,255,0.12)"/>
+
+      <!-- Vertical ribbon on box -->
+      <rect x="31" y="38" width="10" height="38" fill="url(#ribbonV)" opacity="0.9"/>
+      <!-- Vertical ribbon on lid -->
+      <rect x="31" y="28" width="10" height="14" fill="url(#ribbonH)" opacity="0.9"/>
+      <!-- Horizontal ribbon on box -->
+      <rect x="6" y="52" width="60" height="8" fill="url(#ribbonH)" opacity="0.9"/>
+
+      <!-- BOW left loop -->
+      <ellipse cx="23" cy="22" rx="13" ry="9" fill="url(#bowGrad)" transform="rotate(-25 23 22)"/>
+      <ellipse cx="23" cy="22" rx="9" ry="6" fill="rgba(255,255,255,0.18)" transform="rotate(-25 23 22)"/>
+      <!-- BOW right loop -->
+      <ellipse cx="49" cy="22" rx="13" ry="9" fill="url(#bowGrad)" transform="rotate(25 49 22)"/>
+      <ellipse cx="49" cy="22" rx="9" ry="6" fill="rgba(255,255,255,0.18)" transform="rotate(25 49 22)"/>
+      <!-- BOW center knot -->
+      <ellipse cx="36" cy="24" rx="7" ry="6" fill="#FCD34D"/>
+      <ellipse cx="36" cy="23" rx="4" ry="3.5" fill="#FDE68A"/>
+
+      <!-- Sparkle stars -->
+      <g fill="#FDE68A" opacity="0.9">
+        <!-- top-left star -->
+        <path d="M8 14 L9.2 11 L10.4 14 L13.5 14 L11 16 L12 19 L9.2 17 L6.4 19 L7.4 16 L5 14Z" transform="scale(0.7) translate(2,2)"/>
+        <!-- top-right star -->
+        <path d="M8 14 L9.2 11 L10.4 14 L13.5 14 L11 16 L12 19 L9.2 17 L6.4 19 L7.4 16 L5 14Z" transform="scale(0.55) translate(91,1)"/>
+        <!-- small dot sparkles -->
+        <circle cx="4" cy="32" r="2" opacity="0.7"/>
+        <circle cx="68" cy="48" r="1.5" opacity="0.6"/>
+        <circle cx="60" cy="14" r="2" opacity="0.8"/>
+      </g>
+
+      <!-- "P" coin icons on box (BatamWay poin branding) -->
+      <circle cx="20" cy="61" r="8" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+      <text x="20" y="65" text-anchor="middle" font-family="Sora,sans-serif" font-size="8" font-weight="800" fill="white">P</text>
+      <circle cx="52" cy="61" r="8" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+      <text x="52" y="65" text-anchor="middle" font-family="Sora,sans-serif" font-size="8" font-weight="800" fill="white">P</text>
+    </svg>
   </button>
+  <button class="fab-label" onclick="navigateToGamifikasi()">Dapatkan Reward</button>
 </div>
 
 <!-- ══════════════════════════════════
@@ -1230,20 +1306,13 @@ function resetAutoPlay(){
 
 resetAutoPlay();
 
-/* ─ Gamification popup ─ */
-let gamiOpen=false;
-function toggleGamiPopup(){
-  gamiOpen=!gamiOpen;
-  document.getElementById('gamiPopup').classList.toggle('open',gamiOpen);
+/* ── FAB / Gamifikasi Navigation ── */
+function navigateToGamifikasi(){
+  window.location.href = 'gamifikasi.html';
 }
-document.addEventListener('click',e=>{
-  const popup=document.getElementById('gamiPopup');
-  const fab=document.querySelector('.gami-fab-btn');
-  if(gamiOpen && !popup.contains(e.target) && !fab.contains(e.target)){
-    gamiOpen=false;
-    popup.classList.remove('open');
-  }
-});
+function toggleGamiPopup(){
+  window.location.href = 'gamifikasi.html';
+}
 
 /* ─ Route search ─ */
 function swapI(){const f=document.getElementById('fi'),t=document.getElementById('ti');[f.value,t.value]=[t.value,f.value]}
@@ -1259,29 +1328,37 @@ function doSearch(){
 
 /* ─ Tab bar and navbar active state ─ */
 function updateActiveLinks(){
+  // Deteksi halaman saat ini dari pathname
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
   const hash = window.location.hash || '#beranda';
-  const tabMaps = {
-    '#beranda': '#peta-live',
-    '#rute': '#rute',
-    '#tiket-jadwal': '#tiket-jadwal',
-    '#halte': '#halte',
-    '#features': '#features',
-    '#stats': '#stats',
-    '#berita': '#berita',
-    '#tentang': '#tentang',
-    '#peta-live': '#peta-live'
+  
+  // Map halaman ke hash untuk tab bar
+  const pageHashMap = {
+    'index.html': '#beranda',
+    'rute.html': '#rute',
+    'jadwal.html': '#rute',
+    'tiket.html': '#rute',
+    'halte.html': '#halte',
+    'berita.html': '#berita',
+    'gamifikasi.html': '#gamifikasi'
   };
   
+  const targetHash = pageHashMap[currentPage] || hash;
+  
+  // Update tab bar (ptab)
   document.querySelectorAll('.ptab').forEach(tab=>{
     tab.classList.remove('active');
-    if(tab.getAttribute('href') === hash || tab.getAttribute('href') === tabMaps[hash]){
+    if(tab.getAttribute('href') === targetHash){
       tab.classList.add('active');
     }
   });
   
+  // Update navbar links
   document.querySelectorAll('.nav-links a').forEach(link=>{
     link.classList.remove('active');
-    if(link.getAttribute('href') === hash){
+    const linkHref = link.getAttribute('href');
+    // Cocokkan dengan nama file atau hash
+    if(linkHref === currentPage || linkHref === targetHash || (currentPage === 'index.html' && linkHref === '#beranda')){
       link.classList.add('active');
     }
   });
@@ -1314,8 +1391,6 @@ window.addEventListener('load',()=>{
   });
 });
 
-/* ─ Logo is loaded directly from assets/logo.png ─ */
-// Paste your permanent logo file at assets/logo.png and it will be displayed here.
 </script>
 </body>
 </html>
