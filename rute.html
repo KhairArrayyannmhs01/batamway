@@ -63,113 +63,33 @@ nav{
 @keyframes glowRing{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.15)}}
 .gift-svg{width:72px;height:80px;overflow:visible}
 
-/* ══ CAROUSEL ══ */
-.carousel-wrap{background:#0D1526;overflow:hidden;position:relative;margin-top:calc(-1 * var(--nav-h));padding-top:var(--nav-h)}
-.carousel-track{display:flex;transition:transform .6s cubic-bezier(.4,0,.2,1)}
-.carousel-slide{
-  min-width:100%;aspect-ratio:16/9;
-  position:relative;overflow:hidden;
-  display:flex;align-items:center;
-}
-/* Slide 1 — Main hero */
-.slide-1{background:linear-gradient(135deg,#0D1526 0%,#1a2a50 55%,#0f2d4a 100%)}
-/* Slide 2 — Gamifikasi promo */
-.slide-2{background:linear-gradient(135deg,#1E1B4B 0%,#2D1B69 50%,#1a1a3e 100%)}
-/* Slide 3 — Eco promo */
-.slide-3{background:linear-gradient(135deg,#022c22 0%,#064e3b 50%,#065f46 100%)}
-
-.slide-glow-1{position:absolute;top:-80px;left:30%;width:500px;height:500px;background:radial-gradient(circle,rgba(37,99,235,0.28) 0%,transparent 65%);pointer-events:none}
-.slide-glow-2{position:absolute;bottom:-60px;right:5%;width:350px;height:350px;background:radial-gradient(circle,rgba(13,148,136,0.2) 0%,transparent 65%);pointer-events:none}
-.slide-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:55px 55px;pointer-events:none}
-
-.slide-inner{max-width:1320px;margin:0 auto;padding:0 2rem;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;position:relative;z-index:1}
-.slide-pill{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);padding:6px 15px;border-radius:var(--r-full);font-size:11.5px;color:rgba(255,255,255,.8);margin-bottom:1.2rem;font-weight:600}
-.ldot{width:7px;height:7px;background:#10B981;border-radius:50%;box-shadow:0 0 8px #10B981;animation:blink 1.5s ease-in-out infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
-.slide-h1{font-family:'Bricolage Grotesque',sans-serif;font-size:2.8rem;font-weight:800;color:white;line-height:1.12;letter-spacing:-1.2px;margin-bottom:.9rem}
-.slide-h1 .acc-blue{background:linear-gradient(90deg,#60A5FA,#34D399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.slide-h1 .acc-gold{background:linear-gradient(90deg,#FCD34D,#F59E0B);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.slide-h1 .acc-green{background:linear-gradient(90deg,#34D399,#10B981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.slide-p{font-size:14.5px;color:rgba(255,255,255,.55);max-width:420px;margin-bottom:1.75rem;line-height:1.7}
-.slide-cta{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.btn-hp{padding:13px 26px;border-radius:var(--r-md);background:var(--blue-mid);color:white;border:none;font-size:14px;font-weight:700;font-family:'Sora',sans-serif;cursor:pointer;box-shadow:var(--sh-blue);display:inline-flex;align-items:center;gap:8px;transition:all .25s;text-decoration:none}
-.btn-hp:hover{background:var(--blue);transform:translateY(-2px)}
-.btn-hp.violet{background:linear-gradient(135deg,#7C3AED,#EC4899);box-shadow:0 6px 24px rgba(124,58,237,.35)}
-.btn-hp.green{background:linear-gradient(135deg,#059669,#10B981);box-shadow:0 6px 24px rgba(16,185,129,.35)}
-.btn-hs{padding:13px 22px;border-radius:var(--r-md);background:rgba(255,255,255,0.08);color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,0.15);font-size:14px;font-weight:600;font-family:'Sora',sans-serif;cursor:pointer;transition:all .25s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
-.btn-hs:hover{background:rgba(255,255,255,0.16)}
-
-/* Stat strip */
-.slide-stats{display:flex;gap:2rem;margin-top:2rem;padding-top:1.75rem;border-top:1px solid rgba(255,255,255,.1)}
-.hst-v{font-size:1.7rem;font-weight:800;color:white;letter-spacing:-0.8px;display:block;font-family:'DM Mono',monospace}
-.hst-l{font-size:11.5px;color:rgba(255,255,255,.45);font-weight:500}
-.vsep{width:1px;background:rgba(255,255,255,.12);align-self:stretch}
-
-/* Search card */
-.sc{background:white;border-radius:var(--r-xl);padding:1.75rem;box-shadow:0 20px 60px rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.1);max-width:400px;width:100%}
-.sc-title{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:1.2rem;display:flex;align-items:center;gap:8px}
-.sc-title svg{width:18px;height:18px;stroke:var(--blue-mid);stroke-width:2.5;fill:none}
-.iw{position:relative;margin-bottom:10px}
-.iw label{display:block;font-size:10.5px;font-weight:700;color:var(--ink-4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px}
-.iw input{width:100%;padding:12px 14px 12px 42px;border:1.5px solid var(--border);border-radius:var(--r-md);font-size:13.5px;font-family:'Sora',sans-serif;color:var(--ink);transition:all .2s;outline:none;background:var(--surface-2)}
-.iw input:focus{border-color:var(--blue-mid);background:white;box-shadow:0 0 0 3px var(--blue-glow)}
-.iw input::placeholder{color:var(--ink-4)}
-.ii{position:absolute;left:13px;bottom:13px;width:18px;height:18px;stroke:var(--ink-4);stroke-width:2;fill:none}
-.swap-d{display:flex;align-items:center;gap:10px;margin:4px 0}
-.swap-d .line{flex:1;height:1px;background:var(--border)}
-.swap-c{width:32px;height:32px;border-radius:50%;background:white;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;flex-shrink:0;box-shadow:var(--sh-sm)}
-.swap-c:hover{border-color:var(--blue-mid);background:var(--blue-light)}
-.swap-c svg{width:14px;height:14px;stroke:var(--ink-3);stroke-width:2.5;fill:none}
-.sf{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 12px}
-.fsel{padding:10px 12px;border:1.5px solid var(--border);border-radius:var(--r-md);font-size:12.5px;font-family:'Sora',sans-serif;color:var(--ink-2);background:var(--surface-2);cursor:pointer;outline:none;transition:all .2s}
-.fsel:focus{border-color:var(--blue-mid)}
-.btn-sm{width:100%;padding:14px;border-radius:var(--r-md);background:linear-gradient(135deg,var(--blue-mid) 0%,#1E40AF 100%);color:white;border:none;font-size:14px;font-weight:700;font-family:'Sora',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;box-shadow:var(--sh-blue);transition:all .25s}
-.btn-sm:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(37,99,235,.35)}
-.btn-sm svg{width:17px;height:17px;stroke:white;stroke-width:2.5;fill:none}
-.pchips{margin-top:12px}
-.pchips p{font-size:11px;color:var(--ink-4);font-weight:600;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{padding:5px 12px;border-radius:var(--r-full);border:1px solid var(--border);background:white;font-size:12px;color:var(--ink-3);font-weight:500;cursor:pointer;transition:all .2s}
-.chip:hover{border-color:var(--blue-mid);color:var(--blue-mid);background:var(--blue-light)}
-
-/* Slide 2 promo card */
-.promo-card{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,.14);border-radius:var(--r-xl);padding:2rem;backdrop-filter:blur(10px);max-width:400px}
-.promo-stat-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:1.5rem}
-.promo-stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:1rem;text-align:center}
-.promo-stat-v{font-size:1.6rem;font-weight:800;color:white;font-family:'DM Mono',monospace;letter-spacing:-1px}
-.promo-stat-l{font-size:11px;color:rgba(255,255,255,.45);font-weight:500;margin-top:2px}
-
-/* Eco card */
-.eco-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,.12);border-radius:var(--r-xl);padding:1.75rem;backdrop-filter:blur(10px);max-width:380px}
-.eco-row{display:flex;align-items:center;gap:12px;padding:12px;background:rgba(255,255,255,.06);border-radius:12px;margin-bottom:8px;border:1px solid rgba(255,255,255,.08)}
-.eco-icon{font-size:24px;flex-shrink:0}
-.eco-label{font-size:13px;font-weight:600;color:rgba(255,255,255,.85)}
-.eco-val{font-size:12px;color:rgba(255,255,255,.45);font-weight:500}
-
-/* Carousel controls */
-.carousel-dots{display:flex;gap:8px;position:absolute;bottom:22px;left:50%;transform:translateX(-50%);z-index:10}
-.cdot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer;transition:all .3s;border:none}
-.cdot.active{width:28px;border-radius:4px;background:white}
-.carousel-prev,.carousel-next{
-  position:absolute;top:50%;transform:translateY(-50%);
-  width:44px;height:44px;border-radius:50%;
-  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
-  color:white;font-size:18px;cursor:pointer;z-index:10;
-  display:flex;align-items:center;justify-content:center;
-  transition:all .2s;backdrop-filter:blur(6px);
-}
-.carousel-prev{left:16px}
-.carousel-next{right:16px}
-.carousel-prev:hover,.carousel-next:hover{background:rgba(255,255,255,.22)}
-
 /* ══ MAIN CONTENT WRAPPER ══ */
 .mwrap{max-width:1320px;margin:0 auto;padding:2.5rem 2rem}
 
 /* ══ PAGE HEADER ══ */
 .page-header{margin-bottom:2rem}
-.page-header h1{font-family:'Bricolage Grotesque',sans-serif;font-size:1.9rem;font-weight:800;color:var(--ink);letter-spacing:-.6px;margin-bottom:.3rem}
-.page-header p{font-size:14px;color:var(--ink-4);font-weight:500}
-.page-header-row{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.page-hero{background:linear-gradient(180deg,#07091A,#111827);border-radius:28px;padding:2rem 2rem 2.25rem;color:#F8FAFF;overflow:hidden;position:relative;box-shadow:0 24px 60px rgba(15,23,42,.16);margin-bottom:1.75rem}
+.page-hero::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at top right,rgba(37,99,235,.18),transparent 24%),radial-gradient(circle at bottom left,rgba(37,99,235,.08),transparent 28%);pointer-events:none}
+.page-hero h1{font-family:'Bricolage Grotesque',sans-serif;font-size:2.15rem;font-weight:800;color:white;letter-spacing:-.6px;margin-bottom:.35rem}
+.page-hero p{font-size:14px;color:rgba(255,255,255,.72);font-weight:500;max-width:620px}
+.page-hero-row{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.page-hero-actions{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+.page-hero-btn{padding:11px 18px;border-radius:999px;border:none;font-weight:700;cursor:pointer;min-width:140px;transition:all .2s;white-space:nowrap}
+.page-hero-btn.primary{background:rgba(255,255,255,.12);color:white;border:1px solid rgba(255,255,255,.18)}
+.page-hero-btn.secondary{background:white;color:#0F172A;box-shadow:var(--sh-sm)}
+.page-hero-btn:hover{transform:translateY(-1px);opacity:.95}
+.search-card{background:white;border-radius:24px;border:1px solid rgba(15,23,42,.08);padding:1.3rem 1.4rem;box-shadow:0 20px 45px rgba(15,23,42,.08);position:sticky;top:calc(var(--nav-h) + 1rem);z-index:250}
+.search-card-row{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap}
+.search-card-field{flex:1;min-width:180px;position:relative}
+.search-card-field label{display:block;font-size:10.5px;font-weight:700;color:var(--ink-4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px}
+.search-card-input{width:100%;padding:12px 14px 12px 38px;border:1.5px solid var(--border);border-radius:18px;font-size:14px;font-family:'Sora',sans-serif;color:var(--ink);outline:none;background:var(--surface-2);transition:all .2s}
+.search-card-input:focus{border-color:var(--blue-mid);box-shadow:0 0 0 4px rgba(37,99,235,.12)}
+.search-card-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;stroke:var(--ink-4);stroke-width:2;fill:none}
+.search-card-swap{width:42px;height:42px;border-radius:18px;background:var(--surface-2);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s}
+.search-card-swap:hover{border-color:var(--blue-mid);background:var(--blue-light)}
+.search-card-btn{padding:13px 26px;border-radius:18px;background:var(--blue-mid);color:white;border:none;font-size:14px;font-weight:700;font-family:'Sora',sans-serif;cursor:pointer;display:flex;align-items:center;gap:10px;box-shadow:var(--sh-blue);transition:all .25s;white-space:nowrap}
+.search-card-btn:hover{background:var(--blue)}
+.search-card-select{width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:18px;font-size:14px;font-family:'Sora',sans-serif;color:var(--ink-2);background:var(--surface-2);outline:none;cursor:pointer}
 .filter-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .filter-btn{padding:8px 16px;border-radius:var(--r-full);border:1.5px solid var(--border);background:white;font-size:12.5px;font-weight:600;color:var(--ink-3);cursor:pointer;font-family:'Sora',sans-serif;transition:all .2s;display:flex;align-items:center;gap:6px}
 .filter-btn:hover{border-color:var(--blue-mid);color:var(--blue-mid);background:var(--blue-light)}
@@ -380,7 +300,7 @@ footer{background:#07091A;padding:0}
       <li><a href="halte.html">Halte</a></li>
     </ul>
     <div class="nav-right">
-      <div class="nav-points" onclick="window.location.href='gamifikasi.html'">🪙 <span>2.840</span> Poin</div>
+      <div class="nav-points" onclick="window.location.href='gamifikasi.html'">🎁 <span>2.840</span> Poin</div>
       <button class="btn-nl">Masuk</button>
       <button class="btn-ns">Daftar Gratis</button>
     </div>
@@ -390,7 +310,7 @@ footer{background:#07091A;padding:0}
 <!-- ══ FAB GIFT BOX ══ -->
 <div class="fab-wrapper">
   <button class="fab-gift" onclick="window.location.href='gamifikasi.html'" aria-label="Buka halaman gamifikasi">
-    <div class="fab-notif">3</div>
+    <div class="fab-notif">◉</div>
     <svg class="gift-svg" viewBox="0 0 72 80" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="boxGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#7C3AED"/><stop offset="100%" stop-color="#4F46E5"/></linearGradient>
@@ -430,160 +350,51 @@ footer{background:#07091A;padding:0}
   <button class="fab-label" onclick="window.location.href='gamifikasi.html'">Dapatkan Reward</button>
 </div>
 
-<!-- ══ HERO CAROUSEL ══ -->
-<div class="carousel-wrap">
-  <div class="carousel-track" id="carouselTrack">
-
-    <!-- SLIDE 1 — Cari Rute -->
-    <div class="carousel-slide slide-1">
-      <div class="slide-glow-1"></div>
-      <div class="slide-glow-2"></div>
-      <div class="slide-grid"></div>
-      <div class="slide-inner">
-        <div>
-          <div class="slide-pill"><span class="ldot"></span>Trans Batam · Live Tracking Aktif</div>
-          <h1 class="slide-h1">Naik Bus Batam<br>Lebih <span class="acc-blue">Cerdas</span><br>&amp; Menyenangkan</h1>
-          <p class="slide-p">Lacak posisi Trans Batam secara real-time, rencanakan perjalanan, kumpulkan poin, dan nikmati Batam tanpa stres.</p>
-          <div class="slide-cta">
-            <a href="#" class="btn-hp">
-              <svg viewBox="0 0 24 24" width="17" height="17" stroke="white" stroke-width="2.5" fill="none"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-              Cari Rute Sekarang
-            </a>
-            <a href="#" class="btn-hs">Lihat Jadwal →</a>
-          </div>
-          <div class="slide-stats">
-            <div><span class="hst-v">12</span><span class="hst-l">Koridor Aktif</span></div>
-            <div class="vsep"></div>
-            <div><span class="hst-v">84</span><span class="hst-l">Armada Bus</span></div>
-            <div class="vsep"></div>
-            <div><span class="hst-v">12.4K</span><span class="hst-l">Pengguna Aktif</span></div>
-          </div>
-        </div>
-        <!-- Search Card -->
-        <div class="sc">
-          <div class="sc-title">
-            <svg viewBox="0 0 24 24"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
-            Rencanakan Perjalanan
-          </div>
-          <div class="iw">
-            <label>Dari mana?</label>
-            <div style="position:relative">
-              <svg class="ii" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
-              <input type="text" id="fi" placeholder="Pilih halte asal…">
-            </div>
-          </div>
-          <div class="swap-d">
-            <div class="line"></div>
-            <div class="swap-c" onclick="swapI()" title="Tukar">
-              <svg viewBox="0 0 24 24"><path d="M7 16V4m0 0L3 8m4-4l4 4M17 8v12m0 0l4-4m-4 4l-4-4"/></svg>
-            </div>
-            <div class="line"></div>
-          </div>
-          <div class="iw">
-            <label>Ke mana?</label>
-            <div style="position:relative">
-              <svg class="ii" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              <input type="text" id="ti" placeholder="Pilih halte tujuan…">
-            </div>
-          </div>
-          <div class="sf">
-            <select class="fsel"><option>Berangkat Sekarang</option><option>Pilih Waktu</option></select>
-            <select class="fsel"><option>Semua Koridor</option><option>Koridor 1</option><option>Koridor 2</option><option>Koridor 3</option><option>Koridor 4</option><option>Koridor 5</option></select>
-          </div>
-          <button class="btn-sm" onclick="doSearch()">
-            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-            Cari Rute Trans Batam
-          </button>
-          <div class="pchips">
-            <p>Populer hari ini</p>
-            <div class="chips">
-              <span class="chip" onclick="fillR('Batam Centre','Nagoya')">Batam Centre → Nagoya</span>
-              <span class="chip" onclick="fillR('Batu Aji','Sekupang')">Batu Aji → Sekupang</span>
-              <span class="chip" onclick="fillR('Tiban','Jodoh')">Tiban → Jodoh</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SLIDES 2–6 — Poster slides -->
-    <div class="carousel-slide" style="background:url('assets/Poster Slide 1.png') center/cover no-repeat;position:relative"><div style="position:absolute;inset:0;background:rgba(0,0,0,0.2)"></div></div>
-    <div class="carousel-slide" style="background:url('assets/Poster Slide 2.png') center/cover no-repeat;position:relative"><div style="position:absolute;inset:0;background:rgba(0,0,0,0.2)"></div></div>
-    <div class="carousel-slide" style="background:url('assets/Poster Slide 3.png') center/cover no-repeat;position:relative"><div style="position:absolute;inset:0;background:rgba(0,0,0,0.2)"></div></div>
-    <div class="carousel-slide" style="background:url('assets/Poster Slide 4.png') center/cover no-repeat;position:relative"><div style="position:absolute;inset:0;background:rgba(0,0,0,0.2)"></div></div>
-    <div class="carousel-slide" style="background:url('assets/Poster Slide 5.png') center/cover no-repeat;position:relative"><div style="position:absolute;inset:0;background:rgba(0,0,0,0.2)"></div></div>
-
-  </div>
-  <button class="carousel-prev" onclick="carouselMove(-1)">&#8249;</button>
-  <button class="carousel-next" onclick="carouselMove(1)">&#8250;</button>
-  <div class="carousel-dots">
-    <button class="cdot active" onclick="carouselGo(0)"></button>
-    <button class="cdot" onclick="carouselGo(1)"></button>
-    <button class="cdot" onclick="carouselGo(2)"></button>
-    <button class="cdot" onclick="carouselGo(3)"></button>
-    <button class="cdot" onclick="carouselGo(4)"></button>
-    <button class="cdot" onclick="carouselGo(5)"></button>
-  </div>
-</div>
-
 <!-- ══ MAIN CONTENT ══ -->
 <div class="mwrap" id="cari-rute">
 
   <!-- Page Header + Search Bar -->
   <div class="page-header">
-    <div class="page-header-row">
-      <div>
-        <h1>Rute Trans Batam</h1>
-        <p>12 koridor tersedia · Perbarui setiap 30 detik</p>
-      </div>
-      <div class="filter-row">
-        <button class="filter-btn active" onclick="filterRoutes('semua',this)">
-          <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-          Semua Koridor
-        </button>
-        <button class="filter-btn" onclick="filterRoutes('tersedia',this)">
-          <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          Tersedia
-        </button>
-        <button class="filter-btn" onclick="filterRoutes('longgar',this)">
-          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-          Longgar
-        </button>
+    <div class="page-hero">
+      <div class="page-hero-row">
+        <div>
+          <h1>Rute Trans Batam</h1>
+          <p>12 koridor aktif · Diperbarui setiap 30 detik</p>
+        </div>
+        <div class="page-hero-actions">
+          <button class="page-hero-btn primary" onclick="window.location.href='#'">Peta Live</button>
+          <button class="page-hero-btn secondary" onclick="window.location.href='#'">+ Rute Favorit</button>
+        </div>
       </div>
     </div>
 
-    <!-- Inline Search Form -->
-    <div style="background:white;border:1px solid var(--border);border-radius:var(--r-lg);padding:1.25rem 1.5rem;margin-top:1.25rem;box-shadow:var(--sh-sm);display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap">
-      <div style="flex:1;min-width:160px">
-        <label style="display:block;font-size:10.5px;font-weight:700;color:var(--ink-4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px">Lokasi Asal</label>
-        <div style="position:relative">
-          <svg style="position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;stroke:var(--ink-4);stroke-width:2;fill:none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
-          <input id="from-input" type="text" placeholder="Halte asal…" style="width:100%;padding:11px 14px 11px 38px;border:1.5px solid var(--border);border-radius:var(--r-md);font-size:13.5px;font-family:'Sora',sans-serif;color:var(--ink);outline:none;background:var(--surface-2);transition:all .2s" onfocus="this.style.borderColor='var(--blue-mid)';this.style.boxShadow='0 0 0 3px var(--blue-glow)'" onblur="this.style.borderColor='';this.style.boxShadow=''">
+    <div class="search-card">
+      <div class="search-card-row">
+        <div class="search-card-field">
+          <label for="from-input">Lokasi Asal</label>
+          <svg class="search-card-icon" viewBox="0 0 24 24"><circle cx="12" cy="10" r="4"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+          <input id="from-input" class="search-card-input" type="text" placeholder="Lokasi asal…">
         </div>
-      </div>
-      <div style="padding-bottom:11px;cursor:pointer" onclick="swapMain()" title="Tukar asal & tujuan">
-        <div style="width:36px;height:36px;border-radius:50%;background:var(--surface-2);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;transition:all .2s" onmouseover="this.style.borderColor='var(--blue-mid)'" onmouseout="this.style.borderColor=''">
-          <svg width="16" height="16" viewBox="0 0 24 24" stroke="var(--ink-3)" stroke-width="2.5" fill="none"><path d="M7 16V4m0 0L3 8m4-4l4 4M17 8v12m0 0l4-4m-4 4l-4-4"/></svg>
+        <div class="search-card-swap" onclick="swapMain()" title="Tukar asal & tujuan">
+          <svg width="18" height="18" viewBox="0 0 24 24" stroke="var(--ink-3)" stroke-width="2.5" fill="none"><path d="M7 16V4m0 0L3 8m4-4l4 4M17 8v12m0 0l4-4m-4 4l-4-4"/></svg>
         </div>
-      </div>
-      <div style="flex:1;min-width:160px">
-        <label style="display:block;font-size:10.5px;font-weight:700;color:var(--ink-4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px">Lokasi Tujuan</label>
-        <div style="position:relative">
-          <svg style="position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;stroke:var(--ink-4);stroke-width:2;fill:none" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <input id="to-input" type="text" placeholder="Halte tujuan…" style="width:100%;padding:11px 14px 11px 38px;border:1.5px solid var(--border);border-radius:var(--r-md);font-size:13.5px;font-family:'Sora',sans-serif;color:var(--ink);outline:none;background:var(--surface-2);transition:all .2s" onfocus="this.style.borderColor='var(--blue-mid)';this.style.boxShadow='0 0 0 3px var(--blue-glow)'" onblur="this.style.borderColor='';this.style.boxShadow=''">
+        <div class="search-card-field">
+          <label for="to-input">Lokasi Tujuan</label>
+          <svg class="search-card-icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <input id="to-input" class="search-card-input" type="text" placeholder="Lokasi tujuan…">
         </div>
+        <div class="search-card-field">
+          <label for="time-select">Waktu</label>
+          <select id="time-select" class="search-card-select">
+            <option>Berangkat Sekarang</option>
+            <option>Pilih Waktu</option>
+          </select>
+        </div>
+        <button class="search-card-btn" onclick="doMainSearch()">
+          <svg width="16" height="16" viewBox="0 0 24 24" stroke="white" stroke-width="2.5" fill="none"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Cari Rute
+        </button>
       </div>
-      <div style="min-width:140px">
-        <label style="display:block;font-size:10.5px;font-weight:700;color:var(--ink-4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px">Waktu</label>
-        <select style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:var(--r-md);font-size:13px;font-family:'Sora',sans-serif;color:var(--ink-2);background:var(--surface-2);outline:none;cursor:pointer">
-          <option>Berangkat Sekarang</option>
-          <option>Pilih Waktu</option>
-        </select>
-      </div>
-      <button onclick="doMainSearch()" style="padding:11px 28px;border-radius:var(--r-md);background:linear-gradient(135deg,var(--blue-mid),#1E40AF);color:white;border:none;font-size:14px;font-weight:700;font-family:'Sora',sans-serif;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:var(--sh-blue);transition:all .25s;white-space:nowrap" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
-        <svg width="16" height="16" viewBox="0 0 24 24" stroke="white" stroke-width="2.5" fill="none"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        Cari Rute
-      </button>
     </div>
   </div>
 
@@ -970,18 +781,6 @@ footer{background:#07091A;padding:0}
 
 <!-- ══ SCRIPTS ══ -->
 <script>
-/* ─ Carousel ─ */
-let curSlide=0,totalSlides=6,autoTimer;
-function carouselGo(n){
-  curSlide=n;
-  document.getElementById('carouselTrack').style.transform=`translateX(-${curSlide*100}%)`;
-  document.querySelectorAll('.cdot').forEach((d,i)=>d.classList.toggle('active',i===curSlide));
-  resetAutoPlay();
-}
-function carouselMove(dir){curSlide=(curSlide+dir+totalSlides)%totalSlides;carouselGo(curSlide)}
-function resetAutoPlay(){clearInterval(autoTimer);autoTimer=setInterval(()=>carouselMove(1),5500)}
-resetAutoPlay();
-
 /* ─ Route data for sidebar ─ */
 const routes=[
   {badge:'K1',color:'#2563EB',name:'Batam Centre ↔ Jodoh',bus:'Bus K1-07',eta:'2 menit',pct:'78%',full:'78% penuh',price:'Rp 5.000'},
