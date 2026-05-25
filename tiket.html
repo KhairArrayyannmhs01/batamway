@@ -3,11 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BatamWay — Trans Batam Digital</title>
+<title>BatamWay &mdash; Tiket Trans Batam</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800;900&family=DM+Mono:wght@400;500&family=Bricolage+Grotesque:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-/* ══ RESET & ROOT ══ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --blue:#1B4FD8;--blue-mid:#2563EB;--blue-light:#EFF4FF;--blue-glow:rgba(37,99,235,0.18);
@@ -23,52 +22,21 @@
 html{scroll-behavior:smooth}
 body{font-family:'Sora',sans-serif;background:var(--surface-2);color:var(--ink);line-height:1.6;min-height:100vh;overflow-x:hidden}
 
-/* ══ NAVBAR ══ */
-nav{
-  background-color: rgba(6, 8, 15, 0.60);
-  backdrop-filter: blur(6px);
-  border-bottom:1px solid rgba(255,255,255,0.06);
-  position:sticky;top:0;z-index:300;
-  padding: 12px 0;
-}
-.nav-inner{max-width:1320px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:var(--nav-h)}
-
-/* Logo */
+/* ═══════════════════════════
+   NAVBAR (identik jadwal.html)
+═══════════════════════════ */
+nav{background-color:rgba(6,8,15,0.60);backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,0.06);position:sticky;top:0;z-index:300;padding:12px 0}
+.nav-inner{max-width:1320px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:var(--nav-h);padding:0 2rem}
 .logo{display:flex;align-items:center;gap:12px;text-decoration:none;flex-shrink:0}
-.logo-img-slot{
-  width:40px;height:40px;
-  border-radius:12px;
-  border:2px dashed rgba(255,255,255,0.08);
-  display:flex;align-items:center;justify-content:center;
-  overflow:hidden;
-  background:transparent;
-  position:relative;
-  cursor:default;
-  transition:border-color .2s;
-}
+.logo-img-slot{width:40px;height:40px;border-radius:12px;border:2px dashed rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;overflow:hidden;background:rgba(255,255,255,0.06);cursor:default;transition:border-color .2s}
 .logo-img-slot:hover{border-color:var(--blue-mid)}
-.logo-img-slot img{width:100%;height:100%;object-fit:cover;display:block;background:transparent}
-.logo-img-slot{background:rgba(255,255,255,0.06)}
-.logo-mark{
-  width:40px;height:40px;
-  background:linear-gradient(135deg,var(--blue) 0%,#4F8EF7 100%);
-  border-radius:12px;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:var(--sh-blue);
-  flex-shrink:0;
-}
-.logo-mark svg{width:20px;height:20px;fill:white}
+.logo-img-slot img{width:100%;height:100%;object-fit:cover;display:block}
 .logo-text{font-family:'Bricolage Grotesque',sans-serif;font-size:20px;font-weight:800;color:var(--blue-mid);letter-spacing:-0.6px;line-height:1}
 .logo-text span{color:var(--amber)}
-.logo-divider{width:1px;height:22px;background:var(--border-2);margin:0 2px}
-
-/* Nav links */
 .nav-links{display:flex;align-items:center;gap:2px;list-style:none}
 .nav-links a{font-size:13.5px;font-weight:600;color:rgba(255,255,255,0.92);text-decoration:none;padding:7px 13px;border-radius:var(--r-sm);transition:all .2s;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent}
 .nav-links a:hover{color:rgba(255,255,255,0.98);background:rgba(255,255,255,0.04)}
 .nav-links a.active{color:var(--blue-mid);background:rgba(37,99,235,0.16);font-weight:700;border-bottom-color:var(--blue-mid)}
-
-/* Nav right */
 .nav-right{display:flex;gap:8px;align-items:center;flex-shrink:0}
 .nav-points{display:flex;align-items:center;gap:6px;background:var(--amber-light);border:1px solid #FDE68A;padding:7px 14px;border-radius:var(--r-full);font-size:13px;font-weight:700;color:#92400E;cursor:pointer;transition:all .2s;white-space:nowrap}
 .nav-points:hover{background:#FEF3C7}
@@ -77,398 +45,229 @@ nav{
 .btn-ns{padding:8px 20px;border-radius:var(--r-md);font-size:13.5px;font-weight:700;cursor:pointer;background:var(--blue-mid);border:none;color:white;font-family:'Sora',sans-serif;box-shadow:var(--sh-blue);transition:all .2s;white-space:nowrap}
 .btn-ns:hover{background:var(--blue);transform:translateY(-1px)}
 
-/* ═══════════════════════════════
-   SHOPEE-STYLE GIFT BOX FAB
-═══════════════════════════════ */
-.fab-wrapper{
-  position:fixed;left:50px;top:200px;z-index:600;
-  display:flex;flex-direction:column;align-items:flex-start;gap:8px;
-}
-
-/* The gift box button */
-.fab-gift{
-  width:72px;height:80px;
-  cursor:pointer;border:none;background:none;padding:0;
-  position:relative;
-  filter:drop-shadow(0 6px 20px rgba(124,58,237,0.5));
-  animation:fabFloat 3s ease-in-out infinite;
-  transition:filter .2s;
-}
+/* ═══════════════════════════
+   GIFT BOX FAB (identik)
+═══════════════════════════ */
+.fab-wrapper{position:fixed;left:50px;top:200px;z-index:600;display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.fab-gift{width:72px;height:80px;cursor:pointer;border:none;background:none;padding:0;position:relative;filter:drop-shadow(0 6px 20px rgba(124,58,237,0.5));animation:fabFloat 3s ease-in-out infinite;transition:filter .2s}
 .fab-gift:hover{filter:drop-shadow(0 10px 28px rgba(124,58,237,0.65))}
-@keyframes fabFloat{
-  0%,100%{transform:translateY(0) rotate(0deg)}
-  25%{transform:translateY(-6px) rotate(-2deg)}
-  75%{transform:translateY(-3px) rotate(2deg)}
-}
-
-/* Label bawah tombol */
-.fab-label{
-  background:linear-gradient(135deg,#7C3AED,#EC4899);
-  color:white;border-radius:var(--r-full);
-  padding:4px 12px;font-size:11px;font-weight:700;
-  font-family:'Sora',sans-serif;
-  white-space:nowrap;letter-spacing:.2px;
-  box-shadow:0 4px 16px rgba(124,58,237,0.4);
-  animation:labelPulse 2s ease-in-out infinite;
-  cursor:pointer;border:none;
-}
+@keyframes fabFloat{0%,100%{transform:translateY(0) rotate(0deg)}25%{transform:translateY(-6px) rotate(-2deg)}75%{transform:translateY(-3px) rotate(2deg)}}
+.fab-label{background:linear-gradient(135deg,#7C3AED,#EC4899);color:white;border-radius:var(--r-full);padding:4px 12px;font-size:11px;font-weight:700;font-family:'Sora',sans-serif;white-space:nowrap;letter-spacing:.2px;box-shadow:0 4px 16px rgba(124,58,237,0.4);animation:labelPulse 2s ease-in-out infinite;cursor:pointer;border:none}
 @keyframes labelPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
-
-/* Notif badge */
-.fab-notif{
-  position:absolute;top:-4px;right:-4px;
-  background:#EF4444;color:white;border-radius:50%;
-  width:20px;height:20px;font-size:10px;font-weight:800;
-  display:flex;align-items:center;justify-content:center;
-  border:2.5px solid white;
-  animation:notifBounce 1.4s ease-in-out infinite;
-  font-family:'Sora',sans-serif;
-}
+.fab-notif{position:absolute;top:-4px;right:-4px;background:#EF4444;color:white;border-radius:50%;width:20px;height:20px;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2.5px solid white;animation:notifBounce 1.4s ease-in-out infinite;font-family:'Sora',sans-serif}
 @keyframes notifBounce{0%,100%{transform:scale(1)}40%{transform:scale(1.25)}60%{transform:scale(0.9)}}
-
-/* Glow ring behind gift */
-.fab-gift::before{
-  content:'';
-  position:absolute;
-  inset:-8px;border-radius:50%;
-  background:radial-gradient(circle,rgba(124,58,237,0.2) 0%,transparent 70%);
-  animation:glowRing 2s ease-in-out infinite;
-  z-index:-1;
-}
+.fab-gift::before{content:'';position:absolute;inset:-8px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,0.2) 0%,transparent 70%);animation:glowRing 2s ease-in-out infinite;z-index:-1}
 @keyframes glowRing{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.15)}}
-
-/* SVG Gift Box — drawn inline */
 .gift-svg{width:72px;height:80px;overflow:visible}
+.ldot{width:7px;height:7px;background:#10B981;border-radius:50%;box-shadow:0 0 6px #10B981;animation:blink 1.5s ease-in-out infinite;display:inline-block;flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
 
-/* ═══════════════════════════════
-   POPUP MENU
-═══════════════════════════════ */
-.gami-popup{
-  position:fixed;left:20px;top:100px;right:auto;bottom:auto;z-index:599;
-  background:white;border-radius:22px;
-  box-shadow:0 24px 70px rgba(13,21,38,0.18),0 0 0 1px rgba(0,0,0,0.05);
-  width:290px;
-  transform:translateY(16px) scale(0.94);
-  opacity:0;visibility:hidden;pointer-events:none;
-  transition:all .32s cubic-bezier(.16,1,.3,1);
-  transform-origin:top left;
-  overflow:hidden;
-}
-.gami-popup.open{transform:translateY(0) scale(1);opacity:1;visibility:visible;pointer-events:auto}
-
-/* Popup header strip */
-.gami-popup-top{
-  background:linear-gradient(135deg,#1E1B4B,#2D1B69);
-  padding:1rem 1.1rem .85rem;
-  display:flex;align-items:center;justify-content:space-between;
-}
-.gp-poin{flex:1}
-.gp-poin-lbl{font-size:10px;font-weight:700;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.6px}
-.gp-poin-num{font-size:24px;font-weight:900;color:white;font-family:'DM Mono',monospace;letter-spacing:-1px;line-height:1.1;display:flex;align-items:center;gap:6px}
-.gp-rank{background:rgba(255,215,0,.15);border:1px solid rgba(255,215,0,.3);border-radius:10px;padding:6px 10px;text-align:center;flex-shrink:0}
-.gp-rank-num{font-size:16px;font-weight:800;color:#FCD34D;font-family:'DM Mono',monospace;display:block;line-height:1}
-.gp-rank-lbl{font-size:9px;color:rgba(255,255,255,.4);font-weight:600;display:block;margin-top:2px}
-.gami-popup-close{
-  position:absolute;top:10px;right:10px;
-  width:24px;height:24px;border-radius:50%;
-  background:rgba(255,255,255,.12);border:none;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  font-size:13px;color:rgba(255,255,255,.7);transition:all .2s;
-}
-.gami-popup-close:hover{background:rgba(255,255,255,.2)}
-
-/* XP bar */
-.gp-xp{padding:.6rem 1.1rem;background:#F8FAFD;border-bottom:1px solid var(--border)}
-.gp-xp-row{display:flex;justify-content:space-between;font-size:10.5px;color:var(--ink-4);font-weight:600;margin-bottom:5px}
-.gp-xp-bar{height:5px;background:var(--border);border-radius:99px;overflow:hidden}
-.gp-xp-fill{height:100%;width:68%;border-radius:99px;background:linear-gradient(90deg,#7C3AED,#EC4899,#FBBF24);background-size:200%;animation:xpAnim 3s linear infinite}
-@keyframes xpAnim{0%{background-position:0%}100%{background-position:200%}}
-
-/* Menu items */
-.gami-popup-body{padding:.6rem .75rem .75rem}
-.pm-item{
-  display:flex;align-items:center;gap:10px;
-  padding:9px 10px;border-radius:var(--r-md);
-  cursor:pointer;transition:all .18s;
-  text-decoration:none;margin-bottom:3px;
-  border:1px solid transparent;
-}
-.pm-item:last-child{margin-bottom:0}
-.pm-item:hover{background:var(--surface-2);border-color:var(--border)}
-.pm-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
-.pm-label{font-size:13px;font-weight:700;color:var(--ink);display:block}
-.pm-sub{font-size:10.5px;color:var(--ink-4);font-weight:500;display:block;margin-top:1px}
-.pm-arrow{font-size:11px;color:var(--ink-4);margin-left:auto;flex-shrink:0}
-
-/* ══ CAROUSEL ══ */
-.carousel-wrap{background:#0D1526;overflow:hidden;position:relative;margin-top:calc(-1 * var(--nav-h));padding-top:var(--nav-h)}
-.carousel-track{display:flex;transition:transform .6s cubic-bezier(.4,0,.2,1)}
-.carousel-slide{
-  min-width:100%;aspect-ratio:16/9;
-  position:relative;overflow:hidden;
-  display:flex;align-items:center;
-}
-/* Slide 1 — Main hero */
-.slide-1{background:linear-gradient(135deg,#0D1526 0%,#1a2a50 55%,#0f2d4a 100%)}
-/* Slide 2 — Gamifikasi promo */
-.slide-2{background:linear-gradient(135deg,#1E1B4B 0%,#2D1B69 50%,#1a1a3e 100%)}
-/* Slide 3 — Eco promo */
-.slide-3{background:linear-gradient(135deg,#022c22 0%,#064e3b 50%,#065f46 100%)}
-
-.slide-glow-1{position:absolute;top:-80px;left:30%;width:500px;height:500px;background:radial-gradient(circle,rgba(37,99,235,0.28) 0%,transparent 65%);pointer-events:none}
-.slide-glow-2{position:absolute;bottom:-60px;right:5%;width:350px;height:350px;background:radial-gradient(circle,rgba(13,148,136,0.2) 0%,transparent 65%);pointer-events:none}
-.slide-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:55px 55px;pointer-events:none}
-
-.slide-inner{max-width:1320px;margin:0 auto;padding:0 2rem;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;position:relative;z-index:1}
-.slide-pill{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);padding:6px 15px;border-radius:var(--r-full);font-size:11.5px;color:rgba(255,255,255,.8);margin-bottom:1.2rem;font-weight:600}
-.ldot{width:7px;height:7px;background:#10B981;border-radius:50%;box-shadow:0 0 8px #10B981;animation:blink 1.5s ease-in-out infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
-.slide-h1{font-family:'Bricolage Grotesque',sans-serif;font-size:2.8rem;font-weight:800;color:white;line-height:1.12;letter-spacing:-1.2px;margin-bottom:.9rem}
-.slide-h1 .acc-blue{background:linear-gradient(90deg,#60A5FA,#34D399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.slide-h1 .acc-gold{background:linear-gradient(90deg,#FCD34D,#F59E0B);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.slide-h1 .acc-green{background:linear-gradient(90deg,#34D399,#10B981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.slide-p{font-size:14.5px;color:rgba(255,255,255,.55);max-width:420px;margin-bottom:1.75rem;line-height:1.7}
-.slide-cta{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.btn-hp{padding:13px 26px;border-radius:var(--r-md);background:var(--blue-mid);color:white;border:none;font-size:14px;font-weight:700;font-family:'Sora',sans-serif;cursor:pointer;box-shadow:var(--sh-blue);display:inline-flex;align-items:center;gap:8px;transition:all .25s;text-decoration:none}
-.btn-hp:hover{background:var(--blue);transform:translateY(-2px)}
-.btn-hp.violet{background:linear-gradient(135deg,#7C3AED,#EC4899);box-shadow:0 6px 24px rgba(124,58,237,.35)}
-.btn-hp.green{background:linear-gradient(135deg,#059669,#10B981);box-shadow:0 6px 24px rgba(16,185,129,.35)}
-.btn-hs{padding:13px 22px;border-radius:var(--r-md);background:rgba(255,255,255,0.08);color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,0.15);font-size:14px;font-weight:600;font-family:'Sora',sans-serif;cursor:pointer;transition:all .25s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
-.btn-hs:hover{background:rgba(255,255,255,0.16)}
-
-/* Stat strip */
-.slide-stats{display:flex;gap:2rem;margin-top:2rem;padding-top:1.75rem;border-top:1px solid rgba(255,255,255,.1)}
-.hst-v{font-size:1.7rem;font-weight:800;color:white;letter-spacing:-0.8px;display:block;font-family:'DM Mono',monospace}
-.hst-l{font-size:11.5px;color:rgba(255,255,255,.45);font-weight:500}
-.vsep{width:1px;background:rgba(255,255,255,.12);align-self:stretch}
-
-/* Search card */
-.sc{background:white;border-radius:var(--r-xl);padding:1.75rem;box-shadow:0 20px 60px rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.1);max-width:400px;width:100%}
-.sc-title{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:1.2rem;display:flex;align-items:center;gap:8px}
-.sc-title svg{width:18px;height:18px;stroke:var(--blue-mid);stroke-width:2.5;fill:none}
-.iw{position:relative;margin-bottom:10px}
-.iw label{display:block;font-size:10.5px;font-weight:700;color:var(--ink-4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px}
-.iw input{width:100%;padding:12px 14px 12px 42px;border:1.5px solid var(--border);border-radius:var(--r-md);font-size:13.5px;font-family:'Sora',sans-serif;color:var(--ink);transition:all .2s;outline:none;background:var(--surface-2)}
-.iw input:focus{border-color:var(--blue-mid);background:white;box-shadow:0 0 0 3px var(--blue-glow)}
-.iw input::placeholder{color:var(--ink-4)}
-.ii{position:absolute;left:13px;bottom:13px;width:18px;height:18px;stroke:var(--ink-4);stroke-width:2;fill:none}
-.swap-d{display:flex;align-items:center;gap:10px;margin:4px 0}
-.swap-d .line{flex:1;height:1px;background:var(--border)}
-.swap-c{width:32px;height:32px;border-radius:50%;background:white;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;flex-shrink:0;box-shadow:var(--sh-sm)}
-.swap-c:hover{border-color:var(--blue-mid);background:var(--blue-light)}
-.swap-c svg{width:14px;height:14px;stroke:var(--ink-3);stroke-width:2.5;fill:none}
-.sf{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 12px}
-.fsel{padding:10px 12px;border:1.5px solid var(--border);border-radius:var(--r-md);font-size:12.5px;font-family:'Sora',sans-serif;color:var(--ink-2);background:var(--surface-2);cursor:pointer;outline:none;transition:all .2s}
-.fsel:focus{border-color:var(--blue-mid)}
-.btn-sm{width:100%;padding:14px;border-radius:var(--r-md);background:linear-gradient(135deg,var(--blue-mid) 0%,#1E40AF 100%);color:white;border:none;font-size:14px;font-weight:700;font-family:'Sora',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;box-shadow:var(--sh-blue);transition:all .25s}
-.btn-sm:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(37,99,235,.35)}
-.btn-sm svg{width:17px;height:17px;stroke:white;stroke-width:2.5;fill:none}
-.pchips{margin-top:12px}
-.pchips p{font-size:11px;color:var(--ink-4);font-weight:600;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{padding:5px 12px;border-radius:var(--r-full);border:1px solid var(--border);background:white;font-size:12px;color:var(--ink-3);font-weight:500;cursor:pointer;transition:all .2s}
-.chip:hover{border-color:var(--blue-mid);color:var(--blue-mid);background:var(--blue-light)}
-
-/* Slide 2 promo card */
-.promo-card{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,.14);border-radius:var(--r-xl);padding:2rem;backdrop-filter:blur(10px);max-width:400px}
-.promo-stat-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:1.5rem}
-.promo-stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:1rem;text-align:center}
-.promo-stat-v{font-size:1.6rem;font-weight:800;color:white;font-family:'DM Mono',monospace;letter-spacing:-1px}
-.promo-stat-l{font-size:11px;color:rgba(255,255,255,.45);font-weight:500;margin-top:2px}
-
-/* Eco card */
-.eco-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,.12);border-radius:var(--r-xl);padding:1.75rem;backdrop-filter:blur(10px);max-width:380px}
-.eco-row{display:flex;align-items:center;gap:12px;padding:12px;background:rgba(255,255,255,.06);border-radius:12px;margin-bottom:8px;border:1px solid rgba(255,255,255,.08)}
-.eco-icon{font-size:24px;flex-shrink:0}
-.eco-label{font-size:13px;font-weight:600;color:rgba(255,255,255,.85)}
-.eco-val{font-size:12px;color:rgba(255,255,255,.45);font-weight:500}
-
-/* Carousel controls */
-.carousel-dots{display:flex;gap:8px;position:absolute;bottom:22px;left:50%;transform:translateX(-50%);z-index:10}
-.cdot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer;transition:all .3s;border:none}
-.cdot.active{width:28px;border-radius:4px;background:white}
-.carousel-prev,.carousel-next{
-  position:absolute;top:50%;transform:translateY(-50%);
-  width:44px;height:44px;border-radius:50%;
-  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
-  color:white;font-size:18px;cursor:pointer;z-index:10;
-  display:flex;align-items:center;justify-content:center;
-  transition:all .2s;backdrop-filter:blur(6px);
-}
-.carousel-prev{left:16px}
-.carousel-next{right:16px}
-.carousel-prev:hover,.carousel-next:hover{background:rgba(255,255,255,.22)}
-
-/* ══ MAIN CONTENT ══ */
+/* ═══════════════════════════
+   MAIN WRAP
+═══════════════════════════ */
 .mwrap{max-width:1320px;margin:0 auto;padding:2.5rem 2rem}
 
-/* Tab bar */
-.ptabs{display:flex;gap:3px;background:white;border:1px solid var(--border);border-radius:var(--r-lg);padding:5px;width:fit-content;margin-bottom:2rem;box-shadow:var(--sh-sm)}
-.ptab{padding:9px 20px;border-radius:var(--r-md);font-size:13.5px;font-weight:600;cursor:pointer;color:var(--ink-3);border:none;background:transparent;font-family:'Sora',sans-serif;display:flex;align-items:center;gap:7px;transition:all .2s;white-space:nowrap}
-.ptab svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none}
-.ptab.active{background:var(--blue-mid);color:white;box-shadow:var(--sh-blue)}
-.ptab:not(.active):hover{color:var(--ink);background:var(--surface-2)}
+/* Page Hero (identik jadwal) */
+.page-hero{background:linear-gradient(180deg,#07091A,#111827);border-radius:28px;padding:2rem 2rem 2.25rem;color:#F8FAFF;overflow:hidden;position:relative;box-shadow:0 24px 60px rgba(15,23,42,.16);margin-bottom:1.75rem}
+.page-hero::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at top right,rgba(37,99,235,.18),transparent 24%),radial-gradient(circle at bottom left,rgba(37,99,235,.08),transparent 28%);pointer-events:none}
+.page-hero h1{font-family:'Bricolage Grotesque',sans-serif;font-size:2.15rem;font-weight:800;color:white;letter-spacing:-.6px;margin-bottom:.35rem}
+.page-hero p{font-size:14px;color:rgba(255,255,255,.72);font-weight:500;max-width:620px}
+.page-hero-row{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.page-hero-actions{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+.page-hero-btn{padding:11px 18px;border-radius:999px;border:none;font-weight:700;cursor:pointer;min-width:140px;transition:all .2s;white-space:nowrap;font-family:'Sora',sans-serif;font-size:13.5px}
+.page-hero-btn.primary{background:rgba(255,255,255,.12);color:white;border:1px solid rgba(255,255,255,.18)}
+.page-hero-btn.secondary{background:white;color:#0F172A;box-shadow:var(--sh-sm)}
+.page-hero-btn:hover{transform:translateY(-1px);opacity:.95}
 
-/* Main grid */
-.cgrid{display:grid;grid-template-columns:1fr 380px;gap:2rem}
+/* Search / Route Finder (mirip jadwal) */
+.search-card{background:white;border-radius:24px;border:1px solid rgba(15,23,42,.08);padding:1.3rem 1.4rem;box-shadow:0 20px 45px rgba(15,23,42,.08);margin-bottom:1.75rem}
+.search-card-row{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap}
+.search-card-field{flex:1;min-width:180px;position:relative}
+.search-card-field label{display:block;font-size:10.5px;font-weight:700;color:var(--ink-4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px}
+.search-card-input{width:100%;padding:12px 14px 12px 38px;border:1.5px solid var(--border);border-radius:18px;font-size:14px;font-family:'Sora',sans-serif;color:var(--ink);outline:none;background:var(--surface-2);transition:all .2s}
+.search-card-input:focus{border-color:var(--blue-mid);box-shadow:0 0 0 4px rgba(37,99,235,.12)}
+.search-card-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;stroke:var(--ink-4);stroke-width:2;fill:none}
+.search-card-select{width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:18px;font-size:14px;font-family:'Sora',sans-serif;color:var(--ink-2);background:var(--surface-2);outline:none;cursor:pointer;transition:all .2s}
+.search-card-select:focus{border-color:var(--blue-mid)}
+.search-card-btn{padding:13px 26px;border-radius:18px;background:var(--blue-mid);color:white;border:none;font-size:14px;font-weight:700;font-family:'Sora',sans-serif;cursor:pointer;display:flex;align-items:center;gap:10px;box-shadow:var(--sh-blue);transition:all .25s;white-space:nowrap}
+.search-card-btn:hover{background:var(--blue);transform:translateY(-1px)}
 
-/* Map */
-.mshell{background:white;border-radius:var(--r-lg);border:1px solid var(--border);overflow:hidden;height:520px;position:relative;box-shadow:var(--sh-sm)}
-.mcanvas{width:100%;height:100%;background:linear-gradient(rgba(200,215,240,.4) 1px,transparent 1px),linear-gradient(90deg,rgba(200,215,240,.4) 1px,transparent 1px),linear-gradient(160deg,#C8DFF5 0%,#B8D4EF 50%,#C4DCF2 100%);background-size:44px 44px;position:relative}
-.mwater{position:absolute;bottom:0;left:0;right:0;height:28%;background:linear-gradient(180deg,#A8C8E8 0%,#90B8DC 100%);opacity:.55}
-.mwater::after{content:'SELAT SINGAPURA';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:10px;font-weight:700;color:rgba(255,255,255,.6);letter-spacing:2px}
-.rd{position:absolute;background:white;opacity:.75;border-radius:3px}
-.rd-h{height:7px}.rd-v{width:7px}
-.rtl{position:absolute;height:5px;background:var(--blue-mid);opacity:.9;border-radius:3px;box-shadow:0 0 8px rgba(37,99,235,.5)}
-.stp{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;z-index:5}
-.stp-pin{width:30px;height:30px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(0,0,0,.2);border:2.5px solid white}
-.stp-inner{width:11px;height:11px;border-radius:50%;background:white;transform:rotate(45deg)}
-.stp-lbl{background:var(--ink);color:white;border-radius:7px;padding:4px 9px;font-size:10.5px;font-weight:600;white-space:nowrap;box-shadow:var(--sh-md);opacity:0;transform:translateY(4px);transition:all .2s}
-.stp:hover .stp-lbl{opacity:1;transform:translateY(0)}
-.mbus{position:absolute;z-index:8;background:var(--blue-mid);border-radius:6px;padding:5px 9px;display:flex;align-items:center;gap:4px;box-shadow:0 4px 14px rgba(37,99,235,.35);animation:mvb 10s linear infinite;border:2px solid white}
-.mbus svg{width:14px;height:14px;fill:white}
-.mbus span{font-size:10px;font-weight:700;color:white;font-family:'DM Mono',monospace}
-@keyframes mvb{0%{left:8%}50%{left:52%}50.01%{left:8%}100%{left:8%}}
-.lpulse{position:absolute;z-index:6;transform:translate(-50%,-50%)}
-.pr1{position:absolute;width:44px;height:44px;border-radius:50%;background:rgba(37,99,235,.15);transform:translate(-50%,-50%);animation:pls 2.2s ease-out infinite}
-.pr2{animation-delay:.7s}
-.pdot{width:14px;height:14px;border-radius:50%;background:var(--blue-mid);border:3px solid white;box-shadow:var(--sh-md)}
-@keyframes pls{0%{transform:translate(-50%,-50%) scale(.8);opacity:1}100%{transform:translate(-50%,-50%) scale(2.4);opacity:0}}
-.mleg{position:absolute;top:12px;left:12px;background:white;border-radius:var(--r-md);padding:13px 15px;box-shadow:var(--sh-md);min-width:150px}
-.mleg h4{font-size:10px;font-weight:700;color:var(--ink-4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
-.lr{display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--ink-2);margin-bottom:5px;font-weight:500}
-.ld{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.mctrl{position:absolute;top:12px;right:12px;display:flex;flex-direction:column;gap:4px}
-.mc{width:36px;height:36px;background:white;border-radius:var(--r-sm);border:1px solid var(--border);box-shadow:var(--sh-sm);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:var(--ink-2);font-weight:600;transition:all .2s}
-.mc:hover{background:var(--blue-light);color:var(--blue-mid)}
-.mbar{position:absolute;bottom:0;left:0;right:0;padding:12px;background:linear-gradient(transparent,rgba(13,21,38,.06))}
-.mbi{background:white;border-radius:var(--r-md);padding:13px 18px;display:flex;align-items:center;flex-wrap:wrap;box-shadow:var(--sh-md)}
-.mbs{display:flex;align-items:center;gap:7px;padding:0 14px;font-size:12.5px;color:var(--ink-2);flex:1}
-.mbs:first-child{padding-left:0}.mbs:last-child{padding-right:0}
-.msep{width:1px;height:22px;background:var(--border);flex-shrink:0}
-.mbs svg{width:15px;height:15px;stroke:var(--blue-mid);stroke-width:2.5;fill:none;flex-shrink:0}
-.mbs strong{color:var(--ink);font-weight:700}
+/* ═══════════════════════════
+   TICKET TYPE TABS
+═══════════════════════════ */
+.ticket-tabs{display:flex;gap:10px;margin-bottom:1.5rem}
+.ticket-tab{flex:1;padding:18px 20px;border-radius:var(--r-lg);border:2px solid var(--border);background:white;cursor:pointer;transition:all .22s;text-align:left;font-family:'Sora',sans-serif;box-shadow:var(--sh-sm);position:relative;overflow:hidden}
+.ticket-tab::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(37,99,235,.04),transparent);opacity:0;transition:opacity .2s}
+.ticket-tab:hover::before{opacity:1}
+.ticket-tab.active{border-color:var(--blue-mid);background:var(--blue-light);box-shadow:0 4px 20px var(--blue-glow)}
+.ticket-tab.active .tt-badge{background:var(--blue-mid);color:white}
+.ticket-tab:hover:not(.active){border-color:var(--border-2);box-shadow:var(--sh-md)}
+.tt-icon{font-size:28px;margin-bottom:.5rem;display:block}
+.tt-title{font-size:15px;font-weight:800;color:var(--ink);letter-spacing:-.2px}
+.tt-sub{font-size:12px;color:var(--ink-3);font-weight:500;margin-top:3px}
+.tt-badge{display:inline-block;padding:3px 10px;border-radius:var(--r-full);font-size:11px;font-weight:700;background:var(--surface-2);color:var(--ink-3);border:1px solid var(--border);margin-top:.5rem;transition:all .2s}
+.tt-price{font-size:13px;font-weight:700;color:var(--blue-mid);margin-top:4px;display:block}
 
-/* Sidebar */
-.sidebar{display:flex;flex-direction:column;gap:1.25rem}
-.slbl{font-size:12px;font-weight:700;color:var(--ink-4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.75rem}
-.bcard{background:white;border:1.5px solid var(--border);border-radius:var(--r-lg);padding:1.1rem 1.25rem;cursor:pointer;transition:all .22s;position:relative;overflow:hidden;box-shadow:var(--sh-sm)}
-.bcard::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:4px 0 0 4px;background:var(--blue-mid);transform:scaleY(0);transition:transform .22s;transform-origin:center}
-.bcard:hover{border-color:var(--blue-mid);box-shadow:0 4px 20px var(--blue-glow);transform:translateX(3px)}
-.bcard:hover::before,.bcard.sel::before{transform:scaleY(1)}
-.bcard.sel{border-color:var(--blue-mid);background:var(--blue-light)}
-.bch{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.bcl{display:flex;align-items:center;gap:9px}
-.rbadge{padding:5px 12px;border-radius:var(--r-sm);font-size:12px;font-weight:800;font-family:'DM Mono',monospace;letter-spacing:.5px;background:var(--blue-mid);color:white}
-.rbadge.g{background:var(--teal)}.rbadge.a{background:var(--amber)}
-.bcname{font-size:14px;font-weight:700;color:var(--ink)}
-.bcsub{font-size:11.5px;color:var(--ink-4);margin-top:1px}
-.eta{padding:5px 12px;border-radius:var(--r-full);font-size:12px;font-weight:700}
-.es{background:#FEF2F2;color:#DC2626}.eo{background:#F0FDF4;color:#16A34A}.em{background:var(--amber-light);color:#B45309}
-.cr{margin-bottom:8px}
-.cm{display:flex;justify-content:space-between;font-size:11px;color:var(--ink-4);margin-bottom:4px;font-weight:500}
-.ct{height:6px;background:var(--surface-2);border-radius:99px;overflow:hidden;border:1px solid var(--border)}
-.cf{height:100%;border-radius:99px;transition:width .6s cubic-bezier(.4,0,.2,1)}
-.cr-r{background:linear-gradient(90deg,#F87171,#EF4444)}.cr-a{background:linear-gradient(90deg,#FCD34D,#F59E0B)}.cr-g{background:linear-gradient(90deg,#34D399,#10B981)}
-.bcf{display:flex;align-items:center;justify-content:space-between}
-.bcst{display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--ink-4);font-weight:500}
-.bcst svg{width:13px;height:13px;stroke:currentColor;stroke-width:2;fill:none}
-.btrk{padding:6px 15px;border-radius:var(--r-full);background:var(--blue-mid);color:white;border:none;font-size:12px;font-weight:700;font-family:'Sora',sans-serif;cursor:pointer;transition:all .2s}
-.btrk:hover{background:var(--blue);transform:scale(1.04)}
-.qag{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.qab{background:white;border:1.5px solid var(--border);border-radius:var(--r-md);padding:14px 12px;cursor:pointer;text-align:left;transition:all .22s;box-shadow:var(--sh-sm)}
-.qab:hover{border-color:var(--blue-mid);transform:translateY(-2px);box-shadow:var(--sh-md)}
-.qai{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:8px}
-.qai svg{width:18px;height:18px;stroke:white;stroke-width:2.2;fill:none}
-.qan{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:1px}
-.qah{font-size:11px;color:var(--ink-4);font-weight:500}
+/* ═══════════════════════════
+   TWO COL LAYOUT
+═══════════════════════════ */
+.two-col{display:grid;grid-template-columns:1fr 360px;gap:1.75rem;align-items:start}
 
-/* Popular routes */
-.proutes{background:white;border-radius:var(--r-lg);border:1px solid var(--border);padding:1.5rem;margin-top:1.75rem;box-shadow:var(--sh-sm)}
-.shdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem}
-.shdr h2{font-size:17px;font-weight:800;color:var(--ink);letter-spacing:-.3px}
-.seall{font-size:12.5px;font-weight:700;color:var(--blue-mid);cursor:pointer;background:none;border:none;font-family:'Sora',sans-serif;padding:5px 12px;border-radius:var(--r-sm);transition:background .2s}
-.seall:hover{background:var(--blue-light)}
-.prl{display:flex;flex-direction:column;gap:8px}
-.pri{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--surface-2);border-radius:var(--r-md);cursor:pointer;transition:all .2s;border:1px solid transparent}
-.pri:hover{background:var(--blue-light);border-color:var(--blue-mid)}
-.pric{width:40px;height:40px;border-radius:10px;background:var(--blue-light);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.pric svg{width:20px;height:20px;stroke:var(--blue-mid);stroke-width:2;fill:none}
-.prin{flex:1}.prna{font-size:13px;font-weight:700;color:var(--ink)}
-.prde{font-size:11.5px;color:var(--ink-4);font-weight:500;margin-top:1px}
-.prm{text-align:right;flex-shrink:0}
-.prfa{font-size:13px;font-weight:800;color:var(--ink)}.prti{font-size:11px;color:var(--ink-4);font-weight:500}
+/* ═══════════════════════════
+   TICKET FORM CARD
+═══════════════════════════ */
+.form-card{background:white;border-radius:var(--r-xl);border:1px solid var(--border);box-shadow:var(--sh-sm);overflow:hidden}
+.form-card-header{padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.form-card-title{font-size:15px;font-weight:800;color:var(--ink);display:flex;align-items:center;gap:8px}
+.form-card-title svg{width:18px;height:18px;stroke:var(--blue-mid);stroke-width:2.5;fill:none}
+.form-card-body{padding:1.5rem}
+.form-section-label{font-size:10.5px;font-weight:700;color:var(--ink-4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.75rem;display:block}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.1rem}
+.form-row.single{grid-template-columns:1fr}
+.form-group{display:flex;flex-direction:column;gap:5px}
+.form-label{font-size:12px;font-weight:700;color:var(--ink-2)}
+.form-input{padding:11px 14px;border:1.5px solid var(--border);border-radius:var(--r-md);font-size:13.5px;font-family:'Sora',sans-serif;color:var(--ink);outline:none;background:var(--surface-2);transition:all .2s}
+.form-input:focus{border-color:var(--blue-mid);background:white;box-shadow:0 0 0 3px var(--blue-glow)}
+.form-select{padding:11px 14px;border:1.5px solid var(--border);border-radius:var(--r-md);font-size:13.5px;font-family:'Sora',sans-serif;color:var(--ink-2);background:var(--surface-2);outline:none;cursor:pointer;transition:all .2s;width:100%}
+.form-select:focus{border-color:var(--blue-mid)}
+.form-divider{height:1px;background:var(--border);margin:1.25rem 0}
 
-/* ══ SECTION DIVIDER ══ */
-.sec-divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:0}
+/* Qty stepper */
+.qty-stepper{display:flex;align-items:center;gap:0;border:1.5px solid var(--border);border-radius:var(--r-md);overflow:hidden;background:var(--surface-2)}
+.qty-btn{width:40px;height:44px;border:none;background:transparent;font-size:20px;font-weight:700;cursor:pointer;color:var(--ink-3);transition:all .2s;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.qty-btn:hover{background:var(--blue-light);color:var(--blue-mid)}
+.qty-val{flex:1;text-align:center;font-size:15px;font-weight:800;color:var(--ink);border-left:1px solid var(--border);border-right:1px solid var(--border);padding:10px 0;font-family:'DM Mono',monospace}
 
-/* ══ FEATURES SECTION ══ */
-.features-sec{background:var(--surface-2);padding:4rem 2rem}
-.features-inner{max-width:1320px;margin:0 auto}
-.sec-tag{display:inline-flex;align-items:center;gap:7px;background:var(--blue-light);border:1px solid rgba(37,99,235,.2);padding:5px 14px;border-radius:var(--r-full);font-size:12px;font-weight:700;color:var(--blue-mid);margin-bottom:1rem;letter-spacing:.3px}
-.sec-h2{font-family:'Bricolage Grotesque',sans-serif;font-size:2.1rem;font-weight:800;color:var(--ink);letter-spacing:-1px;margin-bottom:.6rem;line-height:1.2}
-.sec-sub{font-size:15px;color:var(--ink-3);max-width:520px;line-height:1.7;margin-bottom:2.5rem}
-.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-.feat-card{background:white;border-radius:var(--r-xl);padding:2rem;border:1px solid var(--border);box-shadow:var(--sh-sm);transition:all .3s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden}
-.feat-card::after{content:'';position:absolute;inset:0;border-radius:inherit;opacity:0;transition:opacity .3s;background:linear-gradient(135deg,rgba(37,99,235,.04),transparent)}
-.feat-card:hover{transform:translateY(-6px);box-shadow:0 16px 50px rgba(13,21,38,.13);border-color:var(--border-2)}
-.feat-card:hover::after{opacity:1}
-.feat-icon{width:52px;height:52px;border-radius:15px;display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;font-size:24px;position:relative;z-index:1}
-.feat-icon svg{width:26px;height:26px;stroke:white;stroke-width:2.2;fill:none}
-.feat-h{font-size:16px;font-weight:800;color:var(--ink);margin-bottom:.5rem;letter-spacing:-.3px}
-.feat-p{font-size:13.5px;color:var(--ink-3);line-height:1.65}
-.feat-tag{display:inline-block;margin-top:.9rem;padding:4px 11px;border-radius:var(--r-full);font-size:11px;font-weight:700}
+/* Koridor select cards */
+.koridor-list{display:flex;flex-direction:column;gap:8px;margin-bottom:1.1rem}
+.koridor-item{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--surface-2);border-radius:var(--r-md);cursor:pointer;border:1.5px solid var(--border);transition:all .2s}
+.koridor-item:hover{border-color:var(--blue-mid);background:var(--blue-light)}
+.koridor-item.selected{border-color:var(--blue-mid);background:var(--blue-light)}
+.koridor-item input[type="radio"]{accent-color:var(--blue-mid);width:16px;height:16px;flex-shrink:0}
+.koridor-badge{padding:5px 11px;border-radius:var(--r-sm);font-size:12px;font-weight:800;font-family:'DM Mono',monospace;color:white;flex-shrink:0}
+.koridor-info{flex:1;min-width:0}
+.koridor-name{font-size:13px;font-weight:700;color:var(--ink)}
+.koridor-meta{font-size:11px;color:var(--ink-4);font-weight:500;margin-top:1px}
+.koridor-price{font-size:13px;font-weight:800;color:var(--ink);flex-shrink:0;font-family:'DM Mono',monospace}
 
-/* ══ NEWS SECTION ══ */
-.news-sec{background:white;padding:4rem 2rem}
-.news-inner{max-width:1320px;margin:0 auto}
-.news-hd{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2rem}
-.news-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:1.5rem}
+/* ═══════════════════════════
+   SUMMARY CARD (right col)
+═══════════════════════════ */
+.summary-card{background:white;border-radius:var(--r-xl);border:1px solid var(--border);box-shadow:var(--sh-sm);overflow:hidden;position:sticky;top:90px}
+.summary-header{padding:1.1rem 1.25rem;border-bottom:1px solid var(--border);background:linear-gradient(135deg,#0D1526,#1a2a50)}
+.summary-title{font-size:14px;font-weight:800;color:white;display:flex;align-items:center;gap:7px}
+.summary-body{padding:1.25rem}
+.summary-row{display:flex;align-items:center;justify-content:space-between;padding:.55rem 0;border-bottom:1px solid var(--border);font-size:13px}
+.summary-row:last-of-type{border-bottom:none}
+.summary-key{color:var(--ink-3);font-weight:500}
+.summary-val{font-weight:700;color:var(--ink)}
+.summary-total-row{display:flex;align-items:center;justify-content:space-between;padding:1rem;background:var(--blue-light);border-radius:var(--r-md);border:1px solid rgba(37,99,235,.2);margin-top:.75rem}
+.summary-total-label{font-size:13px;font-weight:700;color:var(--blue-mid)}
+.summary-total-val{font-size:20px;font-weight:900;color:var(--blue-mid);font-family:'DM Mono',monospace;letter-spacing:-1px}
 
-/* Featured news */
-.news-featured{border-radius:var(--r-xl);overflow:hidden;border:1px solid var(--border);box-shadow:var(--sh-sm);cursor:pointer;transition:all .3s;position:relative;display:flex;flex-direction:column}
-.news-featured:hover{box-shadow:var(--sh-lg);transform:translateY(-4px)}
-.news-img{height:220px;background:linear-gradient(135deg,#1B4FD8,#0D9488);position:relative;overflow:hidden;flex-shrink:0}
-.news-img-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:60px;opacity:.7}
-.news-cat{position:absolute;top:14px;left:14px;padding:4px 12px;border-radius:var(--r-full);font-size:11px;font-weight:700;background:var(--blue-mid);color:white}
-.news-date{position:absolute;bottom:14px;right:14px;padding:4px 10px;border-radius:var(--r-full);font-size:11px;font-weight:600;background:rgba(0,0,0,.45);color:rgba(255,255,255,.85);backdrop-filter:blur(4px)}
-.news-body{padding:1.3rem;flex:1;display:flex;flex-direction:column}
-.news-source{font-size:11px;font-weight:700;color:var(--blue-mid);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.4rem}
-.news-title{font-size:16px;font-weight:800;color:var(--ink);line-height:1.35;letter-spacing:-.2px;margin-bottom:.6rem}
-.news-excerpt{font-size:13px;color:var(--ink-3);line-height:1.6;flex:1}
-.news-footer{display:flex;align-items:center;justify-content:space-between;margin-top:1rem;padding-top:.75rem;border-top:1px solid var(--border)}
-.news-read{font-size:12.5px;font-weight:700;color:var(--blue-mid);display:flex;align-items:center;gap:4px}
-.news-time{font-size:11.5px;color:var(--ink-4);font-weight:500}
+/* QR area in summary */
+.qr-placeholder{width:100%;aspect-ratio:1;background:var(--surface-2);border:2px dashed var(--border-2);border-radius:var(--r-lg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;margin:1rem 0}
+.qr-placeholder svg{width:48px;height:48px;stroke:var(--ink-4);stroke-width:1.5;fill:none;opacity:.5}
+.qr-placeholder span{font-size:12px;color:var(--ink-4);font-weight:600;text-align:center}
 
-/* Small news */
-.news-sm{border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--border);box-shadow:var(--sh-sm);cursor:pointer;transition:all .3s;display:flex;flex-direction:column}
-.news-sm:hover{box-shadow:var(--sh-md);transform:translateY(-3px);border-color:var(--border-2)}
-.news-sm-img{height:140px;position:relative;overflow:hidden;flex-shrink:0}
-.news-sm-body{padding:1rem;flex:1;display:flex;flex-direction:column}
-.news-sm-title{font-size:14px;font-weight:800;color:var(--ink);line-height:1.35;margin-bottom:.4rem;letter-spacing:-.2px}
-.news-sm-excerpt{font-size:12.5px;color:var(--ink-3);line-height:1.55;flex:1}
-.news-sm-meta{display:flex;align-items:center;justify-content:space-between;margin-top:.75rem;padding-top:.6rem;border-top:1px solid var(--border)}
+/* Pay button */
+.pay-btn{width:100%;padding:15px;border-radius:var(--r-lg);background:linear-gradient(135deg,var(--blue-mid),#1E40AF);color:white;border:none;font-size:15px;font-weight:800;font-family:'Sora',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;box-shadow:var(--sh-blue);transition:all .25s;letter-spacing:-.2px}
+.pay-btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(37,99,235,.35)}
+.pay-btn svg{width:18px;height:18px;stroke:white;stroke-width:2.5;fill:none}
+.pay-btn-sub{text-align:center;font-size:11.5px;color:var(--ink-4);margin-top:.6rem;display:flex;align-items:center;justify-content:center;gap:6px;font-weight:500}
+.pay-btn-sub svg{width:13px;height:13px;stroke:var(--ink-4);stroke-width:2;fill:none}
 
-/* More news row */
-.news-more{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-top:1.5rem}
-.news-mini{display:flex;gap:12px;align-items:flex-start;padding:1rem;background:var(--surface-2);border-radius:var(--r-lg);border:1px solid var(--border);cursor:pointer;transition:all .2s}
-.news-mini:hover{background:var(--blue-light);border-color:var(--blue-mid)}
-.news-mini-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
-.news-mini-t{font-size:12.5px;font-weight:700;color:var(--ink);line-height:1.35;margin-bottom:3px}
-.news-mini-d{font-size:11px;color:var(--ink-4);font-weight:500}
+/* Promo input */
+.promo-row{display:flex;gap:8px;margin:1rem 0}
+.promo-input{flex:1;padding:10px 14px;border:1.5px solid var(--border);border-radius:var(--r-md);font-size:13px;font-family:'Sora',sans-serif;color:var(--ink);outline:none;background:var(--surface-2);transition:all .2s}
+.promo-input:focus{border-color:var(--blue-mid);box-shadow:0 0 0 3px var(--blue-glow)}
+.promo-btn{padding:10px 16px;border-radius:var(--r-md);background:var(--surface-2);border:1.5px solid var(--border);font-size:13px;font-weight:700;color:var(--ink-3);cursor:pointer;font-family:'Sora',sans-serif;transition:all .2s;white-space:nowrap}
+.promo-btn:hover{border-color:var(--blue-mid);color:var(--blue-mid);background:var(--blue-light)}
+.promo-applied{display:flex;align-items:center;gap:7px;padding:8px 12px;background:#F0FDF4;border:1px solid #BBF7D0;border-radius:var(--r-md);font-size:12.5px;font-weight:700;color:#15803D}
+.promo-applied svg{width:14px;height:14px;stroke:#15803D;stroke-width:2.5;fill:none}
 
-/* ══ STATS BANNER ══ */
-.stats-banner{background:linear-gradient(135deg,#0D1526 0%,#1a2a50 60%,#0f2d4a 100%);padding:4rem 2rem;position:relative;overflow:hidden}
-.stats-glow{position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:700px;height:400px;background:radial-gradient(circle,rgba(37,99,235,0.22) 0%,transparent 65%);pointer-events:none}
-.stats-inner{max-width:1320px;margin:0 auto;position:relative;z-index:1}
-.stats-row{display:grid;grid-template-columns:repeat(5,1fr);gap:2rem;text-align:center}
-.stat-num{font-family:'Bricolage Grotesque',sans-serif;font-size:2.6rem;font-weight:800;color:white;letter-spacing:-1.5px;display:block;line-height:1}
-.stat-num span{background:linear-gradient(90deg,#60A5FA,#34D399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.stat-label{font-size:13px;color:rgba(255,255,255,.45);font-weight:500;margin-top:.4rem;display:block}
-.stat-sep{width:1px;background:rgba(255,255,255,.1);align-self:stretch}
+/* Payment methods */
+.payment-methods{display:flex;flex-direction:column;gap:8px;margin-bottom:1rem}
+.pm-item{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--surface-2);border-radius:var(--r-md);cursor:pointer;border:1.5px solid var(--border);transition:all .2s}
+.pm-item:hover{border-color:var(--blue-mid);background:var(--blue-light)}
+.pm-item.selected{border-color:var(--blue-mid);background:var(--blue-light)}
+.pm-item input[type="radio"]{accent-color:var(--blue-mid);width:16px;height:16px;flex-shrink:0}
+.pm-icon{width:40px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;background:white;border:1px solid var(--border)}
+.pm-name{font-size:13px;font-weight:700;color:var(--ink)}
+.pm-sub{font-size:11px;color:var(--ink-4);font-weight:500}
+.pm-badge{margin-left:auto;padding:3px 9px;border-radius:var(--r-full);font-size:10.5px;font-weight:700;flex-shrink:0}
+.pm-badge.rec{background:#F0FDF4;color:#15803D;border:1px solid #BBF7D0}
+.pm-badge.poin{background:var(--amber-light);color:#92400E;border:1px solid #FDE68A}
 
-/* ══ FOOTER ══ */
-footer{background:#07091A;padding:0}
+/* ═══════════════════════════
+   MY TICKETS SECTION
+═══════════════════════════ */
+.my-tickets-section{margin-top:2.5rem}
+.section-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem}
+.section-hd h2{font-size:18px;font-weight:800;color:var(--ink);letter-spacing:-.4px}
+.section-hd-btn{font-size:12.5px;font-weight:700;color:var(--blue-mid);background:none;border:none;cursor:pointer;font-family:'Sora',sans-serif;padding:5px 12px;border-radius:var(--r-sm);transition:background .2s}
+.section-hd-btn:hover{background:var(--blue-light)}
+
+/* Filter bar */
+.filter-bar{display:flex;gap:8px;margin-bottom:1.25rem;overflow-x:auto;padding-bottom:2px}
+.filter-bar::-webkit-scrollbar{display:none}
+.filter-chip{padding:7px 16px;border-radius:var(--r-full);border:1.5px solid var(--border);background:white;font-size:12.5px;font-weight:600;color:var(--ink-3);cursor:pointer;font-family:'Sora',sans-serif;transition:all .2s;white-space:nowrap;flex-shrink:0}
+.filter-chip:hover{border-color:var(--blue-mid);color:var(--blue-mid);background:var(--blue-light)}
+.filter-chip.active{border-color:var(--blue-mid);background:var(--blue-mid);color:white}
+
+/* Ticket card */
+.ticket-cards{display:flex;flex-direction:column;gap:1rem}
+.ticket-card{background:white;border-radius:var(--r-lg);border:1.5px solid var(--border);box-shadow:var(--sh-sm);overflow:hidden;transition:all .22s;cursor:pointer;display:flex}
+.ticket-card:hover{border-color:var(--border-2);box-shadow:var(--sh-md);transform:translateY(-2px)}
+.ticket-card.valid{border-color:rgba(37,99,235,.3)}
+.ticket-card.used{opacity:.65}
+
+/* Left color stripe */
+.tc-stripe{width:6px;flex-shrink:0}
+
+/* Card body */
+.tc-body{flex:1;padding:1.1rem 1.25rem;min-width:0}
+.tc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:.6rem}
+.tc-koridor{display:flex;align-items:center;gap:8px}
+.tc-kbadge{padding:4px 10px;border-radius:var(--r-sm);font-size:12px;font-weight:800;font-family:'DM Mono',monospace;color:white}
+.tc-kname{font-size:14px;font-weight:800;color:var(--ink);letter-spacing:-.2px}
+.tc-status-pill{padding:4px 12px;border-radius:var(--r-full);font-size:12px;font-weight:700;display:flex;align-items:center;gap:5px}
+.tc-status-pill.valid{background:#EFF6FF;color:#1D4ED8;border:1px solid #BFDBFE}
+.tc-status-pill.used{background:var(--surface-2);color:var(--ink-4);border:1px solid var(--border)}
+.tc-status-pill.expired{background:var(--rose-light);color:var(--rose);border:1px solid #FECDD3}
+
+.tc-route{display:flex;align-items:center;gap:8px;margin-bottom:.55rem}
+.tc-halte{font-size:13px;font-weight:700;color:var(--ink-2)}
+.tc-arrow{color:var(--ink-4);font-size:14px}
+.tc-meta{display:flex;gap:14px;flex-wrap:wrap}
+.tc-meta-item{display:flex;align-items:center;gap:4px;font-size:11.5px;color:var(--ink-4);font-weight:500}
+.tc-meta-item svg{width:12px;height:12px;stroke:var(--ink-4);stroke-width:2;fill:none;flex-shrink:0}
+.tc-meta-item strong{color:var(--ink-3)}
+
+/* QR right panel */
+.tc-qr{flex-shrink:0;width:90px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-left:1px dashed var(--border-2);padding:.75rem;gap:6px}
+.tc-qr-box{width:64px;height:64px;border-radius:10px;background:var(--surface-2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.tc-qr-box svg{width:40px;height:40px;stroke:var(--ink-3);stroke-width:1.5;fill:none;opacity:.6}
+.tc-qr-label{font-size:10px;font-weight:700;color:var(--ink-4);text-transform:uppercase;letter-spacing:.5px}
+.tc-qr-btn{padding:5px 10px;border-radius:var(--r-sm);background:var(--blue-light);border:none;color:var(--blue-mid);font-size:11px;font-weight:700;cursor:pointer;font-family:'Sora',sans-serif;transition:all .2s}
+.tc-qr-btn:hover{background:var(--blue-mid);color:white}
+
+/* QR code pattern (pure CSS) */
+.qr-pattern{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;width:44px;height:44px}
+.qr-cell{border-radius:1px}
+.qr-dark{background:var(--ink-2)}
+.qr-light{background:transparent}
+
+/* Info callout */
+.info-callout{background:var(--blue-light);border:1px solid rgba(37,99,235,.2);border-radius:var(--r-lg);padding:1rem 1.25rem;display:flex;align-items:flex-start;gap:10px;margin-bottom:1.5rem}
+.info-callout svg{width:18px;height:18px;stroke:var(--blue-mid);stroke-width:2;fill:none;flex-shrink:0;margin-top:1px}
+.info-callout-text{font-size:13px;color:var(--ink-2);font-weight:500;line-height:1.6}
+.info-callout-text strong{color:var(--blue-mid)}
+
+/* ═══════════════════════════
+   FOOTER (identik jadwal.html)
+═══════════════════════════ */
+footer{background:#07091A;padding:0;margin-top:4rem}
 .footer-top{padding:4rem 2rem 3rem}
 .footer-inner{max-width:1320px;margin:0 auto}
 .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1.2fr;gap:3rem}
@@ -490,11 +289,10 @@ footer{background:#07091A;padding:0}
 .app-btn{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:10px 14px;cursor:pointer;transition:all .2s;text-decoration:none}
 .app-btn:hover{background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.2)}
 .app-btn-icon{font-size:22px}
-.app-btn-text{flex:1}
 .app-btn-sub{font-size:9px;color:rgba(255,255,255,.4);font-weight:500;display:block;text-transform:uppercase;letter-spacing:.4px}
 .app-btn-name{font-size:13px;font-weight:700;color:white;display:block}
 .footer-newsletter{margin-top:1.5rem}
-.newsletter-input-wrap{display:flex;gap:0;margin-top:.7rem;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:12px;overflow:hidden;padding:4px 4px 4px 12px;align-items:center}
+.newsletter-input-wrap{display:flex;margin-top:.7rem;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:12px;overflow:hidden;padding:4px 4px 4px 12px;align-items:center}
 .newsletter-input{flex:1;background:transparent;border:none;outline:none;font-size:13px;color:white;font-family:'Sora',sans-serif;padding:5px 0}
 .newsletter-input::placeholder{color:rgba(255,255,255,.3)}
 .newsletter-btn{padding:8px 14px;border-radius:9px;background:var(--blue-mid);border:none;color:white;font-size:12.5px;font-weight:700;font-family:'Sora',sans-serif;cursor:pointer;transition:all .2s;white-space:nowrap}
@@ -513,884 +311,812 @@ footer{background:#07091A;padding:0}
 .footer-legal a{font-size:12px;color:rgba(255,255,255,.3);text-decoration:none;cursor:pointer;transition:color .2s;font-weight:500}
 .footer-legal a:hover{color:rgba(255,255,255,.6)}
 
-/* ══ RESPONSIVE ══ */
-@media(max-width:900px){
-  .slide-inner{grid-template-columns:1fr;gap:2rem}
-  .sc,.promo-card,.eco-card{max-width:100%}
-  .slide-1 .sc{display:none}
-  .cgrid{grid-template-columns:1fr}
-  .feat-grid{grid-template-columns:1fr 1fr}
-  .news-grid{grid-template-columns:1fr}
-  .news-featured{grid-column:auto}
-  .news-more{grid-template-columns:1fr 1fr}
-  .stats-row{grid-template-columns:repeat(3,1fr)}
-  .footer-grid{grid-template-columns:1fr 1fr}
-  .carousel-slide{padding:2rem 0}
-}
-@media(max-width:600px){
-  .nav-links{display:none}
-  .feat-grid{grid-template-columns:1fr}
-  .news-more{grid-template-columns:1fr}
-  .stats-row{grid-template-columns:1fr 1fr}
-  .footer-grid{grid-template-columns:1fr}
-  .slide-h1{font-size:2rem}
-}
+/* ═══════════════════════════
+   RESPONSIVE
+═══════════════════════════ */
+@media(max-width:1024px){.two-col{grid-template-columns:1fr}}
+@media(max-width:768px){.ticket-tabs{flex-direction:column}.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.nav-links{display:none}.footer-grid{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
-<!-- ══════════════════════════════════
-     NAVBAR
-══════════════════════════════════ -->
+<!-- ═══════════════ NAVBAR ═══════════════ -->
 <nav>
   <div class="nav-inner">
-    <!-- Logo area -->
-    <a class="logo" href="#">
-      <!-- Slot untuk logo custom Anda -->
-      <div class="logo-img-slot" title="Logo BatamWay">
-        <img id="logo-custom-img" src="./assets/Logo.png" alt="Logo BatamWay">
+    <a class="logo" href="index.html">
+      <div class="logo-img-slot">
+        <img src="./assets/Logo.png" alt="Logo BatamWay" onerror="this.style.display='none'">
       </div>
       <span class="logo-text">Batam<span>Way</span></span>
     </a>
-
-    <!-- Nav links — halaman utama saja, gamifikasi dipindah ke FAB -->
     <ul class="nav-links">
       <li><a href="index.html">Beranda</a></li>
       <li><a href="rute.html">Rute</a></li>
       <li><a href="jadwal.html">Jadwal</a></li>
-      <li><a href="tiket.html">Tiket</a></li>
+      <li><a href="tiket.html" class="active">Tiket</a></li>
       <li><a href="halte.html">Halte</a></li>
     </ul>
-
     <div class="nav-right">
-      <div class="nav-points" onclick="toggleGamiPopup()">🪙 <span id="nav-pts">2.840</span> Poin</div>
+      <div class="nav-points" onclick="window.location.href='gamifikasi.html'">🎁 <span>2.840</span> Poin</div>
       <button class="btn-nl">Masuk</button>
       <button class="btn-ns">Daftar Gratis</button>
     </div>
   </div>
 </nav>
 
-<!-- ═══════════════════════════════════════════
-     SHOPEE-STYLE GIFT BOX FAB
-═══════════════════════════════════════════ -->
-
-
-<!-- FAB Gift Box -->
+<!-- ═══════════════ GIFT BOX FAB ═══════════════ -->
 <div class="fab-wrapper">
-  <button class="fab-gift" id="fabGift" onclick="navigateToGamifikasi()" aria-label="Buka halaman gamifikasi">
-    <!-- Notif badge -->
-    <div class="fab-notif">3</div>
-    <!-- SVG Gift Box — tema BatamWay ungu & biru -->
+  <button class="fab-gift" onclick="window.location.href='gamifikasi.html'" aria-label="Buka halaman gamifikasi">
+    <div class="fab-notif">⬤</div>
     <svg class="gift-svg" viewBox="0 0 72 80" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <linearGradient id="boxGrad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#7C3AED"/>
-          <stop offset="100%" stop-color="#4F46E5"/>
-        </linearGradient>
-        <linearGradient id="lidGrad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#EC4899"/>
-          <stop offset="100%" stop-color="#9333EA"/>
-        </linearGradient>
-        <linearGradient id="ribbonV" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#FCD34D"/>
-          <stop offset="100%" stop-color="#F59E0B"/>
-        </linearGradient>
-        <linearGradient id="ribbonH" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stop-color="#FCD34D"/>
-          <stop offset="100%" stop-color="#F59E0B"/>
-        </linearGradient>
-        <linearGradient id="bowGrad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#FDE68A"/>
-          <stop offset="100%" stop-color="#FCD34D"/>
-        </linearGradient>
-        <filter id="softGlow">
-          <feGaussianBlur stdDeviation="2" result="blur"/>
-          <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-        </filter>
+        <linearGradient id="boxGrad2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#7C3AED"/><stop offset="100%" stop-color="#4F46E5"/></linearGradient>
+        <linearGradient id="lidGrad2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#EC4899"/><stop offset="100%" stop-color="#9333EA"/></linearGradient>
+        <linearGradient id="rV2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FCD34D"/><stop offset="100%" stop-color="#F59E0B"/></linearGradient>
+        <linearGradient id="rH2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#FCD34D"/><stop offset="100%" stop-color="#F59E0B"/></linearGradient>
+        <linearGradient id="bow2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FDE68A"/><stop offset="100%" stop-color="#FCD34D"/></linearGradient>
       </defs>
-
-      <!-- Shadow -->
       <ellipse cx="36" cy="79" rx="22" ry="4" fill="rgba(0,0,0,0.18)"/>
-
-      <!-- BOX body -->
-      <rect x="6" y="38" width="60" height="38" rx="5" fill="url(#boxGrad)"/>
-      <!-- Box shine -->
+      <rect x="6" y="38" width="60" height="38" rx="5" fill="url(#boxGrad2)"/>
       <rect x="6" y="38" width="60" height="10" rx="5" fill="rgba(255,255,255,0.08)"/>
-      <!-- Box side highlight -->
-      <rect x="6" y="38" width="5" height="38" rx="2" fill="rgba(255,255,255,0.06)"/>
-
-      <!-- LID -->
-      <rect x="3" y="28" width="66" height="14" rx="5" fill="url(#lidGrad)"/>
-      <!-- Lid shine -->
+      <rect x="3" y="28" width="66" height="14" rx="5" fill="url(#lidGrad2)"/>
       <rect x="3" y="28" width="66" height="6" rx="5" fill="rgba(255,255,255,0.12)"/>
-
-      <!-- Vertical ribbon on box -->
-      <rect x="31" y="38" width="10" height="38" fill="url(#ribbonV)" opacity="0.9"/>
-      <!-- Vertical ribbon on lid -->
-      <rect x="31" y="28" width="10" height="14" fill="url(#ribbonH)" opacity="0.9"/>
-      <!-- Horizontal ribbon on box -->
-      <rect x="6" y="52" width="60" height="8" fill="url(#ribbonH)" opacity="0.9"/>
-
-      <!-- BOW left loop -->
-      <ellipse cx="23" cy="22" rx="13" ry="9" fill="url(#bowGrad)" transform="rotate(-25 23 22)"/>
+      <rect x="31" y="38" width="10" height="38" fill="url(#rV2)" opacity="0.9"/>
+      <rect x="31" y="28" width="10" height="14" fill="url(#rH2)" opacity="0.9"/>
+      <rect x="6" y="52" width="60" height="8" fill="url(#rH2)" opacity="0.9"/>
+      <ellipse cx="23" cy="22" rx="13" ry="9" fill="url(#bow2)" transform="rotate(-25 23 22)"/>
       <ellipse cx="23" cy="22" rx="9" ry="6" fill="rgba(255,255,255,0.18)" transform="rotate(-25 23 22)"/>
-      <!-- BOW right loop -->
-      <ellipse cx="49" cy="22" rx="13" ry="9" fill="url(#bowGrad)" transform="rotate(25 49 22)"/>
+      <ellipse cx="49" cy="22" rx="13" ry="9" fill="url(#bow2)" transform="rotate(25 49 22)"/>
       <ellipse cx="49" cy="22" rx="9" ry="6" fill="rgba(255,255,255,0.18)" transform="rotate(25 49 22)"/>
-      <!-- BOW center knot -->
       <ellipse cx="36" cy="24" rx="7" ry="6" fill="#FCD34D"/>
       <ellipse cx="36" cy="23" rx="4" ry="3.5" fill="#FDE68A"/>
-
-      <!-- Sparkle stars -->
       <g fill="#FDE68A" opacity="0.9">
-        <!-- top-left star -->
         <path d="M8 14 L9.2 11 L10.4 14 L13.5 14 L11 16 L12 19 L9.2 17 L6.4 19 L7.4 16 L5 14Z" transform="scale(0.7) translate(2,2)"/>
-        <!-- top-right star -->
-        <path d="M8 14 L9.2 11 L10.4 14 L13.5 14 L11 16 L12 19 L9.2 17 L6.4 19 L7.4 16 L5 14Z" transform="scale(0.55) translate(91,1)"/>
-        <!-- small dot sparkles -->
         <circle cx="4" cy="32" r="2" opacity="0.7"/>
         <circle cx="68" cy="48" r="1.5" opacity="0.6"/>
         <circle cx="60" cy="14" r="2" opacity="0.8"/>
       </g>
-
-      <!-- "P" coin icons on box (BatamWay poin branding) -->
       <circle cx="20" cy="61" r="8" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
       <text x="20" y="65" text-anchor="middle" font-family="Sora,sans-serif" font-size="8" font-weight="800" fill="white">P</text>
       <circle cx="52" cy="61" r="8" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
       <text x="52" y="65" text-anchor="middle" font-family="Sora,sans-serif" font-size="8" font-weight="800" fill="white">P</text>
     </svg>
   </button>
-  <button class="fab-label" onclick="navigateToGamifikasi()">Dapatkan Reward</button>
+  <button class="fab-label" onclick="window.location.href='gamifikasi.html'">Dapatkan Reward</button>
 </div>
 
-<!-- ══════════════════════════════════
-     HERO CAROUSEL
-══════════════════════════════════ -->
-<div class="carousel-wrap" id="beranda">
-  <div class="carousel-track" id="carouselTrack">
-
-    <!-- SLIDE 1 — Cari Rute -->
-    <div class="carousel-slide slide-1">
-      <div class="slide-glow-1"></div>
-      <div class="slide-glow-2"></div>
-      <div class="slide-grid"></div>
-      <div class="slide-inner">
-        <div>
-          <div class="slide-pill"><span class="ldot"></span>Trans Batam · Live Tracking Aktif</div>
-          <h1 class="slide-h1">Naik Bus Batam<br>Lebih <span class="acc-blue">Cerdas</span><br>&amp; Menyenangkan</h1>
-          <p class="slide-p">Lacak posisi Trans Batam secara real-time, rencanakan perjalanan, kumpulkan poin, dan nikmati Batam tanpa stres.</p>
-          <div class="slide-cta">
-            <a href="#" class="btn-hp">
-              <svg viewBox="0 0 24 24" width="17" height="17" stroke="white" stroke-width="2.5" fill="none"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-              Cari Rute Sekarang
-            </a>
-            <a href="#" class="btn-hs">Lihat Jadwal →</a>
-          </div>
-          <div class="slide-stats">
-            <div><span class="hst-v">12</span><span class="hst-l">Koridor Aktif</span></div>
-            <div class="vsep"></div>
-            <div><span class="hst-v">84</span><span class="hst-l">Armada Bus</span></div>
-            <div class="vsep"></div>
-            <div><span class="hst-v">12.4K</span><span class="hst-l">Pengguna Aktif</span></div>
-          </div>
-        </div>
-        <!-- Search Card -->
-        <div class="sc">
-          <div class="sc-title">
-            <svg viewBox="0 0 24 24"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
-            Rencanakan Perjalanan
-          </div>
-          <div class="iw">
-            <label>Dari mana?</label>
-            <div style="position:relative">
-              <svg class="ii" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
-              <input type="text" id="fi" placeholder="Pilih halte asal…">
-            </div>
-          </div>
-          <div class="swap-d">
-            <div class="line"></div>
-            <div class="swap-c" onclick="swapI()" title="Tukar">
-              <svg viewBox="0 0 24 24"><path d="M7 16V4m0 0L3 8m4-4l4 4M17 8v12m0 0l4-4m-4 4l-4-4"/></svg>
-            </div>
-            <div class="line"></div>
-          </div>
-          <div class="iw">
-            <label>Ke mana?</label>
-            <div style="position:relative">
-              <svg class="ii" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              <input type="text" id="ti" placeholder="Pilih halte tujuan…">
-            </div>
-          </div>
-          <div class="sf">
-            <select class="fsel"><option>Berangkat Sekarang</option><option>Pilih Waktu</option></select>
-            <select class="fsel"><option>Semua Koridor</option><option>Koridor 1</option><option>Koridor 2</option><option>Koridor 3</option><option>Koridor 4</option><option>Koridor 5</option></select>
-          </div>
-          <button class="btn-sm" onclick="doSearch()">
-            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-            Cari Rute Trans Batam
-          </button>
-          <div class="pchips">
-            <p>Populer hari ini</p>
-            <div class="chips">
-              <span class="chip" onclick="fillR('Batam Centre','Nagoya')">Batam Centre → Nagoya</span>
-              <span class="chip" onclick="fillR('Batu Aji','Sekupang')">Batu Aji → Sekupang</span>
-              <span class="chip" onclick="fillR('Tiban','Jodoh')">Tiban → Jodoh</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SLIDE 2 — Poster Slide 1 -->
-    <div class="carousel-slide" style="background:url('assets/Poster Slide 1.png') center/cover no-repeat;position:relative">
-      <div style="position:absolute;inset:0;background:rgba(0,0,0,0.2)"></div>
-    </div>
-
-    <!-- SLIDE 3 — Poster Slide 2 -->
-    <div class="carousel-slide" style="background:url('assets/Poster Slide 2.png') center/cover no-repeat;position:relative">
-      <div style="position:absolute;inset:0;background:rgba(0,0,0,0.2)"></div>
-    </div>
-
-    <!-- SLIDE 4 — Poster Slide 3 -->
-    <div class="carousel-slide" style="background:url('assets/Poster Slide 3.png') center/cover no-repeat;position:relative">
-      <div style="position:absolute;inset:0;background:rgba(0,0,0,0.2)"></div>
-    </div>
-
-    <!-- SLIDE 5 — Poster Slide 4 -->
-    <div class="carousel-slide" style="background:url('assets/Poster Slide 4.png') center/cover no-repeat;position:relative">
-      <div style="position:absolute;inset:0;background:rgba(0,0,0,0.2)"></div>
-    </div>
-
-    <!-- SLIDE 6 — Poster Slide 5 -->
-    <div class="carousel-slide" style="background:url('assets/Poster Slide 5.png') center/cover no-repeat;position:relative">
-      <div style="position:absolute;inset:0;background:rgba(0,0,0,0.2)"></div>
-    </div>
-
-  </div><!-- /carousel-track -->
-
-  <!-- Controls -->
-  <button class="carousel-prev" onclick="carouselMove(-1)">&#8249;</button>
-  <button class="carousel-next" onclick="carouselMove(1)">&#8250;</button>
-  <div class="carousel-dots">
-    <button class="cdot active" onclick="carouselGo(0)"></button>
-    <button class="cdot" onclick="carouselGo(1)"></button>
-    <button class="cdot" onclick="carouselGo(2)"></button>
-    <button class="cdot" onclick="carouselGo(3)"></button>
-    <button class="cdot" onclick="carouselGo(4)"></button>
-    <button class="cdot" onclick="carouselGo(5)"></button>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════
-     HOMEPAGE CONTENT (Peta Live + Sidebar)
-══════════════════════════════════ -->
+<!-- ═══════════════ CONTENT ═══════════════ -->
 <div class="mwrap">
-  <!-- Tab bar -->
-  <div class="ptabs">
-    <a href="#peta-live" class="ptab active">
-      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-      Peta Live
-    </a>
-    <a href="#rute" class="ptab">
-      <svg viewBox="0 0 24 24"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
-      Rute
-    </a>
-    <a href="#features" class="ptab">
-      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-      Kelebihan BatamWay
-    </a>
-    <a href="#stats" class="ptab">
-      <svg viewBox="0 0 24 24"><path d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>
-      Angka BatamWay
-    </a>
-    <a href="#berita" class="ptab">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-      Berita
-    </a>
-    <a href="#tentang" class="ptab">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-      Tentang
-    </a>
-  </div>
 
-  <div class="cgrid" id="peta-live">
-    <!-- Map + Routes -->
-    <div>
-      <div class="mshell">
-        <div class="mcanvas">
-          <div class="mwater"></div>
-          <div class="rd rd-h" style="top:32%;left:0;right:0"></div>
-          <div class="rd rd-h" style="top:58%;left:0;right:62%"></div>
-          <div class="rd rd-v" style="left:28%;top:0;bottom:28%"></div>
-          <div class="rd rd-v" style="left:62%;top:0;bottom:0"></div>
-          <div class="rtl" style="top:calc(32% - 2px);left:7%;width:58%"></div>
-
-          <div class="stp" style="top:32%;left:8%"><div class="stp-pin" style="background:var(--blue-mid)"><div class="stp-inner"></div></div><div class="stp-lbl">Terminal Batam Centre</div></div>
-          <div class="stp" style="top:32%;left:29%"><div class="stp-pin" style="background:var(--teal)"><div class="stp-inner"></div></div><div class="stp-lbl">Nagoya Hill</div></div>
-          <div class="stp" style="top:32%;left:52%"><div class="stp-pin" style="background:var(--amber)"><div class="stp-inner"></div></div><div class="stp-lbl">Kepri Mall</div></div>
-          <div class="stp" style="top:58%;left:15%"><div class="stp-pin" style="background:var(--rose)"><div class="stp-inner"></div></div><div class="stp-lbl">Batu Aji Terminal</div></div>
-          <div class="stp" style="top:58%;left:45%"><div class="stp-pin" style="background:var(--violet)"><div class="stp-inner"></div></div><div class="stp-lbl">Sekupang</div></div>
-
-          <div class="lpulse" style="top:32%;left:38%">
-            <div class="pr1"></div><div class="pr1 pr2"></div><div class="pdot"></div>
-          </div>
-          <div class="mbus" style="top:calc(32% - 18px)">
-            <svg viewBox="0 0 24 24"><path d="M3 13h2v3l4-3h5a2 2 0 002-2V8a2 2 0 00-2-2H3a2 2 0 00-2 2v3a2 2 0 002 2zm0-5h16v4H8.83L6 14.17V12H3V8zm18-4H7V3h14a2 2 0 012 2v5l-2-1V4z"/></svg>
-            <span>K1-07</span>
-          </div>
-
-          <div class="mleg">
-            <h4>Legenda</h4>
-            <div class="lr"><div class="ld" style="background:var(--blue-mid)"></div>Terminal Utama</div>
-            <div class="lr"><div class="ld" style="background:var(--teal)"></div>Halte Aktif</div>
-            <div class="lr"><div class="ld" style="background:var(--amber)"></div>Kepadatan Sedang</div>
-            <div class="lr"><div class="ld" style="background:var(--rose)"></div>Kepadatan Tinggi</div>
-          </div>
-          <div class="mctrl">
-            <div class="mc">+</div><div class="mc">−</div><div class="mc" style="font-size:14px">◎</div>
-          </div>
-          <div class="mbar">
-            <div class="mbi">
-              <div class="mbs"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Estimasi <strong style="margin-left:4px">23 mnt</strong></div>
-              <div class="msep"></div>
-              <div class="mbs"><svg viewBox="0 0 24 24"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>Jarak <strong style="margin-left:4px">8.4 km</strong></div>
-              <div class="msep"></div>
-              <div class="mbs"><svg viewBox="0 0 24 24"><path d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>Tarif <strong style="margin-left:4px">Rp 5.000</strong></div>
-              <div class="msep"></div>
-              <div class="mbs"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><strong>1</strong>&nbsp;transfer</div>
-            </div>
-          </div>
-        </div>
+  <!-- Page Hero -->
+  <div class="page-hero">
+    <div class="page-hero-row">
+      <div>
+        <h1>Beli Tiket Trans Batam</h1>
+        <p>Pesan tiket digital Trans Batam dengan mudah &amp; cashless &mdash; Langsung valid di bus</p>
       </div>
-
-      <!-- Popular Routes -->
-      <div class="proutes" id="rute">
-        <div class="shdr"><h2>Rute Populer Trans Batam</h2><button class="seall">Lihat Semua →</button></div>
-        <div class="prl">
-          <div class="pri">
-            <div class="pric"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
-            <div class="prin"><div class="prna">Koridor 1 — Batam Centre ↔ Jodoh</div><div class="prde">Trans Batam · 8 halte · Setiap 15 menit</div></div>
-            <div class="prm"><div class="prfa">Rp 5.000</div><div class="prti">≈ 35 mnt</div></div>
-          </div>
-          <div class="pri">
-            <div class="pric"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
-            <div class="prin"><div class="prna">Koridor 3 — Batu Aji ↔ Sekupang</div><div class="prde">Trans Batam · 6 halte · Setiap 20 menit</div></div>
-            <div class="prm"><div class="prfa">Rp 5.000</div><div class="prti">≈ 28 mnt</div></div>
-          </div>
-          <div class="pri">
-            <div class="pric"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
-            <div class="prin"><div class="prna">Koridor 5 — Tiban ↔ Kepri Mall</div><div class="prde">Trans Batam · 7 halte · Setiap 25 menit</div></div>
-            <div class="prm"><div class="prfa">Rp 5.000</div><div class="prti">≈ 40 mnt</div></div>
-          </div>
-        </div>
+      <div class="page-hero-actions">
+        <button class="page-hero-btn primary" onclick="window.location.href='jadwal.html'">🕐 Lihat Jadwal</button>
+        <button class="page-hero-btn secondary" onclick="window.location.href='rute.html'">🗺️ Lihat Rute</button>
       </div>
     </div>
+  </div>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <div id="halte">
-        <div class="slbl">Bus Terdekat — Real Time</div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div class="bcard sel">
-            <div class="bch">
-              <div class="bcl"><span class="rbadge">K1</span><div><div class="bcname">Koridor 1 — Jodoh</div><div class="bcsub">Trans Batam · Bus 07</div></div></div>
-              <span class="eta es">2 menit</span>
-            </div>
-            <div class="cr"><div class="cm"><span>Kapasitas</span><span>78% — Padat</span></div><div class="ct"><div class="cf cr-r" style="width:78%"></div></div></div>
-            <div class="bcf"><div class="bcst"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>Batam Centre → Jodoh</div><button class="btrk">🔴 Live</button></div>
+  <!-- Route Finder -->
+  <div class="search-card">
+    <div style="font-size:10.5px;font-weight:700;color:var(--ink-4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.75rem">Cari Rute Terlebih Dahulu</div>
+    <div class="search-card-row">
+      <div class="search-card-field" style="position:relative">
+        <label>Lokasi Asal</label>
+        <svg class="search-card-icon" style="top:calc(100% - 22px)" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+        <input type="text" class="search-card-input" placeholder="Cth: Batam Centre" id="from-input">
+      </div>
+      <div class="search-card-field" style="position:relative">
+        <label>Lokasi Tujuan</label>
+        <svg class="search-card-icon" style="top:calc(100% - 22px)" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <input type="text" class="search-card-input" placeholder="Cth: Nagoya Hill" id="to-input">
+      </div>
+      <div class="search-card-field">
+        <label>Tanggal Perjalanan</label>
+        <input type="date" class="search-card-input" style="padding-left:14px" value="2026-05-25" id="date-input">
+      </div>
+      <button class="search-card-btn" onclick="doSearch()">
+        <svg width="16" height="16" viewBox="0 0 24 24" stroke="white" stroke-width="2.5" fill="none"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        Cari Rute
+      </button>
+    </div>
+  </div>
+
+  <!-- Ticket Type Selector -->
+  <div style="font-size:10.5px;font-weight:700;color:var(--ink-4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.85rem">Pilih Jenis Tiket</div>
+  <div class="ticket-tabs" id="ticketTabs">
+    <div class="ticket-tab active" onclick="selectTicketType(this,'single')">
+      <span class="tt-icon">🎫</span>
+      <div class="tt-title">Single Trip</div>
+      <div class="tt-sub">Satu perjalanan sekali jalan</div>
+      <div class="tt-badge" id="badge-single">Paling Populer</div>
+      <span class="tt-price">Rp 5.000 / perjalanan</span>
+    </div>
+    <div class="ticket-tab" onclick="selectTicketType(this,'daypass')">
+      <span class="tt-icon">📅</span>
+      <div class="tt-title">Day Pass</div>
+      <div class="tt-sub">Unlimited naik seharian penuh</div>
+      <div class="tt-badge" id="badge-day">Hemat 40%</div>
+      <span class="tt-price">Rp 20.000 / hari</span>
+    </div>
+  </div>
+
+  <!-- Main Two-Column -->
+  <div class="two-col">
+
+    <!-- LEFT — Form -->
+    <div>
+
+      <!-- Info callout -->
+      <div class="info-callout">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
+        <div class="info-callout-text">
+          Tiket digital langsung aktif setelah pembayaran. Scan QR di pintu bus untuk validasi.
+          <strong>Poin BatamWay</strong> diperoleh otomatis tiap kali menggunakan tiket digital.
+        </div>
+      </div>
+
+      <!-- Pilih Rute & Jadwal -->
+      <div class="form-card" style="margin-bottom:1.25rem">
+        <div class="form-card-header">
+          <div class="form-card-title">
+            <svg viewBox="0 0 24 24"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+            Pilih Koridor &amp; Rute
           </div>
-          <div class="bcard">
-            <div class="bch">
-              <div class="bcl"><span class="rbadge g">K2</span><div><div class="bcname">Koridor 2 — Nagoya</div><div class="bcsub">Trans Batam · Bus 14</div></div></div>
-              <span class="eta em">8 menit</span>
-            </div>
-            <div class="cr"><div class="cm"><span>Kapasitas</span><span>45% — Normal</span></div><div class="ct"><div class="cf cr-a" style="width:45%"></div></div></div>
-            <div class="bcf"><div class="bcst"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>Batu Aji → Nagoya</div><button class="btrk">Lacak</button></div>
-          </div>
-          <div class="bcard">
-            <div class="bch">
-              <div class="bcl"><span class="rbadge a">K5</span><div><div class="bcname">Koridor 5 — Kepri Mall</div><div class="bcsub">Trans Batam · Bus 22</div></div></div>
-              <span class="eta eo">15 menit</span>
-            </div>
-            <div class="cr"><div class="cm"><span>Kapasitas</span><span>18% — Longgar</span></div><div class="ct"><div class="cf cr-g" style="width:18%"></div></div></div>
-            <div class="bcf"><div class="bcst"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>Tiban → Kepri Mall</div><button class="btrk">Lacak</button></div>
+          <span style="font-size:11.5px;color:var(--ink-4);font-weight:500">6 koridor tersedia</span>
+        </div>
+        <div class="form-card-body">
+          <div class="koridor-list" id="koridorList">
+            <label class="koridor-item selected" onclick="selectKoridor(this)">
+              <input type="radio" name="koridor" value="K1" checked>
+              <span class="koridor-badge" style="background:#2563EB">K1</span>
+              <div class="koridor-info">
+                <div class="koridor-name">Batam Centre ↔ Jodoh</div>
+                <div class="koridor-meta">8 halte &middot; ~35 mnt &middot; Setiap 15 mnt</div>
+              </div>
+              <div class="koridor-price">Rp 5.000</div>
+            </label>
+            <label class="koridor-item" onclick="selectKoridor(this)">
+              <input type="radio" name="koridor" value="K2">
+              <span class="koridor-badge" style="background:#0D9488">K2</span>
+              <div class="koridor-info">
+                <div class="koridor-name">Batu Aji ↔ Nagoya</div>
+                <div class="koridor-meta">7 halte &middot; ~28 mnt &middot; Setiap 20 mnt</div>
+              </div>
+              <div class="koridor-price">Rp 5.000</div>
+            </label>
+            <label class="koridor-item" onclick="selectKoridor(this)">
+              <input type="radio" name="koridor" value="K3">
+              <span class="koridor-badge" style="background:#7C3AED">K3</span>
+              <div class="koridor-info">
+                <div class="koridor-name">Batu Aji ↔ Sekupang</div>
+                <div class="koridor-meta">6 halte &middot; ~28 mnt &middot; Setiap 20 mnt</div>
+              </div>
+              <div class="koridor-price">Rp 5.000</div>
+            </label>
+            <label class="koridor-item" onclick="selectKoridor(this)">
+              <input type="radio" name="koridor" value="K4">
+              <span class="koridor-badge" style="background:#F59E0B">K4</span>
+              <div class="koridor-info">
+                <div class="koridor-name">Batam Centre ↔ Tanjung Uncang</div>
+                <div class="koridor-meta">9 halte &middot; ~50 mnt &middot; Setiap 30 mnt</div>
+              </div>
+              <div class="koridor-price">Rp 5.000</div>
+            </label>
+            <label class="koridor-item" onclick="selectKoridor(this)">
+              <input type="radio" name="koridor" value="K5">
+              <span class="koridor-badge" style="background:#F43F5E">K5</span>
+              <div class="koridor-info">
+                <div class="koridor-name">Tiban ↔ Kepri Mall</div>
+                <div class="koridor-meta">7 halte &middot; ~40 mnt &middot; Setiap 25 mnt</div>
+              </div>
+              <div class="koridor-price">Rp 5.000</div>
+            </label>
+            <label class="koridor-item" onclick="selectKoridor(this)">
+              <input type="radio" name="koridor" value="K6">
+              <span class="koridor-badge" style="background:#0EA5E9">K6</span>
+              <div class="koridor-info">
+                <div class="koridor-name">Sagulung ↔ Nongsa</div>
+                <div class="koridor-meta">10 halte &middot; ~60 mnt &middot; Setiap 30 mnt</div>
+              </div>
+              <div class="koridor-price">Rp 5.000</div>
+            </label>
           </div>
         </div>
       </div>
 
-      <div id="tiket-jadwal">
-        <div class="slbl">Aksi Cepat</div>
-        <div class="qag">
-          <div class="qab"><div class="qai" style="background:var(--blue-mid)"><svg viewBox="0 0 24 24"><path d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg></div><div class="qan">Beli Tiket</div><div class="qah">Digital &amp; cashless</div></div>
-          <div class="qab"><div class="qai" style="background:var(--amber)"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="qan">Reward</div><div class="qah">Tukar poin hadiah</div></div>
-          <div class="qab"><div class="qai" style="background:var(--teal)"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><div class="qan">Jadwal</div><div class="qah">Jadwal harian bus</div></div>
-          <div class="qab" onclick="toggleGamiPopup()"><div class="qai" style="background:var(--violet)"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><div class="qan">Gamifikasi</div><div class="qah">Poin &amp; badge saya</div></div>
+      <!-- Detail Perjalanan -->
+      <div class="form-card" style="margin-bottom:1.25rem">
+        <div class="form-card-header">
+          <div class="form-card-title">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            Detail Perjalanan
+          </div>
+        </div>
+        <div class="form-card-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Tanggal Perjalanan</label>
+              <input type="date" class="form-input" value="2026-05-25">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Jam Keberangkatan</label>
+              <select class="form-select">
+                <option>15:00 WIB (Berikutnya)</option>
+                <option>15:15 WIB</option>
+                <option>15:30 WIB</option>
+                <option>16:00 WIB</option>
+                <option>17:00 WIB</option>
+                <option>18:00 WIB</option>
+                <option>19:00 WIB</option>
+                <option>20:00 WIB</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Halte Naik</label>
+              <select class="form-select" id="haltFrom">
+                <option>Terminal Batam Centre</option>
+                <option>Fanindo</option>
+                <option>Muka Kuning</option>
+                <option>Nagoya Hill</option>
+                <option>Kepri Mall</option>
+                <option>Batuampar</option>
+                <option>Jodoh</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Halte Turun</label>
+              <select class="form-select" id="haltTo">
+                <option>Jodoh</option>
+                <option>Batuampar</option>
+                <option>Kepri Mall</option>
+                <option>Nagoya Hill</option>
+                <option>Muka Kuning</option>
+                <option>Fanindo</option>
+                <option>Terminal Batam Centre</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-divider"></div>
+          <span class="form-section-label">Jumlah Penumpang</span>
+          <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+            <div>
+              <div style="font-size:12px;color:var(--ink-4);font-weight:500;margin-bottom:6px">Dewasa</div>
+              <div class="qty-stepper">
+                <button class="qty-btn" onclick="changeQty('adult',-1)">−</button>
+                <div class="qty-val" id="qty-adult">1</div>
+                <button class="qty-btn" onclick="changeQty('adult',1)">+</button>
+              </div>
+            </div>
+            <div>
+              <div style="font-size:12px;color:var(--ink-4);font-weight:500;margin-bottom:6px">Anak &lt; 5 thn</div>
+              <div class="qty-stepper">
+                <button class="qty-btn" onclick="changeQty('child',-1)">−</button>
+                <div class="qty-val" id="qty-child">0</div>
+                <button class="qty-btn" onclick="changeQty('child',1)">+</button>
+              </div>
+            </div>
+            <div style="font-size:11.5px;color:var(--ink-4);font-weight:500;line-height:1.5;margin-top:auto;padding-bottom:2px">
+              Anak di bawah 5 tahun <strong style="color:var(--teal)">gratis</strong><br>
+              Maksimum 10 tiket per transaksi
+            </div>
+          </div>
         </div>
       </div>
+
+      <!-- Data Penumpang -->
+      <div class="form-card" style="margin-bottom:1.25rem">
+        <div class="form-card-header">
+          <div class="form-card-title">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            Data Pemesan
+          </div>
+          <span style="font-size:11.5px;color:var(--teal);font-weight:600;background:var(--teal-light);padding:3px 9px;border-radius:99px;border:1px solid #BBF7D0">Opsional</span>
+        </div>
+        <div class="form-card-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Nama Lengkap</label>
+              <input type="text" class="form-input" placeholder="Masukkan nama lengkap">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Nomor HP</label>
+              <input type="tel" class="form-input" placeholder="08xx-xxxx-xxxx">
+            </div>
+          </div>
+          <div class="form-row single">
+            <div class="form-group">
+              <label class="form-label">Email (untuk e-tiket)</label>
+              <input type="email" class="form-input" placeholder="email@kamu.com">
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;margin-top:.25rem;font-size:12.5px;color:var(--ink-4)">
+            <input type="checkbox" id="save-info" style="accent-color:var(--blue-mid)">
+            <label for="save-info">Simpan data untuk pemesanan berikutnya</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Metode Pembayaran -->
+      <div class="form-card">
+        <div class="form-card-header">
+          <div class="form-card-title">
+            <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg>
+            Metode Pembayaran
+          </div>
+        </div>
+        <div class="form-card-body">
+          <div class="payment-methods" id="paymentMethods">
+            <label class="pm-item selected" onclick="selectPM(this)">
+              <input type="radio" name="payment" value="qris" checked>
+              <div class="pm-icon">📱</div>
+              <div>
+                <div class="pm-name">QRIS</div>
+                <div class="pm-sub">GoPay, OVO, Dana, ShopeePay, dll</div>
+              </div>
+              <span class="pm-badge rec">Disarankan</span>
+            </label>
+            <label class="pm-item" onclick="selectPM(this)">
+              <input type="radio" name="payment" value="gopay">
+              <div class="pm-icon">💚</div>
+              <div>
+                <div class="pm-name">GoPay</div>
+                <div class="pm-sub">Saldo GoPay kamu</div>
+              </div>
+            </label>
+            <label class="pm-item" onclick="selectPM(this)">
+              <input type="radio" name="payment" value="ovo">
+              <div class="pm-icon">💜</div>
+              <div>
+                <div class="pm-name">OVO</div>
+                <div class="pm-sub">Saldo OVO kamu</div>
+              </div>
+            </label>
+            <label class="pm-item" onclick="selectPM(this)">
+              <input type="radio" name="payment" value="poin">
+              <input type="radio" name="payment" value="poin">
+              <div class="pm-icon">🪙</div>
+              <div>
+                <div class="pm-name">Tukar Poin BatamWay</div>
+                <div class="pm-sub">Kamu punya 2.840 poin = Rp 28.400</div>
+              </div>
+              <span class="pm-badge poin">🪙 2.840</span>
+            </label>
+            <label class="pm-item" onclick="selectPM(this)">
+              <input type="radio" name="payment" value="transfer">
+              <div class="pm-icon">🏦</div>
+              <div>
+                <div class="pm-name">Transfer Bank</div>
+                <div class="pm-sub">BCA, Mandiri, BNI, BRI</div>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /left col -->
+
+    <!-- RIGHT — Summary -->
+    <div>
+      <div class="summary-card">
+        <div class="summary-header">
+          <div class="summary-title">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="white" stroke-width="2.5" fill="none"><path d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>
+            Ringkasan Pemesanan
+          </div>
+        </div>
+        <div class="summary-body">
+
+          <!-- Ticket summary rows -->
+          <div class="summary-row">
+            <span class="summary-key">Jenis Tiket</span>
+            <span class="summary-val" id="sum-type">Single Trip</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-key">Koridor</span>
+            <span class="summary-val" id="sum-koridor">K1 — Batam Centre ↔ Jodoh</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-key">Tanggal</span>
+            <span class="summary-val">Minggu, 25 Mei 2026</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-key">Jam Berangkat</span>
+            <span class="summary-val">15:00 WIB</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-key">Penumpang Dewasa</span>
+            <span class="summary-val" id="sum-adult">1 orang</span>
+          </div>
+          <div class="summary-row" id="sum-child-row" style="display:none">
+            <span class="summary-key">Penumpang Anak</span>
+            <span class="summary-val" id="sum-child">0 orang</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-key">Harga per tiket</span>
+            <span class="summary-val" id="sum-price-unit">Rp 5.000</span>
+          </div>
+
+          <!-- Promo code -->
+          <div class="form-divider" style="margin:1rem 0 .5rem"></div>
+          <span class="form-section-label" style="margin-bottom:.5rem">Kode Promo</span>
+          <div id="promoArea">
+            <div class="promo-row">
+              <input type="text" class="promo-input" placeholder="Masukkan kode promo" id="promoInput">
+              <button class="promo-btn" onclick="applyPromo()">Pakai</button>
+            </div>
+          </div>
+
+          <!-- Total -->
+          <div class="summary-total-row" id="totalRow">
+            <div class="summary-total-label">Total Pembayaran</div>
+            <div class="summary-total-val" id="sum-total">Rp 5.000</div>
+          </div>
+
+          <!-- Poin earn -->
+          <div style="display:flex;align-items:center;gap:7px;margin-top:.65rem;padding:.6rem .85rem;background:var(--amber-light);border:1px solid #FDE68A;border-radius:var(--r-md);font-size:12px;font-weight:600;color:#92400E">
+            🪙 Kamu akan mendapat <strong id="sum-poin">+50 Poin</strong> dari transaksi ini
+          </div>
+
+          <!-- Pay button -->
+          <button class="pay-btn" style="margin-top:1rem" onclick="doPay()">
+            <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            Bayar Sekarang
+          </button>
+          <div class="pay-btn-sub">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Pembayaran aman &amp; terenkripsi SSL
+          </div>
+
+          <!-- Features -->
+          <div class="form-divider" style="margin:.85rem 0 .75rem"></div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink-3);font-weight:500">
+              <span style="color:#10B981;font-size:14px">✓</span> Tiket digital instan, langsung di HP
+            </div>
+            <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink-3);font-weight:500">
+              <span style="color:#10B981;font-size:14px">✓</span> Refund 100% jika bus tidak beroperasi
+            </div>
+            <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink-3);font-weight:500">
+              <span style="color:#10B981;font-size:14px">✓</span> Dapat poin BatamWay otomatis
+            </div>
+            <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink-3);font-weight:500">
+              <span style="color:#10B981;font-size:14px">✓</span> Berlaku 24 jam dari jam pemesanan
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /right col -->
+
+  </div><!-- /two-col -->
+
+  <!-- ═══════════ MY TICKETS ═══════════ -->
+  <div class="my-tickets-section">
+    <div class="section-hd">
+      <h2>Tiket Saya</h2>
+      <button class="section-hd-btn">Lihat Semua →</button>
+    </div>
+
+    <!-- Filter bar -->
+    <div class="filter-bar" id="ticketFilter">
+      <span class="filter-chip active" onclick="filterTickets(this,'all')">Semua</span>
+      <span class="filter-chip" onclick="filterTickets(this,'valid')">Aktif</span>
+      <span class="filter-chip" onclick="filterTickets(this,'used')">Sudah Dipakai</span>
+      <span class="filter-chip" onclick="filterTickets(this,'expired')">Kadaluarsa</span>
+    </div>
+
+    <!-- Ticket Cards -->
+    <div class="ticket-cards" id="ticketCards">
+
+      <!-- Ticket 1 — Valid -->
+      <div class="ticket-card valid">
+        <div class="tc-stripe" style="background:#2563EB"></div>
+        <div class="tc-body">
+          <div class="tc-top">
+            <div class="tc-koridor">
+              <span class="tc-kbadge" style="background:#2563EB">K1</span>
+              <span class="tc-kname">Batam Centre ↔ Jodoh</span>
+            </div>
+            <span class="tc-status-pill valid"><span class="ldot" style="width:6px;height:6px;margin-right:2px"></span>Aktif</span>
+          </div>
+          <div class="tc-route">
+            <span class="tc-halte">Terminal Batam Centre</span>
+            <span class="tc-arrow">→</span>
+            <span class="tc-halte">Jodoh</span>
+          </div>
+          <div class="tc-meta">
+            <div class="tc-meta-item"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><strong>Minggu, 25 Mei 2026</strong></div>
+            <div class="tc-meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><strong>15:00 WIB</strong></div>
+            <div class="tc-meta-item"><svg viewBox="0 0 24 24"><path d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>Rp 5.000</div>
+            <div class="tc-meta-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>1 Dewasa</div>
+          </div>
+        </div>
+        <div class="tc-qr">
+          <!-- CSS QR Pattern -->
+          <div class="tc-qr-box">
+            <div class="qr-pattern">
+              <div class="qr-cell qr-dark"></div><div class="qr-cell qr-dark"></div><div class="qr-cell qr-dark"></div><div class="qr-cell qr-light"></div><div class="qr-cell qr-dark"></div><div class="qr-cell qr-dark"></div><div class="qr-cell qr-dark"></div>
+              <div class="qr-cell qr-dark"></div><div class="qr-cell qr-light"></div><div class="qr-cell qr-dark"></div><div class="qr-cell qr-light"></div><div class="qr-cell qr-dark"></div><div class="qr-cell qr-light"></div><div class="qr-cell qr-dark"></div>
+              <div class="qr-cell qr-dark"></div><div class="qr-cell qr-light"></div><div class="qr-cell qr-dark"></div><div class="qr-cell qr-dark"></div><div class="qr-cell qr-dark"></div><div class="qr-cell qr-light"></div><div class="qr-cell qr-dark"></div>
+              <div class="qr-cell qr-dark"></div><div class="qr-cell qr-light"></div><div class="qr-cell qr-light"></div><div class="qr-cell qr-dark"></div><div class="qr-cell qr-light"></div><div class="qr-cell qr-light"></div><div class="qr-cell qr-dark"></div>
+              <div class="qr-cell qr-dark"></div><div class="qr-cell qr-light"></div><div class="qr-cell qr-dark"></div><div class="qr-cell qr-light"></div><div class="qr-cell qr-dark"></div><div class="qr-cell qr-light"></div><div class="qr-cell qr-dark"></div>
+              <div class="qr-cell qr-dark"></div><div class="qr-cell qr-dark"></div><div class="qr-cell qr-light"></div><div class="qr-cell qr-dark"></div><div class="qr-cell qr-light"></div><div class="qr-cell qr-dark"></div><div class="qr-cell qr-dark"></div>
+              <div class="qr-cell qr-dark"></div><div class="qr-cell qr-dark"></div><div class="qr-cell qr-dark"></div><div class="qr-cell qr-light"></div><div class="qr-cell qr-dark"></div><div class="qr-cell qr-dark"></div><div class="qr-cell qr-dark"></div>
+            </div>
+          </div>
+          <div class="tc-qr-label">QR Code</div>
+          <button class="tc-qr-btn" onclick="showQR('TKT-2026-0001')">Tampilkan</button>
+        </div>
+      </div>
+
+      <!-- Ticket 2 — Valid (Day Pass) -->
+      <div class="ticket-card valid">
+        <div class="tc-stripe" style="background:#0D9488"></div>
+        <div class="tc-body">
+          <div class="tc-top">
+            <div class="tc-koridor">
+              <span class="tc-kbadge" style="background:#0D9488">K2</span>
+              <span class="tc-kname">Batu Aji ↔ Nagoya</span>
+              <span style="font-size:10.5px;font-weight:700;background:#F0FDF4;color:#0D9488;padding:2px 8px;border-radius:99px;border:1px solid #BBF7D0">Day Pass</span>
+            </div>
+            <span class="tc-status-pill valid"><span class="ldot" style="width:6px;height:6px;margin-right:2px"></span>Aktif</span>
+          </div>
+          <div class="tc-route">
+            <span class="tc-halte">Semua Halte Koridor 2</span>
+            <span class="tc-arrow">↔</span>
+            <span class="tc-halte">Unlimited Trip</span>
+          </div>
+          <div class="tc-meta">
+            <div class="tc-meta-item"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><strong>Sabtu, 24 Mei 2026</strong></div>
+            <div class="tc-meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>05:30–22:00 WIB</div>
+            <div class="tc-meta-item"><svg viewBox="0 0 24 24"><path d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>Rp 20.000</div>
+            <div class="tc-meta-item" style="color:#F59E0B"><svg viewBox="0 0 24 24" style="stroke:#F59E0B"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Dipakai 3×</div>
+          </div>
+        </div>
+        <div class="tc-qr">
+          <div class="tc-qr-box">
+            <svg viewBox="0 0 24 24" width="36" height="36"><rect x="2" y="2" width="8" height="8" rx="1" fill="none" stroke="#6B7280" stroke-width="1.5"/><rect x="14" y="2" width="8" height="8" rx="1" fill="none" stroke="#6B7280" stroke-width="1.5"/><rect x="2" y="14" width="8" height="8" rx="1" fill="none" stroke="#6B7280" stroke-width="1.5"/><rect x="4" y="4" width="4" height="4" fill="#374151"/><rect x="16" y="4" width="4" height="4" fill="#374151"/><rect x="4" y="16" width="4" height="4" fill="#374151"/><line x1="14" y1="14" x2="14" y2="22" stroke="#374151" stroke-width="1.5"/><line x1="18" y1="14" x2="18" y2="18" stroke="#374151" stroke-width="1.5"/><line x1="22" y1="18" x2="22" y2="22" stroke="#374151" stroke-width="1.5"/></svg>
+          </div>
+          <div class="tc-qr-label">QR Code</div>
+          <button class="tc-qr-btn" onclick="showQR('TKT-2026-0002')">Tampilkan</button>
+        </div>
+      </div>
+
+      <!-- Ticket 3 — Used -->
+      <div class="ticket-card used">
+        <div class="tc-stripe" style="background:#9CA3AF"></div>
+        <div class="tc-body">
+          <div class="tc-top">
+            <div class="tc-koridor">
+              <span class="tc-kbadge" style="background:#7C3AED">K3</span>
+              <span class="tc-kname">Batu Aji ↔ Sekupang</span>
+            </div>
+            <span class="tc-status-pill used">✓ Sudah Dipakai</span>
+          </div>
+          <div class="tc-route">
+            <span class="tc-halte">Terminal Batu Aji</span>
+            <span class="tc-arrow">→</span>
+            <span class="tc-halte">Sekupang</span>
+          </div>
+          <div class="tc-meta">
+            <div class="tc-meta-item"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Jumat, 23 Mei 2026</div>
+            <div class="tc-meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>09:00 WIB</div>
+            <div class="tc-meta-item"><svg viewBox="0 0 24 24"><path d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>Rp 5.000</div>
+            <div class="tc-meta-item" style="color:#0D9488;font-weight:600">🪙 +50 Poin diraih</div>
+          </div>
+        </div>
+        <div class="tc-qr">
+          <div class="tc-qr-box" style="opacity:.4">
+            <svg viewBox="0 0 24 24" width="36" height="36"><path d="M9 12l2 2 4-4" fill="none" stroke="#374151" stroke-width="2"/><circle cx="12" cy="12" r="10" fill="none" stroke="#374151" stroke-width="1.5"/></svg>
+          </div>
+          <div class="tc-qr-label" style="color:#D1D9E8">Terpakai</div>
+          <button class="tc-qr-btn" style="background:var(--surface-2);color:var(--ink-4)" onclick="showReceipt('TKT-2026-0000')">Struk</button>
+        </div>
+      </div>
+
+    </div><!-- /ticket-cards -->
+  </div>
+
+</div><!-- /mwrap -->
+
+<!-- ═══════════ QR MODAL ═══════════ -->
+<div id="qrModal" style="display:none;position:fixed;inset:0;background:rgba(13,21,38,0.7);z-index:800;display:none;align-items:center;justify-content:center;backdrop-filter:blur(6px)">
+  <div style="background:white;border-radius:28px;padding:2rem;max-width:320px;width:90%;text-align:center;box-shadow:0 32px 80px rgba(13,21,38,.3)">
+    <div style="font-size:15px;font-weight:800;color:var(--ink);margin-bottom:.25rem">QR Tiket Kamu</div>
+    <div style="font-size:12px;color:var(--ink-4);margin-bottom:1.25rem" id="modal-ticket-id">TKT-2026-0001</div>
+    <!-- Big QR placeholder -->
+    <div style="width:200px;height:200px;border:2px solid var(--border-2);border-radius:16px;margin:0 auto 1.25rem;display:flex;align-items:center;justify-content:center;background:var(--surface-2)">
+      <svg viewBox="0 0 24 24" width="120" height="120">
+        <rect x="2" y="2" width="9" height="9" rx="1.5" fill="none" stroke="#0D1526" stroke-width="1.2"/>
+        <rect x="13" y="2" width="9" height="9" rx="1.5" fill="none" stroke="#0D1526" stroke-width="1.2"/>
+        <rect x="2" y="13" width="9" height="9" rx="1.5" fill="none" stroke="#0D1526" stroke-width="1.2"/>
+        <rect x="4" y="4" width="5" height="5" fill="#0D1526"/>
+        <rect x="15" y="4" width="5" height="5" fill="#0D1526"/>
+        <rect x="4" y="15" width="5" height="5" fill="#0D1526"/>
+        <rect x="13" y="13" width="3" height="3" fill="#0D1526"/>
+        <rect x="18" y="13" width="3" height="3" fill="#0D1526"/>
+        <rect x="13" y="18" width="3" height="3" fill="#0D1526"/>
+        <rect x="18" y="18" width="3" height="3" fill="#0D1526"/>
+        <rect x="16" y="16" width="1" height="1" fill="#0D1526"/>
+      </svg>
+    </div>
+    <div style="font-size:11.5px;color:var(--ink-4);margin-bottom:1.25rem;line-height:1.5">Tunjukkan QR ini ke petugas atau scan<br>di pintu validasi bus Trans Batam</div>
+    <div style="display:flex;gap:8px">
+      <button onclick="closeModal()" style="flex:1;padding:11px;border-radius:var(--r-md);background:var(--surface-2);border:1.5px solid var(--border);font-size:13.5px;font-weight:700;color:var(--ink-3);cursor:pointer;font-family:'Sora',sans-serif">Tutup</button>
+      <button style="flex:1;padding:11px;border-radius:var(--r-md);background:var(--blue-mid);border:none;font-size:13.5px;font-weight:700;color:white;cursor:pointer;font-family:'Sora',sans-serif">💾 Simpan</button>
     </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════
-     FEATURES SECTION
-══════════════════════════════════ -->
-<div class="sec-divider"></div>
-<section class="features-sec" id="features">
-  <div class="features-inner">
-    <div class="sec-tag">⚡ Kenapa BatamWay?</div>
-    <h2 class="sec-h2">Semua yang kamu butuhkan<br>untuk naik Trans Batam</h2>
-    <p class="sec-sub">Dari pelacakan real-time hingga gamifikasi perjalanan — BatamWay hadir sebagai mitra perjalanan harian terbaik kamu di Batam.</p>
-    <div class="feat-grid">
-      <div class="feat-card">
-        <div class="feat-icon" style="background:linear-gradient(135deg,#2563EB,#1E40AF)">
-          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        </div>
-        <div class="feat-h">Tracking Real-Time</div>
-        <p class="feat-p">Pantau posisi bus Trans Batam secara langsung. Tidak perlu menebak lagi kapan bus datang.</p>
-        <span class="feat-tag" style="background:var(--blue-light);color:var(--blue-mid)">✓ Live GPS</span>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon" style="background:linear-gradient(135deg,#7C3AED,#EC4899)">
-          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>
-        <div class="feat-h">Sistem Gamifikasi</div>
-        <p class="feat-p">Setiap perjalanan menghasilkan poin. Kumpulkan, bersaing di leaderboard, dan raih reward menarik.</p>
-        <span class="feat-tag" style="background:var(--violet-light);color:var(--violet)">✓ Poin & Badge</span>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon" style="background:linear-gradient(135deg,#0D9488,#059669)">
-          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
-        <div class="feat-h">Eco-Rider Program</div>
-        <p class="feat-p">Setiap naik bus mengurangi emisi karbon. Hitung dampak lingkunganmu dan banggakan perjalanannya.</p>
-        <span class="feat-tag" style="background:var(--teal-light);color:var(--teal)">✓ Carbon Tracker</span>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon" style="background:linear-gradient(135deg,#F59E0B,#EF4444)">
-          <svg viewBox="0 0 24 24"><path d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>
-        </div>
-        <div class="feat-h">Tiket Digital</div>
-        <p class="feat-p">Beli tiket Trans Batam langsung dari HP. Tidak perlu antri, tidak perlu uang cash.</p>
-        <span class="feat-tag" style="background:var(--amber-light);color:#92400E">✓ Cashless</span>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon" style="background:linear-gradient(135deg,#0EA5E9,#2563EB)">
-          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-        </div>
-        <div class="feat-h">Jadwal Akurat</div>
-        <p class="feat-p">Jadwal keberangkatan setiap koridor tersedia lengkap. Rencanakan perjalananmu dari jauh hari.</p>
-        <span class="feat-tag" style="background:#E0F2FE;color:#0369A1">✓ 12 Koridor</span>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon" style="background:linear-gradient(135deg,#F43F5E,#7C3AED)">
-          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-        </div>
-        <div class="feat-h">Komunitas Rider</div>
-        <p class="feat-p">Bergabung dengan 12.400+ pengguna aktif. Berbagi info, tantangan, dan raih puncak leaderboard.</p>
-        <span class="feat-tag" style="background:var(--rose-light);color:var(--rose)">✓ 12.4K Member</span>
-      </div>
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="footer-top"><div class="footer-inner"><div class="footer-grid">
+    <div>
+      <div class="footer-logo"><div class="footer-logo-mark"><svg viewBox="0 0 24 24"><path d="M3 13h2v3l4-3h5a2 2 0 002-2V8a2 2 0 00-2-2H3a2 2 0 00-2 2v3a2 2 0 002 2zm0-5h16v4H8.83L6 14.17V12H3V8zm18-4H7V3h14a2 2 0 012 2v5l-2-1V4z"/></svg></div><span class="footer-logo-text">Batam<span>Way</span></span></div>
+      <p class="footer-desc">Platform digitalisasi transportasi publik dan gamifikasi perjalanan untuk warga Batam. Naik bus lebih cerdas, lebih menyenangkan.</p>
+      <div class="footer-social"><a class="social-btn" href="#">📸</a><a class="social-btn" href="#">𝕏</a><a class="social-btn" href="#">📘</a><a class="social-btn" href="#">▶️</a><a class="social-btn" href="#">🎵</a></div>
+      <div class="footer-newsletter"><div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.8px">Newsletter</div><div style="font-size:13px;color:rgba(255,255,255,.35);margin:.4rem 0 .6rem">Update rute &amp; promo langsung ke email</div><div class="newsletter-input-wrap"><input class="newsletter-input" type="email" placeholder="email@kamu.com"><button class="newsletter-btn">Langganan</button></div></div>
     </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════
-     STATS BANNER
-══════════════════════════════════ -->
-<section class="stats-banner" id="stats">
-  <div class="stats-glow"></div>
-  <div class="stats-inner">
-    <div style="text-align:center;margin-bottom:2.5rem">
-      <div class="sec-tag" style="background:rgba(37,99,235,.2);border-color:rgba(37,99,235,.35);color:#93C5FD">📊 Angka BatamWay</div>
-      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-size:2rem;font-weight:800;color:white;margin-top:.5rem;letter-spacing:-.8px">Dipercaya ribuan warga Batam</h2>
+    <div class="footer-col"><h5>Layanan</h5><ul class="footer-links"><li><a href="#">Tracker Live Bus</a></li><li><a href="#">Jadwal Trans Batam</a></li><li><a href="#">Beli Tiket Digital</a></li><li><a href="#">Cari Halte</a></li><li><a href="#">Rencanakan Rute</a></li><li><a href="#">API untuk Developer</a></li></ul></div>
+    <div class="footer-col"><h5>Gamifikasi</h5><ul class="footer-links"><li><a href="#">Dashboard Poin</a></li><li><a href="#">Leaderboard</a></li><li><a href="#">Tantangan Harian</a></li><li><a href="#">Toko Reward</a></li><li><a href="#">Eco-Rider Program</a></li><li><a href="#">Eco-Runner Game</a></li></ul></div>
+    <div class="footer-col"><h5>Tentang</h5><ul class="footer-links"><li><a href="#">Tentang BatamWay</a></li><li><a href="#">Tim Kami</a></li><li><a href="#">Berita &amp; Blog</a></li><li><a href="#">Karir</a></li><li><a href="#">Kontak Kami</a></li><li><a href="#">Hubungi Dishub</a></li></ul></div>
+    <div class="footer-app"><h5>Download App</h5><div class="app-dl"><a class="app-btn" href="#"><span class="app-btn-icon">📱</span><div><span class="app-btn-sub">Download di</span><span class="app-btn-name">App Store</span></div></a><a class="app-btn" href="#"><span class="app-btn-icon">🤖</span><div><span class="app-btn-sub">Tersedia di</span><span class="app-btn-name">Google Play</span></div></a></div>
+      <div style="margin-top:1.25rem"><div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.75rem">Layanan Darurat</div><a href="tel:082100001234" style="display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(255,255,255,.6);text-decoration:none;margin-bottom:6px"><span>📞</span>0821-0000-1234</a><a href="mailto:info@batamway.id" style="display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(255,255,255,.6);text-decoration:none"><span>✉️</span>info@batamway.id</a></div>
     </div>
-    <div class="stats-row">
-      <div class="stat-item">
-        <span class="stat-num"><span>12.4K</span></span>
-        <span class="stat-label">Pengguna Aktif</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-num"><span>84</span></span>
-        <span class="stat-label">Armada Bus</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-num"><span>12</span></span>
-        <span class="stat-label">Koridor Aktif</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-num"><span>2.8M</span></span>
-        <span class="stat-label">Trip Tercatat</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-num"><span>4.8★</span></span>
-        <span class="stat-label">Rating Pengguna</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════
-     BERITA TRANS BATAM
-══════════════════════════════════ -->
-<section class="news-sec" id="berita">
-  <div class="news-inner">
-    <div class="news-hd">
-      <div>
-        <div class="sec-tag">📰 Berita Terkini</div>
-        <h2 class="sec-h2" style="margin-top:.5rem;margin-bottom:0">Berita Trans Batam</h2>
-      </div>
-      <button class="seall" style="align-self:flex-end;padding:10px 20px;background:var(--blue-light);color:var(--blue-mid);border:1.5px solid rgba(37,99,235,.2);border-radius:var(--r-md)">Semua Berita →</button>
-    </div>
-
-    <!-- Main 3-column grid -->
-    <div class="news-grid">
-
-      <!-- Featured News -->
-      <div class="news-featured">
-        <div class="news-img" style="background:linear-gradient(135deg,#1B4FD8 0%,#0D9488 100%)">
-          <div class="news-img-inner">🚌</div>
-          <span class="news-cat">Utama</span>
-          <span class="news-date">15 Mei 2026</span>
-        </div>
-        <div class="news-body">
-          <div class="news-source">Trans Batam Official</div>
-          <div class="news-title">Trans Batam Tambah 20 Armada Bus Baru untuk Koridor 1 dan Koridor 3</div>
-          <div class="news-excerpt">Dishub Kota Batam resmi mengoperasikan 20 unit bus Trans Batam baru yang dilengkapi fasilitas AC, wifi, dan sistem pelacakan GPS real-time. Penambahan armada ini ditargetkan mengurangi waktu tunggu penumpang hingga 40%.</div>
-          <div class="news-footer">
-            <span class="news-read">Baca selengkapnya →</span>
-            <span class="news-time">5 menit baca</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- News 2 -->
-      <div class="news-sm">
-        <div class="news-sm-img" style="background:linear-gradient(135deg,#7C3AED,#EC4899)">
-          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:44px;opacity:.8">🎮</div>
-          <span class="news-cat" style="position:absolute;top:12px;left:12px;background:#7C3AED">Gamifikasi</span>
-          <span class="news-date" style="position:absolute;bottom:10px;right:10px;padding:3px 9px;border-radius:99px;font-size:11px;font-weight:600;background:rgba(0,0,0,.4);color:rgba(255,255,255,.8);backdrop-filter:blur(4px)">12 Mei 2026</span>
-        </div>
-        <div class="news-sm-body">
-          <div class="news-source" style="font-size:11px;font-weight:700;color:var(--violet);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.35rem">BatamWay</div>
-          <div class="news-sm-title">Program Poin BatamWay Capai 500 Ribu Pengguna Terdaftar</div>
-          <div class="news-sm-excerpt">Fitur gamifikasi BatamWay berhasil meningkatkan jumlah pengguna reguler Trans Batam sebesar 35% sejak diluncurkan tahun lalu.</div>
-          <div class="news-sm-meta">
-            <span style="font-size:11.5px;font-weight:700;color:var(--violet)">Baca →</span>
-            <span style="font-size:11px;color:var(--ink-4)">3 mnt baca</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- News 3 -->
-      <div class="news-sm">
-        <div class="news-sm-img" style="background:linear-gradient(135deg,#059669,#0D9488)">
-          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:44px;opacity:.8">♻️</div>
-          <span class="news-cat" style="position:absolute;top:12px;left:12px;background:#059669">Lingkungan</span>
-          <span class="news-date" style="position:absolute;bottom:10px;right:10px;padding:3px 9px;border-radius:99px;font-size:11px;font-weight:600;background:rgba(0,0,0,.4);color:rgba(255,255,255,.8);backdrop-filter:blur(4px)">10 Mei 2026</span>
-        </div>
-        <div class="news-sm-body">
-          <div class="news-source" style="font-size:11px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.35rem">Eco-Rider Program</div>
-          <div class="news-sm-title">Trans Batam Kurangi Emisi CO₂ Setara 2.840 Pohon Bulan Ini</div>
-          <div class="news-sm-excerpt">Program Eco-Rider BatamWay sukses mengurangi emisi karbon secara signifikan berkat pertumbuhan pengguna Trans Batam yang pesat di kota Batam.</div>
-          <div class="news-sm-meta">
-            <span style="font-size:11.5px;font-weight:700;color:var(--teal)">Baca →</span>
-            <span style="font-size:11px;color:var(--ink-4)">4 mnt baca</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- More news row -->
-    <div class="news-more">
-      <div class="news-mini">
-        <div class="news-mini-icon" style="background:#FEF3C7">📅</div>
-        <div>
-          <div class="news-mini-t">Jadwal Koridor 4 Diperbarui Mulai Juni 2026</div>
-          <div class="news-mini-d">8 Mei 2026 · Dishub Batam</div>
-        </div>
-      </div>
-      <div class="news-mini">
-        <div class="news-mini-icon" style="background:#EFF4FF">🏆</div>
-        <div>
-          <div class="news-mini-t">Salman Alfarizi Juara Leaderboard BatamWay Bulan Ini</div>
-          <div class="news-mini-d">7 Mei 2026 · BatamWay</div>
-        </div>
-      </div>
-      <div class="news-mini">
-        <div class="news-mini-icon" style="background:#F0FDF4">🛰️</div>
-        <div>
-          <div class="news-mini-t">Fitur Tracking GPS Bus Diperbarui ke Versi 3.0</div>
-          <div class="news-mini-d">5 Mei 2026 · Tim Teknis</div>
-        </div>
-      </div>
-      <div class="news-mini">
-        <div class="news-mini-icon" style="background:var(--rose-light)">💳</div>
-        <div>
-          <div class="news-mini-t">Tiket Digital Trans Batam Kini Tersedia di GoPay & OVO</div>
-          <div class="news-mini-d">3 Mei 2026 · Kemitraan</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════
-     FOOTER
-══════════════════════════════════ -->
-<footer id="tentang">
-  <div class="footer-top">
-    <div class="footer-inner">
-      <div class="footer-grid">
-
-        <!-- Brand col -->
-        <div class="footer-brand">
-          <div class="footer-logo">
-            <div class="footer-logo-mark">
-              <svg viewBox="0 0 24 24"><path d="M3 13h2v3l4-3h5a2 2 0 002-2V8a2 2 0 00-2-2H3a2 2 0 00-2 2v3a2 2 0 002 2zm0-5h16v4H8.83L6 14.17V12H3V8zm18-4H7V3h14a2 2 0 012 2v5l-2-1V4z"/></svg>
-            </div>
-            <span class="footer-logo-text">Batam<span>Way</span></span>
-          </div>
-          <p class="footer-desc">Platform digitalisasi transportasi publik dan gamifikasi perjalanan untuk warga Batam. Naik bus lebih cerdas, lebih menyenangkan.</p>
-          <div class="footer-social">
-            <a class="social-btn" href="#" title="Instagram">📸</a>
-            <a class="social-btn" href="#" title="Twitter/X">𝕏</a>
-            <a class="social-btn" href="#" title="Facebook">📘</a>
-            <a class="social-btn" href="#" title="YouTube">▶️</a>
-            <a class="social-btn" href="#" title="TikTok">🎵</a>
-          </div>
-          <div class="footer-newsletter" style="margin-top:1.5rem">
-            <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.8px">Newsletter</div>
-            <div style="font-size:13px;color:rgba(255,255,255,.35);margin:.4rem 0 .6rem">Update rute & promo langsung ke email</div>
-            <div class="newsletter-input-wrap">
-              <input class="newsletter-input" type="email" placeholder="email@kamu.com">
-              <button class="newsletter-btn">Langganan</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Layanan -->
-        <div class="footer-col">
-          <h5>Layanan</h5>
-          <ul class="footer-links">
-            <li><a href="#">Tracker Live Bus</a></li>
-            <li><a href="#">Jadwal Trans Batam</a></li>
-            <li><a href="#">Beli Tiket Digital</a></li>
-            <li><a href="#">Cari Halte</a></li>
-            <li><a href="#">Rencanakan Rute</a></li>
-            <li><a href="#">API untuk Developer</a></li>
-          </ul>
-        </div>
-
-        <!-- Gamifikasi -->
-        <div class="footer-col">
-          <h5>Gamifikasi</h5>
-          <ul class="footer-links">
-            <li><a href="#">Dashboard Poin</a></li>
-            <li><a href="#">Leaderboard</a></li>
-            <li><a href="#">Tantangan Harian</a></li>
-            <li><a href="#">Toko Reward</a></li>
-            <li><a href="#">Eco-Rider Program</a></li>
-            <li><a href="#">Eco-Runner Game</a></li>
-          </ul>
-        </div>
-
-        <!-- Tentang -->
-        <div class="footer-col">
-          <h5>Tentang</h5>
-          <ul class="footer-links">
-            <li><a href="#">Tentang BatamWay</a></li>
-            <li><a href="#">Tim Kami</a></li>
-            <li><a href="#">Berita & Blog</a></li>
-            <li><a href="#">Karir</a></li>
-            <li><a href="#">Kontak Kami</a></li>
-            <li><a href="#">Hubungi Dishub</a></li>
-          </ul>
-        </div>
-
-        <!-- Download App -->
-        <div class="footer-app">
-          <h5>Download App</h5>
-          <div class="app-dl">
-            <a class="app-btn" href="#">
-              <span class="app-btn-icon">📱</span>
-              <div class="app-btn-text">
-                <span class="app-btn-sub">Download di</span>
-                <span class="app-btn-name">App Store</span>
-              </div>
-            </a>
-            <a class="app-btn" href="#">
-              <span class="app-btn-icon">🤖</span>
-              <div class="app-btn-text">
-                <span class="app-btn-sub">Tersedia di</span>
-                <span class="app-btn-name">Google Play</span>
-              </div>
-            </a>
-          </div>
-          <div style="margin-top:1.25rem">
-            <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.75rem">Layanan Darurat</div>
-            <div style="display:flex;flex-direction:column;gap:6px">
-              <a href="tel:082100001234" style="display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(255,255,255,.6);text-decoration:none;font-weight:500">
-                <span style="font-size:16px">📞</span>0821-0000-1234
-              </a>
-              <a href="mailto:info@batamway.id" style="display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(255,255,255,.6);text-decoration:none;font-weight:500">
-                <span style="font-size:16px">✉️</span>info@batamway.id
-              </a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- Koridor strip -->
-  <div class="footer-mid">
-    <div class="footer-mid-inner">
-      <div class="footer-badges">
-        <div class="footer-badge"><span>🏛️</span>Didukung Dishub Batam</div>
-        <div class="footer-badge"><span>🔒</span>SSL Secured</div>
-        <div class="footer-badge"><span>✅</span>Terverifikasi Resmi</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-        <span style="font-size:11px;font-weight:700;color:rgba(255,255,255,.3);letter-spacing:.5px;text-transform:uppercase">Koridor:</span>
-        <div class="footer-koridor">
-          <span class="k-chip">K1</span><span class="k-chip">K2</span><span class="k-chip">K3</span>
-          <span class="k-chip">K4</span><span class="k-chip">K5</span><span class="k-chip">K6</span>
-          <span class="k-chip">K7</span><span class="k-chip">K8</span><span class="k-chip">K9</span>
-          <span class="k-chip">K10</span><span class="k-chip">K11</span><span class="k-chip">K12</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Copyright -->
-  <div class="footer-bottom">
-    <div class="footer-bottom-inner">
-      <span class="footer-copy">© 2026 BatamWay. Hak cipta dilindungi undang-undang.</span>
-      <div class="footer-legal">
-        <a href="#">Kebijakan Privasi</a>
-        <a href="#">Syarat &amp; Ketentuan</a>
-        <a href="#">Cookie Policy</a>
-      </div>
-    </div>
-  </div>
+  </div></div></div>
+  <div class="footer-mid"><div class="footer-mid-inner">
+    <div class="footer-badges"><div class="footer-badge"><span>🏛️</span>Didukung Dishub Batam</div><div class="footer-badge"><span>🔒</span>SSL Secured</div><div class="footer-badge"><span>✅</span>Terverifikasi Resmi</div></div>
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span style="font-size:11px;font-weight:700;color:rgba(255,255,255,.3);letter-spacing:.5px;text-transform:uppercase">Koridor:</span><div class="footer-koridor"><span class="k-chip">K1</span><span class="k-chip">K2</span><span class="k-chip">K3</span><span class="k-chip">K4</span><span class="k-chip">K5</span><span class="k-chip">K6</span><span class="k-chip">K7</span><span class="k-chip">K8</span><span class="k-chip">K9</span><span class="k-chip">K10</span><span class="k-chip">K11</span><span class="k-chip">K12</span></div></div>
+  </div></div>
+  <div class="footer-bottom"><div class="footer-bottom-inner"><span class="footer-copy">© 2026 BatamWay. Hak cipta dilindungi undang-undang.</span><div class="footer-legal"><a href="#">Kebijakan Privasi</a><a href="#">Syarat &amp; Ketentuan</a><a href="#">Cookie Policy</a></div></div></div>
 </footer>
 
-<!-- ══════════════════════════════════
-     SCRIPTS
-══════════════════════════════════ -->
 <script>
-/* ─ Carousel ─ */
-let curSlide=0;
-const totalSlides=6;
-let autoTimer;
+/* ── TICKET TYPE ── */
+let currentType = 'single';
+const prices = { single: 5000, daypass: 20000 };
+let adultQty = 1, childQty = 0;
+let promoApplied = false;
 
-function carouselGo(n){
-  curSlide=n;
-  document.getElementById('carouselTrack').style.transform=`translateX(-${curSlide*100}%)`;
-  document.querySelectorAll('.cdot').forEach((d,i)=>{
-    d.classList.toggle('active',i===curSlide);
+function selectTicketType(el, type) {
+  document.querySelectorAll('.ticket-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  currentType = type;
+  const u = type === 'single' ? 'Rp 5.000' : 'Rp 20.000';
+  document.getElementById('sum-type').textContent = type === 'single' ? 'Single Trip' : 'Day Pass';
+  document.getElementById('sum-price-unit').textContent = u;
+  updateTotal();
+}
+
+/* ── KORIDOR SELECT ── */
+function selectKoridor(el) {
+  document.querySelectorAll('.koridor-item').forEach(i => i.classList.remove('selected'));
+  el.classList.add('selected');
+  const name = el.querySelector('.koridor-name').textContent;
+  const badge = el.querySelector('.koridor-badge').textContent;
+  document.getElementById('sum-koridor').textContent = badge + ' — ' + name;
+  // Update halte dropdowns based on koridor
+  updateHalteOptions(badge);
+}
+
+function updateHalteOptions(k) {
+  const halteMap = {
+    'K1': ['Terminal Batam Centre','Fanindo','Muka Kuning','Nagoya Hill','Kepri Mall','Batuampar','Jodoh'],
+    'K2': ['Terminal Batu Aji','Tiban','Sagulung','Batuampar','Jodoh','Nagoya'],
+    'K3': ['Terminal Batu Aji','Taman Raya','Simpang Base','Sekupang'],
+    'K4': ['Terminal Batam Centre','Sungai Panas','Batu Aji','Tiban','Tj. Uncang'],
+    'K5': ['Halte Tiban','Sagulung','Simpang Kabil','Kepri Mall'],
+    'K6': ['Terminal Sagulung','Botania','Telaga Punggur','Nongsa']
+  };
+  const haltes = halteMap[k] || halteMap['K1'];
+  ['haltFrom','haltTo'].forEach((id, i) => {
+    const sel = document.getElementById(id);
+    sel.innerHTML = '';
+    const opts = i === 0 ? haltes : [...haltes].reverse();
+    opts.forEach(h => { const o = document.createElement('option'); o.textContent = h; sel.appendChild(o); });
   });
-  resetAutoPlay();
 }
 
-function carouselMove(dir){
-  curSlide=(curSlide+dir+totalSlides)%totalSlides;
-  carouselGo(curSlide);
+/* ── QTY ── */
+function changeQty(type, delta) {
+  if (type === 'adult') {
+    adultQty = Math.max(1, Math.min(10, adultQty + delta));
+    document.getElementById('qty-adult').textContent = adultQty;
+    document.getElementById('sum-adult').textContent = adultQty + ' orang';
+  } else {
+    childQty = Math.max(0, Math.min(9, childQty + delta));
+    document.getElementById('qty-child').textContent = childQty;
+    const row = document.getElementById('sum-child-row');
+    row.style.display = childQty > 0 ? 'flex' : 'none';
+    document.getElementById('sum-child').textContent = childQty + ' orang (gratis)';
+  }
+  updateTotal();
 }
 
-function resetAutoPlay(){
-  clearInterval(autoTimer);
-  autoTimer=setInterval(()=>carouselMove(1),5500);
+function updateTotal() {
+  const price = prices[currentType] || 5000;
+  let total = price * adultQty;
+  if (promoApplied) total = Math.max(0, total - 5000);
+  document.getElementById('sum-total').textContent = 'Rp ' + total.toLocaleString('id-ID');
+  const poin = Math.floor(total / 100);
+  document.getElementById('sum-poin').textContent = '+' + poin + ' Poin';
 }
 
-resetAutoPlay();
-
-/* ── FAB / Gamifikasi Navigation ── */
-function navigateToGamifikasi(){
-  window.location.href = 'gamifikasi.html';
-}
-function toggleGamiPopup(){
-  window.location.href = 'gamifikasi.html';
-}
-
-/* ─ Route search ─ */
-function swapI(){const f=document.getElementById('fi'),t=document.getElementById('ti');[f.value,t.value]=[t.value,f.value]}
-function fillR(f,t){document.getElementById('fi').value=f;document.getElementById('ti').value=t}
-function doSearch(){
-  const f=document.getElementById('fi').value.trim(),t=document.getElementById('ti').value.trim();
-  if(!f||!t){
-    if(!f)document.getElementById('fi').style.borderColor='#EF4444';
-    if(!t)document.getElementById('ti').style.borderColor='#EF4444';
-    setTimeout(()=>{document.getElementById('fi').style.borderColor='';document.getElementById('ti').style.borderColor=''},2000);
+/* ── PROMO ── */
+function applyPromo() {
+  const code = document.getElementById('promoInput').value.trim().toUpperCase();
+  const validCodes = { 'BATAM2026': true, 'NEWRIDER': true, 'ECORIDE': true };
+  const area = document.getElementById('promoArea');
+  if (validCodes[code]) {
+    promoApplied = true;
+    area.innerHTML = `<div class="promo-applied"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Promo <strong>${code}</strong> berhasil! Hemat Rp 5.000</div>`;
+    updateTotal();
+  } else if (code) {
+    document.getElementById('promoInput').style.borderColor = '#F43F5E';
+    setTimeout(() => document.getElementById('promoInput').style.borderColor = '', 2000);
   }
 }
 
-/* ─ Tab bar and navbar active state ─ */
-function updateActiveLinks(){
-  // Deteksi halaman saat ini dari pathname
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-  const hash = window.location.hash || '#beranda';
-  
-  // Map halaman ke hash untuk tab bar
-  const pageHashMap = {
-    'index.html': '#beranda',
-    'rute.html': '#rute',
-    'jadwal.html': '#rute',
-    'tiket.html': '#rute',
-    'halte.html': '#halte',
-    'berita.html': '#berita',
-    'gamifikasi.html': '#gamifikasi'
-  };
-  
-  const targetHash = pageHashMap[currentPage] || hash;
-  
-  // Update tab bar (ptab)
-  document.querySelectorAll('.ptab').forEach(tab=>{
-    tab.classList.remove('active');
-    if(tab.getAttribute('href') === targetHash){
-      tab.classList.add('active');
-    }
-  });
-  
-  // Update navbar links
-  document.querySelectorAll('.nav-links a').forEach(link=>{
-    link.classList.remove('active');
-    const linkHref = link.getAttribute('href');
-    // Cocokkan dengan nama file atau hash
-    if(linkHref === currentPage || linkHref === targetHash || (currentPage === 'index.html' && linkHref === '#beranda')){
-      link.classList.add('active');
-    }
-  });
+/* ── PAYMENT METHOD ── */
+function selectPM(el) {
+  document.querySelectorAll('.pm-item').forEach(i => i.classList.remove('selected'));
+  el.classList.add('selected');
 }
 
-window.addEventListener('hashchange', updateActiveLinks);
-window.addEventListener('load', updateActiveLinks);
+/* ── PAY ── */
+function doPay() {
+  const btn = document.querySelector('.pay-btn');
+  btn.textContent = '⏳ Memproses...';
+  btn.style.opacity = '0.8';
+  setTimeout(() => {
+    btn.textContent = '✓ Pembayaran Berhasil!';
+    btn.style.background = 'linear-gradient(135deg,#10B981,#059669)';
+    setTimeout(() => {
+      btn.textContent = '💳 Bayar Sekarang';
+      btn.style.background = '';
+      btn.style.opacity = '1';
+    }, 3000);
+  }, 1800);
+}
 
-/* ─ Tab bar click handler (preserved from original) ─ */
-document.querySelectorAll('.ptab').forEach(t=>{
-  t.addEventListener('click',()=>{
-    document.querySelectorAll('.ptab').forEach(x=>x.classList.remove('active'));
-    t.classList.add('active');
-  });
+/* ── SEARCH ── */
+function doSearch() {
+  const f = document.getElementById('from-input').value.trim();
+  const t = document.getElementById('to-input').value.trim();
+  if (!f) { document.getElementById('from-input').style.borderColor = '#F43F5E'; }
+  if (!t) { document.getElementById('to-input').style.borderColor = '#F43F5E'; }
+  setTimeout(() => {
+    document.getElementById('from-input').style.borderColor = '';
+    document.getElementById('to-input').style.borderColor = '';
+  }, 2000);
+}
+
+/* ── QR MODAL ── */
+function showQR(id) {
+  document.getElementById('modal-ticket-id').textContent = id;
+  const m = document.getElementById('qrModal');
+  m.style.display = 'flex';
+}
+function closeModal() { document.getElementById('qrModal').style.display = 'none'; }
+function showReceipt(id) { alert('Struk untuk tiket ' + id + ' akan dikirim ke email Anda.'); }
+document.getElementById('qrModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
 });
 
-/* ─ Bus card selection ─ */
-document.querySelectorAll('.bcard').forEach(c=>{
-  c.addEventListener('click',()=>{
-    document.querySelectorAll('.bcard').forEach(x=>x.classList.remove('sel'));
-    c.classList.add('sel');
-  });
-});
-
-/* ─ Progress bar animation ─ */
-window.addEventListener('load',()=>{
-  document.querySelectorAll('.cf').forEach(b=>{
-    const w=b.style.width; b.style.width='0';
-    setTimeout(()=>{b.style.width=w},600);
-  });
-});
-
+/* ── FILTER TICKETS ── */
+function filterTickets(el, type) {
+  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  // In real app would show/hide cards by status
+}
 </script>
 </body>
 </html>
