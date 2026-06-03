@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BatamWay — Trans Batam Digital</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800;900&family=DM+Mono:wght@400;500&family=Bricolage+Grotesque:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 /* ══ RESET & ROOT ══ */
@@ -313,41 +315,68 @@ nav{
 .cgrid{display:grid;grid-template-columns:1fr 380px;gap:2rem}
 
 /* Map */
-.mshell{background:white;border-radius:var(--r-lg);border:1px solid var(--border);overflow:hidden;height:520px;position:relative;box-shadow:var(--sh-sm)}
-.mcanvas{width:100%;height:100%;background:linear-gradient(rgba(200,215,240,.4) 1px,transparent 1px),linear-gradient(90deg,rgba(200,215,240,.4) 1px,transparent 1px),linear-gradient(160deg,#C8DFF5 0%,#B8D4EF 50%,#C4DCF2 100%);background-size:44px 44px;position:relative}
-.mwater{position:absolute;bottom:0;left:0;right:0;height:28%;background:linear-gradient(180deg,#A8C8E8 0%,#90B8DC 100%);opacity:.55}
-.mwater::after{content:'SELAT SINGAPURA';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:10px;font-weight:700;color:rgba(255,255,255,.6);letter-spacing:2px}
-.rd{position:absolute;background:white;opacity:.75;border-radius:3px}
-.rd-h{height:7px}.rd-v{width:7px}
-.rtl{position:absolute;height:5px;background:var(--blue-mid);opacity:.9;border-radius:3px;box-shadow:0 0 8px rgba(37,99,235,.5)}
-.stp{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;z-index:5}
-.stp-pin{width:30px;height:30px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(0,0,0,.2);border:2.5px solid white}
-.stp-inner{width:11px;height:11px;border-radius:50%;background:white;transform:rotate(45deg)}
-.stp-lbl{background:var(--ink);color:white;border-radius:7px;padding:4px 9px;font-size:10.5px;font-weight:600;white-space:nowrap;box-shadow:var(--sh-md);opacity:0;transform:translateY(4px);transition:all .2s}
-.stp:hover .stp-lbl{opacity:1;transform:translateY(0)}
-.mbus{position:absolute;z-index:8;background:var(--blue-mid);border-radius:6px;padding:5px 9px;display:flex;align-items:center;gap:4px;box-shadow:0 4px 14px rgba(37,99,235,.35);animation:mvb 10s linear infinite;border:2px solid white}
-.mbus svg{width:14px;height:14px;fill:white}
-.mbus span{font-size:10px;font-weight:700;color:white;font-family:'DM Mono',monospace}
-@keyframes mvb{0%{left:8%}50%{left:52%}50.01%{left:8%}100%{left:8%}}
-.lpulse{position:absolute;z-index:6;transform:translate(-50%,-50%)}
-.pr1{position:absolute;width:44px;height:44px;border-radius:50%;background:rgba(37,99,235,.15);transform:translate(-50%,-50%);animation:pls 2.2s ease-out infinite}
-.pr2{animation-delay:.7s}
-.pdot{width:14px;height:14px;border-radius:50%;background:var(--blue-mid);border:3px solid white;box-shadow:var(--sh-md)}
-@keyframes pls{0%{transform:translate(-50%,-50%) scale(.8);opacity:1}100%{transform:translate(-50%,-50%) scale(2.4);opacity:0}}
-.mleg{position:absolute;top:12px;left:12px;background:white;border-radius:var(--r-md);padding:13px 15px;box-shadow:var(--sh-md);min-width:150px}
-.mleg h4{font-size:10px;font-weight:700;color:var(--ink-4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
-.lr{display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--ink-2);margin-bottom:5px;font-weight:500}
-.ld{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.mctrl{position:absolute;top:12px;right:12px;display:flex;flex-direction:column;gap:4px}
-.mc{width:36px;height:36px;background:white;border-radius:var(--r-sm);border:1px solid var(--border);box-shadow:var(--sh-sm);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:var(--ink-2);font-weight:600;transition:all .2s}
-.mc:hover{background:var(--blue-light);color:var(--blue-mid)}
-.mbar{position:absolute;bottom:0;left:0;right:0;padding:12px;background:linear-gradient(transparent,rgba(13,21,38,.06))}
-.mbi{background:white;border-radius:var(--r-md);padding:13px 18px;display:flex;align-items:center;flex-wrap:wrap;box-shadow:var(--sh-md)}
+/* ═══ LIVE MAP (Leaflet) ═══ */
+.map-live-shell{border-radius:var(--r-lg);border:1px solid var(--border);overflow:hidden;height:560px;position:relative;box-shadow:0 8px 32px rgba(13,21,38,.14);background:#e8f4f8}
+#batam-map{width:100%;height:100%}
+/* Leaflet custom overrides */
+.leaflet-container{font-family:'Sora',sans-serif}
+.leaflet-control-zoom{border:none!important;box-shadow:0 4px 16px rgba(13,21,38,.15)!important;border-radius:10px!important;overflow:hidden}
+.leaflet-control-zoom-in,.leaflet-control-zoom-out{width:36px!important;height:36px!important;line-height:36px!important;font-size:16px!important;color:var(--ink)!important;background:white!important;border-bottom:1px solid var(--border)!important}
+.leaflet-control-zoom-in:hover,.leaflet-control-zoom-out:hover{background:var(--blue-light)!important;color:var(--blue-mid)!important}
+/* Bus marker pulse */
+.bus-marker-wrap{position:relative;display:flex;align-items:center;justify-content:center}
+.bus-pulse-ring{position:absolute;width:36px;height:36px;border-radius:50%;background:rgba(37,99,235,.2);animation:busPulse 1.8s ease-out infinite}
+@keyframes busPulse{0%{transform:scale(.7);opacity:1}100%{transform:scale(2);opacity:0}}
+/* Halte popup custom */
+.halte-popup .leaflet-popup-content-wrapper{border-radius:14px;box-shadow:0 8px 32px rgba(13,21,38,.18);border:1px solid rgba(13,21,38,.06);padding:0;overflow:hidden}
+.halte-popup .leaflet-popup-content{margin:0;width:220px!important}
+.halte-popup .leaflet-popup-tip-container{margin-top:-1px}
+.hp-header{padding:10px 14px;background:linear-gradient(135deg,#1B4FD8,#2563EB);color:white}
+.hp-name{font-size:13px;font-weight:800;letter-spacing:-.2px}
+.hp-koridor{display:flex;gap:4px;margin-top:5px;flex-wrap:wrap}
+.hp-kbadge{padding:2px 7px;border-radius:4px;font-size:10px;font-weight:800;color:white;font-family:'DM Mono',monospace}
+.hp-body{padding:10px 14px;background:white}
+.hp-row{display:flex;align-items:center;justify-content:space-between;font-size:11.5px;color:#374151;margin-bottom:5px}
+.hp-row:last-child{margin:0}
+.hp-label{color:#9CA3AF;font-weight:500}
+.hp-val{font-weight:700;color:#0D1526}
+.hp-eta{color:#16A34A;font-weight:800}
+.hp-btn{width:100%;padding:8px;background:#2563EB;color:white;border:none;font-size:12px;font-weight:700;font-family:'Sora',sans-serif;cursor:pointer;margin-top:8px;border-radius:8px;transition:background .2s}
+.hp-btn:hover{background:#1B4FD8}
+/* Terminal popup */
+.terminal-popup .leaflet-popup-content-wrapper{border-radius:14px;box-shadow:0 8px 32px rgba(13,21,38,.2);border:1px solid rgba(13,21,38,.06);padding:0;overflow:hidden}
+.terminal-popup .leaflet-popup-content{margin:0;width:230px!important}
+.tp-header{padding:10px 14px;background:linear-gradient(135deg,#0D1526,#1a2a50)}
+.tp-name{font-size:14px;font-weight:800;color:white;letter-spacing:-.3px}
+.tp-sub{font-size:11px;color:rgba(255,255,255,.55);margin-top:2px}
+.tp-body{padding:10px 14px;background:white}
+/* Map legend overlay */
+.map-legend-overlay{position:absolute;bottom:12px;left:12px;background:rgba(255,255,255,.96);border-radius:12px;padding:12px 14px;box-shadow:0 4px 20px rgba(13,21,38,.15);z-index:1000;backdrop-filter:blur(8px);border:1px solid rgba(13,21,38,.07)}
+.mlo-title{font-size:10px;font-weight:700;color:var(--ink-4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
+.mlo-item{display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--ink-2);margin-bottom:5px;font-weight:600;white-space:nowrap}
+.mlo-item:last-child{margin:0}
+.mlo-line{height:3px;width:22px;border-radius:2px;flex-shrink:0}
+.mlo-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+/* Map stats bar */
+.map-stats-bar{background:white;border-radius:0 0 var(--r-lg) var(--r-lg);border:1px solid var(--border);border-top:none;padding:12px 18px;display:flex;align-items:center;flex-wrap:wrap;box-shadow:0 4px 16px rgba(13,21,38,.08);gap:0}
 .mbs{display:flex;align-items:center;gap:7px;padding:0 14px;font-size:12.5px;color:var(--ink-2);flex:1}
 .mbs:first-child{padding-left:0}.mbs:last-child{padding-right:0}
 .msep{width:1px;height:22px;background:var(--border);flex-shrink:0}
 .mbs svg{width:15px;height:15px;stroke:var(--blue-mid);stroke-width:2.5;fill:none;flex-shrink:0}
 .mbs strong{color:var(--ink);font-weight:700}
+/* Koridor filter bar */
+.koridor-filter-bar{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.kfb-btn{padding:5px 12px;border-radius:var(--r-full);border:1.5px solid var(--border);background:white;font-size:11.5px;font-weight:700;color:var(--ink-3);cursor:pointer;font-family:'Sora',sans-serif;transition:all .2s;display:flex;align-items:center;gap:5px}
+.kfb-btn:hover{border-color:var(--border-2)}
+.kfb-btn.active{color:white;border-color:transparent}
+.kfb-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+/* Live bus chip */
+.live-bus-chip{position:absolute;top:12px;right:12px;background:rgba(13,21,38,.85);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:8px 12px;z-index:1000;color:white}
+.lbc-title{font-size:10px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px}
+.lbc-row{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;color:white;margin-bottom:3px}
+.lbc-row:last-child{margin:0}
+.lbc-badge{padding:2px 6px;border-radius:4px;font-size:10px;font-weight:800;font-family:'DM Mono',monospace;color:white}
+.lbc-eta{font-size:10px;color:rgba(255,255,255,.55);font-weight:500}
 
 /* Sidebar */
 .sidebar{display:flex;flex-direction:column;gap:1.25rem}
@@ -680,11 +709,11 @@ footer{background:#07091A;padding:0}
           <h1 class="slide-h1">Naik Bus Batam<br>Lebih <span class="acc-blue">Cerdas</span><br>&amp; Menyenangkan</h1>
           <p class="slide-p">Lacak posisi Trans Batam secara real-time, rencanakan perjalanan, kumpulkan poin, dan nikmati Batam tanpa stres.</p>
           <div class="slide-cta">
-            <a href="#" class="btn-hp">
+            <a href="rute.html" class="btn-hp">
               <svg viewBox="0 0 24 24" width="17" height="17" stroke="white" stroke-width="2.5" fill="none"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
               Cari Rute Sekarang
             </a>
-            <a href="#" class="btn-hs">Lihat Jadwal →</a>
+            <a href="jadwal.html" class="btn-hs">Lihat Jadwal →</a>
           </div>
           <div class="slide-stats">
             <div><span class="hst-v">12</span><span class="hst-l">Koridor Aktif</span></div>
@@ -747,22 +776,22 @@ footer{background:#07091A;padding:0}
     </div>
 
     <!-- SLIDE 3 — Poster Slide 2 -->
-    <div class="carousel-slide" style="background:url('assets/Poster Slide 2.png') center/cover no-repeat;position:relative">
+    <div class="carousel-slide" style="background:url('assets/Poster\ Slide\ 2.png') center/cover no-repeat;position:relative">
       <div style="position:absolute;inset:0;background:rgba(0,0,0,0.2)"></div>
     </div>
 
     <!-- SLIDE 4 — Poster Slide 3 -->
-    <div class="carousel-slide" style="background:url('assets/Poster Slide 3.png') center/cover no-repeat;position:relative">
+    <div class="carousel-slide" style="background:url('assets/Poster\ Slide\ 3.png') center/cover no-repeat;position:relative">
       <div style="position:absolute;inset:0;background:rgba(0,0,0,0.2)"></div>
     </div>
 
     <!-- SLIDE 5 — Poster Slide 4 -->
-    <div class="carousel-slide" style="background:url('assets/Poster Slide 4.png') center/cover no-repeat;position:relative">
+    <div class="carousel-slide" style="background:url('assets/Poster\ Slide\ 4.png') center/cover no-repeat;position:relative">
       <div style="position:absolute;inset:0;background:rgba(0,0,0,0.2)"></div>
     </div>
 
     <!-- SLIDE 6 — Poster Slide 5 -->
-    <div class="carousel-slide" style="background:url('assets/Poster Slide 5.png') center/cover no-repeat;position:relative">
+    <div class="carousel-slide" style="background:url('assets/Poster\ Slide\ 5.png') center/cover no-repeat;position:relative">
       <div style="position:absolute;inset:0;background:rgba(0,0,0,0.2)"></div>
     </div>
 
@@ -816,56 +845,52 @@ footer{background:#07091A;padding:0}
   <div class="cgrid" id="peta-live">
     <!-- Map + Routes -->
     <div>
-      <div class="mshell">
-        <div class="mcanvas">
-          <div class="mwater"></div>
-          <div class="rd rd-h" style="top:32%;left:0;right:0"></div>
-          <div class="rd rd-h" style="top:58%;left:0;right:62%"></div>
-          <div class="rd rd-v" style="left:28%;top:0;bottom:28%"></div>
-          <div class="rd rd-v" style="left:62%;top:0;bottom:0"></div>
-          <div class="rtl" style="top:calc(32% - 2px);left:7%;width:58%"></div>
+      <!-- Leaflet Live Map -->
 
-          <div class="stp" style="top:32%;left:8%"><div class="stp-pin" style="background:var(--blue-mid)"><div class="stp-inner"></div></div><div class="stp-lbl">Terminal Batam Centre</div></div>
-          <div class="stp" style="top:32%;left:29%"><div class="stp-pin" style="background:var(--teal)"><div class="stp-inner"></div></div><div class="stp-lbl">Nagoya Hill</div></div>
-          <div class="stp" style="top:32%;left:52%"><div class="stp-pin" style="background:var(--amber)"><div class="stp-inner"></div></div><div class="stp-lbl">Kepri Mall</div></div>
-          <div class="stp" style="top:58%;left:15%"><div class="stp-pin" style="background:var(--rose)"><div class="stp-inner"></div></div><div class="stp-lbl">Batu Aji Terminal</div></div>
-          <div class="stp" style="top:58%;left:45%"><div class="stp-pin" style="background:var(--violet)"><div class="stp-inner"></div></div><div class="stp-lbl">Sekupang</div></div>
+      <!-- Koridor Filter Bar -->
+      <div class="koridor-filter-bar" id="koridorFilter">
+        <button class="kfb-btn active" onclick="filterKoridor(this,'all')" style="border-color:#E5E9F2"><span class="kfb-dot" style="background:#6B7280"></span>Semua Koridor</button>
+        <button class="kfb-btn" onclick="filterKoridor(this,'K1')" style="background:#EFF4FF"><span class="kfb-dot" style="background:#2563EB"></span>K1 Batam Centre↔Jodoh</button>
+        <button class="kfb-btn" onclick="filterKoridor(this,'K2')" style="background:#F0FDFA"><span class="kfb-dot" style="background:#0D9488"></span>K2 Batu Aji↔Nagoya</button>
+        <button class="kfb-btn" onclick="filterKoridor(this,'K3')" style="background:#F5F3FF"><span class="kfb-dot" style="background:#7C3AED"></span>K3 Batu Aji↔Sekupang</button>
+        <button class="kfb-btn" onclick="filterKoridor(this,'K5')" style="background:#FFFBEB"><span class="kfb-dot" style="background:#F59E0B"></span>K5 Tiban↔Kepri Mall</button>
+      </div>
 
-          <div class="lpulse" style="top:32%;left:38%">
-            <div class="pr1"></div><div class="pr1 pr2"></div><div class="pdot"></div>
-          </div>
-          <div class="mbus" style="top:calc(32% - 18px)">
-            <svg viewBox="0 0 24 24"><path d="M3 13h2v3l4-3h5a2 2 0 002-2V8a2 2 0 00-2-2H3a2 2 0 00-2 2v3a2 2 0 002 2zm0-5h16v4H8.83L6 14.17V12H3V8zm18-4H7V3h14a2 2 0 012 2v5l-2-1V4z"/></svg>
-            <span>K1-07</span>
-          </div>
-
-          <div class="mleg">
-            <h4>Legenda</h4>
-            <div class="lr"><div class="ld" style="background:var(--blue-mid)"></div>Terminal Utama</div>
-            <div class="lr"><div class="ld" style="background:var(--teal)"></div>Halte Aktif</div>
-            <div class="lr"><div class="ld" style="background:var(--amber)"></div>Kepadatan Sedang</div>
-            <div class="lr"><div class="ld" style="background:var(--rose)"></div>Kepadatan Tinggi</div>
-          </div>
-          <div class="mctrl">
-            <div class="mc">+</div><div class="mc">−</div><div class="mc" style="font-size:14px">◎</div>
-          </div>
-          <div class="mbar">
-            <div class="mbi">
-              <div class="mbs"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Estimasi <strong style="margin-left:4px">23 mnt</strong></div>
-              <div class="msep"></div>
-              <div class="mbs"><svg viewBox="0 0 24 24"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>Jarak <strong style="margin-left:4px">8.4 km</strong></div>
-              <div class="msep"></div>
-              <div class="mbs"><svg viewBox="0 0 24 24"><path d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>Tarif <strong style="margin-left:4px">Rp 5.000</strong></div>
-              <div class="msep"></div>
-              <div class="mbs"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><strong>1</strong>&nbsp;transfer</div>
-            </div>
-          </div>
+      <div class="map-live-shell" id="peta-live-shell">
+        <div id="batam-map"></div>
+        <!-- Live Bus Chip Overlay -->
+        <div class="live-bus-chip" id="liveBusChip">
+          <div class="lbc-title">🔴 Bus Aktif</div>
+          <div class="lbc-row"><span class="lbc-badge" style="background:#2563EB">K1</span>K1-07 · Nagoya Hill<span class="lbc-eta">~2 mnt</span></div>
+          <div class="lbc-row"><span class="lbc-badge" style="background:#0D9488">K2</span>K2-14 · Batuampar<span class="lbc-eta">~8 mnt</span></div>
+          <div class="lbc-row"><span class="lbc-badge" style="background:#7C3AED">K3</span>K3-09 · Batu Aji<span class="lbc-eta">~15 mnt</span></div>
         </div>
+        <!-- Legend Overlay -->
+        <div class="map-legend-overlay">
+          <div class="mlo-title">Legenda</div>
+          <div class="mlo-item"><div class="mlo-line" style="background:#2563EB"></div>Koridor 1</div>
+          <div class="mlo-item"><div class="mlo-line" style="background:#0D9488"></div>Koridor 2</div>
+          <div class="mlo-item"><div class="mlo-line" style="background:#7C3AED"></div>Koridor 3</div>
+          <div class="mlo-item"><div class="mlo-line" style="background:#F59E0B"></div>Koridor 5</div>
+          <div class="mlo-item"><div class="mlo-dot" style="background:#1B4FD8"></div>Terminal Utama</div>
+          <div class="mlo-item"><div class="mlo-dot" style="background:#10B981"></div>Halte Aktif</div>
+          <div class="mlo-item"><div class="mlo-dot" style="background:#EF4444"></div>Bus Live 🚌</div>
+        </div>
+      </div>
+      <!-- Stats bar below map -->
+      <div class="map-stats-bar" id="mapStatsBar">
+        <div class="mbs"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>ETA <strong id="statEta" style="margin-left:4px">2 mnt</strong></div>
+        <div class="msep"></div>
+        <div class="mbs"><svg viewBox="0 0 24 24"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>Jarak <strong id="statJarak" style="margin-left:4px">12.4 km</strong></div>
+        <div class="msep"></div>
+        <div class="mbs"><svg viewBox="0 0 24 24"><path d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>Tarif <strong style="margin-left:4px">Rp 5.000</strong></div>
+        <div class="msep"></div>
+        <div class="mbs"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><strong id="statHalte">8</strong>&nbsp;Halte Aktif</div>
       </div>
 
       <!-- Popular Routes -->
       <div class="proutes" id="rute">
-        <div class="shdr"><h2>Rute Populer Trans Batam</h2><button class="seall">Lihat Semua →</button></div>
+        <div class="shdr"><h2>Rute Populer Trans Batam</h2><a href="rute.html" class="seall" style="text-decoration:none">Lihat Semua →</a></div>
         <div class="prl">
           <div class="pri">
             <div class="pric"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
@@ -891,40 +916,40 @@ footer{background:#07091A;padding:0}
       <div id="halte">
         <div class="slbl">Bus Terdekat — Real Time</div>
         <div style="display:flex;flex-direction:column;gap:10px">
-          <div class="bcard sel">
+          <a href="halte.html" class="bcard sel" style="text-decoration:none">
             <div class="bch">
               <div class="bcl"><span class="rbadge">K1</span><div><div class="bcname">Koridor 1 — Jodoh</div><div class="bcsub">Trans Batam · Bus 07</div></div></div>
               <span class="eta es">2 menit</span>
             </div>
             <div class="cr"><div class="cm"><span>Kapasitas</span><span>78% — Padat</span></div><div class="ct"><div class="cf cr-r" style="width:78%"></div></div></div>
             <div class="bcf"><div class="bcst"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>Batam Centre → Jodoh</div><button class="btrk">🔴 Live</button></div>
-          </div>
-          <div class="bcard">
+          </a>
+          <a href="halte.html" class="bcard" style="text-decoration:none">
             <div class="bch">
               <div class="bcl"><span class="rbadge g">K2</span><div><div class="bcname">Koridor 2 — Nagoya</div><div class="bcsub">Trans Batam · Bus 14</div></div></div>
               <span class="eta em">8 menit</span>
             </div>
             <div class="cr"><div class="cm"><span>Kapasitas</span><span>45% — Normal</span></div><div class="ct"><div class="cf cr-a" style="width:45%"></div></div></div>
             <div class="bcf"><div class="bcst"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>Batu Aji → Nagoya</div><button class="btrk">Lacak</button></div>
-          </div>
-          <div class="bcard">
+          </a>
+          <a href="halte.html" class="bcard" style="text-decoration:none">
             <div class="bch">
               <div class="bcl"><span class="rbadge a">K5</span><div><div class="bcname">Koridor 5 — Kepri Mall</div><div class="bcsub">Trans Batam · Bus 22</div></div></div>
               <span class="eta eo">15 menit</span>
             </div>
             <div class="cr"><div class="cm"><span>Kapasitas</span><span>18% — Longgar</span></div><div class="ct"><div class="cf cr-g" style="width:18%"></div></div></div>
             <div class="bcf"><div class="bcst"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>Tiban → Kepri Mall</div><button class="btrk">Lacak</button></div>
-          </div>
+          </a>
         </div>
       </div>
 
       <div id="tiket-jadwal">
         <div class="slbl">Aksi Cepat</div>
         <div class="qag">
-          <div class="qab"><div class="qai" style="background:var(--blue-mid)"><svg viewBox="0 0 24 24"><path d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg></div><div class="qan">Beli Tiket</div><div class="qah">Digital &amp; cashless</div></div>
-          <div class="qab"><div class="qai" style="background:var(--amber)"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="qan">Reward</div><div class="qah">Tukar poin hadiah</div></div>
-          <div class="qab"><div class="qai" style="background:var(--teal)"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><div class="qan">Jadwal</div><div class="qah">Jadwal harian bus</div></div>
-          <div class="qab" onclick="toggleGamiPopup()"><div class="qai" style="background:var(--violet)"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><div class="qan">Gamifikasi</div><div class="qah">Poin &amp; badge saya</div></div>
+          <a href="tiket.html" style="text-decoration:none"><div class="qab"><div class="qai" style="background:var(--blue-mid)"><svg viewBox="0 0 24 24"><path d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg></div><div class="qan">Beli Tiket</div><div class="qah">Digital &amp; cashless</div></div></a>
+          <a href="#" style="text-decoration:none"><div class="qab"><div class="qai" style="background:var(--amber)"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="qan">Reward</div><div class="qah">Tukar poin hadiah</div></div></a>
+          <a href="jadwal.html" style="text-decoration:none"><div class="qab"><div class="qai" style="background:var(--teal)"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><div class="qan">Jadwal</div><div class="qah">Jadwal harian bus</div></div></a>
+          <a href="gamifikasi.html" style="text-decoration:none" onclick="toggleGamiPopup()"><div class="qab"><div class="qai" style="background:var(--violet)"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><div class="qan">Gamifikasi</div><div class="qah">Poin &amp; badge saya</div></div></a>
         </div>
       </div>
     </div>
@@ -1038,7 +1063,7 @@ footer{background:#07091A;padding:0}
         <div class="sec-tag">📰 Berita Terkini</div>
         <h2 class="sec-h2" style="margin-top:.5rem;margin-bottom:0">Berita Trans Batam</h2>
       </div>
-      <button class="seall" style="align-self:flex-end;padding:10px 20px;background:var(--blue-light);color:var(--blue-mid);border:1.5px solid rgba(37,99,235,.2);border-radius:var(--r-md)">Semua Berita →</button>
+      <a href="https://dishub.batam.go.id/category/program-kegiatan/berita/"><button class="seall" style="align-self:flex-end;padding:10px 20px;background:var(--blue-light);color:var(--blue-mid);border:1.5px solid rgba(37,99,235,.2);border-radius:var(--r-md)">Semua Berita →</button></a>
     </div>
 
     <!-- Main 3-column grid -->
@@ -1203,7 +1228,7 @@ footer{background:#07091A;padding:0}
             <li><a href="#">Berita & Blog</a></li>
             <li><a href="#">Karir</a></li>
             <li><a href="#">Kontak Kami</a></li>
-            <li><a href="#">Hubungi Dishub</a></li>
+            <li><a href="https://dishub.batam.go.id/category/layanan-pengaduan/trans-batam/">Hubungi Dishub</a></li>
           </ul>
         </div>
 
@@ -1325,6 +1350,341 @@ function doSearch(){
     setTimeout(()=>{document.getElementById('fi').style.borderColor='';document.getElementById('ti').style.borderColor=''},2000);
   }
 }
+
+/* ═══════════════════════════════════════════
+   BATAM LIVE MAP — Leaflet.js Integration
+   ═══════════════════════════════════════════ */
+(function initBatamMap() {
+  // Wait for DOM + Leaflet
+  function tryInit() {
+    if (typeof L === 'undefined' || !document.getElementById('batam-map')) {
+      setTimeout(tryInit, 100); return;
+    }
+    buildMap();
+  }
+
+  function buildMap() {
+    // ── Centre of Batam island
+    const BATAM_CENTER = [1.1333, 104.0167];
+
+    const map = L.map('batam-map', {
+      center: BATAM_CENTER,
+      zoom: 12,
+      zoomControl: false,
+      attributionControl: true
+    });
+
+    // ── Custom dark-styled tile layer via CartoDB Positron (light, clean)
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
+      subdomains: 'abcd', maxZoom: 19
+    }).addTo(map);
+
+    // ── Zoom control custom position
+    L.control.zoom({ position: 'topright' }).addTo(map);
+
+    // ══════════════════════════════════════════
+    // DATA: HALTE & TERMINAL (real Batam coords)
+    // ══════════════════════════════════════════
+    const HALTE_DATA = [
+      // TERMINALS
+      { id:'t1', name:'Terminal Batam Centre', type:'terminal', lat:1.1310, lng:104.0547, koridor:['K1','K4'], nextBus:'2 mnt', capacity:78 },
+      { id:'t2', name:'Terminal Batu Aji', type:'terminal', lat:1.0867, lng:103.9583, koridor:['K2','K3'], nextBus:'8 mnt', capacity:45 },
+      { id:'t3', name:'Terminal Sekupang', type:'terminal', lat:1.0606, lng:103.9275, koridor:['K3'], nextBus:'15 mnt', capacity:18 },
+      { id:'t4', name:'Terminal Jodoh', type:'terminal', lat:1.1467, lng:103.9896, koridor:['K1','K2'], nextBus:'12 mnt', capacity:55 },
+      // HALTE K1: Batam Centre → Jodoh
+      { id:'h1', name:'Halte Fanindo', type:'halte', lat:1.1350, lng:104.0200, koridor:['K1'], nextBus:'5 mnt', capacity:30 },
+      { id:'h2', name:'Halte Nagoya Hill', type:'halte', lat:1.1428, lng:104.0075, koridor:['K1','K2'], nextBus:'3 mnt', capacity:65 },
+      { id:'h3', name:'Halte Kepri Mall', type:'halte', lat:1.1478, lng:103.9983, koridor:['K1','K5'], nextBus:'7 mnt', capacity:40 },
+      { id:'h4', name:'Halte Batuampar', type:'halte', lat:1.1512, lng:103.9935, koridor:['K1','K2'], nextBus:'10 mnt', capacity:25 },
+      // HALTE K2: Batu Aji → Nagoya
+      { id:'h5', name:'Halte Tiban', type:'halte', lat:1.0950, lng:103.9750, koridor:['K2','K5'], nextBus:'6 mnt', capacity:50 },
+      { id:'h6', name:'Halte Sagulung', type:'halte', lat:1.0820, lng:103.9680, koridor:['K2','K5'], nextBus:'9 mnt', capacity:35 },
+      { id:'h7', name:'Halte Aviari', type:'halte', lat:1.1050, lng:103.9850, koridor:['K2'], nextBus:'11 mnt', capacity:20 },
+      // HALTE K3: Batu Aji → Sekupang
+      { id:'h8', name:'Halte Taman Raya', type:'halte', lat:1.0780, lng:103.9520, koridor:['K3'], nextBus:'14 mnt', capacity:15 },
+      { id:'h9', name:'Halte Simpang Base', type:'halte', lat:1.0700, lng:103.9400, koridor:['K3'], nextBus:'13 mnt', capacity:10 },
+      // HALTE K5: Tiban → Kepri Mall
+      { id:'h10', name:'Halte Simpang Kabil', type:'halte', lat:1.1150, lng:103.9870, koridor:['K5'], nextBus:'18 mnt', capacity:22 },
+    ];
+
+    // ══════════════════════════════════════════
+    // DATA: RUTE KORIDOR (polylines)
+    // ══════════════════════════════════════════
+    const KORIDOR_ROUTES = {
+      K1: {
+        color: '#2563EB', weight: 5, name: 'K1 — Batam Centre ↔ Jodoh',
+        coords: [
+          [1.1310, 104.0547],[1.1350, 104.0200],[1.1428, 104.0075],
+          [1.1478, 103.9983],[1.1512, 103.9935],[1.1467, 103.9896]
+        ]
+      },
+      K2: {
+        color: '#0D9488', weight: 5, name: 'K2 — Batu Aji ↔ Nagoya',
+        coords: [
+          [1.0867, 103.9583],[1.0950, 103.9750],[1.1050, 103.9850],
+          [1.1428, 104.0075],[1.1467, 103.9896]
+        ]
+      },
+      K3: {
+        color: '#7C3AED', weight: 5, name: 'K3 — Batu Aji ↔ Sekupang',
+        coords: [
+          [1.0867, 103.9583],[1.0780, 103.9520],[1.0700, 103.9400],[1.0606, 103.9275]
+        ]
+      },
+      K5: {
+        color: '#F59E0B', weight: 5, name: 'K5 — Tiban ↔ Kepri Mall',
+        coords: [
+          [1.0950, 103.9750],[1.0820, 103.9680],[1.1150, 103.9870],[1.1478, 103.9983]
+        ]
+      }
+    };
+
+    // ══════════════════════════════════════════
+    // DATA: BUS LIVE POSITIONS (simulated)
+    // ══════════════════════════════════════════
+    const BUS_LIVE = [
+      { id:'K1-07', koridor:'K1', color:'#2563EB', lat:1.1428, lng:104.0075, route:'Batam Centre → Jodoh', eta:'2 mnt', cap:78 },
+      { id:'K2-14', koridor:'K2', color:'#0D9488', lat:1.1050, lng:103.9850, route:'Batu Aji → Nagoya', eta:'8 mnt', cap:45 },
+      { id:'K3-09', koridor:'K3', color:'#7C3AED', lat:1.0780, lng:103.9520, route:'Batu Aji → Sekupang', eta:'15 mnt', cap:18 },
+      { id:'K5-22', koridor:'K5', color:'#F59E0B', lat:1.1150, lng:103.9870, route:'Tiban → Kepri Mall', eta:'20 mnt', cap:32 },
+    ];
+
+    // ══════════════════════════════════════════
+    // DRAW ROUTES
+    // ══════════════════════════════════════════
+    const routeLayers = {};
+    Object.entries(KORIDOR_ROUTES).forEach(([kode, r]) => {
+      const pl = L.polyline(r.coords, {
+        color: r.color, weight: r.weight, opacity: 0.85,
+        lineCap: 'round', lineJoin: 'round'
+      }).addTo(map);
+      // Animated dashed overlay
+      const dash = L.polyline(r.coords, {
+        color: 'white', weight: 2, opacity: 0.35,
+        dashArray: '10, 18', lineCap: 'round'
+      }).addTo(map);
+      routeLayers[kode] = [pl, dash];
+    });
+
+    // ══════════════════════════════════════════
+    // CUSTOM ICONS
+    // ══════════════════════════════════════════
+    function terminalIcon() {
+      return L.divIcon({
+        className: '',
+        html: `<div style="
+          width:34px;height:34px;background:linear-gradient(135deg,#1B4FD8,#2563EB);
+          border-radius:50%;border:3px solid white;
+          box-shadow:0 4px 14px rgba(37,99,235,.45);
+          display:flex;align-items:center;justify-content:center;
+          font-size:14px;cursor:pointer;
+          transition:transform .2s;
+        ">🚉</div>`,
+        iconSize: [34, 34], iconAnchor: [17, 17], popupAnchor: [0, -20]
+      });
+    }
+
+    function halteIcon(koridor) {
+      const colors = { K1:'#2563EB', K2:'#0D9488', K3:'#7C3AED', K5:'#F59E0B' };
+      const c = colors[koridor[0]] || '#10B981';
+      return L.divIcon({
+        className: '',
+        html: `<div style="
+          width:20px;height:20px;background:${c};
+          border-radius:50%;border:3px solid white;
+          box-shadow:0 3px 10px rgba(0,0,0,.25);
+          cursor:pointer;
+        "></div>`,
+        iconSize: [20, 20], iconAnchor: [10, 10], popupAnchor: [0, -14]
+      });
+    }
+
+    function busIcon(color, id) {
+      return L.divIcon({
+        className: '',
+        html: `<div style="position:relative;width:44px;height:44px;">
+          <div style="position:absolute;inset:0;border-radius:50%;background:${color}22;animation:busPulse 1.8s ease-out infinite"></div>
+          <div style="
+            position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+            background:${color};border-radius:8px;padding:4px 8px;border:2px solid white;
+            box-shadow:0 4px 14px rgba(0,0,0,.3);
+            display:flex;align-items:center;gap:4px;white-space:nowrap;
+          ">
+            <span style="font-size:12px">🚌</span>
+            <span style="font-size:10px;font-weight:800;color:white;font-family:'DM Mono',monospace">${id}</span>
+          </div>
+        </div>`,
+        iconSize: [44, 44], iconAnchor: [22, 22], popupAnchor: [0, -26]
+      });
+    }
+
+    // ══════════════════════════════════════════
+    // PLACE HALTE MARKERS
+    // ══════════════════════════════════════════
+    const halteMarkers = {};
+    const halteLayers = {};
+    HALTE_DATA.forEach(h => {
+      const icon = h.type === 'terminal' ? terminalIcon() : halteIcon(h.koridor);
+      const marker = L.marker([h.lat, h.lng], { icon });
+
+      const kapBadge = h.capacity >= 70 ? `<span style="color:#DC2626;font-weight:800">${h.capacity}% — Padat</span>`
+        : h.capacity >= 40 ? `<span style="color:#B45309;font-weight:800">${h.capacity}% — Normal</span>`
+        : `<span style="color:#16A34A;font-weight:800">${h.capacity}% — Longgar</span>`;
+
+      const koridorBadges = h.koridor.map(k => {
+        const kColors = { K1:'#2563EB', K2:'#0D9488', K3:'#7C3AED', K5:'#F59E0B' };
+        return `<span class="hp-kbadge" style="background:${kColors[k]||'#6B7280'}">${k}</span>`;
+      }).join('');
+
+      const popupClass = h.type === 'terminal' ? 'terminal-popup' : 'halte-popup';
+      const popupHeader = h.type === 'terminal'
+        ? `<div class="tp-header"><div class="tp-name">🚉 ${h.name}</div><div class="tp-sub">Terminal Trans Batam</div></div>`
+        : `<div class="hp-header"><div class="hp-name">${h.name}</div><div class="hp-koridor">${koridorBadges}</div></div>`;
+
+      marker.bindPopup(`
+        ${popupHeader}
+        <div class="hp-body">
+          <div class="hp-row"><span class="hp-label">Bus Berikutnya</span><span class="hp-eta">${h.nextBus}</span></div>
+          <div class="hp-row"><span class="hp-label">Kapasitas</span>${kapBadge}</div>
+          <div class="hp-row"><span class="hp-label">Koridor</span><span class="hp-val">${h.koridor.join(', ')}</span></div>
+          <button class="hp-btn" onclick="window.location.href='halte.html'">Lihat Detail Halte →</button>
+        </div>
+      `, { className: popupClass, maxWidth: 240 });
+
+      marker.addTo(map);
+      halteMarkers[h.id] = marker;
+      h.koridor.forEach(k => {
+        if (!halteLayers[k]) halteLayers[k] = [];
+        halteLayers[k].push(marker);
+      });
+
+      // Click updates stats bar
+      marker.on('click', () => {
+        document.getElementById('statEta').textContent = h.nextBus;
+        document.getElementById('statHalte').textContent = HALTE_DATA.filter(x => x.koridor.some(k => h.koridor.includes(k))).length;
+      });
+    });
+
+    // ══════════════════════════════════════════
+    // PLACE BUS MARKERS (animated)
+    // ══════════════════════════════════════════
+    const busMarkers = {};
+    BUS_LIVE.forEach(b => {
+      const marker = L.marker([b.lat, b.lng], { icon: busIcon(b.color, b.id), zIndexOffset: 1000 });
+      const kapPct = b.cap >= 70 ? `<span style="color:#DC2626">${b.cap}% Padat</span>`
+        : b.cap >= 40 ? `<span style="color:#B45309">${b.cap}% Normal</span>`
+        : `<span style="color:#16A34A">${b.cap}% Longgar</span>`;
+
+      marker.bindPopup(`
+        <div class="hp-header" style="background:linear-gradient(135deg,${b.color},${b.color}cc)">
+          <div class="hp-name">🚌 Bus ${b.id}</div>
+          <div class="hp-koridor"><span class="hp-kbadge" style="background:rgba(255,255,255,.25)">${b.koridor}</span></div>
+        </div>
+        <div class="hp-body">
+          <div class="hp-row"><span class="hp-label">Rute</span><span class="hp-val" style="font-size:11px">${b.route}</span></div>
+          <div class="hp-row"><span class="hp-label">ETA Halte</span><span class="hp-eta">${b.eta}</span></div>
+          <div class="hp-row"><span class="hp-label">Kapasitas</span>${kapPct}</div>
+          <button class="hp-btn" style="background:${b.color}" onclick="window.location.href='halte.html'">Track Bus Ini →</button>
+        </div>
+      `, { className: 'halte-popup', maxWidth: 240 });
+
+      marker.addTo(map);
+      busMarkers[b.id] = { marker, data: b, route: KORIDOR_ROUTES[b.koridor].coords, step: 0 };
+    });
+
+    // ══════════════════════════════════════════
+    // ANIMATE BUSES ALONG ROUTES
+    // ══════════════════════════════════════════
+    function animateBuses() {
+      Object.values(busMarkers).forEach(bus => {
+        const coords = bus.route;
+        const total = coords.length - 1;
+        if (total < 1) return;
+        bus.t = (bus.t || 0) + 0.003;
+        if (bus.t > total) bus.t = 0;
+        const i = Math.floor(bus.t);
+        const frac = bus.t - i;
+        const from = coords[Math.min(i, total)];
+        const to   = coords[Math.min(i+1, total)];
+        const lat = from[0] + (to[0] - from[0]) * frac;
+        const lng = from[1] + (to[1] - from[1]) * frac;
+        bus.marker.setLatLng([lat, lng]);
+      });
+      requestAnimationFrame(animateBuses);
+    }
+    animateBuses();
+
+    // ══════════════════════════════════════════
+    // KORIDOR FILTER FUNCTION
+    // ══════════════════════════════════════════
+    window.filterKoridor = function(btn, kode) {
+      document.querySelectorAll('.kfb-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Toggle routes
+      Object.entries(routeLayers).forEach(([k, layers]) => {
+        const show = kode === 'all' || k === kode;
+        layers.forEach(l => { show ? l.addTo(map) : map.removeLayer(l); });
+      });
+
+      // Toggle halte markers
+      Object.values(halteMarkers).forEach(m => map.removeLayer(m));
+      HALTE_DATA.forEach(h => {
+        const show = kode === 'all' || h.koridor.includes(kode);
+        if (show) halteMarkers[h.id].addTo(map);
+      });
+
+      // Toggle bus markers
+      Object.values(busMarkers).forEach(b => {
+        const show = kode === 'all' || b.data.koridor === kode;
+        show ? b.marker.addTo(map) : map.removeLayer(b.marker);
+      });
+
+      // Fit to visible route
+      if (kode !== 'all' && KORIDOR_ROUTES[kode]) {
+        map.fitBounds(L.latLngBounds(KORIDOR_ROUTES[kode].coords), { padding: [40, 40] });
+        // Update stats
+        const halteCount = HALTE_DATA.filter(h => h.koridor.includes(kode)).length;
+        document.getElementById('statHalte').textContent = halteCount;
+        const busData = BUS_LIVE.find(b => b.koridor === kode);
+        if (busData) document.getElementById('statEta').textContent = busData.eta;
+        const distMap = { K1:'12.4 km', K2:'9.1 km', K3:'7.8 km', K5:'11.2 km' };
+        document.getElementById('statJarak').textContent = distMap[kode] || '—';
+      } else {
+        map.setView(BATAM_CENTER, 12);
+        document.getElementById('statHalte').textContent = HALTE_DATA.length;
+        document.getElementById('statEta').textContent = '2 mnt';
+        document.getElementById('statJarak').textContent = '—';
+      }
+    };
+
+    // ══════════════════════════════════════════
+    // USER LOCATION (if permitted)
+    // ══════════════════════════════════════════
+    map.on('locationfound', e => {
+      const userIcon = L.divIcon({
+        className: '',
+        html: `<div style="
+          width:18px;height:18px;background:#3B82F6;border-radius:50%;
+          border:3px solid white;box-shadow:0 0 0 6px rgba(59,130,246,.2);
+        "></div>`,
+        iconSize: [18,18], iconAnchor: [9,9]
+      });
+      L.marker(e.latlng, { icon: userIcon }).addTo(map)
+        .bindPopup('<b>📍 Lokasi Kamu</b>').openPopup();
+    });
+    map.locate({ setView: false, maxZoom: 14 });
+
+    // ── Add Batam boundary label
+    L.tooltip({ permanent: true, direction: 'center', className: 'batam-label' })
+      .setContent('<span style="font-size:10px;font-weight:700;color:#94A3B8;letter-spacing:2px;text-transform:uppercase">KOTA BATAM</span>')
+      .setLatLng([1.0900, 104.0200])
+      .addTo(map);
+  }
+
+  window.addEventListener('load', tryInit);
+})();
 
 /* ─ Tab bar and navbar active state ─ */
 function updateActiveLinks(){
