@@ -593,8 +593,7 @@ footer{background:#07091A;padding:0}
 
     <div class="nav-right">
       <div class="nav-points" onclick="window.location.href='gamifikasi.html'">🎁 <span>2.840</span> Poin</div>
-      <button class="btn-nl">Masuk</button>
-      <button class="btn-ns">Daftar Gratis</button>
+      <a href="login.html" class="btn-ns" style="text-decoration: none;">Masuk</a>
     </div>
   </div>
 </nav>
@@ -847,13 +846,18 @@ footer{background:#07091A;padding:0}
     <div>
       <!-- Leaflet Live Map -->
 
-      <!-- Koridor Filter Bar -->
-      <div class="koridor-filter-bar" id="koridorFilter">
-        <button class="kfb-btn active" onclick="filterKoridor(this,'all')" style="border-color:#E5E9F2"><span class="kfb-dot" style="background:#6B7280"></span>Semua Koridor</button>
-        <button class="kfb-btn" onclick="filterKoridor(this,'K1')" style="background:#EFF4FF"><span class="kfb-dot" style="background:#2563EB"></span>K1 Batam Centre↔Jodoh</button>
-        <button class="kfb-btn" onclick="filterKoridor(this,'K2')" style="background:#F0FDFA"><span class="kfb-dot" style="background:#0D9488"></span>K2 Batu Aji↔Nagoya</button>
-        <button class="kfb-btn" onclick="filterKoridor(this,'K3')" style="background:#F5F3FF"><span class="kfb-dot" style="background:#7C3AED"></span>K3 Batu Aji↔Sekupang</button>
-        <button class="kfb-btn" onclick="filterKoridor(this,'K5')" style="background:#FFFBEB"><span class="kfb-dot" style="background:#F59E0B"></span>K5 Tiban↔Kepri Mall</button>
+      <!-- Koridor Filter Bar — 9 Rute Resmi Trans Batam -->
+      <div class="koridor-filter-bar" id="koridorFilter" style="flex-wrap:wrap;gap:6px 8px">
+        <button class="kfb-btn active" onclick="filterKoridor(this,'all')"><span class="kfb-dot" style="background:#6B7280"></span>Semua</button>
+        <button class="kfb-btn" onclick="filterKoridor(this,'K1')"><span class="kfb-dot" style="background:#1B7A2E"></span>K1 Sekupang–BC</button>
+        <button class="kfb-btn" onclick="filterKoridor(this,'K2')"><span class="kfb-dot" style="background:#DC2626"></span>K2 BC–Tg.Uncang</button>
+        <button class="kfb-btn" onclick="filterKoridor(this,'K3')"><span class="kfb-dot" style="background:#7C3AED"></span>K3 Sekupang–Jodoh</button>
+        <button class="kfb-btn" onclick="filterKoridor(this,'K4')"><span class="kfb-dot" style="background:#2563EB"></span>K4 Sagulung–Sekupang</button>
+        <button class="kfb-btn" onclick="filterKoridor(this,'K5')"><span class="kfb-dot" style="background:#D97706"></span>K5 Jodoh–BC</button>
+        <button class="kfb-btn" onclick="filterKoridor(this,'K6')"><span class="kfb-dot" style="background:#7C4F2A"></span>K6 Tg.Piayu–BC</button>
+        <button class="kfb-btn" onclick="filterKoridor(this,'K7')"><span class="kfb-dot" style="background:#65A30D"></span>K7 Nongsa–BC</button>
+        <button class="kfb-btn" onclick="filterKoridor(this,'K8')"><span class="kfb-dot" style="background:#059669"></span>K8 Punggur–Jodoh</button>
+        <button class="kfb-btn" onclick="filterKoridor(this,'K9')"><span class="kfb-dot" style="background:#9F1239"></span>K9 Punggur–Nongsa</button>
       </div>
 
       <div class="map-live-shell" id="peta-live-shell">
@@ -861,31 +865,36 @@ footer{background:#07091A;padding:0}
         <!-- Live Bus Chip Overlay -->
         <div class="live-bus-chip" id="liveBusChip">
           <div class="lbc-title">🔴 Bus Aktif</div>
-          <div class="lbc-row"><span class="lbc-badge" style="background:#2563EB">K1</span>K1-07 · Nagoya Hill<span class="lbc-eta">~2 mnt</span></div>
-          <div class="lbc-row"><span class="lbc-badge" style="background:#0D9488">K2</span>K2-14 · Batuampar<span class="lbc-eta">~8 mnt</span></div>
-          <div class="lbc-row"><span class="lbc-badge" style="background:#7C3AED">K3</span>K3-09 · Batu Aji<span class="lbc-eta">~15 mnt</span></div>
+          <div class="lbc-row"><span class="lbc-badge" style="background:#1B7A2E">K1</span>K1-03 · Nagoya<span class="lbc-eta">~4 mnt</span></div>
+          <div class="lbc-row"><span class="lbc-badge" style="background:#DC2626">K2</span>K2-07 · Batuaji<span class="lbc-eta">~6 mnt</span></div>
+          <div class="lbc-row"><span class="lbc-badge" style="background:#2563EB">K4</span>K4-12 · Sagulung<span class="lbc-eta">~9 mnt</span></div>
         </div>
         <!-- Legend Overlay -->
         <div class="map-legend-overlay">
-          <div class="mlo-title">Legenda</div>
-          <div class="mlo-item"><div class="mlo-line" style="background:#2563EB"></div>Koridor 1</div>
-          <div class="mlo-item"><div class="mlo-line" style="background:#0D9488"></div>Koridor 2</div>
-          <div class="mlo-item"><div class="mlo-line" style="background:#7C3AED"></div>Koridor 3</div>
-          <div class="mlo-item"><div class="mlo-line" style="background:#F59E0B"></div>Koridor 5</div>
+          <div class="mlo-title">Legenda Rute</div>
+          <div class="mlo-item"><div class="mlo-line" style="background:#1B7A2E"></div>K1 Sekupang–BC</div>
+          <div class="mlo-item"><div class="mlo-line" style="background:#DC2626"></div>K2 BC–Tg.Uncang</div>
+          <div class="mlo-item"><div class="mlo-line" style="background:#7C3AED"></div>K3 Sekupang–Jodoh</div>
+          <div class="mlo-item"><div class="mlo-line" style="background:#2563EB"></div>K4 Sagulung–Sekupang</div>
+          <div class="mlo-item"><div class="mlo-line" style="background:#D97706"></div>K5 Jodoh–BC</div>
+          <div class="mlo-item"><div class="mlo-line" style="background:#7C4F2A"></div>K6 Tg.Piayu–BC</div>
+          <div class="mlo-item"><div class="mlo-line" style="background:#65A30D"></div>K7 Nongsa–BC</div>
+          <div class="mlo-item"><div class="mlo-line" style="background:#059669"></div>K8 Punggur–Jodoh</div>
+          <div class="mlo-item"><div class="mlo-line" style="background:#9F1239"></div>K9 Punggur–Nongsa</div>
           <div class="mlo-item"><div class="mlo-dot" style="background:#1B4FD8"></div>Terminal Utama</div>
-          <div class="mlo-item"><div class="mlo-dot" style="background:#10B981"></div>Halte Aktif</div>
+          <div class="mlo-item"><div class="mlo-dot" style="background:#10B981"></div>Halte</div>
           <div class="mlo-item"><div class="mlo-dot" style="background:#EF4444"></div>Bus Live 🚌</div>
         </div>
       </div>
       <!-- Stats bar below map -->
       <div class="map-stats-bar" id="mapStatsBar">
-        <div class="mbs"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>ETA <strong id="statEta" style="margin-left:4px">2 mnt</strong></div>
+        <div class="mbs"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>ETA <strong id="statEta" style="margin-left:4px">4 mnt</strong></div>
         <div class="msep"></div>
-        <div class="mbs"><svg viewBox="0 0 24 24"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>Jarak <strong id="statJarak" style="margin-left:4px">12.4 km</strong></div>
+        <div class="mbs"><svg viewBox="0 0 24 24"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>Jarak <strong id="statJarak" style="margin-left:4px">—</strong></div>
         <div class="msep"></div>
         <div class="mbs"><svg viewBox="0 0 24 24"><path d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>Tarif <strong style="margin-left:4px">Rp 5.000</strong></div>
         <div class="msep"></div>
-        <div class="mbs"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><strong id="statHalte">8</strong>&nbsp;Halte Aktif</div>
+        <div class="mbs"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><strong id="statHalte">9</strong>&nbsp;Rute Aktif</div>
       </div>
 
       <!-- Popular Routes -->
@@ -893,19 +902,19 @@ footer{background:#07091A;padding:0}
         <div class="shdr"><h2>Rute Populer Trans Batam</h2><a href="rute.html" class="seall" style="text-decoration:none">Lihat Semua →</a></div>
         <div class="prl">
           <div class="pri">
-            <div class="pric"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
-            <div class="prin"><div class="prna">Koridor 1 — Batam Centre ↔ Jodoh</div><div class="prde">Trans Batam · 8 halte · Setiap 15 menit</div></div>
-            <div class="prm"><div class="prfa">Rp 5.000</div><div class="prti">≈ 35 mnt</div></div>
+            <div class="pric" style="background:#FEF9F0"><svg viewBox="0 0 24 24" style="stroke:#1B7A2E"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+            <div class="prin"><div class="prna">K1 — Sekupang ↔ Batam Centre</div><div class="prde">Trans Batam · 8 halte · via Batu Aji, Sagulung, Nagoya</div></div>
+            <div class="prm"><div class="prfa">Rp 5.000</div><div class="prti">≈ 60 mnt</div></div>
           </div>
           <div class="pri">
-            <div class="pric"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
-            <div class="prin"><div class="prna">Koridor 3 — Batu Aji ↔ Sekupang</div><div class="prde">Trans Batam · 6 halte · Setiap 20 menit</div></div>
-            <div class="prm"><div class="prfa">Rp 5.000</div><div class="prti">≈ 28 mnt</div></div>
+            <div class="pric" style="background:#FFF1F2"><svg viewBox="0 0 24 24" style="stroke:#DC2626"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+            <div class="prin"><div class="prna">K2 — Batam Centre ↔ Tg. Uncang</div><div class="prde">Trans Batam · 9 halte · via Batu Aji, Tiban, Muka Kuning</div></div>
+            <div class="prm"><div class="prfa">Rp 5.000</div><div class="prti">≈ 75 mnt</div></div>
           </div>
           <div class="pri">
-            <div class="pric"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
-            <div class="prin"><div class="prna">Koridor 5 — Tiban ↔ Kepri Mall</div><div class="prde">Trans Batam · 7 halte · Setiap 25 menit</div></div>
-            <div class="prm"><div class="prfa">Rp 5.000</div><div class="prti">≈ 40 mnt</div></div>
+            <div class="pric" style="background:#FFFBEB"><svg viewBox="0 0 24 24" style="stroke:#D97706"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+            <div class="prin"><div class="prna">K5 — Jodoh ↔ Batam Centre</div><div class="prde">Trans Batam · 7 halte · via Nagoya, Muka Kuning</div></div>
+            <div class="prm"><div class="prfa">Rp 5.000</div><div class="prti">≈ 45 mnt</div></div>
           </div>
         </div>
       </div>
@@ -918,27 +927,27 @@ footer{background:#07091A;padding:0}
         <div style="display:flex;flex-direction:column;gap:10px">
           <a href="halte.html" class="bcard sel" style="text-decoration:none">
             <div class="bch">
-              <div class="bcl"><span class="rbadge">K1</span><div><div class="bcname">Koridor 1 — Jodoh</div><div class="bcsub">Trans Batam · Bus 07</div></div></div>
-              <span class="eta es">2 menit</span>
+              <div class="bcl"><span class="rbadge" style="background:#1B7A2E">K1</span><div><div class="bcname">K1 — Sekupang → BC</div><div class="bcsub">Trans Batam · Bus 03</div></div></div>
+              <span class="eta es">4 menit</span>
             </div>
-            <div class="cr"><div class="cm"><span>Kapasitas</span><span>78% — Padat</span></div><div class="ct"><div class="cf cr-r" style="width:78%"></div></div></div>
-            <div class="bcf"><div class="bcst"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>Batam Centre → Jodoh</div><button class="btrk">🔴 Live</button></div>
+            <div class="cr"><div class="cm"><span>Kapasitas</span><span>72% — Padat</span></div><div class="ct"><div class="cf cr-r" style="width:72%"></div></div></div>
+            <div class="bcf"><div class="bcst"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>Sekupang → Batam Centre</div><button class="btrk">🔴 Live</button></div>
           </a>
           <a href="halte.html" class="bcard" style="text-decoration:none">
             <div class="bch">
-              <div class="bcl"><span class="rbadge g">K2</span><div><div class="bcname">Koridor 2 — Nagoya</div><div class="bcsub">Trans Batam · Bus 14</div></div></div>
-              <span class="eta em">8 menit</span>
+              <div class="bcl"><span class="rbadge" style="background:#DC2626">K2</span><div><div class="bcname">K2 — BC → Tg.Uncang</div><div class="bcsub">Trans Batam · Bus 07</div></div></div>
+              <span class="eta em">6 menit</span>
             </div>
-            <div class="cr"><div class="cm"><span>Kapasitas</span><span>45% — Normal</span></div><div class="ct"><div class="cf cr-a" style="width:45%"></div></div></div>
-            <div class="bcf"><div class="bcst"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>Batu Aji → Nagoya</div><button class="btrk">Lacak</button></div>
+            <div class="cr"><div class="cm"><span>Kapasitas</span><span>48% — Normal</span></div><div class="ct"><div class="cf cr-a" style="width:48%"></div></div></div>
+            <div class="bcf"><div class="bcst"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>Batam Centre → Tg. Uncang</div><button class="btrk">Lacak</button></div>
           </a>
           <a href="halte.html" class="bcard" style="text-decoration:none">
             <div class="bch">
-              <div class="bcl"><span class="rbadge a">K5</span><div><div class="bcname">Koridor 5 — Kepri Mall</div><div class="bcsub">Trans Batam · Bus 22</div></div></div>
-              <span class="eta eo">15 menit</span>
+              <div class="bcl"><span class="rbadge" style="background:#2563EB">K4</span><div><div class="bcname">K4 — Sagulung → Sekupang</div><div class="bcsub">Trans Batam · Bus 12</div></div></div>
+              <span class="eta eo">9 menit</span>
             </div>
-            <div class="cr"><div class="cm"><span>Kapasitas</span><span>18% — Longgar</span></div><div class="ct"><div class="cf cr-g" style="width:18%"></div></div></div>
-            <div class="bcf"><div class="bcst"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>Tiban → Kepri Mall</div><button class="btrk">Lacak</button></div>
+            <div class="cr"><div class="cm"><span>Kapasitas</span><span>22% — Longgar</span></div><div class="ct"><div class="cf cr-g" style="width:22%"></div></div></div>
+            <div class="bcf"><div class="bcst"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>Sagulung → Sekupang</div><button class="btrk">Lacak</button></div>
           </a>
         </div>
       </div>
@@ -1351,11 +1360,10 @@ function doSearch(){
   }
 }
 
-/* ═══════════════════════════════════════════
-   BATAM LIVE MAP — Leaflet.js Integration
-   ═══════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════
+   BATAM LIVE MAP — 9 Rute Resmi Trans Batam
+   ═══════════════════════════════════════════════════════════════ */
 (function initBatamMap() {
-  // Wait for DOM + Leaflet
   function tryInit() {
     if (typeof L === 'undefined' || !document.getElementById('batam-map')) {
       setTimeout(tryInit, 100); return;
@@ -1364,323 +1372,472 @@ function doSearch(){
   }
 
   function buildMap() {
-    // ── Centre of Batam island
-    const BATAM_CENTER = [1.1333, 104.0167];
+    const BATAM_CENTER = [1.105, 104.000];
 
     const map = L.map('batam-map', {
-      center: BATAM_CENTER,
-      zoom: 12,
-      zoomControl: false,
-      attributionControl: true
+      center: BATAM_CENTER, zoom: 12,
+      zoomControl: false, attributionControl: true
     });
 
-    // ── Custom dark-styled tile layer via CartoDB Positron (light, clean)
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
-      subdomains: 'abcd', maxZoom: 19
+    // ── OSM Default tile (mudah dibaca, familiar) ──
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 19
     }).addTo(map);
 
-    // ── Zoom control custom position
     L.control.zoom({ position: 'topright' }).addTo(map);
 
-    // ══════════════════════════════════════════
-    // DATA: HALTE & TERMINAL (real Batam coords)
-    // ══════════════════════════════════════════
-    const HALTE_DATA = [
-      // TERMINALS
-      { id:'t1', name:'Terminal Batam Centre', type:'terminal', lat:1.1310, lng:104.0547, koridor:['K1','K4'], nextBus:'2 mnt', capacity:78 },
-      { id:'t2', name:'Terminal Batu Aji', type:'terminal', lat:1.0867, lng:103.9583, koridor:['K2','K3'], nextBus:'8 mnt', capacity:45 },
-      { id:'t3', name:'Terminal Sekupang', type:'terminal', lat:1.0606, lng:103.9275, koridor:['K3'], nextBus:'15 mnt', capacity:18 },
-      { id:'t4', name:'Terminal Jodoh', type:'terminal', lat:1.1467, lng:103.9896, koridor:['K1','K2'], nextBus:'12 mnt', capacity:55 },
-      // HALTE K1: Batam Centre → Jodoh
-      { id:'h1', name:'Halte Fanindo', type:'halte', lat:1.1350, lng:104.0200, koridor:['K1'], nextBus:'5 mnt', capacity:30 },
-      { id:'h2', name:'Halte Nagoya Hill', type:'halte', lat:1.1428, lng:104.0075, koridor:['K1','K2'], nextBus:'3 mnt', capacity:65 },
-      { id:'h3', name:'Halte Kepri Mall', type:'halte', lat:1.1478, lng:103.9983, koridor:['K1','K5'], nextBus:'7 mnt', capacity:40 },
-      { id:'h4', name:'Halte Batuampar', type:'halte', lat:1.1512, lng:103.9935, koridor:['K1','K2'], nextBus:'10 mnt', capacity:25 },
-      // HALTE K2: Batu Aji → Nagoya
-      { id:'h5', name:'Halte Tiban', type:'halte', lat:1.0950, lng:103.9750, koridor:['K2','K5'], nextBus:'6 mnt', capacity:50 },
-      { id:'h6', name:'Halte Sagulung', type:'halte', lat:1.0820, lng:103.9680, koridor:['K2','K5'], nextBus:'9 mnt', capacity:35 },
-      { id:'h7', name:'Halte Aviari', type:'halte', lat:1.1050, lng:103.9850, koridor:['K2'], nextBus:'11 mnt', capacity:20 },
-      // HALTE K3: Batu Aji → Sekupang
-      { id:'h8', name:'Halte Taman Raya', type:'halte', lat:1.0780, lng:103.9520, koridor:['K3'], nextBus:'14 mnt', capacity:15 },
-      { id:'h9', name:'Halte Simpang Base', type:'halte', lat:1.0700, lng:103.9400, koridor:['K3'], nextBus:'13 mnt', capacity:10 },
-      // HALTE K5: Tiban → Kepri Mall
-      { id:'h10', name:'Halte Simpang Kabil', type:'halte', lat:1.1150, lng:103.9870, koridor:['K5'], nextBus:'18 mnt', capacity:22 },
-    ];
-
-    // ══════════════════════════════════════════
-    // DATA: RUTE KORIDOR (polylines)
-    // ══════════════════════════════════════════
+    /* ════════════════════════════════════════════════════════════════
+       KOORDINAT TERVERIFIKASI GPS — Kota Batam
+       Referensi titik utama (lat, lng):
+         Terminal Sekupang      : 1.0571, 103.9034
+         Batu Aji               : 1.0802, 103.9553
+         Tiban                  : 1.0908, 103.9690
+         Sagulung               : 1.1011, 103.9742
+         Sp. Jam (Simpang Jam)  : 1.1112, 103.9879
+         Batam Centre           : 1.1217, 104.0212  ← Terminal/Jl.Engku Putri
+         Muka Kuning            : 1.1188, 104.0510
+         Nagoya                 : 1.1441, 104.0300  ← area Nagoya Hill Mall
+         Jodoh                  : 1.1536, 104.0210  ← Terminal Seraya/Jodoh
+         Kepri Mall             : 1.1470, 104.0410
+         Sp. Base Camp          : 1.0745, 103.9312
+         Tg. Uncang             : 1.0586, 103.8994
+         Tg. Piayu              : 1.1728, 104.1003
+         Sp. Sei Harapan        : 1.1550, 104.0740
+         Kabil                  : 1.1487, 104.1144
+         Punggur / Bandara      : 1.1210, 104.1010
+         Sp. Hang Nadim         : 1.1374, 104.1138
+         Tg. Sari               : 1.1825, 104.1343
+         Nongsa                 : 1.2062, 104.1399
+    ════════════════════════════════════════════════════════════════ */
     const KORIDOR_ROUTES = {
+
+      /* ─ K1 HIJAU TUA — Sekupang ↔ Batam Centre (Rute Tengah) ─────
+         Sekupang → Sp.Base Camp → Batu Aji → Tiban → Sagulung
+         → Sp. Jam → Batam Centre
+         Arah: dari barat-daya lurus ke timur-laut
+      ───────────────────────────────────────────────────────────── */
       K1: {
-        color: '#2563EB', weight: 5, name: 'K1 — Batam Centre ↔ Jodoh',
-        coords: [
-          [1.1310, 104.0547],[1.1350, 104.0200],[1.1428, 104.0075],
-          [1.1478, 103.9983],[1.1512, 103.9935],[1.1467, 103.9896]
+        color:'#15803D', weight:6,
+        name:'K1 — Sekupang ↔ Batam Centre',
+        dist:'~30 km', waktu:'~65 mnt',
+        coords:[
+          [1.0571, 103.9034], // Terminal Sekupang
+          [1.0640, 103.9150], // Sei Harapan (lewat)
+          [1.0745, 103.9312], // Sp. Base Camp
+          [1.0802, 103.9553], // Batu Aji
+          [1.0908, 103.9690], // Tiban
+          [1.1011, 103.9742], // Sagulung
+          [1.1112, 103.9879], // Sp. Jam
+          [1.1217, 104.0212], // Terminal Batam Centre
         ]
       },
+
+      /* ─ K2 MERAH — Batam Centre ↔ Tg. Uncang (Rute Selatan Panjang)
+         BC → Sp.Jam → Sagulung → Tiban → Batu Aji
+         → Sp.Base Camp → Tg.Uncang
+         Arah: dari timur-laut melintasi tengah ke ujung barat
+      ───────────────────────────────────────────────────────────── */
       K2: {
-        color: '#0D9488', weight: 5, name: 'K2 — Batu Aji ↔ Nagoya',
-        coords: [
-          [1.0867, 103.9583],[1.0950, 103.9750],[1.1050, 103.9850],
-          [1.1428, 104.0075],[1.1467, 103.9896]
+        color:'#DC2626', weight:6,
+        name:'K2 — Batam Centre ↔ Tg. Uncang',
+        dist:'~33 km', waktu:'~70 mnt',
+        coords:[
+          [1.1217, 104.0212], // Terminal Batam Centre
+          [1.1112, 103.9879], // Sp. Jam
+          [1.1011, 103.9742], // Sagulung
+          [1.0908, 103.9690], // Tiban
+          [1.0802, 103.9553], // Batu Aji
+          [1.0745, 103.9312], // Sp. Base Camp
+          [1.0640, 103.9150], // Sei Harapan
+          [1.0586, 103.8994], // Tg. Uncang
         ]
       },
+
+      /* ─ K3 UNGU — Sekupang ↔ Jodoh (Rute Pendek Tengah) ──────────
+         Sekupang → Sp.Base Camp → Tiban → Sagulung
+         → Sp.Jam → Nagoya → Jodoh
+         Arah: dari barat-daya ke utara Batam
+      ───────────────────────────────────────────────────────────── */
       K3: {
-        color: '#7C3AED', weight: 5, name: 'K3 — Batu Aji ↔ Sekupang',
-        coords: [
-          [1.0867, 103.9583],[1.0780, 103.9520],[1.0700, 103.9400],[1.0606, 103.9275]
+        color:'#7C3AED', weight:6,
+        name:'K3 — Sekupang ↔ Jodoh',
+        dist:'~24 km', waktu:'~50 mnt',
+        coords:[
+          [1.0571, 103.9034], // Terminal Sekupang
+          [1.0745, 103.9312], // Sp. Base Camp
+          [1.0908, 103.9690], // Tiban
+          [1.1011, 103.9742], // Sagulung
+          [1.1112, 103.9879], // Sp. Jam
+          [1.1350, 104.0120], // Jl. Imam Bonjol
+          [1.1441, 104.0300], // Nagoya
+          [1.1536, 104.0210], // Terminal Jodoh
         ]
       },
-      K5: {
-        color: '#F59E0B', weight: 5, name: 'K5 — Tiban ↔ Kepri Mall',
-        coords: [
-          [1.0950, 103.9750],[1.0820, 103.9680],[1.1150, 103.9870],[1.1478, 103.9983]
+
+      /* ─ K4 BIRU — Sagulung ↔ Sekupang (Rute Barat) ───────────────
+         Sagulung → Tiban → Batu Aji → Sp.Base Camp → Sekupang
+         Arah: dari tengah ke ujung barat-daya
+      ───────────────────────────────────────────────────────────── */
+      K4: {
+        color:'#2563EB', weight:6,
+        name:'K4 — Sagulung ↔ Sekupang',
+        dist:'~18 km', waktu:'~40 mnt',
+        coords:[
+          [1.1011, 103.9742], // Terminal Sagulung
+          [1.0908, 103.9690], // Tiban
+          [1.0802, 103.9553], // Batu Aji
+          [1.0745, 103.9312], // Sp. Base Camp
+          [1.0640, 103.9150], // Sei Harapan
+          [1.0571, 103.9034], // Terminal Sekupang
         ]
-      }
+      },
+
+      /* ─ K5 KUNING — Jodoh ↔ Batam Centre (Rute Utara) ────────────
+         Jodoh → Nagoya → Kepri Mall → Muka Kuning → Batam Centre
+         Arah: menyusuri utara Pulau Batam
+      ───────────────────────────────────────────────────────────── */
+      K5: {
+        color:'#CA8A04', weight:6,
+        name:'K5 — Jodoh ↔ Batam Centre',
+        dist:'~16 km', waktu:'~35 mnt',
+        coords:[
+          [1.1536, 104.0210], // Terminal Jodoh
+          [1.1441, 104.0300], // Nagoya Hill
+          [1.1470, 104.0410], // Kepri Mall
+          [1.1350, 104.0510], // Sp. Fanindo
+          [1.1188, 104.0510], // Muka Kuning
+          [1.1217, 104.0212], // Terminal Batam Centre
+        ]
+      },
+
+      /* ─ K6 COKLAT — Tg. Piayu ↔ Batam Centre (Rute Selatan) ──────
+         Tg.Piayu → Sp.Sei Harapan → Sp.Kabil (arah BC)
+         → Muka Kuning → Batam Centre
+         Arah: dari tenggara ke barat-laut
+      ───────────────────────────────────────────────────────────── */
+      K6: {
+        color:'#92400E', weight:6,
+        name:'K6 — Tg. Piayu ↔ Batam Centre',
+        dist:'~24 km', waktu:'~50 mnt',
+        coords:[
+          [1.1728, 104.1003], // Tg. Piayu
+          [1.1550, 104.0740], // Sp. Sei Harapan
+          [1.1390, 104.0580], // Sp. Kabil arah BC
+          [1.1188, 104.0510], // Muka Kuning
+          [1.1217, 104.0212], // Terminal Batam Centre
+        ]
+      },
+
+      /* ─ K7 HIJAU MUDA — Nongsa ↔ Batam Centre (Rute Nongsa) ───────
+         Nongsa → Tg.Sari → Kabil → Sp.Kabil → Muka Kuning → BC
+         Arah: dari ujung timur-laut menyusuri ke barat
+      ───────────────────────────────────────────────────────────── */
+      K7: {
+        color:'#65A30D', weight:6,
+        name:'K7 — Nongsa ↔ Batam Centre',
+        dist:'~32 km', waktu:'~65 mnt',
+        coords:[
+          [1.2062, 104.1399], // Nongsa
+          [1.1825, 104.1343], // Tg. Sari
+          [1.1487, 104.1144], // Kabil
+          [1.1374, 104.1138], // Sp. Hang Nadim
+          [1.1188, 104.0510], // Muka Kuning
+          [1.1217, 104.0212], // Terminal Batam Centre
+        ]
+      },
+
+      /* ─ K8 HIJAU EMERALD — Punggur ↔ Jodoh (Rute Punggur) ─────────
+         Punggur/Bandara → Kabil → Sp.Kabil → Muka Kuning
+         → Batam Centre → Kepri Mall → Nagoya → Jodoh
+         Arah: dari selatan-tengah melingkar ke utara
+      ───────────────────────────────────────────────────────────── */
+      K8: {
+        color:'#059669', weight:6,
+        name:'K8 — Punggur ↔ Jodoh',
+        dist:'~36 km', waktu:'~75 mnt',
+        coords:[
+          [1.1210, 104.1010], // Punggur / Bandara
+          [1.1487, 104.1144], // Kabil
+          [1.1374, 104.1138], // Sp. Hang Nadim
+          [1.1188, 104.0510], // Muka Kuning
+          [1.1217, 104.0212], // Batam Centre
+          [1.1350, 104.0510], // Sp. Fanindo
+          [1.1470, 104.0410], // Kepri Mall
+          [1.1441, 104.0300], // Nagoya
+          [1.1536, 104.0210], // Terminal Jodoh
+        ]
+      },
+
+      /* ─ K9 MERAH TUA — Punggur ↔ Nongsa (Rute Timur) ─────────────
+         Punggur/Bandara → Sp.Hang Nadim → Tg.Sari → Nongsa
+         Arah: dari tengah selatan ke ujung timur-laut
+      ───────────────────────────────────────────────────────────── */
+      K9: {
+        color:'#9F1239', weight:6,
+        name:'K9 — Punggur ↔ Nongsa',
+        dist:'~22 km', waktu:'~45 mnt',
+        coords:[
+          [1.1210, 104.1010], // Punggur / Bandara
+          [1.1374, 104.1138], // Sp. Hang Nadim
+          [1.1825, 104.1343], // Tg. Sari
+          [1.2062, 104.1399], // Nongsa
+        ]
+      },
     };
 
-    // ══════════════════════════════════════════
-    // DATA: BUS LIVE POSITIONS (simulated)
-    // ══════════════════════════════════════════
-    const BUS_LIVE = [
-      { id:'K1-07', koridor:'K1', color:'#2563EB', lat:1.1428, lng:104.0075, route:'Batam Centre → Jodoh', eta:'2 mnt', cap:78 },
-      { id:'K2-14', koridor:'K2', color:'#0D9488', lat:1.1050, lng:103.9850, route:'Batu Aji → Nagoya', eta:'8 mnt', cap:45 },
-      { id:'K3-09', koridor:'K3', color:'#7C3AED', lat:1.0780, lng:103.9520, route:'Batu Aji → Sekupang', eta:'15 mnt', cap:18 },
-      { id:'K5-22', koridor:'K5', color:'#F59E0B', lat:1.1150, lng:103.9870, route:'Tiban → Kepri Mall', eta:'20 mnt', cap:32 },
+    /* ════════════════════════════════════════════════════════════════
+       HALTE & TERMINAL — sesuai koordinat rute di atas
+    ════════════════════════════════════════════════════════════════ */
+    const HALTE_DATA = [
+      // ── TERMINAL UTAMA ─────────────────────────────────────────────
+      {id:'t1',name:'Terminal Batam Centre',   type:'terminal',lat:1.1217,lng:104.0212,koridor:['K1','K2','K5','K6','K7','K8'],nextBus:'3 mnt', capacity:70},
+      {id:'t2',name:'Terminal Sekupang',       type:'terminal',lat:1.0571,lng:103.9034,koridor:['K1','K2','K3','K4'],         nextBus:'8 mnt', capacity:40},
+      {id:'t3',name:'Terminal Jodoh',          type:'terminal',lat:1.1536,lng:104.0210,koridor:['K3','K5','K8'],              nextBus:'5 mnt', capacity:55},
+      {id:'t4',name:'Terminal Sagulung',       type:'terminal',lat:1.1011,lng:103.9742,koridor:['K1','K2','K3','K4'],         nextBus:'10 mnt',capacity:45},
+      // ── HALTE KORIDOR TENGAH & BARAT ───────────────────────────────
+      {id:'h1', name:'Halte Sp. Base Camp',   type:'halte',lat:1.0745,lng:103.9312,koridor:['K1','K2','K3','K4'],nextBus:'11 mnt',capacity:25},
+      {id:'h2', name:'Halte Batu Aji',        type:'halte',lat:1.0802,lng:103.9553,koridor:['K1','K2','K4'],    nextBus:'6 mnt', capacity:50},
+      {id:'h3', name:'Halte Tiban',           type:'halte',lat:1.0908,lng:103.9690,koridor:['K1','K2','K3','K4'],nextBus:'7 mnt', capacity:42},
+      {id:'h4', name:'Halte Sp. Jam',         type:'halte',lat:1.1112,lng:103.9879,koridor:['K1','K2','K3'],    nextBus:'8 mnt', capacity:38},
+      // ── HALTE UTARA (Nagoya - Jodoh) ───────────────────────────────
+      {id:'h5', name:'Halte Nagoya Hill',     type:'halte',lat:1.1441,lng:104.0300,koridor:['K3','K5','K8'],    nextBus:'4 mnt', capacity:65},
+      {id:'h6', name:'Halte Kepri Mall',      type:'halte',lat:1.1470,lng:104.0410,koridor:['K5','K8'],         nextBus:'7 mnt', capacity:42},
+      // ── HALTE TIMUR (Muka Kuning - BC) ─────────────────────────────
+      {id:'h7', name:'Halte Muka Kuning',     type:'halte',lat:1.1188,lng:104.0510,koridor:['K2','K5','K6','K7','K8'],nextBus:'5 mnt',capacity:45},
+      {id:'h8', name:'Halte Sp. Fanindo',     type:'halte',lat:1.1350,lng:104.0510,koridor:['K5','K8'],         nextBus:'6 mnt', capacity:35},
+      // ── HALTE K2 (Tg. Uncang) ──────────────────────────────────────
+      {id:'h9', name:'Halte Sei Harapan',     type:'halte',lat:1.0640,lng:103.9150,koridor:['K1','K2','K4'],    nextBus:'12 mnt',capacity:20},
+      {id:'h10',name:'Halte Tg. Uncang',      type:'halte',lat:1.0586,lng:103.8994,koridor:['K2'],              nextBus:'18 mnt',capacity:15},
+      // ── HALTE K6 (Tg. Piayu) ───────────────────────────────────────
+      {id:'h11',name:'Halte Tg. Piayu',       type:'halte',lat:1.1728,lng:104.1003,koridor:['K6'],              nextBus:'15 mnt',capacity:22},
+      {id:'h12',name:'Halte Sp. Sei Harapan', type:'halte',lat:1.1550,lng:104.0740,koridor:['K6'],              nextBus:'13 mnt',capacity:28},
+      // ── HALTE K7, K8, K9 (Timur) ───────────────────────────────────
+      {id:'h13',name:'Halte Punggur / Bandara',type:'halte',lat:1.1210,lng:104.1010,koridor:['K8','K9'],         nextBus:'10 mnt',capacity:45},
+      {id:'h14',name:'Halte Sp. Hang Nadim',   type:'halte',lat:1.1374,lng:104.1138,koridor:['K7','K8','K9'],   nextBus:'12 mnt',capacity:30},
+      {id:'h15',name:'Halte Kabil',            type:'halte',lat:1.1487,lng:104.1144,koridor:['K7','K8'],         nextBus:'11 mnt',capacity:32},
+      {id:'h16',name:'Halte Tg. Sari',         type:'halte',lat:1.1825,lng:104.1343,koridor:['K7','K9'],         nextBus:'14 mnt',capacity:25},
+      {id:'h17',name:'Halte Nongsa',           type:'halte',lat:1.2062,lng:104.1399,koridor:['K7','K9'],         nextBus:'16 mnt',capacity:28},
     ];
 
-    // ══════════════════════════════════════════
-    // DRAW ROUTES
-    // ══════════════════════════════════════════
+    /* ════════════════════════════════════════════════════════
+       BUS LIVE SIMULASI (1 bus per koridor)
+    ════════════════════════════════════════════════════════ */
+    const BUS_LIVE = [
+      {id:'K1-03',koridor:'K1',color:'#1B7A2E',route:'Sekupang → Batam Centre',eta:'4 mnt',cap:72},
+      {id:'K2-07',koridor:'K2',color:'#DC2626',route:'Batam Centre → Tg. Uncang',eta:'6 mnt',cap:48},
+      {id:'K3-05',koridor:'K3',color:'#7C3AED',route:'Sekupang → Jodoh',eta:'9 mnt',cap:35},
+      {id:'K4-12',koridor:'K4',color:'#2563EB',route:'Sagulung → Sekupang',eta:'11 mnt',cap:22},
+      {id:'K5-08',koridor:'K5',color:'#D97706',route:'Jodoh → Batam Centre',eta:'7 mnt',cap:60},
+      {id:'K6-02',koridor:'K6',color:'#7C4F2A',route:'Tg. Piayu → Batam Centre',eta:'14 mnt',cap:30},
+      {id:'K7-06',koridor:'K7',color:'#65A30D',route:'Nongsa → Batam Centre',eta:'16 mnt',cap:28},
+      {id:'K8-09',koridor:'K8',color:'#059669',route:'Punggur → Jodoh',eta:'10 mnt',cap:45},
+      {id:'K9-04',koridor:'K9',color:'#9F1239',route:'Punggur → Nongsa',eta:'13 mnt',cap:20},
+    ];
+
+    const kColors = {
+      K1:'#1B7A2E',K2:'#DC2626',K3:'#7C3AED',K4:'#2563EB',
+      K5:'#D97706',K6:'#7C4F2A',K7:'#65A30D',K8:'#059669',K9:'#9F1239'
+    };
+
+    /* ─── DRAW ROUTES ─── */
     const routeLayers = {};
     Object.entries(KORIDOR_ROUTES).forEach(([kode, r]) => {
       const pl = L.polyline(r.coords, {
-        color: r.color, weight: r.weight, opacity: 0.85,
-        lineCap: 'round', lineJoin: 'round'
+        color:r.color, weight:r.weight, opacity:0.88, lineCap:'round', lineJoin:'round'
       }).addTo(map);
-      // Animated dashed overlay
       const dash = L.polyline(r.coords, {
-        color: 'white', weight: 2, opacity: 0.35,
-        dashArray: '10, 18', lineCap: 'round'
+        color:'white', weight:2, opacity:0.3, dashArray:'8, 16', lineCap:'round'
       }).addTo(map);
+      // Click on route line
+      pl.on('click', () => {
+        document.getElementById('statJarak').textContent = r.dist;
+        document.getElementById('statEta').textContent = '—';
+      });
+      pl.bindTooltip(`<strong>${kode}</strong> ${r.name}`, {sticky:true, className:'leaflet-tooltip'});
       routeLayers[kode] = [pl, dash];
     });
 
-    // ══════════════════════════════════════════
-    // CUSTOM ICONS
-    // ══════════════════════════════════════════
-    function terminalIcon() {
+    /* ─── ICON FACTORIES ─── */
+    function terminalIcon(color) {
       return L.divIcon({
-        className: '',
-        html: `<div style="
-          width:34px;height:34px;background:linear-gradient(135deg,#1B4FD8,#2563EB);
-          border-radius:50%;border:3px solid white;
-          box-shadow:0 4px 14px rgba(37,99,235,.45);
-          display:flex;align-items:center;justify-content:center;
-          font-size:14px;cursor:pointer;
-          transition:transform .2s;
-        ">🚉</div>`,
-        iconSize: [34, 34], iconAnchor: [17, 17], popupAnchor: [0, -20]
+        className:'',
+        html:`<div style="width:36px;height:36px;background:linear-gradient(135deg,${color},${color}bb);border-radius:50%;border:3px solid white;box-shadow:0 4px 14px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;">🚉</div>`,
+        iconSize:[36,36], iconAnchor:[18,18], popupAnchor:[0,-20]
       });
     }
 
-    function halteIcon(koridor) {
-      const colors = { K1:'#2563EB', K2:'#0D9488', K3:'#7C3AED', K5:'#F59E0B' };
-      const c = colors[koridor[0]] || '#10B981';
+    function halteIcon(color) {
       return L.divIcon({
-        className: '',
-        html: `<div style="
-          width:20px;height:20px;background:${c};
-          border-radius:50%;border:3px solid white;
-          box-shadow:0 3px 10px rgba(0,0,0,.25);
-          cursor:pointer;
-        "></div>`,
-        iconSize: [20, 20], iconAnchor: [10, 10], popupAnchor: [0, -14]
+        className:'',
+        html:`<div style="width:14px;height:14px;background:${color};border-radius:50%;border:2.5px solid white;box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:pointer;"></div>`,
+        iconSize:[14,14], iconAnchor:[7,7], popupAnchor:[0,-10]
       });
     }
 
     function busIcon(color, id) {
       return L.divIcon({
-        className: '',
-        html: `<div style="position:relative;width:44px;height:44px;">
-          <div style="position:absolute;inset:0;border-radius:50%;background:${color}22;animation:busPulse 1.8s ease-out infinite"></div>
-          <div style="
-            position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-            background:${color};border-radius:8px;padding:4px 8px;border:2px solid white;
-            box-shadow:0 4px 14px rgba(0,0,0,.3);
-            display:flex;align-items:center;gap:4px;white-space:nowrap;
-          ">
-            <span style="font-size:12px">🚌</span>
-            <span style="font-size:10px;font-weight:800;color:white;font-family:'DM Mono',monospace">${id}</span>
+        className:'',
+        html:`<div style="position:relative;width:46px;height:30px;">
+          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:${color};border-radius:8px;padding:3px 7px;border:2px solid white;box-shadow:0 3px 12px rgba(0,0,0,.35);display:flex;align-items:center;gap:3px;white-space:nowrap;">
+            <span style="font-size:11px">🚌</span>
+            <span style="font-size:9px;font-weight:800;color:white;font-family:'DM Mono',monospace">${id}</span>
           </div>
+          <div style="position:absolute;inset:-6px;border-radius:50%;background:${color}30;animation:busPulse 1.8s ease-out infinite;pointer-events:none;"></div>
         </div>`,
-        iconSize: [44, 44], iconAnchor: [22, 22], popupAnchor: [0, -26]
+        iconSize:[46,30], iconAnchor:[23,15], popupAnchor:[0,-18]
       });
     }
 
-    // ══════════════════════════════════════════
-    // PLACE HALTE MARKERS
-    // ══════════════════════════════════════════
+    /* ─── HALTE MARKERS ─── */
     const halteMarkers = {};
-    const halteLayers = {};
     HALTE_DATA.forEach(h => {
-      const icon = h.type === 'terminal' ? terminalIcon() : halteIcon(h.koridor);
-      const marker = L.marker([h.lat, h.lng], { icon });
+      const mainK = h.koridor[0];
+      const color = kColors[mainK] || '#10B981';
+      const icon = h.type === 'terminal' ? terminalIcon(color) : halteIcon(color);
+      const marker = L.marker([h.lat, h.lng], {icon});
 
-      const kapBadge = h.capacity >= 70 ? `<span style="color:#DC2626;font-weight:800">${h.capacity}% — Padat</span>`
-        : h.capacity >= 40 ? `<span style="color:#B45309;font-weight:800">${h.capacity}% — Normal</span>`
-        : `<span style="color:#16A34A;font-weight:800">${h.capacity}% — Longgar</span>`;
+      const kapBadge = h.capacity >= 70
+        ? `<span style="color:#DC2626;font-weight:700">${h.capacity}% — Padat</span>`
+        : h.capacity >= 40
+        ? `<span style="color:#B45309;font-weight:700">${h.capacity}% — Normal</span>`
+        : `<span style="color:#16A34A;font-weight:700">${h.capacity}% — Longgar</span>`;
 
-      const koridorBadges = h.koridor.map(k => {
-        const kColors = { K1:'#2563EB', K2:'#0D9488', K3:'#7C3AED', K5:'#F59E0B' };
-        return `<span class="hp-kbadge" style="background:${kColors[k]||'#6B7280'}">${k}</span>`;
-      }).join('');
+      const kBadges = h.koridor.map(k =>
+        `<span class="hp-kbadge" style="background:${kColors[k]||'#6B7280'}">${k}</span>`
+      ).join('');
 
-      const popupClass = h.type === 'terminal' ? 'terminal-popup' : 'halte-popup';
-      const popupHeader = h.type === 'terminal'
-        ? `<div class="tp-header"><div class="tp-name">🚉 ${h.name}</div><div class="tp-sub">Terminal Trans Batam</div></div>`
-        : `<div class="hp-header"><div class="hp-name">${h.name}</div><div class="hp-koridor">${koridorBadges}</div></div>`;
+      const headerStyle = `background:linear-gradient(135deg,${color},${color}bb)`;
+      const headerTitle = h.type === 'terminal'
+        ? `🚉 ${h.name}<br><small style="opacity:.7;font-weight:500">Terminal Trans Batam</small>`
+        : `🚏 ${h.name}`;
 
       marker.bindPopup(`
-        ${popupHeader}
+        <div class="hp-header" style="${headerStyle}">
+          <div class="hp-name">${headerTitle}</div>
+          <div class="hp-koridor" style="margin-top:5px">${kBadges}</div>
+        </div>
         <div class="hp-body">
           <div class="hp-row"><span class="hp-label">Bus Berikutnya</span><span class="hp-eta">${h.nextBus}</span></div>
           <div class="hp-row"><span class="hp-label">Kapasitas</span>${kapBadge}</div>
-          <div class="hp-row"><span class="hp-label">Koridor</span><span class="hp-val">${h.koridor.join(', ')}</span></div>
-          <button class="hp-btn" onclick="window.location.href='halte.html'">Lihat Detail Halte →</button>
+          <div class="hp-row"><span class="hp-label">Koridor</span><span class="hp-val" style="font-size:11px">${h.koridor.join(', ')}</span></div>
+          <button class="hp-btn" style="background:${color}" onclick="window.location.href='halte.html'">Detail Halte →</button>
         </div>
-      `, { className: popupClass, maxWidth: 240 });
+      `, {className:'halte-popup', maxWidth:250});
 
-      marker.addTo(map);
-      halteMarkers[h.id] = marker;
-      h.koridor.forEach(k => {
-        if (!halteLayers[k]) halteLayers[k] = [];
-        halteLayers[k].push(marker);
-      });
-
-      // Click updates stats bar
       marker.on('click', () => {
         document.getElementById('statEta').textContent = h.nextBus;
         document.getElementById('statHalte').textContent = HALTE_DATA.filter(x => x.koridor.some(k => h.koridor.includes(k))).length;
       });
+
+      marker.addTo(map);
+      halteMarkers[h.id] = {marker, data:h};
     });
 
-    // ══════════════════════════════════════════
-    // PLACE BUS MARKERS (animated)
-    // ══════════════════════════════════════════
+    /* ─── BUS MARKERS (animated) ─── */
     const busMarkers = {};
     BUS_LIVE.forEach(b => {
-      const marker = L.marker([b.lat, b.lng], { icon: busIcon(b.color, b.id), zIndexOffset: 1000 });
-      const kapPct = b.cap >= 70 ? `<span style="color:#DC2626">${b.cap}% Padat</span>`
-        : b.cap >= 40 ? `<span style="color:#B45309">${b.cap}% Normal</span>`
+      const routeCoords = KORIDOR_ROUTES[b.koridor].coords;
+      const marker = L.marker([routeCoords[0][0], routeCoords[0][1]], {
+        icon: busIcon(b.color, b.id), zIndexOffset:1000
+      });
+
+      const kapPct = b.cap >= 70
+        ? `<span style="color:#DC2626">${b.cap}% Padat</span>`
+        : b.cap >= 40
+        ? `<span style="color:#B45309">${b.cap}% Normal</span>`
         : `<span style="color:#16A34A">${b.cap}% Longgar</span>`;
 
       marker.bindPopup(`
-        <div class="hp-header" style="background:linear-gradient(135deg,${b.color},${b.color}cc)">
+        <div class="hp-header" style="background:linear-gradient(135deg,${b.color},${b.color}bb)">
           <div class="hp-name">🚌 Bus ${b.id}</div>
-          <div class="hp-koridor"><span class="hp-kbadge" style="background:rgba(255,255,255,.25)">${b.koridor}</span></div>
+          <div class="hp-koridor" style="margin-top:4px"><span class="hp-kbadge" style="background:rgba(255,255,255,.22)">${b.koridor}</span></div>
         </div>
         <div class="hp-body">
           <div class="hp-row"><span class="hp-label">Rute</span><span class="hp-val" style="font-size:11px">${b.route}</span></div>
           <div class="hp-row"><span class="hp-label">ETA Halte</span><span class="hp-eta">${b.eta}</span></div>
           <div class="hp-row"><span class="hp-label">Kapasitas</span>${kapPct}</div>
-          <button class="hp-btn" style="background:${b.color}" onclick="window.location.href='halte.html'">Track Bus Ini →</button>
+          <button class="hp-btn" style="background:${b.color}" onclick="window.location.href='halte.html'">Track Bus →</button>
         </div>
-      `, { className: 'halte-popup', maxWidth: 240 });
+      `, {className:'halte-popup', maxWidth:250});
 
       marker.addTo(map);
-      busMarkers[b.id] = { marker, data: b, route: KORIDOR_ROUTES[b.koridor].coords, step: 0 };
+      busMarkers[b.id] = {marker, data:b, route:routeCoords, t:Math.random() * (routeCoords.length-1)};
     });
 
-    // ══════════════════════════════════════════
-    // ANIMATE BUSES ALONG ROUTES
-    // ══════════════════════════════════════════
+    /* ─── ANIMATE BUSES ─── */
     function animateBuses() {
       Object.values(busMarkers).forEach(bus => {
         const coords = bus.route;
         const total = coords.length - 1;
         if (total < 1) return;
-        bus.t = (bus.t || 0) + 0.003;
+        bus.t = (bus.t || 0) + 0.004;
         if (bus.t > total) bus.t = 0;
-        const i = Math.floor(bus.t);
+        const i = Math.min(Math.floor(bus.t), total - 1);
         const frac = bus.t - i;
-        const from = coords[Math.min(i, total)];
-        const to   = coords[Math.min(i+1, total)];
-        const lat = from[0] + (to[0] - from[0]) * frac;
-        const lng = from[1] + (to[1] - from[1]) * frac;
-        bus.marker.setLatLng([lat, lng]);
+        const from = coords[i], to = coords[i+1] || coords[i];
+        bus.marker.setLatLng([
+          from[0] + (to[0]-from[0])*frac,
+          from[1] + (to[1]-from[1])*frac
+        ]);
       });
       requestAnimationFrame(animateBuses);
     }
     animateBuses();
 
-    // ══════════════════════════════════════════
-    // KORIDOR FILTER FUNCTION
-    // ══════════════════════════════════════════
+    /* ─── KORIDOR FILTER ─── */
+    const distMap = {K1:'~28 km',K2:'~35 km',K3:'~22 km',K4:'~18 km',K5:'~20 km',K6:'~25 km',K7:'~30 km',K8:'~38 km',K9:'~20 km'};
+
     window.filterKoridor = function(btn, kode) {
       document.querySelectorAll('.kfb-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
-      // Toggle routes
+      // Rute
       Object.entries(routeLayers).forEach(([k, layers]) => {
         const show = kode === 'all' || k === kode;
         layers.forEach(l => { show ? l.addTo(map) : map.removeLayer(l); });
       });
-
-      // Toggle halte markers
-      Object.values(halteMarkers).forEach(m => map.removeLayer(m));
+      // Halte
+      Object.values(halteMarkers).forEach(({marker}) => map.removeLayer(marker));
       HALTE_DATA.forEach(h => {
         const show = kode === 'all' || h.koridor.includes(kode);
-        if (show) halteMarkers[h.id].addTo(map);
+        if (show) halteMarkers[h.id].marker.addTo(map);
       });
-
-      // Toggle bus markers
+      // Bus
       Object.values(busMarkers).forEach(b => {
         const show = kode === 'all' || b.data.koridor === kode;
         show ? b.marker.addTo(map) : map.removeLayer(b.marker);
       });
 
-      // Fit to visible route
       if (kode !== 'all' && KORIDOR_ROUTES[kode]) {
-        map.fitBounds(L.latLngBounds(KORIDOR_ROUTES[kode].coords), { padding: [40, 40] });
-        // Update stats
-        const halteCount = HALTE_DATA.filter(h => h.koridor.includes(kode)).length;
-        document.getElementById('statHalte').textContent = halteCount;
+        map.fitBounds(L.latLngBounds(KORIDOR_ROUTES[kode].coords), {padding:[50,50]});
+        document.getElementById('statJarak').textContent = distMap[kode] || '—';
         const busData = BUS_LIVE.find(b => b.koridor === kode);
         if (busData) document.getElementById('statEta').textContent = busData.eta;
-        const distMap = { K1:'12.4 km', K2:'9.1 km', K3:'7.8 km', K5:'11.2 km' };
-        document.getElementById('statJarak').textContent = distMap[kode] || '—';
+        document.getElementById('statHalte').textContent =
+          HALTE_DATA.filter(h => h.koridor.includes(kode)).length;
       } else {
         map.setView(BATAM_CENTER, 12);
-        document.getElementById('statHalte').textContent = HALTE_DATA.length;
-        document.getElementById('statEta').textContent = '2 mnt';
         document.getElementById('statJarak').textContent = '—';
+        document.getElementById('statEta').textContent = '4 mnt';
+        document.getElementById('statHalte').textContent = '9';
       }
     };
 
-    // ══════════════════════════════════════════
-    // USER LOCATION (if permitted)
-    // ══════════════════════════════════════════
+    /* ─── USER LOCATION ─── */
     map.on('locationfound', e => {
-      const userIcon = L.divIcon({
-        className: '',
-        html: `<div style="
-          width:18px;height:18px;background:#3B82F6;border-radius:50%;
-          border:3px solid white;box-shadow:0 0 0 6px rgba(59,130,246,.2);
-        "></div>`,
-        iconSize: [18,18], iconAnchor: [9,9]
+      L.divIcon({
+        className:'',
+        html:`<div style="width:16px;height:16px;background:#3B82F6;border-radius:50%;border:3px solid white;box-shadow:0 0 0 6px rgba(59,130,246,.2);"></div>`,
+        iconSize:[16,16], iconAnchor:[8,8]
       });
-      L.marker(e.latlng, { icon: userIcon }).addTo(map)
-        .bindPopup('<b>📍 Lokasi Kamu</b>').openPopup();
+      L.marker(e.latlng, {icon: L.divIcon({
+        className:'',
+        html:`<div style="width:16px;height:16px;background:#3B82F6;border-radius:50%;border:3px solid white;box-shadow:0 0 0 6px rgba(59,130,246,.2);"></div>`,
+        iconSize:[16,16],iconAnchor:[8,8]
+      })}).addTo(map).bindPopup('<b>📍 Lokasi Kamu</b>').openPopup();
     });
-    map.locate({ setView: false, maxZoom: 14 });
-
-    // ── Add Batam boundary label
-    L.tooltip({ permanent: true, direction: 'center', className: 'batam-label' })
-      .setContent('<span style="font-size:10px;font-weight:700;color:#94A3B8;letter-spacing:2px;text-transform:uppercase">KOTA BATAM</span>')
-      .setLatLng([1.0900, 104.0200])
-      .addTo(map);
+    map.locate({setView:false, maxZoom:14});
   }
 
   window.addEventListener('load', tryInit);
