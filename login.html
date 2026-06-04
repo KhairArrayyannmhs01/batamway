@@ -1,138 +1,1126 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Login</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            background: linear-gradient(90deg, #050C9C, #0d6efd);
-            font-family: 'Roboto', sans-serif;
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BatamWay — Masuk / Daftar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800;900&family=DM+Mono:wght@400;500&family=Bricolage+Grotesque:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#1B4FD8;--blue-mid:#2563EB;--blue-light:#EFF4FF;--blue-glow:rgba(37,99,235,0.18);
+  --teal:#0D9488;--amber:#F59E0B;--amber-light:#FFFBEB;
+  --rose:#F43F5E;--violet:#7C3AED;
+  --ink:#0D1526;--ink-2:#374151;--ink-3:#6B7280;--ink-4:#9CA3AF;
+  --surface:#FFFFFF;--surface-2:#F8FAFD;--border:#E5E9F2;--border-2:#D1D9E8;
+  --r-sm:8px;--r-md:14px;--r-lg:20px;--r-xl:28px;--r-full:999px;
+  --sh-sm:0 1px 4px rgba(13,21,38,0.07);--sh-md:0 4px 20px rgba(13,21,38,0.10);
+  --sh-lg:0 12px 40px rgba(13,21,38,0.13);--sh-blue:0 6px 24px rgba(37,99,235,0.22);
+}
+html{scroll-behavior:smooth;height:100%}
+body{
+  font-family:'Sora',sans-serif;
+  background:#07091A;
+  color:var(--ink);
+  line-height:1.6;
+  min-height:100vh;
+  overflow-x:hidden;
+  display:flex;
+  flex-direction:column;
+}
 
-        .login-container {
-            background-color: #fff;
-            border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
-            padding: 30px;
-            transition: transform 0.3s ease-in-out;
-        }
+/* ═══ ANIMATED BACKGROUND ═══ */
+.bg-canvas{
+  position:fixed;inset:0;z-index:0;
+  background:linear-gradient(135deg,#07091A 0%,#0f1535 50%,#07091A 100%);
+  overflow:hidden;
+}
+.bg-orb{
+  position:absolute;border-radius:50%;filter:blur(80px);
+  animation:orbFloat 8s ease-in-out infinite;
+  pointer-events:none;
+}
+.bg-orb-1{width:500px;height:500px;background:rgba(37,99,235,0.12);top:-100px;left:-100px;animation-delay:0s}
+.bg-orb-2{width:400px;height:400px;background:rgba(124,58,237,0.1);bottom:-80px;right:-80px;animation-delay:3s}
+.bg-orb-3{width:300px;height:300px;background:rgba(13,148,136,0.08);top:40%;left:40%;animation-delay:5s}
+@keyframes orbFloat{
+  0%,100%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(30px,-20px) scale(1.05)}
+  66%{transform:translate(-20px,30px) scale(0.95)}
+}
+.bg-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);
+  background-size:55px 55px;pointer-events:none;
+}
 
-        .login-container:hover {
-            transform: scale(1.02); /* Sedikit membesar saat hover */
-        }
+/* ═══ NAVBAR ═══ */
+nav{
+  position:relative;z-index:100;
+  padding:16px 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  backdrop-filter:blur(10px);
+  background:rgba(6,8,15,0.4);
+  flex-shrink:0;
+}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-text{font-family:'Bricolage Grotesque',sans-serif;font-size:20px;font-weight:800;color:var(--blue-mid);letter-spacing:-0.5px}
+.logo-text span{color:var(--amber)}
+.nav-back{
+  display:flex;align-items:center;gap:6px;
+  font-size:13px;font-weight:600;color:rgba(255,255,255,0.6);
+  text-decoration:none;padding:7px 14px;border-radius:var(--r-md);
+  border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);
+  transition:all .2s;cursor:pointer;
+}
+.nav-back:hover{color:white;background:rgba(255,255,255,0.1)}
 
-        .login-header {
-            text-align: center;
-            font-size: 28px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 20px;
-        }
+/* ═══ MAIN LAYOUT ═══ */
+.auth-wrapper{
+  position:relative;z-index:1;
+  flex:1;display:flex;align-items:center;justify-content:center;
+  padding:2rem;min-height:calc(100vh - 73px);
+}
+.auth-container{
+  display:grid;grid-template-columns:1fr 1fr;
+  max-width:960px;width:100%;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:28px;overflow:hidden;
+  box-shadow:0 40px 100px rgba(0,0,0,0.5);
+  backdrop-filter:blur(20px);
+  animation:slideUp .5s cubic-bezier(.16,1,.3,1) both;
+}
+@keyframes slideUp{
+  from{opacity:0;transform:translateY(24px) scale(0.98)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
 
-        .form-control {
-            height: 50px;
-            padding: 15px;
-            font-size: 16px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #ced4da;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
+/* ═══ LEFT PANEL (Ilustrasi) ═══ */
+.auth-left{
+  background:linear-gradient(145deg,#0D1526 0%,#1a2a50 60%,#0D1526 100%);
+  padding:3rem 2.5rem;
+  display:flex;flex-direction:column;justify-content:space-between;
+  position:relative;overflow:hidden;
+}
+.auth-left::before{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:280px;height:280px;border-radius:50%;
+  background:radial-gradient(circle,rgba(37,99,235,0.2) 0%,transparent 65%);
+  pointer-events:none;
+}
+.auth-left::after{
+  content:'';position:absolute;bottom:-40px;left:-40px;
+  width:200px;height:200px;border-radius:50%;
+  background:radial-gradient(circle,rgba(124,58,237,0.15) 0%,transparent 65%);
+  pointer-events:none;
+}
+.al-brand{position:relative;z-index:1}
+.al-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(37,99,235,0.2);border:1px solid rgba(37,99,235,0.3);
+  padding:5px 13px;border-radius:var(--r-full);
+  font-size:11.5px;font-weight:700;color:#93C5FD;
+  margin-bottom:1.25rem;
+}
+.ldot{width:6px;height:6px;background:#10B981;border-radius:50%;box-shadow:0 0 6px #10B981;animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.al-title{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:1.9rem;font-weight:800;color:white;
+  letter-spacing:-.6px;line-height:1.2;margin-bottom:.75rem;
+}
+.al-title .accent{
+  background:linear-gradient(90deg,#60A5FA,#34D399);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.al-sub{font-size:13.5px;color:rgba(255,255,255,0.5);line-height:1.7;max-width:280px}
 
-        .form-control:focus {
-            border-color: #0d6efd;
-            box-shadow: 0 0 8px rgba(13, 110, 253, 0.5);
-        }
+/* Stats mini */
+.al-stats{
+  display:flex;gap:1rem;position:relative;z-index:1;
+  margin-top:2rem;
+}
+.al-stat{
+  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);
+  border-radius:14px;padding:.85rem 1rem;text-align:center;flex:1;
+}
+.al-stat-v{font-family:'DM Mono',monospace;font-size:1.3rem;font-weight:600;color:white;display:block}
+.al-stat-l{font-size:10px;color:rgba(255,255,255,0.4);font-weight:500;margin-top:2px;display:block;text-transform:uppercase;letter-spacing:.4px}
 
-        .btn-primary {
-            background-color: rgb(8, 39, 242);
-            border: none;
-            color: #fff;
-            font-size: 18px;
-            font-weight: 500;
-            padding: 15px;
-            width: 100%;
-            border-radius: 12px;
-            margin-top: 20px;
-            transition: background-color 0.3s, transform 0.2s;
-        }
+/* User testimonials */
+.al-users{position:relative;z-index:1;margin-top:2rem}
+.al-users-row{display:flex;align-items:center;gap:-8px;margin-bottom:.6rem}
+.al-av{
+  width:32px;height:32px;border-radius:50%;
+  border:2px solid rgba(255,255,255,0.15);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;color:white;
+  margin-left:-8px;flex-shrink:0;
+}
+.al-av:first-child{margin-left:0}
+.al-users-text{font-size:12px;color:rgba(255,255,255,0.5);margin-left:.75rem;font-weight:500}
+.al-users-text strong{color:rgba(255,255,255,0.8)}
 
-        .btn-primary:hover {
-            background-color: #062db3; /* Warna lebih gelap */
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(8, 39, 242, 0.3);
-        }
+/* Bus illustration */
+.al-bus-wrap{
+  position:relative;z-index:1;
+  background:rgba(37,99,235,0.08);border:1px solid rgba(37,99,235,0.15);
+  border-radius:16px;padding:1.25rem;margin-top:1.5rem;
+}
+.al-bus-label{font-size:10.5px;font-weight:700;color:#93C5FD;text-transform:uppercase;letter-spacing:.6px;margin-bottom:.75rem}
+.al-bus-item{
+  display:flex;align-items:center;gap:10px;
+  padding:8px 10px;background:rgba(255,255,255,0.04);
+  border-radius:10px;margin-bottom:6px;
+}
+.al-bus-item:last-child{margin-bottom:0}
+.al-bus-badge{padding:4px 10px;border-radius:6px;font-size:11px;font-weight:800;font-family:'DM Mono',monospace;color:white;flex-shrink:0}
+.al-bus-info{flex:1}
+.al-bus-name{font-size:12px;font-weight:700;color:rgba(255,255,255,.8)}
+.al-bus-sub{font-size:10.5px;color:rgba(255,255,255,.4);font-weight:500}
+.al-bus-eta{font-size:11.5px;font-weight:800;color:#FCD34D;font-family:'DM Mono',monospace}
 
-        .btn-back {
-            margin-top: 10px;
-            background-color: #f1f1f1;
-            color: #333;
-            border-radius: 12px;
-            padding: 12px;
-            width: 100%;
-            text-align: center;
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
+/* ═══ RIGHT PANEL (Form) ═══ */
+.auth-right{
+  background:white;
+  padding:2.5rem 2.75rem;
+  display:flex;flex-direction:column;
+  overflow-y:auto;max-height:90vh;
+}
+.auth-right::-webkit-scrollbar{width:4px}
+.auth-right::-webkit-scrollbar-thumb{background:var(--border-2);border-radius:99px}
 
-        .btn-back:hover {
-            background-color: #e2e2e2;
-        }
+/* Tab switcher */
+.auth-tabs{
+  display:flex;gap:0;background:var(--surface-2);
+  border:1px solid var(--border);border-radius:var(--r-lg);
+  padding:4px;margin-bottom:2rem;
+}
+.auth-tab{
+  flex:1;padding:10px;border-radius:12px;border:none;
+  font-size:13.5px;font-weight:700;font-family:'Sora',sans-serif;
+  cursor:pointer;transition:all .22s;color:var(--ink-3);background:transparent;
+}
+.auth-tab.active{
+  background:var(--blue-mid);color:white;
+  box-shadow:var(--sh-blue);
+}
+.auth-tab:not(.active):hover{color:var(--ink);background:var(--border)}
 
-        .alert {
-            font-size: 14px;
-            margin-top: 20px;
-            border-radius: 12px;
-        }
+/* Form header */
+.form-hd{margin-bottom:1.75rem}
+.form-hd-title{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:1.5rem;font-weight:800;color:var(--ink);
+  letter-spacing:-.5px;margin-bottom:.3rem;
+}
+.form-hd-sub{font-size:13.5px;color:var(--ink-3);font-weight:500}
+.form-hd-sub a{color:var(--blue-mid);font-weight:700;cursor:pointer;text-decoration:none}
+.form-hd-sub a:hover{text-decoration:underline}
 
-        .logo {
-            max-width: 150px;
-            height: auto;
-            display: block;
-            margin: 0 auto 20px;
-            transition: transform 0.3s ease-in-out;
-        }
+/* Form panels */
+.form-panel{display:none;animation:fadeIn .3s ease both}
+.form-panel.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-        .logo:hover {
-            transform: scale(1.1); /* Logo sedikit membesar saat hover */
-        }
-    </style>
+/* Form elements */
+.form-group{margin-bottom:1rem}
+.form-label{
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:12px;font-weight:700;color:var(--ink-2);margin-bottom:5px;
+}
+.form-label a{font-size:11.5px;font-weight:600;color:var(--blue-mid);cursor:pointer;text-decoration:none}
+.form-label a:hover{text-decoration:underline}
+.input-wrap{position:relative}
+.form-input{
+  width:100%;padding:12px 14px 12px 42px;
+  border:1.5px solid var(--border);border-radius:var(--r-md);
+  font-size:14px;font-family:'Sora',sans-serif;color:var(--ink);
+  outline:none;background:var(--surface-2);transition:all .2s;
+}
+.form-input:focus{
+  border-color:var(--blue-mid);background:white;
+  box-shadow:0 0 0 3px var(--blue-glow);
+}
+.form-input.error{border-color:#F43F5E;box-shadow:0 0 0 3px rgba(244,63,94,0.1)}
+.input-icon{
+  position:absolute;left:13px;top:50%;transform:translateY(-50%);
+  width:17px;height:17px;stroke:var(--ink-4);stroke-width:2;fill:none;
+  transition:stroke .2s;
+}
+.form-input:focus ~ .input-icon,
+.input-wrap:focus-within .input-icon{stroke:var(--blue-mid)}
+.input-toggle{
+  position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  width:18px;height:18px;cursor:pointer;stroke:var(--ink-4);stroke-width:2;fill:none;
+  transition:stroke .2s;
+}
+.input-toggle:hover{stroke:var(--ink-2)}
+
+/* Form row */
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+/* Error message */
+.field-error{
+  font-size:11.5px;font-weight:600;color:#F43F5E;
+  margin-top:4px;display:flex;align-items:center;gap:4px;
+  opacity:0;transform:translateY(-4px);transition:all .2s;
+}
+.field-error.show{opacity:1;transform:translateY(0)}
+.field-error svg{width:12px;height:12px;stroke:#F43F5E;stroke-width:2.5;fill:none;flex-shrink:0}
+
+/* Alert box */
+.alert-box{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:.85rem 1rem;border-radius:var(--r-md);
+  font-size:13px;font-weight:500;line-height:1.5;
+  margin-bottom:1rem;
+  opacity:0;max-height:0;overflow:hidden;
+  transition:all .3s cubic-bezier(.4,0,.2,1);
+}
+.alert-box.show{opacity:1;max-height:100px}
+.alert-box.error{background:#FFF1F2;border:1px solid #FECDD3;color:#9F1239}
+.alert-box.success{background:#F0FDF4;border:1px solid #BBF7D0;color:#14532D}
+.alert-box svg{width:16px;height:16px;stroke:currentColor;stroke-width:2.5;fill:none;flex-shrink:0;margin-top:1px}
+
+/* Submit button */
+.btn-submit{
+  width:100%;padding:14px;border-radius:var(--r-md);
+  background:linear-gradient(135deg,var(--blue-mid),#1E40AF);
+  color:white;border:none;font-size:14px;font-weight:700;
+  font-family:'Sora',sans-serif;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  box-shadow:var(--sh-blue);transition:all .25s;
+  letter-spacing:-.1px;margin-top:1.25rem;position:relative;overflow:hidden;
+}
+.btn-submit::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.1),transparent);
+  opacity:0;transition:opacity .2s;
+}
+.btn-submit:hover::before{opacity:1}
+.btn-submit:hover{transform:translateY(-1px);box-shadow:0 12px 32px rgba(37,99,235,.35)}
+.btn-submit:active{transform:translateY(0)}
+.btn-submit:disabled{opacity:.65;cursor:not-allowed;transform:none}
+.btn-submit svg{width:17px;height:17px;stroke:white;stroke-width:2.5;fill:none}
+
+/* Loading spinner */
+.spinner{
+  width:18px;height:18px;border:2px solid rgba(255,255,255,0.3);
+  border-top-color:white;border-radius:50%;
+  animation:spin .7s linear infinite;display:none;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Divider */
+.divider{
+  display:flex;align-items:center;gap:12px;
+  margin:1.25rem 0;font-size:12px;color:var(--ink-4);font-weight:500;
+}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* Social login */
+.social-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.social-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:11px;border-radius:var(--r-md);
+  border:1.5px solid var(--border);background:white;
+  font-size:13px;font-weight:600;color:var(--ink-2);
+  cursor:pointer;font-family:'Sora',sans-serif;transition:all .2s;
+}
+.social-btn:hover{border-color:var(--border-2);background:var(--surface-2);transform:translateY(-1px)}
+.social-icon{font-size:17px}
+
+/* Password strength */
+.pw-strength{margin-top:6px;display:none}
+.pw-strength-bar{
+  height:4px;background:var(--border);border-radius:99px;overflow:hidden;margin-bottom:4px;
+}
+.pw-strength-fill{height:100%;border-radius:99px;transition:all .4s;width:0}
+.pw-strength-text{font-size:11px;font-weight:600}
+
+/* Checkbox */
+.check-wrap{
+  display:flex;align-items:flex-start;gap:9px;
+  font-size:12.5px;color:var(--ink-3);font-weight:500;margin-top:.75rem;
+}
+.check-wrap input[type="checkbox"]{
+  accent-color:var(--blue-mid);width:15px;height:15px;flex-shrink:0;margin-top:2px;cursor:pointer;
+}
+.check-wrap a{color:var(--blue-mid);font-weight:600;cursor:pointer}
+
+/* Demo accounts */
+.demo-section{
+  margin-top:1.5rem;padding-top:1.25rem;
+  border-top:1px solid var(--border);
+}
+.demo-title{
+  font-size:10.5px;font-weight:700;color:var(--ink-4);
+  text-transform:uppercase;letter-spacing:.8px;margin-bottom:.75rem;
+}
+.demo-accounts{display:flex;flex-direction:column;gap:6px}
+.demo-account{
+  display:flex;align-items:center;gap:10px;
+  padding:8px 10px;background:var(--surface-2);
+  border-radius:var(--r-md);border:1.5px solid var(--border);
+  cursor:pointer;transition:all .2s;
+}
+.demo-account:hover{border-color:var(--blue-mid);background:var(--blue-light)}
+.demo-av{
+  width:30px;height:30px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;color:white;flex-shrink:0;
+}
+.demo-info{flex:1;min-width:0}
+.demo-name{font-size:12.5px;font-weight:700;color:var(--ink)}
+.demo-email{font-size:11px;color:var(--ink-4);font-weight:500}
+.demo-tier{
+  font-size:10.5px;font-weight:700;padding:2px 8px;
+  border-radius:var(--r-full);white-space:nowrap;
+}
+
+/* Success state */
+.success-panel{
+  display:none;flex-direction:column;align-items:center;
+  text-align:center;padding:2rem 0;
+  animation:fadeIn .4s ease both;
+}
+.success-panel.show{display:flex}
+.success-icon{
+  width:72px;height:72px;border-radius:50%;
+  background:linear-gradient(135deg,#10B981,#059669);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.25rem;
+  box-shadow:0 8px 24px rgba(16,185,129,0.35);
+  animation:bounceIn .5s cubic-bezier(.16,1,.3,1) both;
+}
+@keyframes bounceIn{
+  from{transform:scale(0.5);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+.success-icon svg{width:32px;height:32px;stroke:white;stroke-width:2.5;fill:none}
+.success-title{font-family:'Bricolage Grotesque',sans-serif;font-size:1.4rem;font-weight:800;color:var(--ink);margin-bottom:.4rem}
+.success-sub{font-size:13.5px;color:var(--ink-3);margin-bottom:1.5rem;line-height:1.6}
+.btn-goto{
+  padding:13px 32px;border-radius:var(--r-md);
+  background:linear-gradient(135deg,var(--blue-mid),#1E40AF);
+  color:white;border:none;font-size:14px;font-weight:700;
+  font-family:'Sora',sans-serif;cursor:pointer;
+  box-shadow:var(--sh-blue);transition:all .25s;
+  display:flex;align-items:center;gap:8px;
+}
+.btn-goto:hover{transform:translateY(-1px)}
+
+/* User profile preview after login */
+.profile-preview{
+  display:flex;flex-direction:column;gap:.65rem;margin-top:1rem;
+}
+.pp-stat{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:8px 12px;background:var(--surface-2);
+  border-radius:var(--r-md);border:1px solid var(--border);
+  font-size:12.5px;
+}
+.pp-key{color:var(--ink-4);font-weight:500}
+.pp-val{font-weight:700;color:var(--ink);font-family:'DM Mono',monospace}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:768px){
+  .auth-container{grid-template-columns:1fr}
+  .auth-left{display:none}
+  .auth-right{max-height:none;padding:2rem 1.75rem}
+}
+@media(max-width:480px){
+  .auth-wrapper{padding:1rem}
+  .auth-right{padding:1.75rem 1.5rem}
+  .form-row-2{grid-template-columns:1fr}
+  .social-btns{grid-template-columns:1fr}
+}
+</style>
 </head>
 <body>
-    <div class="login-container">
-        <!-- Logo -->
-        <a class="navbar-brand d-flex justify-content-center">
-            <img src="../assets/Logo.png" alt="Logo PGN" class="logo">
-        </a>
-        <h3 class="login-header text-center">Form Login</h3>
-        <div class="alert alert-danger text-center">
-            Username atau password salah!
+
+<!-- Background -->
+<div class="bg-canvas">
+  <div class="bg-grid"></div>
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+  <div class="bg-orb bg-orb-3"></div>
+</div>
+
+<!-- Navbar -->
+<nav>
+  <a class="logo" href="index.html">
+    <span class="logo-text">Batam<span>Way</span></span>
+  </a>
+  <a class="nav-back" href="index.html">
+    <svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" fill="none"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Kembali ke Beranda
+  </a>
+</nav>
+
+<!-- Auth Wrapper -->
+<div class="auth-wrapper">
+  <div class="auth-container">
+
+    <!-- LEFT PANEL -->
+    <div class="auth-left">
+      <div class="al-brand">
+        <div class="al-tag"><span class="ldot"></span>Trans Batam — Live</div>
+        <h2 class="al-title">Naik Bus Lebih<br><span class="accent">Cerdas & Seru</span><br>Bersama BatamWay</h2>
+        <p class="al-sub">Platform digitalisasi transportasi Batam. Kumpulkan poin, raih badge, dan nikmati perjalanan tanpa stres.</p>
+      </div>
+
+      <div class="al-stats">
+        <div class="al-stat"><span class="al-stat-v">12.4K</span><span class="al-stat-l">Pengguna</span></div>
+        <div class="al-stat"><span class="al-stat-v">12</span><span class="al-stat-l">Koridor</span></div>
+        <div class="al-stat"><span class="al-stat-v">84</span><span class="al-stat-l">Armada</span></div>
+      </div>
+
+      <div class="al-bus-wrap">
+        <div class="al-bus-label">🚌 Bus Segera Tiba</div>
+        <div class="al-bus-item">
+          <span class="al-bus-badge" style="background:#2563EB">K1</span>
+          <div class="al-bus-info">
+            <div class="al-bus-name">Batam Centre → Jodoh</div>
+            <div class="al-bus-sub">Bus K1-07 · 78% penuh</div>
+          </div>
+          <span class="al-bus-eta">2 mnt</span>
         </div>
-        <form method="post">
-            <div class="mb-3">
-                <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
-            </div>
-            <div class="mb-3">
-                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-            </div>
-            <div class="d-grid gap-2">
-                <a href="index.html" class="btn btn-primary">Login</a>
-                <a href="index.html" class="btn btn-secondary">Back to Home</a>
-            </div>
-        </form>
-        <div class="text-center mt-3">
+        <div class="al-bus-item">
+          <span class="al-bus-badge" style="background:#0D9488">K2</span>
+          <div class="al-bus-info">
+            <div class="al-bus-name">Batu Aji → Nagoya</div>
+            <div class="al-bus-sub">Bus K2-14 · 45% penuh</div>
+          </div>
+          <span class="al-bus-eta">8 mnt</span>
         </div>
+      </div>
+
+      <div class="al-users">
+        <div class="al-users-row">
+          <div class="al-av" style="background:linear-gradient(135deg,#F59E0B,#EF4444)">S</div>
+          <div class="al-av" style="background:linear-gradient(135deg,#6366F1,#7C3AED)">N</div>
+          <div class="al-av" style="background:linear-gradient(135deg,#10B981,#0D9488)">R</div>
+          <div class="al-av" style="background:linear-gradient(135deg,#F43F5E,#EC4899)">J</div>
+          <div class="al-av" style="background:linear-gradient(135deg,#7C3AED,#6366F1)">K</div>
+          <span class="al-users-text">+<strong>12.400</strong> pengguna aktif</span>
+        </div>
+      </div>
     </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="auth-right">
+
+      <!-- Tab Switcher -->
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tab-login" onclick="switchTab('login')">Masuk</button>
+        <button class="auth-tab" id="tab-register" onclick="switchTab('register')">Daftar Gratis</button>
+      </div>
+
+      <!-- ══ LOGIN FORM ══ -->
+      <div class="form-panel active" id="panel-login">
+        <div class="form-hd">
+          <div class="form-hd-title">Selamat datang kembali!</div>
+          <div class="form-hd-sub">Belum punya akun? <a onclick="switchTab('register')">Daftar sekarang →</a></div>
+        </div>
+
+        <div class="alert-box" id="login-alert">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
+          <span id="login-alert-text"></span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <div class="input-wrap">
+            <input type="email" class="form-input" id="login-email" placeholder="email@kamu.com" autocomplete="email">
+            <svg class="input-icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="field-error" id="err-login-email">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">
+            Kata Sandi
+            <a onclick="forgotPassword()">Lupa kata sandi?</a>
+          </label>
+          <div class="input-wrap">
+            <input type="password" class="form-input" id="login-password" placeholder="Masukkan kata sandi" autocomplete="current-password">
+            <svg class="input-icon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            <svg class="input-toggle" id="toggle-login-pw" viewBox="0 0 24 24" onclick="togglePw('login-password','toggle-login-pw')"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <div class="field-error" id="err-login-password">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="check-wrap">
+          <input type="checkbox" id="remember-me">
+          <label for="remember-me">Ingat saya di perangkat ini</label>
+        </div>
+
+        <button class="btn-submit" id="btn-login" onclick="doLogin()">
+          <span id="login-btn-text">Masuk ke BatamWay</span>
+          <div class="spinner" id="login-spinner"></div>
+          <svg id="login-btn-icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+
+        <div class="divider">atau masuk dengan</div>
+        <div class="social-btns">
+          <button class="social-btn" onclick="socialLogin('Google')"><span class="social-icon">🌐</span> Google</button>
+          <button class="social-btn" onclick="socialLogin('Facebook')"><span class="social-icon">📘</span> Facebook</button>
+        </div>
+
+        <!-- Demo Accounts -->
+        <div class="demo-section">
+          <div class="demo-title">🧪 Akun Demo — Klik untuk isi otomatis</div>
+          <div class="demo-accounts" id="demo-accounts">
+            <!-- Generated by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Success Login -->
+      <div class="success-panel" id="success-login">
+        <div class="success-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <div class="success-title" id="success-login-title">Selamat datang!</div>
+        <div class="success-sub" id="success-login-sub">Kamu berhasil masuk. Redirecting...</div>
+        <div class="profile-preview" id="profile-preview"></div>
+        <button class="btn-goto" style="margin-top:1.25rem" onclick="goToDashboard()">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="white" stroke-width="2.5" fill="none"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          Ke Dashboard
+        </button>
+      </div>
+
+      <!-- ══ REGISTER FORM ══ -->
+      <div class="form-panel" id="panel-register">
+        <div class="form-hd">
+          <div class="form-hd-title">Buat akun baru</div>
+          <div class="form-hd-sub">Sudah punya akun? <a onclick="switchTab('login')">Masuk di sini →</a></div>
+        </div>
+
+        <div class="alert-box" id="register-alert">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
+          <span id="register-alert-text"></span>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label">Nama Lengkap</label>
+            <div class="input-wrap">
+              <input type="text" class="form-input" id="reg-nama" placeholder="Nama lengkap" autocomplete="name">
+              <svg class="input-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <div class="field-error" id="err-reg-nama">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg><span></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nomor HP</label>
+            <div class="input-wrap">
+              <input type="tel" class="form-input" id="reg-hp" placeholder="08xx-xxxx-xxxx" autocomplete="tel">
+              <svg class="input-icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.06 6.06l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
+            <div class="field-error" id="err-reg-hp">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg><span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <div class="input-wrap">
+            <input type="email" class="form-input" id="reg-email" placeholder="email@kamu.com" autocomplete="email">
+            <svg class="input-icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="field-error" id="err-reg-email">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg><span></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Kota Asal</label>
+          <div class="input-wrap">
+            <select class="form-input" id="reg-kota" style="padding-left:42px;cursor:pointer">
+              <option value="">Pilih kota/area</option>
+              <option>Batam Centre</option>
+              <option>Nagoya</option>
+              <option>Batu Aji</option>
+              <option>Tiban</option>
+              <option>Sagulung</option>
+              <option>Sekupang</option>
+              <option>Batuampar</option>
+              <option>Jodoh</option>
+              <option>Taman Kota</option>
+              <option>Sengkuang</option>
+              <option>Nongsa</option>
+              <option>Tanjung Uncang</option>
+            </select>
+            <svg class="input-icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="field-error" id="err-reg-kota">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg><span></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Kata Sandi</label>
+          <div class="input-wrap">
+            <input type="password" class="form-input" id="reg-password" placeholder="Minimal 8 karakter" autocomplete="new-password" oninput="checkPwStrength(this.value)">
+            <svg class="input-icon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            <svg class="input-toggle" id="toggle-reg-pw" viewBox="0 0 24 24" onclick="togglePw('reg-password','toggle-reg-pw')"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <div class="pw-strength" id="pw-strength">
+            <div class="pw-strength-bar"><div class="pw-strength-fill" id="pw-fill"></div></div>
+            <div class="pw-strength-text" id="pw-text"></div>
+          </div>
+          <div class="field-error" id="err-reg-password">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg><span></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Konfirmasi Kata Sandi</label>
+          <div class="input-wrap">
+            <input type="password" class="form-input" id="reg-confirm" placeholder="Ulangi kata sandi" autocomplete="new-password">
+            <svg class="input-icon" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <div class="field-error" id="err-reg-confirm">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg><span></span>
+          </div>
+        </div>
+
+        <div class="check-wrap">
+          <input type="checkbox" id="agree-terms">
+          <label for="agree-terms">Saya setuju dengan <a>Syarat & Ketentuan</a> dan <a>Kebijakan Privasi</a> BatamWay</label>
+        </div>
+        <div class="field-error" id="err-reg-terms" style="margin-top:4px">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg><span></span>
+        </div>
+
+        <button class="btn-submit" id="btn-register" onclick="doRegister()">
+          <span id="reg-btn-text">Daftar Gratis Sekarang</span>
+          <div class="spinner" id="reg-spinner"></div>
+          <svg id="reg-btn-icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </button>
+
+        <div class="divider">atau daftar dengan</div>
+        <div class="social-btns">
+          <button class="social-btn" onclick="socialLogin('Google')"><span class="social-icon">🌐</span> Google</button>
+          <button class="social-btn" onclick="socialLogin('Facebook')"><span class="social-icon">📘</span> Facebook</button>
+        </div>
+      </div>
+
+      <!-- Success Register -->
+      <div class="success-panel" id="success-register">
+        <div class="success-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <div class="success-title">Akun Berhasil Dibuat! 🎉</div>
+        <div class="success-sub" id="success-reg-sub">Selamat datang di BatamWay! Akun kamu sudah aktif dan siap digunakan.</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+          <div style="background:var(--blue-light);border:1px solid #BFDBFE;border-radius:12px;padding:.75rem 1.25rem;text-align:center">
+            <div style="font-family:'DM Mono',monospace;font-size:1.4rem;font-weight:700;color:var(--blue-mid)">0</div>
+            <div style="font-size:11px;color:var(--ink-4);font-weight:500;margin-top:2px">Poin Awal</div>
+          </div>
+          <div style="background:#F0FDF4;border:1px solid #BBF7D0;border-radius:12px;padding:.75rem 1.25rem;text-align:center">
+            <div style="font-size:1.4rem">🎁</div>
+            <div style="font-size:11px;color:#166534;font-weight:600;margin-top:2px">Bonus Signup!</div>
+          </div>
+          <div style="background:#F5F3FF;border:1px solid #DDD6FE;border-radius:12px;padding:.75rem 1.25rem;text-align:center">
+            <div style="font-family:'DM Mono',monospace;font-size:1.4rem;font-weight:700;color:var(--violet)">Lv.1</div>
+            <div style="font-size:11px;color:var(--ink-4);font-weight:500;margin-top:2px">Level Awal</div>
+          </div>
+        </div>
+        <button class="btn-goto" style="margin-top:1.5rem" onclick="goToDashboard()">
+          Mulai Perjalanan →
+        </button>
+      </div>
+
+    </div><!-- /auth-right -->
+  </div><!-- /auth-container -->
+</div><!-- /auth-wrapper -->
+
+<script>
+/* ══════════════════════════════════════
+   DATABASE PENGGUNA (dari batamway.sql)
+══════════════════════════════════════ */
+const DB_USERS = [
+  {id:1, nama:'Salman Alfarizi',    email:'salman@gmail.com',    kata_sandi:'salman123',    nomor_hp:'081234567890', kota_asal:'Tiban',         total_poin:5240, level:18, tier:'Diamond',  streak_hari:22, total_perjalanan:312},
+  {id:2, nama:'Nathaniel Alfa Putra',email:'nathaniel@gmail.com',kata_sandi:'nathaniel123', nomor_hp:'081234567891', kota_asal:'Batam Centre',  total_poin:4910, level:17, tier:'Platinum', streak_hari:14, total_perjalanan:289},
+  {id:3, nama:'Ricky',              email:'ricky@gmail.com',     kata_sandi:'ricky123',     nomor_hp:'081234567892', kota_asal:'Taman Kota',    total_poin:4650, level:16, tier:'Platinum', streak_hari:10, total_perjalanan:265},
+  {id:4, nama:'Jason Alfaro',       email:'jason@gmail.com',     kata_sandi:'jason123',     nomor_hp:'081234567893', kota_asal:'Batam Centre',  total_poin:3980, level:15, tier:'Gold',     streak_hari:7,  total_perjalanan:231},
+  {id:5, nama:'Khair Arrayyan',     email:'khair@gmail.com',     kata_sandi:'khair123',     nomor_hp:'081234567894', kota_asal:'Sengkuang',     total_poin:3500, level:14, tier:'Gold',     streak_hari:5,  total_perjalanan:198},
+  {id:6, nama:'Siti Rahayu',        email:'siti@gmail.com',      kata_sandi:'siti123',      nomor_hp:'081234567895', kota_asal:'Nagoya',        total_poin:2840, level:12, tier:'Silver',   streak_hari:8,  total_perjalanan:156},
+  {id:7, nama:'Ahmad Rizky',        email:'ahmad@gmail.com',     kata_sandi:'ahmad123',     nomor_hp:'081234567896', kota_asal:'Batu Aji',      total_poin:2310, level:11, tier:'Silver',   streak_hari:3,  total_perjalanan:134},
+  {id:8, nama:'Dewi Lestari',       email:'dewi@gmail.com',      kata_sandi:'dewi123',      nomor_hp:'081234567897', kota_asal:'Sekupang',      total_poin:1780, level:9,  tier:'Silver',   streak_hari:6,  total_perjalanan:108},
+  {id:9, nama:'Budi Santoso',       email:'budi@gmail.com',      kata_sandi:'budi123',      nomor_hp:'081234567898', kota_asal:'Jodoh',         total_poin:1200, level:7,  tier:'Bronze',   streak_hari:1,  total_perjalanan:74},
+  {id:10,nama:'Maya Indah',         email:'maya@gmail.com',      kata_sandi:'maya123',      nomor_hp:'081234567899', kota_asal:'Tiban',         total_poin:650,  level:4,  tier:'Bronze',   streak_hari:0,  total_perjalanan:42},
+];
+
+/* Registered users (localStorage for new signups) */
+function getAllUsers(){
+  const stored = JSON.parse(localStorage.getItem('bw_users') || '[]');
+  return [...DB_USERS, ...stored];
+}
+
+function saveNewUser(user){
+  const stored = JSON.parse(localStorage.getItem('bw_users') || '[]');
+  stored.push(user);
+  localStorage.setItem('bw_users', JSON.stringify(stored));
+}
+
+/* ══ TAB SWITCHER ══ */
+function switchTab(tab){
+  document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.success-panel').forEach(p => p.classList.remove('show'));
+
+  document.getElementById('tab-' + tab).classList.add('active');
+  document.getElementById('panel-' + tab).classList.add('active');
+
+  // Reset alerts
+  hideAlert('login-alert'); hideAlert('register-alert');
+}
+
+/* ══ TOGGLE PASSWORD VISIBILITY ══ */
+function togglePw(inputId, iconId){
+  const input = document.getElementById(inputId);
+  const isPass = input.type === 'password';
+  input.type = isPass ? 'text' : 'password';
+  // Change icon
+  const icon = document.getElementById(iconId);
+  icon.innerHTML = isPass
+    ? '<path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>'
+    : '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+}
+
+/* ══ SHOW / HIDE ALERT ══ */
+function showAlert(id, msg, type='error'){
+  const box = document.getElementById(id);
+  const text = document.getElementById(id + '-text');
+  if(text) text.textContent = msg;
+  box.className = `alert-box ${type} show`;
+}
+function hideAlert(id){
+  const box = document.getElementById(id);
+  box.className = 'alert-box';
+}
+
+/* ══ FIELD ERROR ══ */
+function showFieldError(id, msg){
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.querySelector('span').textContent = msg;
+  el.classList.add('show');
+  el.previousElementSibling?.querySelector?.('.form-input')?.classList.add('error');
+}
+function clearFieldError(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.classList.remove('show');
+  // Remove error from sibling input
+  const wrap = el.closest('.form-group');
+  if(wrap) wrap.querySelector('.form-input')?.classList.remove('error');
+}
+function clearAllErrors(){
+  document.querySelectorAll('.field-error').forEach(e => e.classList.remove('show'));
+  document.querySelectorAll('.form-input').forEach(e => e.classList.remove('error'));
+}
+
+/* ══ LOADING STATE ══ */
+function setLoading(isLoading, panel='login'){
+  const btn = document.getElementById(`btn-${panel}`);
+  const text = document.getElementById(`${panel === 'login' ? 'login' : 'reg'}-btn-text`);
+  const spinner = document.getElementById(`${panel === 'login' ? 'login' : 'reg'}-spinner`);
+  const icon = document.getElementById(`${panel === 'login' ? 'login' : 'reg'}-btn-icon`);
+
+  btn.disabled = isLoading;
+  spinner.style.display = isLoading ? 'block' : 'none';
+  if(icon) icon.style.display = isLoading ? 'none' : 'block';
+  if(text) text.textContent = isLoading
+    ? (panel === 'login' ? 'Memeriksa...' : 'Mendaftarkan...')
+    : (panel === 'login' ? 'Masuk ke BatamWay' : 'Daftar Gratis Sekarang');
+}
+
+/* ══ TIER COLORS ══ */
+function tierColor(tier){
+  return {
+    Diamond:'linear-gradient(135deg,#60A5FA,#34D399)',
+    Platinum:'linear-gradient(135deg,#EC4899,#9333EA)',
+    Gold:'linear-gradient(135deg,#FCD34D,#F59E0B)',
+    Silver:'linear-gradient(135deg,#CBD5E1,#94A3B8)',
+    Bronze:'linear-gradient(135deg,#FDBA74,#EA580C)',
+  }[tier] || 'linear-gradient(135deg,#9CA3AF,#6B7280)';
+}
+function tierBg(tier){
+  return {
+    Diamond:'#EFF4FF',Platinum:'#F5F3FF',Gold:'#FFFBEB',Silver:'#F8FAFC',Bronze:'#FFF7ED'
+  }[tier] || '#F8FAFD';
+}
+function tierText(tier){
+  return {
+    Diamond:'#1D4ED8',Platinum:'#6D28D9',Gold:'#92400E',Silver:'#475569',Bronze:'#9A3412'
+  }[tier] || '#374151';
+}
+
+/* ══ LOGIN ══ */
+function doLogin(){
+  clearAllErrors();
+  hideAlert('login-alert');
+
+  const email = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value;
+  let valid = true;
+
+  if(!email){showFieldError('err-login-email','Email tidak boleh kosong');valid=false;}
+  else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showFieldError('err-login-email','Format email tidak valid');valid=false;}
+
+  if(!password){showFieldError('err-login-password','Kata sandi tidak boleh kosong');valid=false;}
+
+  if(!valid) return;
+
+  setLoading(true,'login');
+
+  // Simulasi network delay
+  setTimeout(()=>{
+    const allUsers = getAllUsers();
+    const user = allUsers.find(u =>
+      u.email.toLowerCase() === email.toLowerCase() &&
+      u.kata_sandi === password
+    );
+
+    setLoading(false,'login');
+
+    if(!user){
+      showAlert('login-alert','Email atau kata sandi salah. Coba lagi atau gunakan akun demo di bawah.','error');
+      document.getElementById('login-password').value = '';
+      return;
+    }
+
+    // Save session
+    localStorage.setItem('bw_session', JSON.stringify({
+      id: user.id, nama: user.nama, email: user.email,
+      tier: user.tier, level: user.level, total_poin: user.total_poin,
+      streak_hari: user.streak_hari, total_perjalanan: user.total_perjalanan,
+      kota_asal: user.kota_asal
+    }));
+
+    // Show success
+    showLoginSuccess(user);
+  }, 1200);
+}
+
+function showLoginSuccess(user){
+  document.getElementById('panel-login').classList.remove('active');
+
+  const sPanel = document.getElementById('success-login');
+  sPanel.classList.add('show');
+
+  document.getElementById('success-login-title').textContent = `Halo, ${user.nama.split(' ')[0]}! 👋`;
+  document.getElementById('success-login-sub').textContent = `Kamu masuk sebagai ${user.tier} Rider. Redirecting ke dashboard...`;
+
+  const preview = document.getElementById('profile-preview');
+  preview.innerHTML = `
+    <div class="pp-stat"><span class="pp-key">Total Poin</span><span class="pp-val" style="color:var(--amber)">🪙 ${user.total_poin.toLocaleString('id-ID')}</span></div>
+    <div class="pp-stat"><span class="pp-key">Level</span><span class="pp-val">Level ${user.level}</span></div>
+    <div class="pp-stat"><span class="pp-key">Tier</span><span class="pp-val" style="background:${tierBg(user.tier)};color:${tierText(user.tier)};padding:2px 10px;border-radius:99px;font-size:12px">${user.tier} Rider</span></div>
+    <div class="pp-stat"><span class="pp-key">Streak</span><span class="pp-val">🔥 ${user.streak_hari} hari</span></div>
+    <div class="pp-stat"><span class="pp-key">Total Perjalanan</span><span class="pp-val">${user.total_perjalanan}x</span></div>
+  `;
+
+  // Auto redirect after 3.5s
+  setTimeout(goToDashboard, 3500);
+}
+
+/* ══ REGISTER ══ */
+function doRegister(){
+  clearAllErrors();
+  hideAlert('register-alert');
+
+  const nama    = document.getElementById('reg-nama').value.trim();
+  const hp      = document.getElementById('reg-hp').value.trim();
+  const email   = document.getElementById('reg-email').value.trim();
+  const kota    = document.getElementById('reg-kota').value;
+  const pw      = document.getElementById('reg-password').value;
+  const confirm = document.getElementById('reg-confirm').value;
+  const terms   = document.getElementById('agree-terms').checked;
+  let valid = true;
+
+  if(!nama || nama.length < 3){showFieldError('err-reg-nama','Nama minimal 3 karakter');valid=false;}
+  if(!hp || !/^08[0-9]{8,11}$/.test(hp.replace(/[\s\-]/g,''))){showFieldError('err-reg-hp','Nomor HP tidak valid (cth: 081234567890)');valid=false;}
+  if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showFieldError('err-reg-email','Format email tidak valid');valid=false;}
+  if(!kota){showFieldError('err-reg-kota','Pilih kota asal Anda');valid=false;}
+  if(!pw || pw.length < 8){showFieldError('err-reg-password','Kata sandi minimal 8 karakter');valid=false;}
+  if(pw !== confirm){showFieldError('err-reg-confirm','Konfirmasi kata sandi tidak cocok');valid=false;}
+  if(!terms){showFieldError('err-reg-terms','Kamu harus menyetujui syarat & ketentuan');valid=false;}
+
+  if(!valid) return;
+
+  setLoading(true,'register');
+
+  setTimeout(()=>{
+    const allUsers = getAllUsers();
+
+    // Check duplicate email
+    if(allUsers.find(u => u.email.toLowerCase() === email.toLowerCase())){
+      setLoading(false,'register');
+      showAlert('register-alert','Email sudah terdaftar. Silakan masuk atau gunakan email lain.','error');
+      showFieldError('err-reg-email','Email ini sudah digunakan');
+      return;
+    }
+
+    // Create new user
+    const newUser = {
+      id: Date.now(),
+      nama, email, kata_sandi: pw,
+      nomor_hp: hp, kota_asal: kota,
+      total_poin: 100, // welcome bonus
+      level: 1, tier: 'Bronze',
+      streak_hari: 0, total_perjalanan: 0
+    };
+
+    saveNewUser(newUser);
+
+    // Save session
+    localStorage.setItem('bw_session', JSON.stringify(newUser));
+
+    setLoading(false,'register');
+
+    // Show success
+    document.getElementById('panel-register').classList.remove('active');
+    document.getElementById('success-register').classList.add('show');
+    document.getElementById('success-reg-sub').textContent =
+      `Selamat datang, ${nama.split(' ')[0]}! Akun kamu sudah aktif dengan bonus 100 poin.`;
+
+    setTimeout(goToDashboard, 4000);
+  }, 1500);
+}
+
+/* ══ DEMO ACCOUNTS ══ */
+function renderDemoAccounts(){
+  const avColors = [
+    'linear-gradient(135deg,#F59E0B,#EF4444)',
+    'linear-gradient(135deg,#6366F1,#7C3AED)',
+    'linear-gradient(135deg,#10B981,#0D9488)',
+    'linear-gradient(135deg,#F43F5E,#EC4899)',
+    'linear-gradient(135deg,#7C3AED,#6366F1)',
+  ];
+  const top5 = DB_USERS.slice(0,5);
+  const container = document.getElementById('demo-accounts');
+  container.innerHTML = top5.map((u,i) => `
+    <div class="demo-account" onclick="fillDemo('${u.email}','${u.kata_sandi}')">
+      <div class="demo-av" style="background:${avColors[i]}">${u.nama[0]}</div>
+      <div class="demo-info">
+        <div class="demo-name">${u.nama}</div>
+        <div class="demo-email">${u.email} · ${u.kata_sandi}</div>
+      </div>
+      <span class="demo-tier" style="background:${tierBg(u.tier)};color:${tierText(u.tier)};border:1px solid ${tierText(u.tier)}33">${u.tier}</span>
+    </div>
+  `).join('');
+}
+
+function fillDemo(email, password){
+  document.getElementById('login-email').value = email;
+  document.getElementById('login-password').value = password;
+  document.getElementById('login-email').focus();
+  // Highlight effect
+  ['login-email','login-password'].forEach(id => {
+    const el = document.getElementById(id);
+    el.style.borderColor = 'var(--blue-mid)';
+    el.style.boxShadow = '0 0 0 3px var(--blue-glow)';
+    setTimeout(()=>{el.style.borderColor='';el.style.boxShadow='';},1500);
+  });
+}
+
+/* ══ PASSWORD STRENGTH ══ */
+function checkPwStrength(pw){
+  const wrap = document.getElementById('pw-strength');
+  const fill = document.getElementById('pw-fill');
+  const text = document.getElementById('pw-text');
+
+  if(!pw){wrap.style.display='none';return;}
+  wrap.style.display='block';
+
+  let score = 0;
+  if(pw.length >= 8) score++;
+  if(pw.length >= 12) score++;
+  if(/[A-Z]/.test(pw)) score++;
+  if(/[0-9]/.test(pw)) score++;
+  if(/[^A-Za-z0-9]/.test(pw)) score++;
+
+  const levels = [
+    {w:'20%',  c:'#EF4444', label:'Sangat lemah'},
+    {w:'40%',  c:'#F97316', label:'Lemah'},
+    {w:'60%',  c:'#EAB308', label:'Cukup'},
+    {w:'80%',  c:'#22C55E', label:'Kuat'},
+    {w:'100%', c:'#10B981', label:'Sangat kuat'},
+  ];
+  const l = levels[Math.max(0,score-1)] || levels[0];
+  fill.style.width = l.w;
+  fill.style.background = l.c;
+  text.textContent = l.label;
+  text.style.color = l.c;
+}
+
+/* ══ FORGOT PASSWORD ══ */
+function forgotPassword(){
+  const email = document.getElementById('login-email').value.trim();
+  if(!email){
+    showAlert('login-alert','Masukkan email kamu terlebih dahulu, lalu klik "Lupa kata sandi?"','error');
+    document.getElementById('login-email').focus();
+    return;
+  }
+  const allUsers = getAllUsers();
+  const user = allUsers.find(u => u.email.toLowerCase() === email.toLowerCase());
+  if(!user){
+    showAlert('login-alert','Email tidak ditemukan dalam sistem.','error');
+    return;
+  }
+  showAlert('login-alert',`Link reset kata sandi telah dikirim ke ${email}. Periksa inbox kamu.`,'success');
+}
+
+/* ══ SOCIAL LOGIN ══ */
+function socialLogin(provider){
+  showAlert('login-alert', `Login dengan ${provider} belum tersedia. Gunakan email dan kata sandi.`, 'error');
+}
+
+/* ══ REDIRECT ══ */
+function goToDashboard(){
+  window.location.href = 'gamifikasi.html';
+}
+
+/* ══ CHECK EXISTING SESSION ══ */
+(function checkSession(){
+  const session = localStorage.getItem('bw_session');
+  if(session){
+    const user = JSON.parse(session);
+    // Show already logged in message — optional, just continue
+    console.log('Session active:', user.nama);
+  }
+})();
+
+/* ══ INIT ══ */
+renderDemoAccounts();
+
+// Enter key support
+document.addEventListener('keydown', e => {
+  if(e.key !== 'Enter') return;
+  const loginActive = document.getElementById('panel-login').classList.contains('active');
+  const regActive   = document.getElementById('panel-register').classList.contains('active');
+  if(loginActive) doLogin();
+  else if(regActive) doRegister();
+});
+</script>
 </body>
 </html>
